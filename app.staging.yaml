@@ -1,0 +1,31 @@
+# [START runtime]
+runtime: python37
+# [END runtime]
+
+# [START handlers]
+handlers:
+  - url: /assets/js/(.*)
+    secure: always
+    static_files: dist/assets/js/\1
+    upload: dist/assets/js/(.*)
+  - url: /assets/css/(.*)
+    secure: always
+    static_files: dist/assets/css/\1
+    upload: dist/assets/css/(.*)
+  - url: /static/media/(.*)
+    secure: always
+    static_files: dist/static/media/\1
+    upload: dist/static/media/(.*)
+  - url: /favicon.ico
+    secure: always
+    static_files: dist/favicon.ico
+    upload: dist/favicon.ico
+  - url: /
+    secure: always
+    static_files: dist/index.html
+    upload: dist/index.html
+  - url: /.*
+    secure: always
+    static_files: dist/index.html
+    upload: dist/index.html
+# [END handlers]
