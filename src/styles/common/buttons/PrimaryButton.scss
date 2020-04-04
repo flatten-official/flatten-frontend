@@ -1,18 +1,20 @@
-button.primary-button {
-  background-color: #00267a;
-  border: none;
-  border-radius: 12px;
+.primary-button {
   height: 70px;
   width: 100%;
-  color: white;
-  font-family: "Open Sans";
-  font-weight: bolder;
+  border-radius: 16px;
+  border: solid 2px $navy-blue;
+  background-color: $navy-blue;
   font-size: 1.5rem;
-  letter-spacing: 0.5px;
+  color: $white-main;
+
+  &:hover {
+    background-color: $white-main;
+    color: $navy-blue;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+  }
 }
-
-
-button.disabled {
-  background-color: #4b78db;
-}
-

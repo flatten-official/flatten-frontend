@@ -1,4 +1,5 @@
 import React from "react";
+import PrimaryButton from "../common/buttons/PrimaryButton";
 import logo from "../../assets/logo-black.png";
 
 class HomePage extends React.Component {
@@ -16,9 +17,9 @@ class HomePage extends React.Component {
             Our ultimate goal is to flatten the curve of COVID-19, and you can
             do your part by <b>filling out our form once a day</b>.
           </div>
-          <button className="button body home__button">Returning User</button>
+          <PrimaryButton className="home__button">Returning User</PrimaryButton>
           <br />
-          <button className="button body home__button">New User</button>
+          <PrimaryButton className="home__button">New User</PrimaryButton>
         </div>
       </div>
     );

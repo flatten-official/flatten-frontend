@@ -68,24 +68,6 @@ html {
   height: 100px;
 }
 
-.button {
-  border-radius: 16px;
-  border: solid 2px $navy-blue;
-  background-color: $navy-blue;
-  color: $white-main;
-
-  &:hover {
-    background-color: $white-main;
-    color: $navy-blue;
-    transition: 0.3s;
-    cursor: pointer;
-  }
-
-  &:focus {
-    outline: none;
-  }
-}
-
 // media queries
 @media only screen and (max-width: 1200px) {
   .body {
