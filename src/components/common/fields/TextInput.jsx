@@ -1,5 +1,4 @@
 import React from "react";
-import "./TextInput.scss";
 
 const TextInput = ({ label, input, meta, ...props }) => {
   return (

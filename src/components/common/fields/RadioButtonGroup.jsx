@@ -1,6 +1,5 @@
 import React from "react";
 import RadioButton from "./RadioButton";
-import './RadioButtonGroup.scss';
 
 const RadioButtonGroup = ({ input, options, label, meta }) => {
   return (

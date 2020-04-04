@@ -4,7 +4,6 @@ import RadioButtonGroup from "../common/fields/RadioButtonGroup";
 import Checkbox from "../common/fields/Checkbox";
 import PostalCodeInput from "../common/fields/PostalCodeInput";
 import { validate, yesNoOptions } from "./SymptomsFormUtils";
-import "./SymptomsForm.scss";
 
 export const symptomsFormName = "trackYourSymptoms";
 
@@ -36,7 +35,7 @@ const SymptomsForm = ({ handleSubmit }) => {
       <div className="symptoms-form-body">
         {questions.map((question, i) => (
           <div key={i} className="symptoms-form-question">
-            <p className="symptoms-form-question-body body-black">{question}</p>
+            <p className="symptoms-form-question-body description">{question}</p>
             <div className="symptoms-form-question-response">
               <Field
                 name={`q${i + 1}`}
@@ -47,7 +46,7 @@ const SymptomsForm = ({ handleSubmit }) => {
           </div>
         ))}
         <div className="symptoms-form-question">
-          <p className="symptoms-form-question-body body-black">
+          <p className="symptoms-form-question-body description">
             What are the three first characters of the postal code of your current
             residence?
           </p>

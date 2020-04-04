@@ -4,7 +4,6 @@ import { submit } from "redux-form";
 import { submitForm } from "../../actions/index";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 import SymptomsForm, { symptomsFormName } from "./SymptomsForm";
-import "./TrackYourSymptoms.scss";
 
 const TrackYourSymptoms = () => {
   const [submitting, setSubmitting] = useState(false);

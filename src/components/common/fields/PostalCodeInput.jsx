@@ -1,8 +1,6 @@
 import React from "react";
 import TextInput from "./TextInput";
 
-
-
 const PostalCodeInput = props => {
   const { input } = props;
 

@@ -1,6 +1,5 @@
 import React from "react";
-import classNames from "../../../styles/classNames";
-import "./PrimaryButton.scss";
+import classNames from "../../../utils/classNames";
 
 const PrimaryButton = ({ disabled, onClick, children }) => {
   return (
