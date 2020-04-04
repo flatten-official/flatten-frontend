@@ -1,0 +1,10 @@
+.home {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("/src/assets/background.png");
+  background-attachment: fixed;
+  background-size: cover;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}

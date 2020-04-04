@@ -2,7 +2,7 @@ import React from "react";
 
 class HomePage extends React.Component {
   render() {
-    return <React.Fragment></React.Fragment>;
+    return <div className="home">hello</div>;
   }
 }
 
