@@ -1,27 +1,27 @@
 // colours
 $black-main: #000000;
 $white-main: #ffffff;
-$navy-blue: #00267a;
-$error-red: #ff0000;
+$navy-blue: #121847;
+$error-red: #000a52;
 
 // text
 .title {
   font-family: "Open Sans", sans-serif;
   font-weight: 700;
-  font-size: 2.5rem; // TODO: change to vh once titles are written
+  font-size: 2.5rem; // TODO: change to vw once titles are written
   color: $black-main;
 }
 
 .body {
   font-family: "Open Sans", sans-serif;
-  font-size: 2.3vh;
+  font-size: 1.25vw;
   letter-spacing: 1.35px;
   color: $black-main;
 }
 
 .description {
   font-family: "Open Sans", sans-serif;
-  font-size: 1.125rem; // TODO: change to vh once descriptions are written
+  font-size: 1.125rem; // TODO: change to vw once descriptions are written
   color: $black-main;
 }
 
@@ -55,11 +55,6 @@ html {
   background-color: $navy-blue;
   color: $white-main;
 
-  font-family: "Open Sans", sans-serif;
-  font-size: 1.75vh;
-  font-weight: 400;
-  letter-spacing: 1px;
-
   &:hover {
     background-color: $white-main;
     color: $navy-blue;
@@ -73,14 +68,32 @@ html {
 }
 
 // media queries
+@media only screen and (max-width: 1200px) {
+  .body {
+    font-size: 1.5vw;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .body {
+    font-size: 1.8vw;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .body {
+    font-size: 2.25vw;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .body {
-    font-size: 1.8vh;
+    font-size: 2.75vw;
   }
 }
 
 @media only screen and (max-width: 400px) {
   .body {
-    font-size: 1.5vh;
+    font-size: 3.5vw;
   }
 }
