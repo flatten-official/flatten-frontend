@@ -16,26 +16,15 @@ $error-red: #ff0000;
   color: $black-main;
 }
 
-.body-black {
+.body {
   font-family: "Open Sans", sans-serif;
-  font-size: 2.5vh;
+  font-size: 2.3vh;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: 1.35px;
   color: $black-main;
-}
-
-.body-white {
-  font-family: "Open Sans", sans-serif;
-  font-size: 2.5vh;
-  font-weight: 300;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: 1.35px;
-  color: $white-main;
 }
 
 .description {
@@ -75,9 +64,10 @@ html {
 
 .button {
   border-radius: 8px;
-  border: solid 0px $navy-blue;
+  border: solid 2px $navy-blue;
   background-color: $navy-blue;
   color: $white-main;
+
   font-family: "Open Sans", sans-serif;
   font-size: 1.75vh;
   font-weight: 400;
@@ -92,5 +82,18 @@ html {
 
   &:focus {
     outline: none;
+  }
+}
+
+// media queries
+@media only screen and (max-width: 600px) {
+  .body {
+    font-size: 1.8vh;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .body {
+    font-size: 1.5vh;
   }
 }

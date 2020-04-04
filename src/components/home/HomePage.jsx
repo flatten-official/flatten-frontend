@@ -7,7 +7,7 @@ class HomePage extends React.Component {
       <div className="home">
         <div className="home__content">
           <img className="home__logo" src={logo} alt="logo" />
-          <div className="body-white home__description">
+          <div className="body home__description">
             FLATTEN is designed to collect <b>real-time healthcare data</b> and
             <b> increase national awareness</b> throughout this difficult time
             during COVID-19.
