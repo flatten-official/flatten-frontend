@@ -1,15 +1,13 @@
 import React from "react";
 
-import Form from "./form/Form";
-import Heatmap from "./heatmap/Heatmap";
+import HomePage from "./home/HomePage";
 
 class App extends React.Component {
   render() {
     return (
-      <div>
-        <Form />
-        <Heatmap />
-      </div>
+      <React.Fragment>
+        <HomePage />
+      </React.Fragment>
     );
   }
 }

@@ -1,0 +1,48 @@
+.home {
+  height: 100%;
+  width: 100%;
+
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("/src/assets/background.png");
+  background-attachment: fixed;
+  background-size: cover;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.home__content {
+  padding: 0% 20%;
+}
+
+.home__logo {
+  width: 60%;
+  filter: invert(100%);
+}
+
+.home__description {
+  padding-bottom: 32px;
+  color: white;
+}
+
+.home__button {
+  width: 50%;
+  height: 12%;
+  min-width: 200px;
+  min-height: 30px;
+  margin: 10px 0px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .home__content {
+    padding: 0% 10%;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .home__logo {
+    width: 100%;
+  }
+}

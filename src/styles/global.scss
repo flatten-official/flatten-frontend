@@ -1,53 +1,86 @@
+// colours
 $black-main: #000000;
 $white-main: #ffffff;
 $navy-blue: #00267a;
 $error-red: #ff0000;
 
+// text
 .title {
   font-family: "Open Sans", sans-serif;
   font-weight: 700;
-  font-size: 2.5rem;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
+  font-size: 2.5rem; // TODO: change to vh once titles are written
   color: $black-main;
 }
 
-.body-black {
+.body {
   font-family: "Open Sans", sans-serif;
-  font-size: 1.5rem;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
+  font-size: 2.3vh;
+  letter-spacing: 1.35px;
   color: $black-main;
-}
-
-.body-white {
-  font-family: "Open Sans", sans-serif;
-  font-size: 1.5rem;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: $white-main;
 }
 
 .description {
   font-family: "Open Sans", sans-serif;
-  font-size: 1.125rem;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
+  font-size: 1.125rem; // TODO: change to vh once descriptions are written
   color: $black-main;
+}
+
+// components
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
 
 .icon {
   width: 100px;
   height: 100px;
+}
+
+.button {
+  border-radius: 16px;
+  border: solid 2px $navy-blue;
+  background-color: $navy-blue;
+  color: $white-main;
+
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.75vh;
+  font-weight: 400;
+  letter-spacing: 1px;
+
+  &:hover {
+    background-color: $white-main;
+    color: $navy-blue;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// media queries
+@media only screen and (max-width: 600px) {
+  .body {
+    font-size: 1.8vh;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .body {
+    font-size: 1.5vh;
+  }
 }
