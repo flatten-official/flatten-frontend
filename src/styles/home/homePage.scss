@@ -1,10 +1,34 @@
 .home {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("/src/assets/background.png");
   background-attachment: fixed;
   background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
-  height: 100%;
-  width: 100%;
-  position: relative;
+}
+
+.home__content {
+  padding: 0% 30%;
+}
+
+.home__logo {
+  width: 60%;
+  filter: invert(100%);
+}
+
+.home__description {
+  padding-bottom: 32px;
+}
+
+.home__button {
+  width: 50%;
+  min-width: 200px;
+  height: 12%;
+  min-height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
