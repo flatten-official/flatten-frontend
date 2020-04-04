@@ -18,23 +18,23 @@ $error-red: #ff0000;
 
 .body-black {
   font-family: "Open Sans", sans-serif;
-  font-size: 1.5rem;
+  font-size: 2.5vh;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
-  letter-spacing: normal;
+  letter-spacing: 1.35px;
   color: $black-main;
 }
 
 .body-white {
   font-family: "Open Sans", sans-serif;
-  font-size: 1.5rem;
-  font-weight: normal;
+  font-size: 2.5vh;
+  font-weight: 300;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
-  letter-spacing: normal;
+  letter-spacing: 1.35px;
   color: $white-main;
 }
 
@@ -71,4 +71,26 @@ html {
 .icon {
   width: 100px;
   height: 100px;
+}
+
+.button {
+  border-radius: 8px;
+  border: solid 0px $navy-blue;
+  background-color: $navy-blue;
+  color: $white-main;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.75vh;
+  font-weight: 400;
+  letter-spacing: 1px;
+
+  &:hover {
+    background-color: $white-main !important;
+    color: $navy-blue !important;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+  }
 }
