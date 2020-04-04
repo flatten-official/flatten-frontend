@@ -1,0 +1,53 @@
+$black-main: #000000;
+$white-main: #ffffff;
+$navy-blue: #00267a;
+$error-red: #ff0000;
+
+.title {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: $black-main;
+}
+
+.body-black {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.5rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: $black-main;
+}
+
+.body-white {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.5rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: $white-main;
+}
+
+.description {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.125rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: $black-main;
+}
+
+.icon {
+  width: 100px;
+  height: 100px;
+}
