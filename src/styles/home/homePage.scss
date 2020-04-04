@@ -1,10 +1,12 @@
 .home {
   height: 100%;
   width: 100%;
+
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("/src/assets/background.png");
   background-attachment: fixed;
   background-size: cover;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,11 +29,10 @@
 
 .home__button {
   width: 50%;
-  min-width: 200px;
   height: 12%;
+  min-width: 200px;
   min-height: 30px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10px 0px;
 }
 
 @media only screen and (max-width: 1000px) {
