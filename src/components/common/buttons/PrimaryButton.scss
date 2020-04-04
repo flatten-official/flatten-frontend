@@ -1,0 +1,18 @@
+button.primary-button {
+  background-color: #00267a;
+  border: none;
+  border-radius: 12px;
+  height: 70px;
+  width: 100%;
+  color: white;
+  font-family: "Open Sans";
+  font-weight: bolder;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+
+button.disabled {
+  background-color: #4b78db;
+}
+

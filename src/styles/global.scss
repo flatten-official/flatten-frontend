@@ -44,6 +44,25 @@ html {
   margin: 0;
 }
 
+.error {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.875rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: italic;
+  line-height: normal;
+  letter-spacing: normal;
+  color: $error-red;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
 .icon {
   width: 100px;
   height: 100px;
