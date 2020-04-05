@@ -35,7 +35,7 @@ const SymptomsForm = ({ handleSubmit }) => {
       <div className="symptoms-form__body">
         {questions.map((question, i) => (
           <div key={i} className="symptoms-form__question">
-            <p className="symptoms-form__question-body description">{question}</p>
+            <p className="symptoms-form__question-body body">{question}</p>
             <div className="symptoms-form__question-response">
               <Field
                 name={`q${i + 1}`}
@@ -46,7 +46,7 @@ const SymptomsForm = ({ handleSubmit }) => {
           </div>
         ))}
         <div className="symptoms-form__question">
-          <p className="symptoms-form__question-body description">
+          <p className="symptoms-form__question-body body">
             What are the three first characters of the postal code of your current
             residence?
           </p>
@@ -61,7 +61,7 @@ const SymptomsForm = ({ handleSubmit }) => {
           <Field
             name="acknowledgement"
             label={(
-              <p className="description">
+              <p className="body">
                 <i>
                   By submitting this form, you certify that you are 18+ and agree to our Terms of
                   Service and Privacy Policy.

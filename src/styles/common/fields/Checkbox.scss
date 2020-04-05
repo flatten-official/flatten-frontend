@@ -1,13 +1,12 @@
 input[type=checkbox] {
-  transform: translateY(0.15vw);
-  height: 1.2rem;
-  width: 1.2rem;
+  transform: scale(1.5);
 }
 
 .checkbox__container {
   display: flex;
   justify-content: center;
   align-items: baseline;
+  padding: 8px;
 }
 
 .checkbox__label {
