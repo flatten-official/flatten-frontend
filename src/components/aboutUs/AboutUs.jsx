@@ -5,10 +5,12 @@ import Volunteers from "./Volunteers";
 const AboutUs = () => (
   <React.Fragment>
     <section>
-      <h4 className="title">About Us</h4>
-      <div className="aboutUs__description">
-        <p>Here are the amazing volunteers who made this project possible!</p>
-        <p>
+      <h4 className="about-us__title title">About Us</h4>
+      <div className="about-us__description">
+        <p className="body">
+          Here are the amazing volunteers who made this project possible!
+        </p>
+        <p className="body">
           Contact Us:{" "}
           <a className="emailLink" href="mailto:flattenofficial@gmail.com">
             flattenofficial@gmail.com
@@ -18,7 +20,7 @@ const AboutUs = () => (
       <hr className="line" />
     </section>
     <section>
-      <div className="aboutUs__body">
+      <div className="about-us__body">
         {Volunteers.map((volunteer, index) => (
           <Profile
             key={index}

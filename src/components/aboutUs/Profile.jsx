@@ -7,20 +7,20 @@ const Profile = ({ link, src, name, role, titles, degrees }) => (
     <div>
       <a href={link} target="_blank" rel="noopener noreferrer">
         <img
-          src={require(`${src || "./Headshots/default.png"}`)}
+          src={require(`${src || "./headshots/default.png"}`)}
           alt={name}
           loading="lazy"
-          className="card-img-top"
+          className="profile__img"
         />
       </a>
     </div>
-    <div>
-      <p className="card-text-name">
+    <div className="description">
+      <p className="profile__name">
         {name}
         {degrees}
       </p>
-      <p className="card-text-role">{role}</p>
-      <p className="card-text-title">{titles}</p>
+      <p className="profile__role">{role}</p>
+      <p className="profile__title">{titles}</p>
     </div>
   </div>
 );

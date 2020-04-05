@@ -1,40 +1,50 @@
-.logo {
-  width: 300px;
+.supporters__logo {
+  width: 600px;
   padding: 20px;
   transition: transform 0.2s;
   margin: 20px auto;
   width: 60%;
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
-.logo:hover {
-  transform: scale(1.05);
-}
-
-.company-row {
+.supporters__title {
   width: 60%;
-  display: flex;
-  justify-content: center;
+  text-align: center;
+  margin: 40px auto;
 }
 
 .supporters__description {
   margin: 15px auto;
-  width: 60%;
-  font-size: 1.2rem;
-  font-family: "Open Sans";
+  width: 80%;
 }
 
 .supporters__contact {
   text-align: center;
   margin: 20px auto;
   width: 60%;
-  font-size: 1.2rem;
-  font-family: "Open Sans";
 }
 
 .supporters__card {
-  font-size: 1.5rem;
-  font-family: "Open Sans";
   text-align: center;
-  width: 30%;
+  width: 100%;
   margin: 40px auto;
+}
+
+@media only screen and (min-width: 1200px) {
+  .supporters__logo {
+    width: 300px;
+  }
+
+  .supporters__description {
+    margin: 15px auto;
+    width: 60%;
+  }
+
+  .supporters__card {
+    text-align: center;
+    width: 30%;
+    margin: 40px auto;
+  }
 }

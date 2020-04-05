@@ -1,13 +1,16 @@
-.aboutUs__description {
+.about-us__description {
   text-align: center;
-  font-family: "Open Sans";
-  font-size: 18px;
 }
 
-.aboutUs__body {
+.about-us__body {
   justify-content: center;
   display: flex;
   flex-flow: row wrap;
-  font-family: "Open Sans";
   margin: 50px 80px 50px 80px;
+}
+
+.about-us__title {
+  margin: 30px auto;
+  text-align: center;
+  width: 60%;
 }
