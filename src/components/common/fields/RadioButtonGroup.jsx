@@ -3,7 +3,7 @@ import RadioButton from "./RadioButton";
 
 const RadioButtonGroup = ({ input, options, label, meta }) => {
   return (
-    <div className="radio-group__root">
+    <div className="radio-group">
       {label && <span>{label}</span>}
       <div className="radio-group__container">
         {options.map(option => (

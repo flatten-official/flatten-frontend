@@ -4,11 +4,12 @@ input[type=checkbox] {
 
 .checkbox__container {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: baseline;
   padding: 8px;
 }
 
 .checkbox__label {
+  text-align: left;
   padding-left: 8px;
 }
