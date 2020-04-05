@@ -4,6 +4,7 @@ import { submit } from "redux-form";
 import { submitForm } from "../../actions/index";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 import SymptomsForm, { symptomsFormName } from "./SymptomsForm";
+import SyringeIcon from "../../assets/syringe.svg";
 
 const TrackYourSymptoms = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -20,9 +21,12 @@ const TrackYourSymptoms = () => {
   }
 
   return (
-    <div className="symptoms__root">
+    <div className="symptoms">
       <div className="symptoms__header">
-        <div className="title">Tell us how you feel!</div>
+        <div className="symptoms__title">
+          <div className="title">Tell us how you feel!</div>
+          <SyringeIcon className="symptoms__syringe-icon"/>
+        </div>
         <p className="symptoms__description description">
           Your answers will be collected and shared anonymously through our heatmap to help
           healthcare providers, researchers, and community members gauge the spread of COVID-19.

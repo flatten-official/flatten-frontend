@@ -1,14 +1,28 @@
-.symptoms__root {
+.symptoms {
   padding: 5% 20%;
   text-align: center;
+  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.5);
 }
 
 .symptoms__header {
-  padding: 20px;
+  padding: 10px;
+}
+
+.symptoms__title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.symptoms__syringe-icon{
+  height: 3rem;
+  width: 3rem;
+  margin-left: 14px;
+  transform: rotate(180deg);
 }
 
 .symptoms__description {
-  padding: 1rem;
+  padding: 1rem 0px;
 }
 
 .symptoms__submit {
@@ -19,4 +33,16 @@
 
 .symptoms__submit-button {
   height: 70px;
+}
+
+@media only screen and (max-width: 800px) {
+  .symptoms__root {
+    padding: 5% 15%
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .symptoms__root {
+    padding: 5% 10%
+  }
 }

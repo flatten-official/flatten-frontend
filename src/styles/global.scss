@@ -3,9 +3,10 @@ $black-main: #000000;
 $white-main: #ffffff;
 $navy-blue: #121847;
 $error-red: #ff0a47;
-$medium-grey: #979797;
 $light-grey: #eef0f1;
-$dark-grey: #333;
+$medium-grey: #979797;
+$dark-grey: #333333;
+
 // text
 .title {
   font-family: "Open Sans", sans-serif;
@@ -28,6 +29,12 @@ $dark-grey: #333;
 }
 
 // components
+p {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
 body {
   height: 100%;
   width: 100%;
