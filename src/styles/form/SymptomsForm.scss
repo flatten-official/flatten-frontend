@@ -5,16 +5,18 @@
 .symptoms-form__question {
   display: grid;
   align-items: center;
-  grid-template-columns: 70% 10% 20%;
+  grid-template-columns: 70% 5% 25%;
   background-color: #f8f9fa;
   border-radius: 10px;
-  padding: 15px 30px;
+  padding: 25px;
   margin: 15px 0px;
   text-align: left;
 }
 
 .symptoms-form__question-body {
   grid-column: 1;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .symptoms-form__question-response {
@@ -24,6 +26,18 @@
 
 .symptoms-form__acknowledgement {
   align-items: center;
-  padding: 15px;
-  margin: 15px 5%;
+  margin: 14px 5% 26px;
+}
+
+@media only screen and (max-width: 600px) {
+  .symptoms-form__question {
+    grid-template-columns: 55% 5% 40%;
+    padding: 20px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .symptoms-form__question {
+    grid-template-columns: 50% 5% 45%;
+  }
 }
