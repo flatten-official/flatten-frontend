@@ -12,7 +12,7 @@ const AboutUs = () => (
         </p>
         <p className="body">
           Contact Us:{" "}
-          <a className="emailLink" href="mailto:flattenofficial@gmail.com">
+          <a className="email-link" href="mailto:flattenofficial@gmail.com">
             flattenofficial@gmail.com
           </a>
         </p>
