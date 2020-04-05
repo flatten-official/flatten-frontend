@@ -1,4 +1,4 @@
-import backend from "../apis/backend";
+import backend from "../apis/backend.staging";
 
 export const submitForm = (formValues, tokenId) => async dispatch => {
   formValues.tokenId = tokenId;
@@ -26,7 +26,7 @@ export const readCookie = () => async dispatch => {
   }
 };
 
-export const SignIn = response => async dispatch => {
+export const signIn = response => async dispatch => {
   if (response.profileObj) {
     backend.post("/login", { tokenId: response.tokenId });
     localStorage.setItem("imageURL", response.profileObj.imageUrl);
@@ -37,7 +37,7 @@ export const SignIn = response => async dispatch => {
   }
 };
 
-export const SignOut = () => async dispatch => {
+export const signOut = () => async dispatch => {
   dispatch({
     type: "SIGN_OUT",
     payload: true

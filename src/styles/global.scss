@@ -2,7 +2,8 @@
 $black-main: #000000;
 $white-main: #ffffff;
 $navy-blue: #121847;
-$error-red: #000a52;
+$error-red: #ff0a47;
+$medium-grey: #979797;
 
 // text
 .title {
@@ -44,27 +45,20 @@ html {
   margin: 0;
 }
 
+.error {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.9vw;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: italic;
+  line-height: normal;
+  letter-spacing: normal;
+  color: $error-red;
+}
+
 .icon {
   width: 100px;
   height: 100px;
-}
-
-.button {
-  border-radius: 16px;
-  border: solid 2px $navy-blue;
-  background-color: $navy-blue;
-  color: $white-main;
-
-  &:hover {
-    background-color: $white-main;
-    color: $navy-blue;
-    transition: 0.3s;
-    cursor: pointer;
-  }
-
-  &:focus {
-    outline: none;
-  }
 }
 
 // media queries

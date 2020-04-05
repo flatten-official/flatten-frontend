@@ -1,0 +1,29 @@
+.symptoms-form__body {
+  width: 100%;
+}
+
+.symptoms-form__question {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 70% 10% 20%;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 15px 30px;
+  margin: 15px 0px;
+  text-align: left;
+}
+
+.symptoms-form__question-body {
+  grid-column: 1;
+}
+
+.symptoms-form__question-response {
+  grid-column: 3;
+  text-align: center;
+}
+
+.symptoms-form__acknowledgement {
+  align-items: center;
+  padding: 15px;
+  margin: 15px 5%;
+}
