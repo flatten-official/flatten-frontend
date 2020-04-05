@@ -6,7 +6,7 @@ import logo from "../../assets/logo-black.png";
 class Navbar extends React.Component {
   render() {
     return (
-      <nav className="nav" id="navbar">
+      <nav className="nav">
         <div className="nav__content body">
           <li className="nav__item">
             <Link
@@ -17,7 +17,7 @@ class Navbar extends React.Component {
               offset={-70}
               duration={1000}
             >
-              <img className="header__logo" src={logo} />
+              <img className="navbar__logo" src={logo} />
             </Link>
           </li>
           <li className="nav__item nav__optional">
