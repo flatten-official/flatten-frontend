@@ -7,7 +7,11 @@ input[type=text] {
   border-radius: 4px;
 }
 
+.text-input {
+  text-align: left;
+}
+
 .text-input__container {
   display: flex;
-  text-align: center;
+  text-align: left;
 }

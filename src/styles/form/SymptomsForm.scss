@@ -3,9 +3,7 @@
 }
 
 .symptoms-form__question {
-  display: grid;
   align-items: center;
-  grid-template-columns: 70% 5% 25%;
   background-color: #f8f9fa;
   border-radius: 10px;
   padding: 25px;
@@ -14,7 +12,7 @@
 }
 
 .symptoms-form__question-body {
-  grid-column: 1;
+  padding: 16px 0px;
   overflow-wrap: break-word;
   hyphens: auto;
 }

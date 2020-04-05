@@ -5,8 +5,11 @@ const CheckboxGroup = ({
   input,
   label,
   options,
-  meta
+  meta,
+  maxColumns
 }) => {
+  const containerModifier = maxColumns ? `--columns-${maxColumns}` : "";
+
   const handleChange = event => {
     const selectedValues = event.target.checked
       ? [...input.value, event.target.name]
@@ -18,7 +21,7 @@ const CheckboxGroup = ({
   return (
     <div className="checkbox-group">
       {label && <span>{label}</span>}
-      <div className="checkbox-group__container">
+      <div className={`checkbox-group__container${containerModifier}`}>
         {options.map((option, index) => (
           <Checkbox
             key={index}

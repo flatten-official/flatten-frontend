@@ -1,5 +1,16 @@
-.radio-group__container {
+.radio-button-group__container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+}
+
+.radio-button-group__container--columns-2 {
+  column-count: 2;
+}
+
+@media only screen and (max-width: 1200px) {
+  .radio-button-group__container--columns-2 {
+    display: flex;
+    flex-direction: column;
+  }  
 }
 

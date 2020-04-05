@@ -34,19 +34,22 @@ const questions = [
     body: "Which of the following symptoms are you currently experiencing? (Select all that apply)",
     name: "symptoms",
     component: CheckboxGroup,
-    options: SYMPTOM_OPTIONS
+    options: SYMPTOM_OPTIONS,
+    maxColumns: 2
   },
   { 
     body: "What is your age?",
     name: "age",
     component: RadioButtonGroup,
-    options: AGE_OPTIONS
+    options: AGE_OPTIONS,
+    maxColumns: 2
   },
   {
     body: "Select any medical conditions you have been diagnosed with (Check all that apply)",
     name: "conditions",
     component: CheckboxGroup,
-    options: CONDITION_OPTIONS
+    options: CONDITION_OPTIONS,
+    maxColumns: 2
   },
   {
     body: `Have you had close contact with someone who is coughing, has a fever, or is otherwise
@@ -83,7 +86,8 @@ const questions = [
     body: "What is your greatest need at this time? (Check all that apply)",
     name: "needs",
     component: CheckboxGroup,
-    options: NEED_OPTIONS
+    options: NEED_OPTIONS,
+    maxColumns: 2
   },
   {
     body: "What is your email? (optional)",
