@@ -79,6 +79,7 @@ module.exports = function (_env, argv) {
             options: {
               limit: 8192,
               name: "static/media/[name].[hash:8].[ext]",
+              esModule: false,
             },
           },
         },

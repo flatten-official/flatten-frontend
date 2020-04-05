@@ -4,14 +4,13 @@ $white-main: #ffffff;
 $navy-blue: #121847;
 $error-red: #ff0a47;
 $light-grey: #eef0f1;
-$medium-grey: #979797;
 $dark-grey: #333333;
-
+$medium-grey: #979797;
 // text
 .title {
   font-family: "Open Sans", sans-serif;
   font-size: 2.25vw;
-  font-weight: 700;
+  font-weight: 600;
   color: $black-main;
 }
 
@@ -69,6 +68,20 @@ html {
   height: 100px;
 }
 
+.email-link {
+  color: $black-main;
+  text-decoration: none;
+  &:hover {
+    color: $medium-grey;
+  }
+}
+
+.line {
+  border-color: $black-main;
+  border-width: 4px;
+  width: 50px;
+}
+
 // media queries
 @media only screen and (max-width: 1200px) {
   .body {
@@ -76,7 +89,7 @@ html {
   }
 
   .title {
-    font-size: 2.5vw; 
+    font-size: 2.5vw;
   }
 
   .error {
@@ -134,7 +147,7 @@ html {
   .title {
     font-size: 5.5vw;
   }
-  
+
   .error {
     font-size: 3vw;
   }
