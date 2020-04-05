@@ -17,7 +17,7 @@ export const SYMPTOM_OPTIONS = [
   { label: "Shortness of Breath", value: "shortnessOfBreath" },
   { label: "Diarrhea", value: "diarrhea" },
   { label: "Runny Nose", value: "runnyNose" },
-  { label: "Sore Throat", value: "h" }
+  { label: "Sore Throat", value: "soreThroat" }
 ];
 
 export const AGE_OPTIONS = [
@@ -35,20 +35,18 @@ export const CONDITION_OPTIONS = [
   { label: "Diabetes", value: "fever" },
   { label: "High Blood Pressure", value: "chills" },
   { label: "Heart Disease", value: "shakes" },
-  { label: "Active Cancer", value: "d" },
-  { label: "COPD/Asthma", value: "e" },
-  { label: "Immunocompromised", value: "f" },
-  { label: "Kidney Disease", value: "g" },
-  { label: "History of Stroke", value: "h" },
-  { label: "Other", value: "h" }
+  { label: "Active Cancer", value: "cancer" },
+  { label: "COPD/Asthma", value: "breathingProblems" },
+  { label: "Immunocompromised", value: "immunocompromised" },
+  { label: "Kidney Disease", value: "kidneyDisease" },
+  { label: "History of Stroke", value: "historyOfStroke" },
+  { label: "Other", value: "other" }
 ];
 
 export const NEED_OPTIONS = [
-  { label: "Financial Support", value: "fever" },
-  { label: "Emotional Support", value: "chills" },
-  { label: "Medication/Pharmacy Resources", value: "shakes" },
-  { label: "Food/Necessary Resources", value: "d" },
-  { label: "Other", value: "e" }
+  { label: "Financial Support", value: "financialSupport" },
+  { label: "Emotional Support", value: "emotionalSupport" },
+  { label: "Medication/Pharmacy Resources", value: "medication" },
+  { label: "Food/Necessary Resources", value: "food" },
+  { label: "Other", value: "other" }
 ];
-
-
