@@ -11,14 +11,12 @@ $dark-grey: #333333;
 .title {
   font-family: "Open Sans", sans-serif;
   font-weight: 700;
-  font-size: 2.5rem; // TODO: change to vw once titles are written
   color: $black-main;
 }
 
 .body {
   font-family: "Open Sans", sans-serif;
-  font-size: 1.25vw;
-  letter-spacing: 1.35px;
+  letter-spacing: 0.75px;
   color: $black-main;
 }
 
@@ -74,28 +72,48 @@ html {
   .body {
     font-size: 1.5vw;
   }
+
+  .title {
+    font-size: 2.5vw; 
+  }
 }
 
 @media only screen and (max-width: 1000px) {
   .body {
-    font-size: 1.8vw;
+    font-size: 2vw;
+  }
+
+  .title {
+    font-size: 3.25vw;
   }
 }
 
 @media only screen and (max-width: 800px) {
   .body {
-    font-size: 2.25vw;
+    font-size: 2.5vw;
+  }
+
+  .title {
+    font-size: 4vw;
   }
 }
 
 @media only screen and (max-width: 600px) {
   .body {
-    font-size: 2.75vw;
+    font-size: 3vw;
+  }
+
+  .title {
+    font-size: 4.75vw;
   }
 }
 
 @media only screen and (max-width: 400px) {
   .body {
     font-size: 3.5vw;
+  }
+
+  .title {
+    font-size: 5.5vw;
   }
 }

@@ -35,14 +35,8 @@
   height: 70px;
 }
 
-@media only screen and (max-width: 800px) {
-  .symptoms__root {
-    padding: 5% 15%
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .symptoms__root {
-    padding: 5% 10%
+@media only screen and (max-width: 1000px) {
+  .symptoms {
+    padding: 7% 10%;
   }
 }

@@ -27,7 +27,7 @@ const TrackYourSymptoms = () => {
           <div className="title">Tell us how you feel!</div>
           <SyringeIcon className="symptoms__syringe-icon"/>
         </div>
-        <p className="symptoms__description description">
+        <p className="symptoms__description body">
           Your answers will be collected and shared anonymously through our heatmap to help
           healthcare providers, researchers, and community members gauge the spread of COVID-19.
           The questionnaire is based on the best available guidance from Canadian public health
@@ -36,7 +36,7 @@ const TrackYourSymptoms = () => {
           COVID-19. If you suspect you may have COVID-19, please seek a medical professional. See
           our Terms of Service and Privacy Policy for more information.
         </p>
-        <p className="symptoms__description description">
+        <p className="symptoms__description body">
           <b>Please fill in this form even if you are experiencing no symptoms.</b>
         </p>
       </div>
