@@ -10,12 +10,14 @@ $dark-grey: #333333;
 // text
 .title {
   font-family: "Open Sans", sans-serif;
+  font-size: 2.25vw;
   font-weight: 700;
   color: $black-main;
 }
 
 .body {
   font-family: "Open Sans", sans-serif;
+  font-size: 1.25vw;
   letter-spacing: 0.75px;
   color: $black-main;
 }
@@ -24,6 +26,17 @@ $dark-grey: #333333;
   font-family: "Open Sans", sans-serif;
   font-size: 1.125rem; // TODO: change to vw once descriptions are written
   color: $black-main;
+}
+
+.error {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.9vw;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: italic;
+  line-height: normal;
+  letter-spacing: normal;
+  color: $error-red;
 }
 
 // components
@@ -51,17 +64,6 @@ html {
   margin: 0;
 }
 
-.error {
-  font-family: "Open Sans", sans-serif;
-  font-size: 0.9vw;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: italic;
-  line-height: normal;
-  letter-spacing: normal;
-  color: $error-red;
-}
-
 .icon {
   width: 100px;
   height: 100px;
@@ -76,6 +78,10 @@ html {
   .title {
     font-size: 2.5vw; 
   }
+
+  .error {
+    font-size: 1.2vw;
+  }
 }
 
 @media only screen and (max-width: 1000px) {
@@ -85,6 +91,10 @@ html {
 
   .title {
     font-size: 3.25vw;
+  }
+
+  .error {
+    font-size: 1.65vw;
   }
 }
 
@@ -96,6 +106,10 @@ html {
   .title {
     font-size: 4vw;
   }
+
+  .error {
+    font-size: 2.1vw;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -106,6 +120,10 @@ html {
   .title {
     font-size: 4.75vw;
   }
+
+  .error {
+    font-size: 2.55vw;
+  }
 }
 
 @media only screen and (max-width: 400px) {
@@ -115,5 +133,9 @@ html {
 
   .title {
     font-size: 5.5vw;
+  }
+  
+  .error {
+    font-size: 3vw;
   }
 }
