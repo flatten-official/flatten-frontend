@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-scroll";
+import { NavLink } from "react-router-dom";
 
 import logo from "../../assets/logo-black.png";
 
@@ -54,6 +55,11 @@ class Navbar extends React.Component {
             >
               View Virus Data
             </Link>
+          </li>
+          <li className="nav__info">
+            <NavLink className="body" exact to="/info">
+              COVID-19 Information
+            </NavLink>
           </li>
         </div>
       </nav>

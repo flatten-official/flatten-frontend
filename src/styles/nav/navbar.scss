@@ -4,17 +4,18 @@
   width: 100%;
   z-index: 2;
   background-color: $light-grey;
-  height: 80px;
+  height: 70px;
+  display: flex;
 }
 
 .nav__content {
-  max-width: 800px;
-  padding: 0rem 3rem;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  li:last-child {
+    margin-left: auto;
+  }
 }
 
 .nav__item {
@@ -25,6 +26,12 @@
     color: $black-main;
     cursor: pointer;
   }
+}
+
+.nav__info {
+  position: absolute;
+  display: inline;
+  right: 2%;
 }
 
 .navbar__logo {
