@@ -6,16 +6,10 @@ $error-red: #ff0a47;
 $medium-grey: #979797;
 $light-grey: #eef0f1;
 $dark-grey: #333;
-<<<<<<< HEAD
 // text
 .title {
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
-=======
-.title {
-  font-family: "Open Sans", sans-serif;
-  font-weight: 700;
->>>>>>> 86b0b3cd77e225c11395e7dfa5cebc47220ad18a
   font-size: 2.5rem; // TODO: change to vw once titles are written
   color: $black-main;
 }
