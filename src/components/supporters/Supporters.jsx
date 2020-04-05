@@ -26,13 +26,16 @@ accepting donations and you can contact us at the email below should you be inte
 const Supporters = () => (
   <React.Fragment>
     <h4 className="supporters__title title">Supporters</h4>
-    <p className="supporters__description body">{description}</p>
-    <p className="supporters__contact body">
-      Contact Us:{" "}
-      <a className="emailLink" href="mailto:flattenofficial@gmail.com">
-        flattenofficial@gmail.com
-      </a>
-    </p>
+    <div>
+      <p className="supporters__description body">{description}</p>
+      <p className="supporters__contact body">
+        Contact Us:{" "}
+        <a className="emailLink" href="mailto:flattenofficial@gmail.com">
+          flattenofficial@gmail.com
+        </a>
+      </p>
+    </div>
+
     <hr className="line" />
     {companies.map((company, index) => (
       <div key={index} className="supporters__card body">
