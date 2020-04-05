@@ -1,6 +1,6 @@
 import React from "react";
 
-const ControlledRadioButton = ({ label, value, onChange, checked }) => {
+const RadioButton = ({ label, value, onChange, checked }) => {
   return (
     <label className="radio__root">
       {label && <span className="radio__label description">{label}</span>}
@@ -14,4 +14,4 @@ const ControlledRadioButton = ({ label, value, onChange, checked }) => {
   );
 };
 
-export default ControlledRadioButton;
+export default RadioButton;
