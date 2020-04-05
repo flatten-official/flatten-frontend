@@ -20,10 +20,10 @@ const TrackYourSymptoms = () => {
   }
 
   return (
-    <div className="symptoms-root">
-      <div className="symptoms-header">
+    <div className="symptoms__root">
+      <div className="symptoms__header">
         <div className="title">Tell us how you feel!</div>
-        <p className="symptoms-description description">
+        <p className="symptoms__description description">
           Your answers will be collected and shared anonymously through our heatmap to help
           healthcare providers, researchers, and community members gauge the spread of COVID-19.
           The questionnaire is based on the best available guidance from Canadian public health
@@ -32,13 +32,14 @@ const TrackYourSymptoms = () => {
           COVID-19. If you suspect you may have COVID-19, please seek a medical professional. See
           our Terms of Service and Privacy Policy for more information.
         </p>
-        <p className="symptoms-description description bold">
-          Please fill in this form even if you are experiencing no symptoms.
+        <p className="symptoms__description description">
+          <b>Please fill in this form even if you are experiencing no symptoms.</b>
         </p>
       </div>
       <SymptomsForm onSubmit={handleSubmit}/>
-      <div className="symptoms-submit">
+      <div className="symptoms__submit">
         <PrimaryButton
+          className="symptoms__submit-button"
           disabled={submitting}
           onClick={handleClick}
         >

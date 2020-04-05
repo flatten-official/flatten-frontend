@@ -16,7 +16,7 @@ const formValidation = [
   ["q6", "Field is required"],
   ["q7", "Field is required"],
   ["postalCode", "Postal code is required (ie. A1A)"],
-  ["acknowledgement", "Please accept the Terms and Conditions"]
+  ["acknowledgement", "Please accept the Terms and Conditions."]
 ];
 
 const questions = [
@@ -31,12 +31,12 @@ const questions = [
 
 const SymptomsForm = ({ handleSubmit }) => {
   return (
-    <form id={symptomsFormName} onSubmit={handleSubmit}>
-      <div className="symptoms-form-body">
+    <form onSubmit={handleSubmit}>
+      <div className="symptoms-form__body">
         {questions.map((question, i) => (
-          <div key={i} className="symptoms-form-question">
-            <p className="symptoms-form-question-body description">{question}</p>
-            <div className="symptoms-form-question-response">
+          <div key={i} className="symptoms-form__question">
+            <p className="symptoms-form__question-body description">{question}</p>
+            <div className="symptoms-form__question-response">
               <Field
                 name={`q${i + 1}`}
                 options={yesNoOptions}
@@ -45,25 +45,27 @@ const SymptomsForm = ({ handleSubmit }) => {
             </div>
           </div>
         ))}
-        <div className="symptoms-form-question">
-          <p className="symptoms-form-question-body description">
+        <div className="symptoms-form__question">
+          <p className="symptoms-form__question-body description">
             What are the three first characters of the postal code of your current
             residence?
           </p>
-          <div className="symptoms-form-question-response">
+          <div className="symptoms-form__question-response">
             <Field
               name="postalCode"
               component={PostalCodeInput}
             />
           </div>
         </div>
-        <div className="symptoms-form-acknowledgement">
+        <div className="symptoms-form__acknowledgement">
           <Field
             name="acknowledgement"
             label={(
-              <p className="description italic">
-                By submitting this form, you certify that you are 18+ and agree to our Terms of
-                Service and Privacy Policy.
+              <p className="description">
+                <i>
+                  By submitting this form, you certify that you are 18+ and agree to our Terms of
+                  Service and Privacy Policy.
+                </i>
               </p>
             )}
             component={Checkbox}

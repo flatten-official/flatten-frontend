@@ -1,8 +1,8 @@
-.symptoms-form-body {
+.symptoms-form__body {
   width: 100%;
 }
 
-.symptoms-form-question {
+.symptoms-form__question {
   display: grid;
   align-items: center;
   grid-template-columns: 70% 10% 20%;
@@ -13,17 +13,17 @@
   text-align: left;
 }
 
-.symptoms-form-question-body {
+.symptoms-form__question-body {
   grid-column: 1;
 }
 
-.symptoms-form-question-response {
+.symptoms-form__question-response {
   grid-column: 3;
   text-align: center;
 }
 
-.symptoms-form-acknowledgement {
+.symptoms-form__acknowledgement {
   align-items: center;
   padding: 15px;
-  margin: 15px;
+  margin: 15px 5%;
 }

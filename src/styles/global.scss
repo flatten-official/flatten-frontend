@@ -2,7 +2,8 @@
 $black-main: #000000;
 $white-main: #ffffff;
 $navy-blue: #121847;
-$error-red: #000a52;
+$error-red: #ff0a47;
+$medium-grey: #979797;
 
 // text
 .title {
@@ -46,21 +47,13 @@ html {
 
 .error {
   font-family: "Open Sans", sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.9vw;
   font-weight: normal;
   font-stretch: normal;
   font-style: italic;
   line-height: normal;
   letter-spacing: normal;
   color: $error-red;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-.italic {
-  font-style: italic;
 }
 
 .icon {

@@ -17,9 +17,9 @@ class HomePage extends React.Component {
             Our ultimate goal is to flatten the curve of COVID-19, and you can
             do your part by <b>filling out our form once a day</b>.
           </div>
-          <PrimaryButton className="home__button">Returning User</PrimaryButton>
+          <PrimaryButton className="home__button body">Returning User</PrimaryButton>
           <br />
-          <PrimaryButton className="home__button">New User</PrimaryButton>
+          <PrimaryButton className="home__button body">New User</PrimaryButton>
         </div>
       </div>
     );

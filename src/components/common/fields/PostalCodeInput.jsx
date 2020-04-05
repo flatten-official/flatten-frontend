@@ -14,7 +14,7 @@ const PostalCodeInput = props => {
   }
 
   return (
-    <TextInput {...props} onChange={handleChange} />
+    <TextInput {...props} className onChange={handleChange} />
   );
 };
 

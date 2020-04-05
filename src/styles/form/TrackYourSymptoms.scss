@@ -1,20 +1,22 @@
-.symptoms-root {
-  padding: 5% 10%;
+.symptoms__root {
+  padding: 5% 20%;
   text-align: center;
 }
 
-.symptoms-header {
+.symptoms__header {
   padding: 20px;
 }
 
-.symptoms-description {
+.symptoms__description {
   padding: 1rem;
 }
 
-.symptoms-submit {
-  display: flex;
+.symptoms__submit {
   justify-content: center;
   margin-left: 30%;
   margin-right: 30%;
 }
 
+.symptoms__submit-button {
+  height: 70px;
+}
