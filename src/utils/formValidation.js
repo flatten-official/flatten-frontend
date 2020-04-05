@@ -17,3 +17,9 @@ export const isValidEmail = email => {
   var re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
   return re.test(String(email).toLowerCase());
 }
+
+export const isValidPostalCode = postalCode => {
+  // regex for Canadian postal code prefixes
+  var re = /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z]$/;
+  return re.test(String(postalCode).toUpperCase());
+}

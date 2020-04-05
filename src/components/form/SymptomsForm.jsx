@@ -13,7 +13,7 @@ import {
   SYMPTOM_OPTIONS,
   YES_NO_OPTIONS
 } from "./SymptomsFormUtils";
-import { validate, isValidEmail } from "../../utils/formValidation";
+import { validate, isValidPostalCode, isValidEmail } from "../../utils/formValidation";
 
 export const symptomsFormName = "trackYourSymptoms";
 
@@ -22,7 +22,7 @@ const formValidation = [
   ["contactWithIllness", "Field is required"],
   ["travelOutsideCanada", "Field is required"],
   ["testedPositive", "Field is required"],
-  ["postalCode", "Postal code is required (ie. A1A)"],
+  ["postalCode", "Postal code is required (ie. A1A)", ({ postalCode }) => isValidPostalCode(postalCode)],
   ["sex", "Field is required"],
   ["needs", "Field is required", ({ needs }) => Array.isArray(needs) && needs.length > 0],
   ["acknowledgement", "Please accept the Terms and Conditions."],
