@@ -8,7 +8,7 @@ const CheckboxGroup = ({ input, options, label }) => {
       : input.value.filter(value => value !== event.target.name)
 
     input.onChange(selectedValues)
-  }
+  };
 
   return (
     <div>

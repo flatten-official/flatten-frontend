@@ -3,27 +3,21 @@ $black-main: #000000;
 $white-main: #ffffff;
 $navy-blue: #121847;
 $error-red: #ff0a47;
-$medium-grey: #979797;
 $light-grey: #eef0f1;
-$dark-grey: #333;
-<<<<<<< HEAD
+$dark-grey: #333333;
+$medium-grey: #979797;
 // text
 .title {
   font-family: "Open Sans", sans-serif;
+  font-size: 2.25vw;
   font-weight: 600;
-=======
-.title {
-  font-family: "Open Sans", sans-serif;
-  font-weight: 700;
->>>>>>> 86b0b3cd77e225c11395e7dfa5cebc47220ad18a
-  font-size: 2.5rem; // TODO: change to vw once titles are written
   color: $black-main;
 }
 
 .body {
   font-family: "Open Sans", sans-serif;
   font-size: 1.25vw;
-  letter-spacing: 1.35px;
+  letter-spacing: 0.75px;
   color: $black-main;
 }
 
@@ -33,7 +27,24 @@ $dark-grey: #333;
   color: $black-main;
 }
 
+.error {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.9vw;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: italic;
+  line-height: normal;
+  letter-spacing: normal;
+  color: $error-red;
+}
+
 // components
+p {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
 body {
   height: 100%;
   width: 100%;
@@ -50,17 +61,6 @@ html {
   height: 100%;
   width: 100%;
   margin: 0;
-}
-
-.error {
-  font-family: "Open Sans", sans-serif;
-  font-size: 0.9vw;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: italic;
-  line-height: normal;
-  letter-spacing: normal;
-  color: $error-red;
 }
 
 .icon {
@@ -87,28 +87,68 @@ html {
   .body {
     font-size: 1.5vw;
   }
+
+  .title {
+    font-size: 2.5vw; 
+  }
+
+  .error {
+    font-size: 1.2vw;
+  }
 }
 
 @media only screen and (max-width: 1000px) {
   .body {
-    font-size: 1.8vw;
+    font-size: 2vw;
+  }
+
+  .title {
+    font-size: 3.25vw;
+  }
+
+  .error {
+    font-size: 1.65vw;
   }
 }
 
 @media only screen and (max-width: 800px) {
   .body {
-    font-size: 2.25vw;
+    font-size: 2.5vw;
+  }
+
+  .title {
+    font-size: 4vw;
+  }
+
+  .error {
+    font-size: 2.1vw;
   }
 }
 
 @media only screen and (max-width: 600px) {
   .body {
-    font-size: 2.75vw;
+    font-size: 3vw;
+  }
+
+  .title {
+    font-size: 4.75vw;
+  }
+
+  .error {
+    font-size: 2.55vw;
   }
 }
 
 @media only screen and (max-width: 400px) {
   .body {
     font-size: 3.5vw;
+  }
+
+  .title {
+    font-size: 5.5vw;
+  }
+  
+  .error {
+    font-size: 3vw;
   }
 }
