@@ -1,33 +1,41 @@
-.card {
+.profile__card {
   margin-bottom: 40px;
+  width: 260px;
+  margin-right: 15px;
+  margin-left: 15px;
+  text-align: center;
+  border-radius: 5px;
+  border: 2px solid #eef0f1;
 }
 
 .card-img-top {
   position: static;
   padding: 0;
-  max-width: 100%;
-  height: 220px;
+  width: 100%;
+  height: 260px;
+  border-radius: 1%;
   object-fit: cover;
 }
 
-.card-text {
-  padding-top: 0px;
-  margin-bottom: 5px;
+.card-text-title {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .card-text-name {
+  font-size: 17px;
   padding-top: 0px;
-  margin-bottom: 5px;
-  font-weight: bold;
+  margin-bottom: 3px;
+  font-weight: 600;
 }
 
 .card-text-role {
   padding-top: 0px;
-  margin-bottom: 5px;
+  margin: 10px 0px 10px 0px;
   font-style: italic;
 }
 
-.card:hover {
+.profile__card:hover {
   transition: 0.3s;
   -webkit-box-shadow: 4px 4px 10px 0px rgb(211, 185, 185);
   -moz-box-shadow: 4px 4px 10px 0px rgb(211, 185, 185);

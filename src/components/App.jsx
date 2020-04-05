@@ -1,25 +1,16 @@
 import React from "react";
 
-<<<<<<< HEAD
-import Form from "./form/Form";
-import Heatmap from "./heatmap/Heatmap";
-import AboutUs from "./aboutUs/AboutUs";
-=======
 import HomePage from "./home/HomePage";
->>>>>>> origin/home-page
+import AboutUs from "./aboutUs/AboutUs";
+import Info from "./info/Info";
+import Supporters from "./supporters/Supporters";
 
 class App extends React.Component {
   render() {
     return (
-<<<<<<< HEAD
-      <div>
-        <AboutUs />
-      </div>
-=======
       <React.Fragment>
-        <HomePage />
+        <Supporters />
       </React.Fragment>
->>>>>>> origin/home-page
     );
   }
 }

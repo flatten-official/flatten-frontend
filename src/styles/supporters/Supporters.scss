@@ -1,0 +1,40 @@
+.logo {
+  width: 300px;
+  padding: 20px;
+  transition: transform 0.2s;
+  margin: 20px auto;
+  width: 60%;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.company-row {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+}
+
+.supporters__description {
+  margin: 15px auto;
+  width: 60%;
+  font-size: 1.2rem;
+  font-family: "Open Sans";
+}
+
+.supporters__contact {
+  text-align: center;
+  margin: 20px auto;
+  width: 60%;
+  font-size: 1.2rem;
+  font-family: "Open Sans";
+}
+
+.supporters__card {
+  font-size: 1.5rem;
+  font-family: "Open Sans";
+  text-align: center;
+  width: 30vw;
+  margin: 40px auto;
+}

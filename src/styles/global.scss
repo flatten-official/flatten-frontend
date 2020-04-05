@@ -1,19 +1,20 @@
 // colours
 $black-main: #000000;
 $white-main: #ffffff;
-$navy-blue: #00267a;
+$navy-blue: #121847;
 $error-red: #ff0000;
 
 // text
 .title {
   font-family: "Open Sans", sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 2.5rem;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
   color: $black-main;
+  text-align: center;
 }
 
 .body {
@@ -83,6 +84,21 @@ html {
   &:focus {
     outline: none;
   }
+}
+
+.emailLink {
+  color: #212529;
+  text-decoration: none;
+}
+
+.emailLink:hover {
+  color: grey;
+}
+
+.line {
+  border-color: black;
+  border-width: 4px;
+  width: 50px;
 }
 
 // media queries
