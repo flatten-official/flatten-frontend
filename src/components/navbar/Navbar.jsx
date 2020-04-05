@@ -56,7 +56,7 @@ class Navbar extends React.Component {
               View Virus Data
             </Link>
           </li>
-          <li className="nav__info">
+          <li className="nav__info nav__optional">
             <NavLink className="body" exact to="/info">
               COVID-19 Information
             </NavLink>
