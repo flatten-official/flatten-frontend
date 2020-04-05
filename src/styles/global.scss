@@ -2,40 +2,28 @@
 $black-main: #000000;
 $white-main: #ffffff;
 $navy-blue: #121847;
-$error-red: #ff0000;
-
-// text
+$error-red: #ff0a47;
+$medium-grey: #979797;
+$light-grey: #eef0f1;
+$dark-grey: #333;
 .title {
   font-family: "Open Sans", sans-serif;
-  font-weight: 600;
-  font-size: 2.5rem;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
+  font-weight: 700;
+  font-size: 2.5rem; // TODO: change to vw once titles are written
   color: $black-main;
   text-align: center;
 }
 
 .body {
   font-family: "Open Sans", sans-serif;
-  font-size: 2.3vh;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
+  font-size: 1.25vw;
   letter-spacing: 1.35px;
   color: $black-main;
 }
 
 .description {
   font-family: "Open Sans", sans-serif;
-  font-size: 1.125rem;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
+  font-size: 1.125rem; // TODO: change to vw once descriptions are written
   color: $black-main;
 }
 
@@ -58,31 +46,38 @@ html {
   margin: 0;
 }
 
+.error {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.9vw;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: italic;
+  line-height: normal;
+  letter-spacing: normal;
+  color: $error-red;
+}
+
 .icon {
   width: 100px;
   height: 100px;
 }
 
-.button {
-  border-radius: 8px;
-  border: solid 2px $navy-blue;
-  background-color: $navy-blue;
-  color: $white-main;
-
-  font-family: "Open Sans", sans-serif;
-  font-size: 1.75vh;
-  font-weight: 400;
-  letter-spacing: 1px;
-
-  &:hover {
-    background-color: $white-main !important;
-    color: $navy-blue !important;
-    transition: 0.3s;
-    cursor: pointer;
+// media queries
+@media only screen and (max-width: 1200px) {
+  .body {
+    font-size: 1.5vw;
   }
+}
 
-  &:focus {
-    outline: none;
+@media only screen and (max-width: 1000px) {
+  .body {
+    font-size: 1.8vw;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .body {
+    font-size: 2.25vw;
   }
 }
 
@@ -104,12 +99,12 @@ html {
 // media queries
 @media only screen and (max-width: 600px) {
   .body {
-    font-size: 1.8vh;
+    font-size: 2.75vw;
   }
 }
 
 @media only screen and (max-width: 400px) {
   .body {
-    font-size: 1.5vh;
+    font-size: 3.5vw;
   }
 }
