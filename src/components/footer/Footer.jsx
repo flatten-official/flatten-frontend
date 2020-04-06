@@ -48,9 +48,6 @@ class Footer extends React.Component {
               <p>
                 <b>Contact Us</b>
               </p>
-              <a>
-                <p></p>
-              </a>
               <a
                 className="footer__link"
                 href="mailto:flattenofficial@gmail.com"
