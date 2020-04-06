@@ -39,6 +39,7 @@ class Navbar extends React.Component {
               to="symptoms"
               spy={true}
               smooth={true}
+              offset={-70}
               duration={1000}
             >
               Report Your Symptoms
