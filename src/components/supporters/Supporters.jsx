@@ -3,17 +3,14 @@ import React from "react";
 const companies = [
   {
     name: "Google Cloud",
-    src: "./companyLogos/google-cloud.png",
     link: "https://cloud.google.com/",
   },
   {
     name: "Vector Institute",
-    src: "./companyLogos/vector-institute.png",
     link: "https://vectorinstitute.ai/",
   },
   {
     name: "CIFAR",
-    src: "./companyLogos/cifar.png",
     link: "https://cifar.ca",
   },
 ];
@@ -38,16 +35,15 @@ const Supporters = () => (
 
     <hr className="line" />
     {companies.map((company, index) => (
-      <div key={index} className="supporters__card body">
-        <a href={company.link} target="_blank" rel="noopener noreferrer">
-          <img
-            alt={company.name}
-            src={require(`${company.src}`)}
-            key={index}
-            className="supporters__logo"
-          />
+      <div key={index} className="supporters__card">
+        <a
+          className="supporters__link title"
+          href={company.link}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {company.name}
         </a>
-        <div>{company.name}</div>
       </div>
     ))}
   </React.Fragment>
