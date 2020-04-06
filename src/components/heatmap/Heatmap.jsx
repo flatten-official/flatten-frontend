@@ -42,32 +42,40 @@ class HeatMap extends React.Component {
 
           <div className="heatmap__description body">
             <p>
-              Welcome to our interactive heat map! To view information about your region,
-              click on your municipality or postal code region. To easily locate yourself, let
-              Flatten access your location.
-          </p>
+              Welcome to our interactive heat map! To view information about
+              your region, click on your municipality or postal code region. To
+              easily locate yourself, let Flatten access your location.
+            </p>
           </div>
 
           <div className="heatmap__description body">
             <p>
-              <b>Potential and Vulnerable Cases:</b> This tab displays all individuals
-          that are especially vulnerable to COVID-19 in Canada that are also deemed potential cases,
-          based on data inputted into Flatten's form.
-        </p>
+              <b>Potential and Vulnerable Cases:</b> This tab displays all
+              individuals that are especially vulnerable to COVID-19 in Canada
+              that are also deemed potential cases, based on data inputted into
+              Flatten's form.
+            </p>
 
             <p>
-              <b>Potential Cases:</b> This tab displays all of the potential cases
-          of COVID-19 in Canada, based on data inputted into Flatten's form.
-        </p>
+              <b>Potential Cases:</b> This tab displays all of the potential
+              cases of COVID-19 in Canada, based on data inputted into Flatten's
+              form.
+            </p>
 
             <p>
               <b>Vulnerable Individuals: </b> This tab displays all individuals
-          that are especially vulnerable to COVID-19 in Canada, based on data inputted into Flatten's form.
-        </p>
+              that are especially vulnerable to COVID-19 in Canada, based on
+              data inputted into Flatten's form.
+            </p>
           </div>
 
           <div className="heatmap__description body">
-            <p><i>In order to ensure non-trolling we use cookies, recaptcha and track suspicious IP addresses.</i></p>
+            <p>
+              <i>
+                In order to ensure non-trolling we use cookies, recaptcha and
+                track suspicious IP addresses.
+              </i>
+            </p>
           </div>
         </div>
 
@@ -76,17 +84,6 @@ class HeatMap extends React.Component {
             Sorry, the heat-map did not load.
           </iframe>
         </div>
-
-        <div className="heatmap__analytics">
-          <PrimaryButton
-            className="heatmap__analytics-button"
-            //disabled={submitting}
-            //onClick={handleClick}
-          >
-            View Analytics Dashboard
-        </PrimaryButton>
-        </div>
-
       </div>
     );
   }

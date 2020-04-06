@@ -17,18 +17,16 @@
   align-items: center;
 }
 
-.heatmap__map-icon{
+.heatmap__map-icon {
   height: 3rem;
   width: 3rem;
   margin-left: 14px;
-  transform: rotate(180deg);
 }
 
 .heatmap__container {
   overflow: hidden;
   position: relative;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin: 0% 10%;
   margin-top: 1%;
   iframe {
     border: 0;
@@ -51,9 +49,14 @@
   height: 70px;
 }
 
+@media only screen and (max-width: 1000px) {
+  .heatmap__header {
+    padding: 10% 10%;
+  }
+}
+
 @media screen and (max-width: 800px) {
-  .iframe-container {
-    margin-left: 0%;
-    margin-right: 0%;
+  .heatmap__container {
+    margin: 0;
   }
 }
