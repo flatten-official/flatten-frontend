@@ -1,0 +1,29 @@
+.footer__container {
+    text-align: center;
+    background-color: #f8f9fa;
+    padding-top: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 30px;
+}
+
+.footer__pair {
+    width: fit-content;
+    display: inline-block;
+
+}
+
+.footer__section {
+    margin: 40px;
+    vertical-align: top;
+    width: fit-content;
+    display: inline-block;
+    text-align: right;
+}
+
+@media screen and (max-width: 600px) {
+    .footer__section {
+        margin: 10px;
+        
+    }
+}

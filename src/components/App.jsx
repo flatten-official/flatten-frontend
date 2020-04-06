@@ -4,6 +4,7 @@ import Navbar from "./navbar/Navbar";
 import HomePage from "./home/HomePage";
 import TrackYourSymptoms from "./form/TrackYourSymptoms";
 import Heatmap from "./heatmap/Heatmap";
+import Footer from "./footer/Footer";
 
 class App extends React.Component {
   render() {
@@ -13,6 +14,7 @@ class App extends React.Component {
         <HomePage />
         <TrackYourSymptoms />
         <Heatmap />
+        <Footer />
       </>
     );
   }
