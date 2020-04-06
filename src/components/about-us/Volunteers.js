@@ -82,7 +82,7 @@ const volunteers = [
     name: "Ranjani Somayaji",
     src: "./headshots/somayaji.png",
     role: "Advisor",
-    degrees: "MD, MPH, FRCPC",
+    degrees: ", MD, MPH, FRCPC",
     titles: "Infectious Disease Specialist and Epidemiologist",
   },
   {

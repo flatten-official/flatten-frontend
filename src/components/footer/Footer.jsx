@@ -22,7 +22,7 @@ class Footer extends React.Component {
                 <p>About Us</p>
               </Link>
               <Link className="footer__link" to="/supporters">
-                <p>Sponsors</p>
+                <p>Supporters</p>
               </Link>
             </div>
           </div>
@@ -42,9 +42,6 @@ class Footer extends React.Component {
               <p>
                 <b>Contact Us</b>
               </p>
-              <a>
-                <p></p>
-              </a>
               <a
                 className="footer__link"
                 href="mailto:flattenofficial@gmail.com"
