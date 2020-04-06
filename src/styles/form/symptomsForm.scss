@@ -1,0 +1,41 @@
+.symptoms-form {
+  width: 100%;
+}
+
+.symptoms-form__question {
+  align-items: center;
+  background-color: $white-paper;
+  border-radius: 10px;
+  padding: 25px;
+  margin: 15px 0px;
+  text-align: left;
+}
+
+.symptoms-form__question-body {
+  padding: 16px 0px;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.symptoms-form__question-response {
+  grid-column: 3;
+  text-align: center;
+}
+
+.symptoms-form__acknowledgement {
+  align-items: center;
+  margin: 14px 5% 26px;
+}
+
+@media only screen and (max-width: 600px) {
+  .symptoms-form__question {
+    grid-template-columns: 55% 5% 40%;
+    padding: 20px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .symptoms-form__question {
+    grid-template-columns: 50% 5% 45%;
+  }
+}
