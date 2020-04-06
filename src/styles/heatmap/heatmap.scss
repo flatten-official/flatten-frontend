@@ -2,11 +2,31 @@
   text-align: center;
 }
 
+.heatmap__header {
+  padding: 5% 20%;
+}
+
+.heatmap__description {
+  text-align: center;
+  padding: 1rem 0px;
+}
+
+.heatmap__title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heatmap__map-icon {
+  height: 3rem;
+  width: 3rem;
+  margin-left: 14px;
+}
+
 .heatmap__container {
   overflow: hidden;
   position: relative;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin: 0% 10%;
   margin-top: 1%;
   iframe {
     border: 0;
@@ -18,9 +38,25 @@
   }
 }
 
+.heatmap__analytics {
+  padding: 1rem;
+  justify-content: center;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+.heatmap__analytics-button {
+  height: 70px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .heatmap__header {
+    padding: 10% 10%;
+  }
+}
+
 @media screen and (max-width: 800px) {
-  .iframe-container {
-    margin-left: 0%;
-    margin-right: 0%;
+  .heatmap__container {
+    margin: 0;
   }
 }
