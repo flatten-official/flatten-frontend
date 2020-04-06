@@ -13,7 +13,7 @@ const volunteers = [
     role: "Dev Team Lead and DevOps",
   },
   {
-    name: "Martin Staadacker",
+    name: "Martin Staadecker",
     src: "./headshots/martin.png",
     link: "https://www.linkedin.com/in/staad/",
     role: "Maps Team Systems Integration Lead and DevOps",
@@ -82,7 +82,7 @@ const volunteers = [
     name: "Ranjani Somayaji",
     src: "./headshots/somayaji.png",
     role: "Advisor",
-    degrees: "MD, MPH, FRCPC",
+    degrees: ", MD, MPH, FRCPC",
     titles: "Infectious Disease Specialist and Epidemiologist",
   },
   {
