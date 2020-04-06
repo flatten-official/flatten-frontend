@@ -36,7 +36,7 @@ class Navbar extends React.Component {
           <li className="nav__item">
             <Link
               activeClass="active"
-              to="symptoms__root"
+              to="symptoms"
               spy={true}
               smooth={true}
               duration={1000}
