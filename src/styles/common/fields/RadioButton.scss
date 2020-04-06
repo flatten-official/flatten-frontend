@@ -2,12 +2,13 @@ input[type=radio] {
   transform: scale(1.2);
 }
 
-.radio__root {
+.radio-button {
   display: flex;
   align-items: center;
+  padding: 8px;
 }
 
-.radio__label {
+.radio-button__label {
   padding: 0px 4px;
 }
   

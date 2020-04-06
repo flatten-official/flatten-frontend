@@ -1,6 +1,7 @@
 @import "./global.scss";
 @import "./common/buttons/PrimaryButton.scss";
 @import "./common/fields/Checkbox.scss";
+@import "./common/fields/CheckboxGroup.scss";
 @import "./common/fields/RadioButton.scss";
 @import "./common/fields/RadioButtonGroup.scss";
 @import "./common/fields/TextInput.scss";
@@ -15,3 +16,4 @@
 @import "./heatmap/heatmap.scss";
 @import "./esri_gsi_map/EsriGsiMap.scss";
 @import "./esri_gsi_map/EsriLink.scss";
+@import "./footer/footer.scss";

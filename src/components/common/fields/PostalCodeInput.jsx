@@ -7,7 +7,7 @@ const PostalCodeInput = props => {
   const handleChange = event => {
     const postalCode = event.target.value.toUpperCase();
 
-    // regex for ALL Canadian postal code prefixes
+    // partial match regex for Canadian postal code prefixes
     if (postalCode.match(/^(?:[ABCEGHJ-NPRSTVXY]|$)(?:\d|$)(?:[ABCEGHJ-NPRSTV-Z]|$)$/)) {
       input.onChange(event.target.value);
     }

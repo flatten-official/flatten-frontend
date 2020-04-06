@@ -3,6 +3,7 @@ import React from "react";
 import Navbar from "../navbar/Navbar";
 import HomePage from "./HomePage";
 import Heatmap from "../heatmap/Heatmap";
+import Footer from "../footer/Footer";
 import TrackYourSymptoms from "../form/TrackYourSymptoms";
 import EsriLink from "../esri_gsi_map/EsriLink";
 
@@ -15,6 +16,7 @@ class Home extends React.Component {
         <TrackYourSymptoms />
         <Heatmap />
         <EsriLink />
+        <Footer />
       </React.Fragment>
     );
   }
