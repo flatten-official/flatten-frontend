@@ -1,6 +1,7 @@
 .footer__container {
     text-align: center;
     background-color: #f8f9fa;
+    margin-top: 10px;
     padding-top: 10px;
     padding-left: 15px;
     padding-right: 15px;
@@ -19,6 +20,16 @@
     width: fit-content;
     display: inline-block;
     text-align: right;
+}
+
+.footer__link{
+    text-decoration: none;
+    color: black;
+    transition-duration: 0.3s;
+}
+
+.footer__link:hover{
+    text-decoration: underline;
 }
 
 @media screen and (max-width: 600px) {
