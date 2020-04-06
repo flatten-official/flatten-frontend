@@ -10,7 +10,7 @@ class EsriGsiMap extends React.Component {
   render() {
     const ratio = `${this.state.ratio}%`;
     return (
-      <div className="heatmap">
+      <div className="esrimap">
         <div className="esrimap__container" style={{ paddingTop: ratio }}>
           <iframe src="https://experience.arcgis.com/experience/48d10d406869457990432a21e09dc0a1">
             Sorry, the heat-map did not load.
