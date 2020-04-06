@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { reduxForm, Field } from "redux-form";
 import Recaptcha from "react-recaptcha";
 
@@ -106,11 +106,9 @@ const questions = [
   },
 ];
 
-const SymptomsForm = ({ handleSubmit }) => {
-  const [isVerified, setIsVerified] = useState(false);
-
+const SymptomsForm = (props) => {
   const recaptchaLoaded = () => {
-    //console.log("Loaded");
+    // console.log("Loaded");
   };
 
   const recaptchaExpired = () => {
@@ -119,12 +117,11 @@ const SymptomsForm = ({ handleSubmit }) => {
 
   const verifyCallback = (response) => {
     if (response) {
-      setIsVerified(true);
       props.change("recaptchaVerification", response);
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={props.handleSubmit}>
       <div className="symptoms-form">
         {questions.map(({ body, ...question }) => (
           <div className="symptoms-form__question" key={question.name}>
