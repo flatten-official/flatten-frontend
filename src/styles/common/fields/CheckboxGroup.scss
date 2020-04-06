@@ -2,7 +2,7 @@
   column-count: 2;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 600px) {
   .checkbox-group__container--columns-2 {
     display: flex;
     flex-direction: column;

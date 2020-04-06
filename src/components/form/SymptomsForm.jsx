@@ -8,7 +8,6 @@ import PostalCodeInput from "../common/fields/PostalCodeInput";
 import { 
   AGE_OPTIONS,
   CONDITION_OPTIONS,
-  NEED_OPTIONS,
   SEX_OPTIONS,
   SYMPTOM_OPTIONS,
   YES_NO_OPTIONS
@@ -24,14 +23,13 @@ const formValidation = [
   ["testedPositive", "Field is required"],
   ["postalCode", "Postal code is required (ie. A1A)", ({ postalCode }) => isValidPostalCode(postalCode)],
   ["sex", "Field is required"],
-  ["needs", "Field is required", ({ needs }) => Array.isArray(needs) && needs.length > 0],
   ["acknowledgement", "Please accept the Terms and Conditions."],
   ["email", "Please enter a valid email", ({ email }) => !email || isValidEmail(email)]
 ];
 
 const questions = [
   { 
-    body: "Which of the following symptoms are you currently experiencing? (Select all that apply)",
+    body: "Which of the following symptoms are you currently experiencing? Select all that apply.",
     name: "symptoms",
     component: CheckboxGroup,
     options: SYMPTOM_OPTIONS,
@@ -45,7 +43,7 @@ const questions = [
     maxColumns: 2
   },
   {
-    body: "Select any medical conditions you have been diagnosed with (Check all that apply)",
+    body: "Select any medical conditions you have been diagnosed with. Check all that apply.",
     name: "conditions",
     component: CheckboxGroup,
     options: CONDITION_OPTIONS,
@@ -83,18 +81,10 @@ const questions = [
     options: SEX_OPTIONS
   },
   {
-    body: "What is your greatest need at this time? (Check all that apply)",
-    name: "needs",
-    component: CheckboxGroup,
-    options: NEED_OPTIONS,
-    maxColumns: 2
-  },
-  {
     body: "What is your email? (optional)",
     name: "email",
     component: TextInput,
   }
-
 ];
 
 const SymptomsForm = ({ handleSubmit }) => {
