@@ -55,22 +55,19 @@ const questions = [
            COVID-19?`,
     name: "contactWithIllness",
     component: RadioButtonGroup,
-    options: YES_NO_OPTIONS,
-    maxColumns: 2
+    options: YES_NO_OPTIONS
   },
   {
     body: "Have you traveled outside of Canada within the last 14 days?",
     name: "travelOutsideCanada",
     component: RadioButtonGroup,
-    options: YES_NO_OPTIONS,
-    maxColumns: 2
+    options: YES_NO_OPTIONS
   },
   {
     body: "Have you tested positive for COVID-19?",
     name: "testedPositive",
     component: RadioButtonGroup,
-    options: YES_NO_OPTIONS,
-    maxColumns: 2
+    options: YES_NO_OPTIONS
   },
   {
     body: "What are the three first characters of the postal code of your current residence?",
