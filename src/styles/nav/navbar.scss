@@ -1,11 +1,13 @@
 .nav {
   position: fixed;
   top: 0px;
-  width: 100%;
+  left: 0px;
+  width: 100VW;
   z-index: 2;
-  background-color: $light-grey;
+  background-color: #f8f9fa;
   height: 70px;
   display: flex;
+  filter: drop-shadow(0px 2px 3px #f8f9fa);
 }
 
 .nav__content {
@@ -19,6 +21,7 @@
 }
 
 .nav__item {
+  font-size: 16px;
   display: inline;
   margin-left: 2rem;
   color: $dark-grey;
@@ -38,7 +41,36 @@
   width: 120px;
 }
 
-@media screen and (max-width: 800px) {
+.navbar__covid {
+  color: #00267a;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 860px) {
+  .nav__item {
+    text-align: center;
+    vertical-align: middle;
+    display: inline;
+    width: 120px;
+  }
+  .nav__info {
+    text-align: center;
+    display: inline;
+    width: 100px;
+  }
+  .nav__optional {
+    display: none;
+  }
+  .navbar__covid {
+    color: #00267a;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: normal;
+  }
+}
+
+@media screen and (max-width: 571px) {
   .nav__content {
     margin: 0;
     padding: 0;
@@ -47,17 +79,29 @@
     height: 100%;
   }
   .nav__item {
-    display: inline;
     margin-left: 5px;
     margin-right: 5px;
     color: $dark-grey;
-    text-align: center;
-    vertical-align: middle;
-  }
-  .nav__optional {
-    display: none;
+    font-size: 10px;
+    width: 85px;
   }
   .navbar__logo {
+    width: 60px;
+  }
+  .navbar__logo__container {
+    width: 70px
+  }
+  .navbar__covid {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .nav__item {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .nav__info {
     width: 80px;
   }
 }

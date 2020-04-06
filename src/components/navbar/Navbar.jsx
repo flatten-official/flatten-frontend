@@ -9,7 +9,7 @@ class Navbar extends React.Component {
     return (
       <nav className="nav">
         <div className="nav__content body">
-          <li className="nav__item">
+          <li className="nav__item navbar__logo__container">
             <Link
               activeClass="active"
               to="home"
@@ -56,8 +56,8 @@ class Navbar extends React.Component {
               View Virus Data
             </Link>
           </li>
-          <li className="nav__info nav__optional">
-            <NavLink className="body" exact to="/info">
+          <li className="nav__info">
+            <NavLink className="navbar__covid" exact to="/info">
               COVID-19 Information
             </NavLink>
           </li>
