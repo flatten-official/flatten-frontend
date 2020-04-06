@@ -13,11 +13,11 @@ export const SYMPTOM_OPTIONS = [
   { label: "Fever", value: "fever" },
   { label: "Chills", value: "chills" },
   { label: "Shakes", value: "shakes" },
-  { label: "New or Worsening Cough", value: "cough" },
-  { label: "Shortness of Breath", value: "shortnessOfBreath" },
+  { label: "New or worsening cough", value: "cough" },
+  { label: "Shortness of breath", value: "shortnessOfBreath" },
   { label: "Diarrhea", value: "diarrhea" },
-  { label: "Runny Nose", value: "runnyNose" },
-  { label: "Sore Throat", value: "soreThroat" }
+  { label: "Runny nose", value: "runnyNose" },
+  { label: "Sore throat", value: "soreThroat" }
 ];
 
 export const AGE_OPTIONS = [
@@ -32,21 +32,21 @@ export const AGE_OPTIONS = [
 ];
 
 export const CONDITION_OPTIONS = [
-  { label: "Diabetes", value: "fever" },
-  { label: "High Blood Pressure", value: "chills" },
-  { label: "Heart Disease", value: "shakes" },
-  { label: "Active Cancer", value: "cancer" },
+  { label: "Diabetes", value: "diabetes" },
+  { label: "High blood pressure", value: "highBloodPressure" },
+  { label: "Heart disease", value: "heartDisease" },
+  { label: "Active cancer", value: "cancer" },
   { label: "COPD/Asthma", value: "breathingProblems" },
   { label: "Immunocompromised", value: "immunocompromised" },
-  { label: "Kidney Disease", value: "kidneyDisease" },
-  { label: "History of Stroke", value: "historyOfStroke" },
+  { label: "Kidney disease", value: "kidneyDisease" },
+  { label: "History of stroke", value: "historyOfStroke" },
   { label: "Other", value: "other" }
 ];
 
 export const NEED_OPTIONS = [
-  { label: "Financial Support", value: "financialSupport" },
-  { label: "Emotional Support", value: "emotionalSupport" },
-  { label: "Medication/Pharmacy Resources", value: "medication" },
-  { label: "Food/Necessary Resources", value: "food" },
+  { label: "Financial support", value: "financialSupport" },
+  { label: "Emotional support", value: "emotionalSupport" },
+  { label: "Medication/Pharmacy resources", value: "medication" },
+  { label: "Food/Necessary resources", value: "food" },
   { label: "Other", value: "other" }
 ];
