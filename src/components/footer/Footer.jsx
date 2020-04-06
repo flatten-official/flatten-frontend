@@ -13,7 +13,7 @@ class Footer extends React.Component {
                 <div className="footer__section body">
                     <p><b>Additional Information</b></p>
                     <Link className="footer__link" to="/about-us"><p>About Us</p></Link>
-                    <Link className="footer__link" to="/supporters"><p>Sponsors</p></Link>
+                    <Link className="footer__link" to="/supporters"><p>Supporters</p></Link>
                 </div>
             </div>
             <div className="footer__pair">

@@ -6,6 +6,7 @@ import Info from "./info/Info";
 import About from "./about-us/AboutUs";
 import Supporters from "./supporters/Supporters";
 import history from "../history";
+import Footer from "./footer/Footer";
 
 class App extends React.Component {
   render() {
@@ -18,6 +19,7 @@ class App extends React.Component {
             <Route path="/about-us" exact component={About} />
             <Route path="/supporters" exact component={Supporters} />
           </Switch>
+          <Footer />
         </Router>
       </React.Fragment>
     );

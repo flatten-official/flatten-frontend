@@ -14,7 +14,6 @@ class Home extends React.Component {
         <HomePage />
         <TrackYourSymptoms />
         <Heatmap />
-        <Footer />
       </React.Fragment>
     );
   }
