@@ -5,7 +5,7 @@ import Home from "./home/Home";
 import Info from "./info/Info";
 import About from "./about-us/AboutUs";
 import Supporters from "./supporters/Supporters";
-import EsriGsiMap from "./esri_gsi_map/EsriGsiMap";
+import EsriGsiMap from "./esri-gsi-map/EsriGsiMap";
 import history from "../history";
 
 class App extends React.Component {
