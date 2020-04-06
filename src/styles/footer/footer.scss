@@ -1,0 +1,37 @@
+.footer__container {
+  text-align: center;
+  background-color: $white-paper;
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 30px;
+}
+
+.footer__pair {
+  width: fit-content;
+  display: inline-block;
+}
+
+.footer__section {
+  margin: 40px;
+  vertical-align: top;
+  width: fit-content;
+  display: inline-block;
+  text-align: right;
+}
+
+.footer__link {
+  text-decoration: none;
+  color: $black-main;
+  transition-duration: 0.3s;
+}
+
+.footer__link:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 600px) {
+  .footer__section {
+    margin: 10px;
+  }
+}

@@ -3,6 +3,7 @@ import React from "react";
 import Navbar from "../navbar/Navbar";
 import HomePage from "./HomePage";
 import Heatmap from "../heatmap/Heatmap";
+import Footer from "../footer/Footer";
 import TrackYourSymptoms from "../form/TrackYourSymptoms";
 
 class Home extends React.Component {
@@ -13,6 +14,7 @@ class Home extends React.Component {
         <HomePage />
         <TrackYourSymptoms />
         <Heatmap />
+        <Footer />
       </React.Fragment>
     );
   }
