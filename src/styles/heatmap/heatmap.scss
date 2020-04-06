@@ -2,6 +2,28 @@
   text-align: center;
 }
 
+.heatmap__header {
+  padding: 5% 20%;
+}
+
+.heatmap__description {
+  text-align: center;
+  padding: 1rem 0px;
+}
+
+.heatmap__title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heatmap__map-icon{
+  height: 3rem;
+  width: 3rem;
+  margin-left: 14px;
+  transform: rotate(180deg);
+}
+
 .heatmap__container {
   overflow: hidden;
   position: relative;
@@ -16,6 +38,17 @@
     top: 0;
     width: 100%;
   }
+}
+
+.heatmap__analytics {
+  padding: 1rem;
+  justify-content: center;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+.heatmap__analytics-button {
+  height: 70px;
 }
 
 @media screen and (max-width: 800px) {
