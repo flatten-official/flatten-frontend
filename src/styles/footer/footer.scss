@@ -24,7 +24,7 @@
 
 .footer__link{
     text-decoration: none;
-    color: black;
+    color: $black-main;
     transition-duration: 0.3s;
 }
 
@@ -35,6 +35,5 @@
 @media screen and (max-width: 600px) {
     .footer__section {
         margin: 10px;
-        
     }
 }
