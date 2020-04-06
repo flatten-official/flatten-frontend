@@ -1,0 +1,15 @@
+.esri__link {
+  text-align: center;
+  margin-top: 25px;
+  height: 300px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(/src/assets/background.png);
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.esri__link-button {
+  width: 50%;
+  height: 25%;
+  margin-top: 100px;
+}

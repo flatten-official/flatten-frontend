@@ -5,6 +5,7 @@ import Home from "./home/Home";
 import Info from "./info/Info";
 import About from "./about-us/AboutUs";
 import Supporters from "./supporters/Supporters";
+import EsriGsiMap from "./esri-gsi-map/EsriGsiMap";
 import history from "../history";
 
 class App extends React.Component {
@@ -17,6 +18,7 @@ class App extends React.Component {
             <Route path="/info" exact component={Info} />
             <Route path="/about-us" exact component={About} />
             <Route path="/supporters" exact component={Supporters} />
+            <Route path="/dashboard-analytics" exact component={EsriGsiMap} />
           </Switch>
         </Router>
       </React.Fragment>
