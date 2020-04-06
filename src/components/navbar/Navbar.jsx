@@ -9,7 +9,7 @@ class Navbar extends React.Component {
     return (
       <nav className="nav">
         <div className="nav__content body">
-          <li className="nav__item navbar__logo__container">
+          <li className="nav__item navbar__logo-container">
             <Link
               activeClass="active"
               to="home"
