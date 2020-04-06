@@ -1,0 +1,26 @@
+.heatmap {
+  text-align: center;
+}
+
+.heatmap__container {
+  overflow: hidden;
+  position: relative;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 1%;
+  iframe {
+    border: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .iframe-container {
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+}
