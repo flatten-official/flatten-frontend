@@ -1,11 +1,14 @@
+input[type=radio] {
+  transform: scale(1.2);
+}
+
 .radio__root {
   display: flex;
   align-items: center;
-  padding: 7px;
 }
 
 .radio__label {
-  padding: 0px 7px;
+  padding: 0px 4px;
 }
   
   
