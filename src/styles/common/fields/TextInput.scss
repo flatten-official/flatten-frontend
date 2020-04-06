@@ -1,4 +1,4 @@
-input[type=text] {
+input[type="text"] {
   width: 100%;
   max-width: 150px;
   padding: 8px;
@@ -14,4 +14,5 @@ input[type=text] {
 .text-input__container {
   display: flex;
   text-align: left;
+  padding-left: 32px;
 }
