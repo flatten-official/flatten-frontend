@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-scroll";
+import { NavLink } from "react-router-dom";
 
 import logo from "../../assets/logo-black.png";
 
@@ -8,7 +9,7 @@ class Navbar extends React.Component {
     return (
       <nav className="nav">
         <div className="nav__content body">
-          <li className="nav__item">
+          <li className="nav__item navbar__logo-container">
             <Link
               activeClass="active"
               to="home"
@@ -35,9 +36,10 @@ class Navbar extends React.Component {
           <li className="nav__item">
             <Link
               activeClass="active"
-              to="symptoms__root"
+              to="symptoms"
               spy={true}
               smooth={true}
+              offset={-70}
               duration={1000}
             >
               Report Your Symptoms
@@ -54,6 +56,11 @@ class Navbar extends React.Component {
             >
               View Virus Data
             </Link>
+          </li>
+          <li className="nav__info">
+            <NavLink className="navbar__covid" exact to="/info">
+              COVID-19 Information
+            </NavLink>
           </li>
         </div>
       </nav>

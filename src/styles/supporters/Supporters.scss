@@ -1,14 +1,3 @@
-.supporters__logo {
-  width: 600px;
-  padding: 20px;
-  transition: transform 0.2s;
-  margin: 20px auto;
-  width: 60%;
-  &:hover {
-    transform: scale(1.05);
-  }
-}
-
 .supporters__title {
   width: 60%;
   text-align: center;
@@ -32,11 +21,17 @@
   margin: 40px auto;
 }
 
-@media only screen and (min-width: 1200px) {
-  .supporters__logo {
-    width: 300px;
+.supporters__link {
+  text-align: center;
+  width: 100%;
+  margin: 40px auto;
+  text-decoration: none;
+  &:hover {
+    color: $medium-grey;
   }
+}
 
+@media only screen and (min-width: 1200px) {
   .supporters__description {
     margin: 15px auto;
     width: 60%;
