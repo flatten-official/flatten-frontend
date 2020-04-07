@@ -10,12 +10,13 @@
 
 .submit-modal__container {
   background-color: $white-main;
+  transform: translate(-50%, -50%);
   position: absolute;
-  float: left;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50vw;
+  width: 40%;
+  height: 30%;
+  padding: 64px;
   border-radius: 8px;
   border: 1px solid $medium-grey;
 }
@@ -25,9 +26,8 @@
 }
 
 .submit-modal__gift-icon {
-  padding: 5vh 0px;
-  height: 20vw;
-  width: 20vw;
+  height: 100px;
+  width: 100px;
 }
 
 .submit-modal__close-icon {
@@ -35,4 +35,23 @@
   position: absolute;
   top: 15px;
   right: 15px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .heatmap__header {
+    padding: 10% 10%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .submit-modal__container {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .submit-modal__container {
+    width: 60%;
+    padding: 32px;
+  }
 }
