@@ -20,16 +20,16 @@ const Home = ({ dispatch, cookie }) => {
   return (
     <React.Fragment>
       <Navbar />
-      <HomePage cookieStatus={cookie.status}/>
+      <HomePage cookieStatus={cookie.status} />
       <TrackYourSymptoms />
       <Heatmap />
       <EsriLink />
     </React.Fragment>
   );
-}
+};
 
-const mapStateToProps = state => ({
-  cookie: state.cookie
+const mapStateToProps = (state) => ({
+  cookie: state.cookie,
 });
 
 export default connect(mapStateToProps)(Home);

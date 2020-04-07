@@ -8,5 +8,5 @@ export default combineReducers({
   form: formReducer,
   HTML: submitReducer,
   cookie: cookieReducer,
-  account: accountReducer
+  account: accountReducer,
 });

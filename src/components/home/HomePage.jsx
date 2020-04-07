@@ -8,20 +8,23 @@ const HomePage = ({ cookieStatus }) => {
       <div className="home__content">
         <img className="home__logo" src={logo} alt="logo" />
         <div className="body home__description">
-          FLATTEN is designed to collect <b>real-time healthcare data</b> and
-          <b> increase national awareness</b> throughout this difficult time
-          during COVID-19.
-          <br />
-          <br />
-          Our ultimate goal is to flatten the curve of COVID-19, and you can
-          do your part by <b>filling out our form once a day</b>.
+          Flatten is a not-for-profit that focuses on using the
+          <b> self-reported data of Canadians</b> to help the slow the spread of
+          COVID-19. <br /> <br />
+          To do your part, <b>fill in the form once a day</b>,
+          <b> share with all of your friends </b>, and then
+          <b> tell them to do the same</b>.
         </div>
-        <PrimaryButton className="home__button body">Returning User</PrimaryButton>
+        <PrimaryButton className="home__button body">
+          Returning User
+        </PrimaryButton>
         <br />
-        {!cookieStatus && <PrimaryButton className="home__button body">New User</PrimaryButton>}
+        {!cookieStatus && (
+          <PrimaryButton className="home__button body">New User</PrimaryButton>
+        )}
       </div>
     </div>
   ) : null;
-}
+};
 
 export default HomePage;

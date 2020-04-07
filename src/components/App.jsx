@@ -8,6 +8,8 @@ import Supporters from "./supporters/Supporters";
 import EsriGsiMap from "./esri-gsi-map/EsriGsiMap";
 import history from "../history";
 import Footer from "./footer/Footer";
+import TOS from "./legal/TOS";
+import PrivacyPolicy from "./legal/PrivacyPolicy";
 
 class App extends React.Component {
   render() {
@@ -19,6 +21,8 @@ class App extends React.Component {
             <Route path="/info" exact component={Info} />
             <Route path="/about-us" exact component={About} />
             <Route path="/supporters" exact component={Supporters} />
+            <Route path="/terms-of-service" exact component={TOS} />
+            <Route path="/privacy-policy" exact component={PrivacyPolicy} />
             <Route path="/dashboard-analytics" exact component={EsriGsiMap} />
           </Switch>
           <Footer />
