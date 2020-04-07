@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { submit } from "redux-form";
 import { withTranslation } from "react-i18next";
+import i18next from "i18next";
 
 import { submitForm } from "../../actions/index";
 import PrimaryButton from "../common/buttons/PrimaryButton";
-import SymptomsForm, { symptomsFormName } from "./SymptomsForm";
+// DO NOT REPLACE
+import { symptomsFormName } from "./SymptomsFormEn";
 import SyringeIcon from "../../assets/syringe.svg";
+import SymptomsFormEn from "./SymptomsFormEn";
+import SymptomsFormFr from "./SymptomsFormFr";
 
 const TrackYourSymptoms = ({ t }) => {
   const [submitting, setSubmitting] = useState(false);
@@ -21,6 +25,20 @@ const TrackYourSymptoms = ({ t }) => {
   const handleSubmit = (values) => {
     dispatch(submitForm(values));
   };
+
+  const i18nlang = i18next.language;
+  let component = <SymptomsFormEn onSubmit={handleSubmit} />;
+  switch (i18nlang) {
+    case "en":
+      component = <SymptomsFormEn onSubmit={handleSubmit} />;
+      break;
+    case "fr":
+      component = <SymptomsFormFr onSubmit={handleSubmit} />;
+      break;
+    default:
+      component = <SymptomsFormEn onSubmit={handleSubmit} />;
+  }
+
   return (
     <div className="symptoms">
       <div className="symptoms__header">
@@ -33,7 +51,7 @@ const TrackYourSymptoms = ({ t }) => {
           <b>{t("disclaimer")} </b>
         </p>
       </div>
-      <SymptomsForm onSubmit={handleSubmit} />
+      {component}
       <div className="symptoms__submit">
         <PrimaryButton
           className="symptoms__submit-button"

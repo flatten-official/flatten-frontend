@@ -20,7 +20,7 @@ import FrAboutUs from "./translations/fr/AboutUs.json";
 import FrEsriGsiMap from "./translations/fr/EsriGsiMap.json";
 import FrFooter from "./translations/fr/Footer.json";
 import FrInfo from "./translations/fr/Info.json";
-
+import FrForm from "./translations/fr/Form.json";
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -49,6 +49,7 @@ i18n
         EsriGsiMap: FrEsriGsiMap,
         Footer: FrFooter,
         Info: FrInfo,
+        Form: FrForm,
       },
     },
   });

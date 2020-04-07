@@ -14,7 +14,7 @@ import {
   SEX_OPTIONS,
   SYMPTOM_OPTIONS,
   YES_NO_OPTIONS,
-} from "./SymptomsFormUtils";
+} from "./SymptomsFormUtilsFr";
 import {
   validate,
   isValidPostalCode,
@@ -22,8 +22,10 @@ import {
 } from "../../utils/formValidation";
 import { RecaptchaKey } from "./Recaptcha.js";
 
+// DO NOT CHANGE TO FRENCH
 export const symptomsFormName = "trackYourSymptoms";
 
+// DO NOT CHANGE FIELD NAMES
 const formValidation = [
   ["age", "Age is required"],
   ["contactWithIllness", "Field is required"],
@@ -44,17 +46,18 @@ const formValidation = [
   ],
 ];
 
+// DO NOT CHANGE NAME
 const questions = [
   {
     body:
-      "Which of the following symptoms are you currently experiencing? Select all that apply.",
+      "Lesquels des symptômes suivants avez vous actuellement? Veuillez cocher tous ceux qui s'appliquent.",
     name: "symptoms",
     component: CheckboxGroup,
     options: SYMPTOM_OPTIONS,
     maxColumns: 2,
   },
   {
-    body: "What is your age?",
+    body: "Quel âge avez-vous?",
     name: "age",
     component: RadioButtonGroup,
     options: AGE_OPTIONS,
@@ -62,46 +65,46 @@ const questions = [
   },
   {
     body:
-      "Select any medical conditions you have been diagnosed with. Check all that apply.",
+      "Avez-vous été diagnostiqué avec l'une des conditions médicales suivantes? Veuillez cocher toutes celles qui s'appliquent.",
     name: "conditions",
     component: CheckboxGroup,
     options: CONDITION_OPTIONS,
     maxColumns: 2,
   },
   {
-    body: `Have you had close contact with someone who is coughing, has a fever, or is otherwise
-           sick and has been outside of Canada in the last 14 days or has been diagnosed with
-           COVID-19?`,
+    body:
+      "Avez-vous été en contact rapproché avec une personne qui tousse, qui fait de la fièvre, ou qui est malade, et qui a voyagé à l’extérieur du Canada au cours des 14 derniers jours, ou qui a reçu un diagnostic de COVID-19?",
     name: "contactWithIllness",
     component: RadioButtonGroup,
     options: YES_NO_OPTIONS,
   },
   {
-    body: "Have you traveled outside of Canada within the last 14 days?",
+    body:
+      "Avez-vous voyagé à l’extérieur du Canada au cours de 14 derniers jours?",
     name: "travelOutsideCanada",
     component: RadioButtonGroup,
     options: YES_NO_OPTIONS,
   },
   {
-    body: "Have you tested positive for COVID-19?",
+    body: "Avez-vous reçu un diagnostic de COVID-19?",
     name: "testedPositive",
     component: RadioButtonGroup,
     options: YES_NO_OPTIONS,
   },
   {
     body:
-      "What are the three first characters of the postal code of your current residence?",
+      "Quels sont les trois premiers caractères du code postal de votre résidence actuelle?",
     name: "postalCode",
     component: PostalCodeInput,
   },
   {
-    body: "What is your sex?",
+    body: "Quel est votre sexe ?",
     name: "sex",
     component: RadioButtonGroup,
     options: SEX_OPTIONS,
   },
   {
-    body: "What is your email? (optional)",
+    body: "Saisissez votre courriel (facultatif)",
     name: "email",
     component: TextInput,
   },
@@ -141,6 +144,7 @@ const SymptomsForm = (props) => {
             onloadCallback={recaptchaLoaded}
             verifyCallback={verifyCallback}
             expiredCallback={recaptchaExpired}
+            hl="fr"
           />
         </div>
         <Field
