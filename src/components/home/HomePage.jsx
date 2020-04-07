@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { submit } from "redux-form";
 import { Trans, withTranslation } from "react-i18next";
+
 import { submitForm } from "../../actions/index";
-import ReturningUserModal, { returningUserFormName } from "./ReturningUserModal";
+import ReturningUserModal from "./ReturningUserModal";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 import logo from "../../assets/logo-black.png";
 
