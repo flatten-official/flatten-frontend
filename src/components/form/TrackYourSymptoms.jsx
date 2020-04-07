@@ -4,16 +4,16 @@ import { submit } from "redux-form";
 import { submitForm } from "../../actions/index";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 import SymptomsForm, { symptomsFormName } from "./SymptomsForm";
+import SubmitModal from "./SubmitModal";
 import SyringeIcon from "../../assets/syringe.svg";
 
 const TrackYourSymptoms = () => {
-  const [submitting, setSubmitting] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
   const handleClick = async () => {
-    setSubmitting(true);
+    setShowModal(true);
     await dispatch(submit(symptomsFormName));
-    setSubmitting(false);
   }
 
   const handleSubmit = values => {
@@ -44,12 +44,14 @@ const TrackYourSymptoms = () => {
       <div className="symptoms__submit">
         <PrimaryButton
           className="symptoms__submit-button"
-          disabled={submitting}
           onClick={handleClick}
         >
           Submit
         </PrimaryButton>
       </div>
+      {showModal && (
+        <SubmitModal handleClose={() => setShowModal(false)}/>
+      )}
     </div>
   );
 };
