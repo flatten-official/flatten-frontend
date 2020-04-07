@@ -22,6 +22,8 @@ const Navbar = ({ t }) => {
     case "fr":
       toggle = "en";
       break;
+    default:
+      toggle = "fr";
   }
   let linkLang = `/?lang=${toggle}`;
 
