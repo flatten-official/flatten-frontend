@@ -12,11 +12,11 @@ const TrackYourSymptoms = () => {
   const dispatch = useDispatch();
 
   const handleClick = async () => {
-    setShowModal(true);
-    await dispatch(submit(symptomsFormName));
+    dispatch(submit(symptomsFormName));
   }
 
   const handleSubmit = values => {
+    setShowModal(true);
     dispatch(submitForm(values));
   }
 
@@ -50,7 +50,7 @@ const TrackYourSymptoms = () => {
         </PrimaryButton>
       </div>
       {showModal && (
-        <SubmitModal handleClose={() => setShowModal(false)}/>
+        <SubmitModal onClose={() => setShowModal(false)}/>
       )}
     </div>
   );

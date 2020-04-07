@@ -1,7 +1,17 @@
 import React from "react";
+import { scroller } from "react-scroll";
 import CloseIcon from "../../assets/close.svg";
 
-const SubmitModal = ({ handleClose }) => {
+const SubmitModal = ({ onClose }) => {
+  const handleClose = () => {
+    onClose();
+    scroller.scrollTo("heatmap", {
+      duration: 1000,
+      smooth: true,
+      offset: -70
+    });
+  } 
+
   return (
     <div className="submit-modal">
       <div className="submit-modal__content">

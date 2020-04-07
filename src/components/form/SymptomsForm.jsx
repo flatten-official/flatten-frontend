@@ -106,22 +106,19 @@ const questions = [
   },
 ];
 
-const SymptomsForm = (props) => {
-  const recaptchaLoaded = () => {
-    // console.log("Loaded");
+const SymptomsForm = ({ change, handleSubmit }) => {
+  const handleRecaptchaExpired = () => {
+    change("recaptchaVerification", false);
   };
 
-  const recaptchaExpired = () => {
-    setIsVerified(false);
-  };
-
-  const verifyCallback = (response) => {
+  const handleRecaptchaVerified = (response) => {
     if (response) {
-      props.change("recaptchaVerification", response);
+      change("recaptchaVerification", response);
     }
   };
+
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="symptoms-form">
         {questions.map(({ body, ...question }) => (
           <div className="symptoms-form__question" key={question.name}>
@@ -131,21 +128,19 @@ const SymptomsForm = (props) => {
             </div>
           </div>
         ))}
-
         <div className="symptoms-form__recaptcha">
           <Recaptcha
             sitekey={RecaptchaKey()}
             render="explicit"
-            onloadCallback={recaptchaLoaded}
-            verifyCallback={verifyCallback}
-            expiredCallback={recaptchaExpired}
+            verifyCallback={handleRecaptchaVerified}
+            expiredCallback={handleRecaptchaExpired}
+          />
+          <Field
+            component={TextInput}
+            name="recaptchaVerification"
+            type="hidden"
           />
         </div>
-        <Field
-          component={TextInput}
-          name="recaptchaVerification"
-          type="hidden"
-        />
         <div className="symptoms-form__acknowledgement">
           <Field
             name="acknowledgement"
@@ -167,7 +162,7 @@ const SymptomsForm = (props) => {
 
 export default reduxForm({
   form: symptomsFormName,
-  //validate: validate(formValidation),
+  // validate: validate(formValidation),
   initialValues: {
     symptoms: [],
     conditions: [],
