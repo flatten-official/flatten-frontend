@@ -1,10 +1,10 @@
 {
   "header": "View Virus Data",
   "p1": "Bienvenue sur notre carte interactive! Pour afficher des informations sur votre région, cliquez sur votre municipalité ou code postal. Pour vous localiser facilement, veuillez laisser Flatten accéder à votre emplacement actuel.",
-  "p2": "<0>Potential and Vulnerable Cases:</0> This tab displays all individuals that are especially vulnerable to COVID-19 in Canada that are also deemed potential cases, based on data inputted into Flatten's form.",
-  "p3": "<0>Potential Cases:</0> This tab displays all of the potential cases of COVID-19 in Canada, based on data inputted into Flatten's form.",
-  "p4": "<0>Vulnerable Individuals: </0> This tab displays all individuals that are especially vulnerable to COVID-19 in Canada, based on data inputted into Flatten's form.",
-  "p5": "In order to ensure non-trolling we use cookies, recaptcha and track suspicious IP addresses.",
+  "p2": "<0>Individus vulnérables manifestant les symptomes :</0> cet onglet affiche les cas potentiels de COVID-19 des individus particulièrement vulnérables au Canada, basé sur les données de Flatten.",
+  "p3": "<0>Cas potentiels :</0> cet onglet illustre tous les cas potentiels de COVID-19 au Canada, selon les données enregistrées dans le formulaire de Flatten.",
+  "p4": "<0>Personnes vulnérables :</0> cet onglet illustre toutes les personnes qui sont particulièrement vulnérables à la COVID-19 au Canada, selon les données enregistrées dans le formulaire de Flatten.",
+  "p5": "Afin d’éviter les trolls, nous utilisons des cookies, recaptcha et nous retraçons les adresses IP suspectes.",
   "maplink": "https://flatten-271620.web.app/?lang=fr",
-  "error": "Sorry, the heat-map did not load."
+  "error": "Désolé, la carte n'a pas été chargée."
 }
