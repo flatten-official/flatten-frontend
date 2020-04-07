@@ -16,7 +16,7 @@ const SubmitModal = ({ onClose }) => {
   );
 
   return (
-    <div className="submit-modal">
+    <div className="submit-modal modal">
       <div className="submit-modal__container">
         <CloseIcon className="submit-modal__close-icon" onClick={onClose} />
         <div className="submit-modal__content body">
