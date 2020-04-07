@@ -61,7 +61,7 @@ class Navbar extends React.Component {
           </li>
           <li className="nav__info">
             <NavLink className="navbar__covid" exact to="/info">
-              COVID-19 Information
+              {t("info")}
             </NavLink>
           </li>
         </div>
