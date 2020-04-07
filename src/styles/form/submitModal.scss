@@ -1,14 +1,6 @@
-.submit-modal__container {
-  background-color: $white-main;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 40%;
+.submit-modal {
   height: 30%;
   padding: 64px;
-  border-radius: 8px;
-  border: 1px solid $medium-grey;
 }
 
 .submit-modal__content {
@@ -20,28 +12,14 @@
   width: 100px;
 }
 
-.submit-modal__close-icon {
-  cursor: pointer;
-  position: absolute;
-  top: 15px;
-  right: 15px;
-}
-
 @media only screen and (max-width: 1000px) {
   .heatmap__header {
     padding: 10% 10%;
   }
 }
 
-@media screen and (max-width: 600px) {
-  .submit-modal__container {
-    width: 60%;
-  }
-}
-
 @media screen and (max-width: 400px) {
-  .submit-modal__container {
-    width: 60%;
+  .submit-modal {
     padding: 32px;
   }
 }

@@ -1,14 +1,5 @@
-.returning-user__container {
-  background-color: $white-main;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 40%;
-  height: 30%;
-  padding: 64px;
-  border-radius: 8px;
-  border: 1px solid $medium-grey;
+.returning-user {
+  padding: 32px;
 }
 
 .returning-user__title {
@@ -16,18 +7,10 @@
 }
 
 .returning-user__submit {
-  padding: 30px;
-  margin-left: 15%;
-  margin-right: 15%;
+  padding-top: 30px;
 }
 
 .returning-user__submit-button {
   height: 50px;
-}
-
-.returning-user__close-icon {
-  cursor: pointer;
-  position: absolute;
-  top: 15px;
-  right: 15px;
+  width: 100px;
 }
