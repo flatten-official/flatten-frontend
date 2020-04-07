@@ -1,6 +1,9 @@
 import React from "react";
 import MapIcon from "../../assets/map.svg";
 import PrimaryButton from "../common/buttons/PrimaryButton";
+import Leafletmap from "./Leafletmap";
+
+
 
 class HeatMap extends React.Component {
   state = {
@@ -80,9 +83,10 @@ class HeatMap extends React.Component {
         </div>
 
         <div className="heatmap__container" style={{ paddingTop: ratio }}>
-          <iframe src="https://flatten-271620.web.app/" allow="geolocation">
-            Sorry, the heat-map did not load.
-          </iframe>
+          {/* <iframe src="https://flatten-271620.web.app/" allow="geolocation">
+            Sorry, the heat-map did not load. 
+          </iframe> */}
+          <Leafletmap></Leafletmap>
         </div>
       </div>
     );
