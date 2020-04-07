@@ -1,11 +1,20 @@
 {
   "feedback": "Formulaire de commentaires",
   "feedback-link": "À déterminer",
+<<<<<<< HEAD
   "additional-info": "Information additionnelle",
+=======
+  "additional-info": "Informations Supplémentaires",
+>>>>>>> Translation-json
   "about-us": "L'équipe",
   "supporters": "Soutenir la cause",
   "legal": "Légal",
   "tos": "Conditions d’utilisation",
+<<<<<<< HEAD
   "privacy": "la Politique de confidentialité",
   "contact": "Nous contacter"
+=======
+  "privacy": "La Politique de confidentialité",
+  "contact": "Nous joindre au :"
+>>>>>>> Translation-json
 }
