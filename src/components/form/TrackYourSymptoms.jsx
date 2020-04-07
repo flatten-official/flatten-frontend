@@ -8,7 +8,7 @@ import SubmitModal from "./SubmitModal";
 import SyringeIcon from "../../assets/syringe.svg";
 
 const TrackYourSymptoms = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
   const dispatch = useDispatch();
 
   const handleClick = () => {
