@@ -129,38 +129,63 @@ function getColour(cases, colour_scheme, color_thresholds) {
 class Leafletmap extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { tab: "CONFIRMED" };
+    this.state = { tab: "conf" };
+    this.setTab = this.setTab.bind(this);
+  }
+
+  setTab(tabID) {
+    this.setState({ tab: tabID });
   }
 
   render() {
     let legend;
     let styleFunc;
-    // if (this.state.tab === "CONFIRMED") {
-    //   style = confirmedStyle;
-    //   legend = confirmedLegend;
-    // }
+    let title;
 
-    styleFunc = create_style_function(
-      COLOUR_SCHEME,
-      HIGH_RISK_SCHEME_THRESHOLDS,
-      "risk"
-    );
+    if (this.state.tab === "conf") {
+      title = "Confirmed Cases";
+      //potential cases style function just for example
+      styleFunc = create_style_function(
+        COLOUR_SCHEME,
+        POT_SCHEME_THRESHOLDS,
+        "pot"
+      );
+      // legend = confirmedLegend;
+    } else if (this.state.tab === "vuln") {
+      title = "Vulnerable cases";
+      styleFunc = create_style_function(
+        COLOUR_SCHEME,
+        HIGH_RISK_SCHEME_THRESHOLDS,
+        "risk"
+      );
+    }
+
+    //feel free to change classNames
 
     return (
-      <div style={{ height }}>
-        <Map
-          maxBounds={CANADA_BOUNDS}
-          center={ONTARIO}
-          zoom={INITIAL_ZOOM}
-          style={{ height, zIndex: 0 }}
-        >
-          <TileLayer
-            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            minZoom={4}
-          />
-          <GeoJSON data={convertedBoundaries} style={styleFunc} />
-        </Map>
+      <div>
+        <div className="PageTitle">
+          {title}
+          <div className="TabSelectors">
+            <button onClick={e => this.setTab("conf")}>Confirmed case</button>
+            <button onClick={e => this.setTab("vuln")}>vulnerable cases</button>
+          </div>
+        </div>
+        <div style={{ height }}>
+          <Map
+            maxBounds={CANADA_BOUNDS}
+            center={ONTARIO}
+            zoom={INITIAL_ZOOM}
+            style={{ height, zIndex: 0 }}
+          >
+            <TileLayer
+              url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              minZoom={4}
+            />
+            <GeoJSON data={convertedBoundaries} style={styleFunc} />
+          </Map>
+        </div>
       </div>
     );
   }
