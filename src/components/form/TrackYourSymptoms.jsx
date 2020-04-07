@@ -21,7 +21,7 @@ const TrackYourSymptoms = () => {
   }
 
   return (
-    <div className="symptoms">
+    <div className="symptoms" id="symptoms">
       <div className="symptoms__header">
         <div className="symptoms__title">
           <div className="title">Tell us how you feel!</div>

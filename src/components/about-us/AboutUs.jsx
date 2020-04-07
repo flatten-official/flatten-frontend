@@ -1,9 +1,11 @@
 import React from "react";
 import Profile from "./Profile";
 import Volunteers from "./Volunteers";
+import Navbar from "../navbar/Navbar";
 
 const AboutUs = () => (
   <React.Fragment>
+    <Navbar />
     <section>
       <h4 className="about-us__title title">About Us</h4>
       <div className="about-us__description">

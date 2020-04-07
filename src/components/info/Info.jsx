@@ -10,6 +10,7 @@ import Para7 from "./paragraphs/Para7";
 import Para8 from "./paragraphs/Para8";
 import Para9 from "./paragraphs/Para9";
 import Para10 from "./paragraphs/Para10";
+import Navbar from "../navbar/Navbar";
 
 const Paragraphs = [
   {
@@ -60,6 +61,7 @@ const Paragraphs = [
 
 const Info = () => (
   <React.Fragment>
+    <Navbar/>
     <h4 className="title info__title">Information</h4>
     {Paragraphs.map((para, index) => (
       <div className="info__para">

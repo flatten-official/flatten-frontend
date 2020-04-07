@@ -31,6 +31,15 @@
   }
 }
 
+.nav__a {
+  text-decoration: none;
+  color:$dark-grey;
+  &:hover {
+    color: $black-main;
+    cursor: pointer;
+  }
+}
+
 .nav__info {
   position: absolute;
   display: inline;

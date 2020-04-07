@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "../navbar/Navbar";
 
 const companies = [
   {
@@ -22,6 +23,7 @@ accepting donations and you can contact us at the email below should you be inte
 
 const Supporters = () => (
   <React.Fragment>
+    <Navbar/>
     <h4 className="supporters__title title">Supporters</h4>
     <div>
       <p className="supporters__description body">{description}</p>

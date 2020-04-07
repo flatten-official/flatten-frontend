@@ -33,7 +33,7 @@ class HeatMap extends React.Component {
   render() {
     const ratio = `${this.state.ratio}%`;
     return (
-      <div className="heatmap">
+      <div className="heatmap" id="heatmap">
         <div className="heatmap__header">
           <div className="heatmap__title">
             <div className="title">View Virus Data</div>
