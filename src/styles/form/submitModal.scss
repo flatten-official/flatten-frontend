@@ -3,26 +3,36 @@
   z-index: 1;
   top: 0px;
   left: 0px;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.25);
 }
 
-.submit-modal__content {
+.submit-modal__container {
   background-color: $white-main;
   position: absolute;
-  top: 20vh;
-  left: 20vw;
-  height: 400px;
-  width: 60vw;
-  padding: 30px;
+  float: left;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
   border-radius: 8px;
   border: 1px solid $medium-grey;
 }
 
+.submit-modal__content {
+  padding: 30px;
+}
+
+.submit-modal__gift-icon {
+  padding: 5vh 0px;
+  height: 20vw;
+  width: 20vw;
+}
+
 .submit-modal__close-icon {
+  cursor: pointer;
   position: absolute;
-  top: 30px;
-  right: 30px;
-  fill: $medium-grey;
+  top: 15px;
+  right: 15px;
 }

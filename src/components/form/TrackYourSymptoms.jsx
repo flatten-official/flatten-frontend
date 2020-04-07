@@ -11,13 +11,18 @@ const TrackYourSymptoms = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
-  const handleClick = async () => {
+  const handleClick = () => {
     dispatch(submit(symptomsFormName));
   }
 
-  const handleSubmit = values => {
+  const handleSubmit = async values => {
     setShowModal(true);
-    dispatch(submitForm(values));
+    await dispatch(submitForm(values));
+  }
+
+  const handleSubmitSuccess = () => {
+    // once the submitForm action is working, close the modal if submission was successful
+    // setShowModal(false);
   }
 
   return (
@@ -40,7 +45,10 @@ const TrackYourSymptoms = () => {
           <b>Please fill in this form even if you are experiencing no symptoms.</b>
         </p>
       </div>
-      <SymptomsForm onSubmit={handleSubmit}/>
+      <SymptomsForm 
+        onSubmit={handleSubmit}
+        onSubmitSuccess={handleSubmitSuccess}
+      />
       <div className="symptoms__submit">
         <PrimaryButton
           className="symptoms__submit-button"
