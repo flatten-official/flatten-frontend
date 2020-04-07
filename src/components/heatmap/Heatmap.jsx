@@ -35,7 +35,7 @@ class HeatMap extends React.Component {
     const ratio = `${this.state.ratio}%`;
     const { t } = this.props;
     return (
-      <div className="heatmap">
+      <div className="heatmap" id="heatmap">
         <div className="heatmap__header">
           <div className="heatmap__title">
             <div className="title">{t("header")}</div>

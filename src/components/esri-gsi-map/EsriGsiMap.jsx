@@ -8,6 +8,10 @@ class EsriGsiMap extends React.Component {
     ratio: 190,
   };
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   render() {
     const { t } = this.props;
     const ratio = `${this.state.ratio}%`;

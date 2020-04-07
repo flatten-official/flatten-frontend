@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import i18next from "i18next";
 
@@ -6,6 +6,10 @@ import InfoEn from "./InfoEn";
 import InfoFr from "./InfoFr";
 
 const Info = ({ t }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const i18nlang = i18next.language;
 
   let component = <InfoEn />;

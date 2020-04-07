@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 
 import Profile from "./Profile";
 
 const AboutUs = ({ t }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const volunteers = t("volunteers", { returnObjects: true });
   return (
     <React.Fragment>

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 
 const Supporters = ({ t }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const companies = t("companies", { returnObjects: true });
-  console.log(companies);
 
   return (
     <React.Fragment>
