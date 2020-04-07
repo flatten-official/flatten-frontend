@@ -147,8 +147,9 @@ const SymptomsForm = ({ change, handleSubmit }) => {
             label={
               <p className="body">
                 <i>
-                  By submitting this form, you certify that you are 18+ and
-                  agree to our Terms of Service and Privacy Policy.
+                  By submitting, you certify you are at least age of the
+                  majority in your province/territory and agree to Flattens’
+                  Terms of Use and Privacy Policy
                 </i>
               </p>
             }
