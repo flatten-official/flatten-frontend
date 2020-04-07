@@ -81,7 +81,10 @@ class HeatMap extends React.Component {
         </div>
 
         <div className="heatmap__container" style={{ paddingTop: ratio }}>
-          <iframe src="https://flatten-271620.web.app/" allow="geolocation">
+          <iframe
+            src="https://flatten-271620.web.app/?lang=fr"
+            allow="geolocation"
+          >
             {t("error")}
           </iframe>
         </div>
