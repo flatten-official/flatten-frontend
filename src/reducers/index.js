@@ -7,6 +7,6 @@ import accountReducer from "./accountReducer";
 export default combineReducers({
   form: formReducer,
   HTML: submitReducer,
-  cookieExists: cookieReducer,
+  cookie: cookieReducer,
   account: accountReducer
 });

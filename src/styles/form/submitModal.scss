@@ -1,0 +1,38 @@
+.submit-modal {
+  position: fixed;
+  z-index: 1;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.submit-modal__container {
+  background-color: $white-main;
+  position: absolute;
+  float: left;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  border-radius: 8px;
+  border: 1px solid $medium-grey;
+}
+
+.submit-modal__content {
+  padding: 30px;
+}
+
+.submit-modal__gift-icon {
+  padding: 5vh 0px;
+  height: 20vw;
+  width: 20vw;
+}
+
+.submit-modal__close-icon {
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
