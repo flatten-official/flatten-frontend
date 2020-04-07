@@ -1,6 +1,7 @@
 import React from "react";
 import { reduxForm, Field } from "redux-form";
 import Recaptcha from "react-recaptcha";
+import { useTranslation } from "react-i18next";
 
 import RadioButtonGroup from "../common/fields/RadioButtonGroup";
 import Checkbox from "../common/fields/Checkbox";
@@ -13,7 +14,7 @@ import {
   SEX_OPTIONS,
   SYMPTOM_OPTIONS,
   YES_NO_OPTIONS,
-} from "./SymptomsFormUtils";
+} from "./SymptomsFormUtilsFr";
 import {
   validate,
   isValidPostalCode,
@@ -21,39 +22,42 @@ import {
 } from "../../utils/formValidation";
 import { RecaptchaKey } from "./Recaptcha.js";
 
+// DO NOT CHANGE TO FRENCH
 export const symptomsFormName = "trackYourSymptoms";
 
+// DO NOT CHANGE FIELD NAMES
 const formValidation = [
-  ["age", "Age is required"],
-  ["contactWithIllness", "Field is required"],
-  ["travelOutsideCanada", "Field is required"],
-  ["testedPositive", "Field is required"],
+  ["age", "L'âge est requis"],
+  ["contactWithIllness", "Champ requis"],
+  ["travelOutsideCanada", "Champ requis"],
+  ["testedPositive", "Champ requis"],
   [
     "postalCode",
-    "Postal code is required (ie. A1A)",
+    "Le code postal est requis (ie. A1A)",
     ({ postalCode }) => isValidPostalCode(postalCode),
   ],
-  ["sex", "Field is required"],
-  ["acknowledgement", "Please accept the Terms and Conditions."],
-  ["recaptchaVerification", "Please prove you are not a robot."],
+  ["sex", "Champ requis"],
+  ["acknowledgement", "Veuillez accepter les conditions générales."],
+  ["recaptchaVerification", "Veuillez prouver que vous n'êtes pas un robot."],
   [
     "email",
-    "Please enter a valid email",
+    "Veuillez saisir un e-mail valide.",
     ({ email }) => !email || isValidEmail(email),
   ],
 ];
 
+// DO NOT CHANGE NAME
 const questions = [
   {
     body:
-      "Which of the following symptoms are you currently experiencing? Select all that apply.",
+      "Lesquels des symptômes suivants avez vous actuellement? Veuillez cocher tous ceux qui s'appliquent.",
     name: "symptoms",
     component: CheckboxGroup,
     options: SYMPTOM_OPTIONS,
     maxColumns: 2,
   },
   {
-    body: "What is your age?",
+    body: "Quel âge avez-vous?",
     name: "age",
     component: RadioButtonGroup,
     options: AGE_OPTIONS,
@@ -61,64 +65,68 @@ const questions = [
   },
   {
     body:
-      "Select any medical conditions you have been diagnosed with. Check all that apply.",
+      "Avez-vous été diagnostiqué avec l'une des conditions médicales suivantes? Veuillez cocher toutes celles qui s'appliquent.",
     name: "conditions",
     component: CheckboxGroup,
     options: CONDITION_OPTIONS,
     maxColumns: 2,
   },
   {
-    body: `Have you had close contact with someone who is coughing, has a fever, or is otherwise
-           sick and has been outside of Canada in the last 14 days or has been diagnosed with
-           COVID-19?`,
+    body:
+      "Avez-vous été en contact rapproché avec une personne qui tousse, qui fait de la fièvre, ou qui est malade, et qui a voyagé à l’extérieur du Canada au cours des 14 derniers jours, ou qui a reçu un diagnostic de COVID-19?",
     name: "contactWithIllness",
     component: RadioButtonGroup,
     options: YES_NO_OPTIONS,
   },
   {
-    body: "Have you traveled outside of Canada within the last 14 days?",
+    body:
+      "Avez-vous voyagé à l’extérieur du Canada au cours de 14 derniers jours?",
     name: "travelOutsideCanada",
     component: RadioButtonGroup,
     options: YES_NO_OPTIONS,
   },
   {
-    body: "Have you tested positive for COVID-19?",
+    body: "Avez-vous reçu un diagnostic de COVID-19?",
     name: "testedPositive",
     component: RadioButtonGroup,
     options: YES_NO_OPTIONS,
   },
   {
     body:
-      "What are the three first characters of the postal code of your current residence?",
+      "Quels sont les trois premiers caractères du code postal de votre résidence actuelle?",
     name: "postalCode",
     component: PostalCodeInput,
   },
   {
-    body: "What is your sex?",
+    body: "Quel est votre sexe ?",
     name: "sex",
     component: RadioButtonGroup,
     options: SEX_OPTIONS,
   },
   {
-    body: "What is your email? (optional)",
+    body: "Saisissez votre courriel (facultatif)",
     name: "email",
     component: TextInput,
   },
 ];
 
-const SymptomsForm = ({ change, handleSubmit }) => {
-  const handleRecaptchaExpired = () => {
-    change("recaptchaVerification", false);
+const SymptomsForm = (props) => {
+  const { t } = useTranslation("Form");
+  const recaptchaLoaded = () => {
+    // console.log("Loaded");
   };
 
-  const handleRecaptchaVerified = (response) => {
+  const recaptchaExpired = () => {
+    setIsVerified(false);
+  };
+
+  const verifyCallback = (response) => {
     if (response) {
-      change("recaptchaVerification", response);
+      props.change("recaptchaVerification", response);
     }
   };
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={props.handleSubmit}>
       <div className="symptoms-form">
         {questions.map(({ body, ...question }) => (
           <div className="symptoms-form__question" key={question.name}>
@@ -128,29 +136,28 @@ const SymptomsForm = ({ change, handleSubmit }) => {
             </div>
           </div>
         ))}
+
         <div className="symptoms-form__recaptcha">
           <Recaptcha
             sitekey={RecaptchaKey()}
             render="explicit"
-            verifyCallback={handleRecaptchaVerified}
-            expiredCallback={handleRecaptchaExpired}
-          />
-          <Field
-            component={TextInput}
-            name="recaptchaVerification"
-            type="hidden"
+            onloadCallback={recaptchaLoaded}
+            verifyCallback={verifyCallback}
+            expiredCallback={recaptchaExpired}
+            hl="fr"
           />
         </div>
+        <Field
+          component={TextInput}
+          name="recaptchaVerification"
+          type="hidden"
+        />
         <div className="symptoms-form__acknowledgement">
           <Field
             name="acknowledgement"
             label={
               <p className="body">
-                <i>
-                  By submitting, you certify you are at least age of the
-                  majority in your province/territory and agree to Flattens’
-                  Terms of Use and Privacy Policy
-                </i>
+                <i>{t("verify")}</i>
               </p>
             }
             component={Checkbox}

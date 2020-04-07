@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { submit } from "redux-form";
+import { withTranslation } from "react-i18next";
+import i18next from "i18next";
+
 import { submitForm } from "../../actions/index";
 import PrimaryButton from "../common/buttons/PrimaryButton";
-import SymptomsForm, { symptomsFormName } from "./SymptomsForm";
+// DO NOT REPLACE
+import { symptomsFormName } from "./SymptomsFormEn";
 import SubmitModal from "./SubmitModal";
 import SyringeIcon from "../../assets/syringe.svg";
+import SymptomsFormEn from "./SymptomsFormEn";
+import SymptomsFormFr from "./SymptomsFormFr";
 
-const TrackYourSymptoms = () => {
+const TrackYourSymptoms = ({ t }) => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
@@ -25,40 +31,38 @@ const TrackYourSymptoms = () => {
     // setShowModal(false);
   };
 
+  const i18nlang = i18next.language;
+  let component = <SymptomsFormEn onSubmit={handleSubmit} />;
+  switch (i18nlang) {
+    case "en":
+      component = <SymptomsFormEn onSubmit={handleSubmit} />;
+      break;
+    case "fr":
+      component = <SymptomsFormFr onSubmit={handleSubmit} />;
+      break;
+    default:
+      component = <SymptomsFormEn onSubmit={handleSubmit} />;
+  }
+
   return (
     <div className="symptoms">
       <div className="symptoms__header">
         <div className="symptoms__title">
-          <div className="title">Tell us how you feel!</div>
+          <div className="title">{t("header")}</div>
           <SyringeIcon className="symptoms__syringe-icon" />
         </div>
+        <p className="symptoms__description body">{t("description")}</p>
         <p className="symptoms__description body">
-          Your answers will be collected and shared anonymously through our
-          heatmap to help healthcare providers, researchers, and community
-          members gauge the spread of COVID-19. The questionnaire is based on
-          the best available guidance from Canadian public health agencies, and
-          is designed to collect information regarding your risk factors for
-          COVID-19. It is not intended to facilitate any kind of diagnosis or
-          self-assessment for COVID-19. If you suspect you may have COVID-19,
-          please seek a medical professional. See our Terms of Service and
-          Privacy Policy for more information.
-        </p>
-        <p className="symptoms__description body">
-          <b>
-            Please fill in this form even if you are experiencing no symptoms.
-          </b>
+          <b>{t("disclaimer")} </b>
         </p>
       </div>
-      <SymptomsForm
-        onSubmit={handleSubmit}
-        onSubmitSuccess={handleSubmitSuccess}
-      />
+      {component}
       <div className="symptoms__submit">
         <PrimaryButton
           className="symptoms__submit-button"
           onClick={handleClick}
         >
-          Submit
+          {t("submit")}
         </PrimaryButton>
       </div>
       {showModal && <SubmitModal onClose={() => setShowModal(false)} />}
@@ -66,4 +70,4 @@ const TrackYourSymptoms = () => {
   );
 };
 
-export default TrackYourSymptoms;
+export default withTranslation("Form")(TrackYourSymptoms);
