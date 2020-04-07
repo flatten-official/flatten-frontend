@@ -26,16 +26,18 @@
 .heatmap__container {
   overflow: hidden;
   position: relative;
-  margin: 0% 10%;
   margin-top: 1%;
-  iframe {
-    border: 0;
-    height: 90%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-  }
+  display: grid;
+  grid-template-columns: 70% 30%;
+}
+
+.test{
+  height: 200px;
+  background-color: $navy-blue;
+  margin: 5%;
+  padding: 5%;
+  border-radius: 8px;
+  color: white;
 }
 
 .heatmap__analytics {
@@ -43,6 +45,20 @@
   justify-content: center;
   margin-left: 30%;
   margin-right: 30%;
+}
+.btn_group{
+  width: 100%;
+  button{
+    width: 20.5%;
+    float: left;
+    font-size: medium;
+    margin-right: 6%;
+    min-height: 40px;
+    border-radius: 0px 0px 8px 8px ;
+  }
+  button:last-child{
+    margin-right: 0%;
+  }
 }
 
 .heatmap__analytics-button {
@@ -58,5 +74,13 @@
 @media screen and (max-width: 800px) {
   .heatmap__container {
     margin: 0;
+    grid-template-columns: 100%;
+  }
+  .btn_group{
+    button{
+      margin-right: 0%;
+      width: 25%;
+      min-height: 80px;
+    }
   }
 }

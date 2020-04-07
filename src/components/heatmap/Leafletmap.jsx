@@ -1,5 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
+import PrimaryButton from "../common/buttons/PrimaryButton";
 import { Map, Marker, Popup, TileLayer, GeoJSON } from "react-leaflet";
 import convertedBoundaries from "./converted_boundaries.js";
 
@@ -180,10 +181,7 @@ class Leafletmap extends React.Component {
       <div>
         <div className="PageTitle">
           {title}
-          <div className="TabSelectors">
-            <button onClick={e => this.setTab("conf")}>Confirmed case</button>
-            <button onClick={e => this.setTab("vuln")}>vulnerable cases</button>
-          </div>
+
         </div>
         <div style={{ height }}>
           <Map
@@ -207,6 +205,12 @@ class Leafletmap extends React.Component {
             ) : null}
           </Map>
         </div>
+        <div className="TabSelectors btn_group">
+            <PrimaryButton onClick={e => this.setTab("vuln")}>Potential and Vulnerable cases</PrimaryButton>
+            <PrimaryButton onClick={e => this.setTab("vuln")}>Potential cases</PrimaryButton>
+            <PrimaryButton onClick={e => this.setTab("vuln")}>Vulnerable individuals</PrimaryButton>
+            <PrimaryButton onClick={e => this.setTab("conf")}>Confirmed cases</PrimaryButton>
+          </div>
       </div>
     );
   }

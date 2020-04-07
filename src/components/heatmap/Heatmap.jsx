@@ -81,13 +81,20 @@ class HeatMap extends React.Component {
             </p>
           </div>
         </div>
-
         <div className="heatmap__container" >
-          {/* <iframe src="https://flatten-271620.web.app/" allow="geolocation">
-            Sorry, the heat-map did not load. 
-          </iframe> */}
           <Leafletmap></Leafletmap>
+          <div className="Info Components">
+            <div className="test">
+             Potential cases Among Vulnerable Individuals 
+
+            </div>
+            <div className="test">
+              Potential cases Among Non-Vulnerable Individuals
+            </div>
+          </div>
+          
         </div>
+        
       </div>
     );
   }
