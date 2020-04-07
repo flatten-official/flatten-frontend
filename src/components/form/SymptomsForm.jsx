@@ -1,6 +1,7 @@
 import React from "react";
 import { reduxForm, Field } from "redux-form";
 import Recaptcha from "react-recaptcha";
+import { useTranslation } from "react-i18next";
 
 import RadioButtonGroup from "../common/fields/RadioButtonGroup";
 import Checkbox from "../common/fields/Checkbox";
@@ -107,6 +108,7 @@ const questions = [
 ];
 
 const SymptomsForm = (props) => {
+  const { t } = useTranslation("Form");
   const recaptchaLoaded = () => {
     // console.log("Loaded");
   };
@@ -151,10 +153,7 @@ const SymptomsForm = (props) => {
             name="acknowledgement"
             label={
               <p className="body">
-                <i>
-                  By submitting this form, you certify that you are 18+ and
-                  agree to our Terms of Service and Privacy Policy.
-                </i>
+                <i>{t("verify")}</i>
               </p>
             }
             component={Checkbox}

@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-scroll";
 import { NavLink } from "react-router-dom";
+import { withTranslation } from "react-i18next";
 
 import logo from "../../assets/logo-black.png";
 
 class Navbar extends React.Component {
   render() {
+    const { t } = this.props;
     return (
       <nav className="nav">
         <div className="nav__content body">
@@ -30,7 +32,7 @@ class Navbar extends React.Component {
               offset={-70}
               duration={1000}
             >
-              Home
+              {t("home")}
             </Link>
           </li>
           <li className="nav__item">
@@ -42,7 +44,7 @@ class Navbar extends React.Component {
               offset={-70}
               duration={1000}
             >
-              Report Your Symptoms
+              {t("form")}
             </Link>
           </li>
           <li className="nav__item">
@@ -54,7 +56,7 @@ class Navbar extends React.Component {
               offset={-70}
               duration={1000}
             >
-              View Virus Data
+              {t("heatmap")}
             </Link>
           </li>
           <li className="nav__info">
@@ -68,4 +70,4 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+export default withTranslation("Navbar")(Navbar);

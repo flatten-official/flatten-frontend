@@ -1,52 +1,55 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { withTranslation } from "react-i18next";
+
 class Footer extends React.Component {
   render() {
+    const { t } = this.props;
     return (
       <div className="footer">
         <div className="footer__container">
           <div className="footer__pair">
             <div className="footer__section body">
               <p>
-                <b>Feedback Form</b>
+                <b>{t("feedback")}</b>
               </p>
               <a>
-                <p>TBD</p>
+                <p>{t("feedback-link")}</p>
               </a>
             </div>
             <div className="footer__section body">
               <p>
-                <b>Additional Information</b>
+                <b>{t("additional-info")}</b>
               </p>
               <Link className="footer__link" to="/about-us">
-                <p>About Us</p>
+                <p>{t("about-us")}</p>
               </Link>
               <Link className="footer__link" to="/supporters">
-                <p>Supporters</p>
+                <p>{t("supporters")}</p>
               </Link>
             </div>
           </div>
           <div className="footer__pair">
             <div className="footer__section body">
               <p>
-                <b>Legal</b>
+                <b>{t("legal")}</b>
               </p>
               <a
                 className="footer__link"
                 href="https://drive.google.com/file/d/1Cb9yb1zFXrQs0TKIAytx-16vCuHpJBDc/view"
               >
-                <p>Terms of Service</p>
+                <p>{t("tos")}</p>
               </a>
               <a
                 className="footer__link"
                 href="https://drive.google.com/file/d/1dbkrOLBBp_yqus-oeQ_JXdanDbdb8u-6/view"
               >
-                <p>Privacy Policy</p>
+                <p>{t("privacy")}</p>
               </a>
             </div>
             <div className="footer__section body">
               <p>
-                <b>Contact Us</b>
+                <b>{t("contact")}</b>
               </p>
               <a
                 className="footer__link"
@@ -62,4 +65,4 @@ class Footer extends React.Component {
   }
 }
 
-export default Footer;
+export default withTranslation("Footer")(Footer);
