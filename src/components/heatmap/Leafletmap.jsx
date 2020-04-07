@@ -28,42 +28,42 @@ const MIN_CIRCLE_RADIUS = 6;
 const CON_SCHEME_THRESHOLDS = [5, 25, 100, 250];
 
 // gets data from gcloud
-let form_data_obj = {
-  total_responses: 6969, // total number of reports recieved
-  max: 9992,
-  time: 29483929829, // UTC unix timestamp in ms since the origin
-  fsa: {
-    B1A: {
-      number_reports: 4938,
-      pot: 23,
-      risk: 18,
-      both: 2, // NB these are not included if fsa excluded is true
-      fsa_excluded: false // flag to include / exclude regions with less than 50 people from census data
-    },
-    M5T: {
-      number_reports: 4938,
-      pot: 23,
-      risk: 18,
-      both: 2, // NB these are not included if fsa excluded is true
-      fsa_excluded: false // flag to include / exclude regions with less than 50 people from census data
-    },
-    M5B: {
-      number_reports: 4938,
-      pot: 23,
-      risk: 18,
-      both: 2, // NB these are not included if fsa excluded is true
-      fsa_excluded: false // flag to include / exclude regions with less than 50 people from census data
-    },
-    S0G: {
-      number_reports: 4938,
-      pot: 23,
-      risk: 18,
-      both: 2, // NB these are not included if fsa excluded is true
-      fsa_excluded: false // flag to include / exclude regions with less than 50 people from census data
-    }
-  }
-};
-let confirmed_data;
+// let form_data_obj = {
+//   total_responses: 6969, // total number of reports recieved
+//   max: 9992,
+//   time: 29483929829, // UTC unix timestamp in ms since the origin
+//   fsa: {
+//     B1A: {
+//       number_reports: 4938,
+//       pot: 23,
+//       risk: 18,
+//       both: 2, // NB these are not included if fsa excluded is true
+//       fsa_excluded: false // flag to include / exclude regions with less than 50 people from census data
+//     },
+//     M5T: {
+//       number_reports: 4938,
+//       pot: 23,
+//       risk: 18,
+//       both: 2, // NB these are not included if fsa excluded is true
+//       fsa_excluded: false // flag to include / exclude regions with less than 50 people from census data
+//     },
+//     M5B: {
+//       number_reports: 4938,
+//       pot: 23,
+//       risk: 18,
+//       both: 2, // NB these are not included if fsa excluded is true
+//       fsa_excluded: false // flag to include / exclude regions with less than 50 people from census data
+//     },
+//     S0G: {
+//       number_reports: 4938,
+//       pot: 23,
+//       risk: 18,
+//       both: 2, // NB these are not included if fsa excluded is true
+//       fsa_excluded: false // flag to include / exclude regions with less than 50 people from census data
+//     }
+//   }
+// };
+// let confirmed_data;
 
 function styleConfirmedPolygons(feature) {
   const case_num = feature.properties["CaseCount"];
@@ -79,11 +79,14 @@ function styleConfirmedPolygons(feature) {
   };
 }
 
-function create_style_function(colour_scheme, thresholds, data_tag) {
+function create_style_function(formData, colour_scheme, thresholds, data_tag) {
   return feature => {
     let opacity = POLYGON_OPACITY; // If no data, is transparent
     let colour = NOT_ENOUGH_GRAY; // Default color if not enough data
-    const post_code_data = form_data_obj["fsa"][feature.properties.CFSAUID];
+
+    const post_code_data = formData
+      ? formData["fsa"][feature.properties.CFSAUID]
+      : null;
 
     // only set numbers if it exists in form_data_obj
     if (post_code_data && data_tag in post_code_data) {
@@ -129,12 +132,26 @@ function getColour(cases, colour_scheme, color_thresholds) {
 class Leafletmap extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { tab: "conf" };
+    this.state = { tab: "conf", formData: null };
     this.setTab = this.setTab.bind(this);
+    this.getData = this.getData.bind(this);
+  }
+
+  componentDidMount() {
+    this.getData();
   }
 
   setTab(tabID) {
     this.setState({ tab: tabID });
+  }
+
+  getData() {
+    console.log("getting form data");
+    let url =
+      "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json";
+    fetch(url)
+      .then(r => r.json())
+      .then(formData => this.setState({ formData }));
   }
 
   render() {
@@ -146,6 +163,7 @@ class Leafletmap extends React.Component {
       title = "Confirmed Cases";
       //potential cases style function just for example
       styleFunc = create_style_function(
+        this.state.formData,
         COLOUR_SCHEME,
         POT_SCHEME_THRESHOLDS,
         "pot"
@@ -154,6 +172,7 @@ class Leafletmap extends React.Component {
     } else if (this.state.tab === "vuln") {
       title = "Vulnerable cases";
       styleFunc = create_style_function(
+        this.state.formData,
         COLOUR_SCHEME,
         HIGH_RISK_SCHEME_THRESHOLDS,
         "risk"
