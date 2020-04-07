@@ -22,48 +22,7 @@ const NOT_ENOUGH_GRAY = "#909090";
 // max size circle can be on map
 const MAX_CIRCLE_RAD = 35;
 const MIN_CIRCLE_RADIUS = 6;
-
-///
-
 const CON_SCHEME_THRESHOLDS = [5, 25, 100, 250];
-
-// gets data from gcloud
-// let form_data_obj = {
-//   total_responses: 6969, // total number of reports recieved
-//   max: 9992,
-//   time: 29483929829, // UTC unix timestamp in ms since the origin
-//   fsa: {
-//     B1A: {
-//       number_reports: 4938,
-//       pot: 23,
-//       risk: 18,
-//       both: 2, // NB these are not included if fsa excluded is true
-//       fsa_excluded: false // flag to include / exclude regions with less than 50 people from census data
-//     },
-//     M5T: {
-//       number_reports: 4938,
-//       pot: 23,
-//       risk: 18,
-//       both: 2, // NB these are not included if fsa excluded is true
-//       fsa_excluded: false // flag to include / exclude regions with less than 50 people from census data
-//     },
-//     M5B: {
-//       number_reports: 4938,
-//       pot: 23,
-//       risk: 18,
-//       both: 2, // NB these are not included if fsa excluded is true
-//       fsa_excluded: false // flag to include / exclude regions with less than 50 people from census data
-//     },
-//     S0G: {
-//       number_reports: 4938,
-//       pot: 23,
-//       risk: 18,
-//       both: 2, // NB these are not included if fsa excluded is true
-//       fsa_excluded: false // flag to include / exclude regions with less than 50 people from census data
-//     }
-//   }
-// };
-// let confirmed_data;
 
 function styleConfirmedPolygons(feature) {
   const case_num = feature.properties["CaseCount"];
@@ -132,7 +91,7 @@ function getColour(cases, colour_scheme, color_thresholds) {
 class Leafletmap extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { tab: "conf", formData: null };
+    this.state = { tab: "vuln", formData: null };
     this.setTab = this.setTab.bind(this);
     this.getData = this.getData.bind(this);
   }
@@ -151,6 +110,10 @@ class Leafletmap extends React.Component {
       "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json";
     fetch(url)
       .then(r => r.json())
+      .then(d => {
+        console.log(d);
+        return d;
+      })
       .then(formData => this.setState({ formData }));
   }
 
@@ -179,8 +142,40 @@ class Leafletmap extends React.Component {
       );
     }
 
-    //feel free to change classNames
+    // this function is called with each polygon when the GeoJSON polygons are rendered
+    // just creates the popup content and binds a popup to each polygon
+    // `feature` is the GeoJSON feature (the FSA polygon)
+    // use the FSA polygon FSA ID to get the FSA data from `formData`
+    let bindPopupOnEachFeature = (feature, layer) => {
+      let fsaID = feature.properties["CFSAUID"];
+      if (!this.state.formData.fsa[fsaID]) {
+        console.log("no data for fsa ID", fsaID);
+      }
+      let fsaData = this.state.formData.fsa[fsaID];
+      if (!fsaData) {
+        fsaData = {}; // instead of an error, it will say 'undefined' in the popup
+      }
 
+      let content = `FSA ID: ${fsaID} <br/>`;
+      // `FSA data: ${JSON.stringify(fsaData)}`
+
+      if (this.state.tab === "vuln") {
+        content += `Vulnerable cases: ${fsaData["pot"]}`;
+      } else if (this.state.tab === "conf") {
+        content += `Confirmed: ${fsaData["number_reports"]}`;
+      }
+      layer.bindPopup(content);
+    };
+
+    // feel free to change classNames I just named them
+    //
+    // we wait until the formData is not null before rendering the GeoJSON.
+    // otherwise it will try to create a popup for every FSA but the data won't
+    // be there yet.
+    //
+    // the key prop on the GeoJSON component ensures React will re-render
+    // the geojson layer when the tab changes. This does the work of
+    // unbinding all popups and recreating them with the correct data.
     return (
       <div>
         <div className="PageTitle">
@@ -202,7 +197,14 @@ class Leafletmap extends React.Component {
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               minZoom={4}
             />
-            <GeoJSON data={convertedBoundaries} style={styleFunc} />
+            {this.state.formData !== null ? (
+              <GeoJSON
+                data={convertedBoundaries}
+                style={styleFunc}
+                onEachFeature={bindPopupOnEachFeature}
+                key={this.state.tab}
+              />
+            ) : null}
           </Map>
         </div>
       </div>
