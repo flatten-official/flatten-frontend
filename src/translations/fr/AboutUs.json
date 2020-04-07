@@ -1,7 +1,7 @@
 {
-  "header": "About Us",
-  "p1": "Here are the amazing volunteers who made this project possible!",
-  "contact": "Contact Us: ",
+  "header": "L'équipe",
+  "p1": "Voici les bénévoles extraordinaires qui ont contribué à monter ce projet!",
+  "contact": "Vous pouvez nous joindre au : ",
   "volunteers": [
     {
       "name": "Shrey Jain",

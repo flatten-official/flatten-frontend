@@ -27,21 +27,21 @@ export const symptomsFormName = "trackYourSymptoms";
 
 // DO NOT CHANGE FIELD NAMES
 const formValidation = [
-  ["age", "Age is required"],
-  ["contactWithIllness", "Field is required"],
-  ["travelOutsideCanada", "Field is required"],
-  ["testedPositive", "Field is required"],
+  ["age", "L'âge est requis"],
+  ["contactWithIllness", "Champ requis"],
+  ["travelOutsideCanada", "Champ requis"],
+  ["testedPositive", "Champ requis"],
   [
     "postalCode",
-    "Postal code is required (ie. A1A)",
+    "Le code postal est requis (ie. A1A)",
     ({ postalCode }) => isValidPostalCode(postalCode),
   ],
-  ["sex", "Field is required"],
-  ["acknowledgement", "Please accept the Terms and Conditions."],
-  ["recaptchaVerification", "Please prove you are not a robot."],
+  ["sex", "Champ requis"],
+  ["acknowledgement", "Veuillez accepter les conditions générales."],
+  ["recaptchaVerification", "Veuillez prouver que vous n'êtes pas un robot."],
   [
     "email",
-    "Please enter a valid email",
+    "Veuillez saisir un e-mail valide.",
     ({ email }) => !email || isValidEmail(email),
   ],
 ];
