@@ -66,9 +66,9 @@ class HeatMap extends React.Component {
 
             <p>
               <Trans t={t} i18nkey="p4">
-                <b>Vulnerable Individuals: </b> This tab displays all
-                individuals that are especially vulnerable to COVID-19 in
-                Canada, based on data inputted into Flatten's form.
+                <b>Vulnerable Individuals:</b> This tab displays all individuals
+                that are especially vulnerable to COVID-19 in Canada, based on
+                data inputted into Flatten's form.
               </Trans>
             </p>
           </div>
