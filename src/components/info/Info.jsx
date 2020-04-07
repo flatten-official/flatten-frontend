@@ -11,6 +11,7 @@ import Para8 from "./paragraphs/Para8";
 import Para9 from "./paragraphs/Para9";
 import Para10 from "./paragraphs/Para10";
 import Navbar from "../navbar/Navbar";
+import Footer from "../footer/Footer";
 
 const Paragraphs = [
   {
@@ -69,6 +70,7 @@ const Info = () => (
         <div className="info__body description">{para.body}</div>
       </div>
     ))}
+    <Footer/>
   </React.Fragment>
 );
 

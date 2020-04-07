@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../navbar/Navbar";
+import Footer from "../footer/Footer";
 const PrivacyPolicy = () => (
   <>
     <Navbar/>
@@ -12,6 +13,7 @@ const PrivacyPolicy = () => (
         <p>Your browser does not support iframes.</p>
       </iframe>
     </div>
+    <Footer/>
   </>
 );
 

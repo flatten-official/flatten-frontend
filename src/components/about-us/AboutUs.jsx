@@ -2,6 +2,7 @@ import React from "react";
 import Profile from "./Profile";
 import Volunteers from "./Volunteers";
 import Navbar from "../navbar/Navbar";
+import Footer from "../footer/Footer";
 
 const AboutUs = () => (
   <React.Fragment>
@@ -37,6 +38,7 @@ const AboutUs = () => (
         ))}
       </div>
     </section>
+    <Footer/>
   </React.Fragment>
 );
 

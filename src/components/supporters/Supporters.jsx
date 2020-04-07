@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../navbar/Navbar";
+import Footer from "../footer/Footer";
 
 const companies = [
   {
@@ -48,6 +49,7 @@ const Supporters = () => (
         </a>
       </div>
     ))}
+  <Footer/>
   </React.Fragment>
 );
 
