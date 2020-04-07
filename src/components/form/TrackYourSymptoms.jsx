@@ -8,22 +8,27 @@ import { submitForm } from "../../actions/index";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 // DO NOT REPLACE
 import { symptomsFormName } from "./SymptomsFormEn";
+import SubmitModal from "./SubmitModal";
 import SyringeIcon from "../../assets/syringe.svg";
 import SymptomsFormEn from "./SymptomsFormEn";
 import SymptomsFormFr from "./SymptomsFormFr";
 
 const TrackYourSymptoms = ({ t }) => {
-  const [submitting, setSubmitting] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
-  const handleClick = async () => {
-    setSubmitting(true);
-    await dispatch(submit(symptomsFormName));
-    setSubmitting(false);
+  const handleClick = () => {
+    dispatch(submit(symptomsFormName));
   };
 
-  const handleSubmit = (values) => {
-    dispatch(submitForm(values));
+  const handleSubmit = async (values) => {
+    setShowModal(true);
+    await dispatch(submitForm(values));
+  };
+
+  const handleSubmitSuccess = () => {
+    // once the submitForm action is working, close the modal if submission was successful
+    // setShowModal(false);
   };
 
   const i18nlang = i18next.language;
@@ -55,12 +60,12 @@ const TrackYourSymptoms = ({ t }) => {
       <div className="symptoms__submit">
         <PrimaryButton
           className="symptoms__submit-button"
-          disabled={submitting}
           onClick={handleClick}
         >
           {t("submit")}
         </PrimaryButton>
       </div>
+      {showModal && <SubmitModal onClose={() => setShowModal(false)} />}
     </div>
   );
 };

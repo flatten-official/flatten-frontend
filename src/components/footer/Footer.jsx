@@ -34,18 +34,12 @@ class Footer extends React.Component {
               <p>
                 <b>{t("legal")}</b>
               </p>
-              <a
-                className="footer__link"
-                href="https://drive.google.com/file/d/1Cb9yb1zFXrQs0TKIAytx-16vCuHpJBDc/view"
-              >
+              <Link className="footer__link" to="/terms-of-service">
                 <p>{t("tos")}</p>
-              </a>
-              <a
-                className="footer__link"
-                href="https://drive.google.com/file/d/1dbkrOLBBp_yqus-oeQ_JXdanDbdb8u-6/view"
-              >
+              </Link>
+              <Link className="footer__link" to="/privacy-policy">
                 <p>{t("privacy")}</p>
-              </a>
+              </Link>
             </div>
             <div className="footer__section body">
               <p>
