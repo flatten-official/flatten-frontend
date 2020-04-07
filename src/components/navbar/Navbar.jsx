@@ -2,16 +2,28 @@ import React from "react";
 import { Link } from "react-scroll";
 import { NavLink, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
+import i18next from "i18next";
 
 import logo from "../../assets/logo-black.png";
 
 const Navbar = ({ t }) => {
   let location = useLocation();
-  console.log(location.pathname);
   let logoLink = null;
   let homeLink = null;
   let symptomsLink = null;
   let heatmapLink = null;
+
+  const i18nlang = i18next.language;
+  let toggle;
+  switch (i18nlang) {
+    case "en":
+      toggle = "fr";
+      break;
+    case "fr":
+      toggle = "en";
+      break;
+  }
+  let linkLang = `/?lang=${toggle}`;
 
   if (location.pathname == ("/" || "#symtpoms" || "#heatmap")) {
     logoLink = (
@@ -35,7 +47,7 @@ const Navbar = ({ t }) => {
         offset={-70}
         duration={1000}
       >
-        Home
+        {t("home")}
       </Link>
     );
     symptomsLink = (
@@ -47,7 +59,7 @@ const Navbar = ({ t }) => {
         offset={-70}
         duration={1000}
       >
-        Report Your Symptoms
+        {t("form")}
       </Link>
     );
     heatmapLink = (
@@ -59,7 +71,7 @@ const Navbar = ({ t }) => {
         offset={-70}
         duration={1000}
       >
-        View Virus Data
+        {t("heatmap")}
       </Link>
     );
   } else {
@@ -70,17 +82,17 @@ const Navbar = ({ t }) => {
     );
     homeLink = (
       <a className="nav__a" href="/">
-        Home
+        {t("home")}
       </a>
     );
     symptomsLink = (
       <a className="nav__a" href="/#symptoms">
-        Report Your Symptoms
+        {t("form")}
       </a>
     );
     heatmapLink = (
       <a className="nav__a" href="/#heatmap">
-        View Virus Data
+        {t("heatmap")}
       </a>
     );
   }
@@ -93,8 +105,11 @@ const Navbar = ({ t }) => {
         <li className="nav__item">{heatmapLink}</li>
         <li className="nav__info">
           <NavLink className="navbar__covid" exact to="/info">
-            COVID-19 Information
+            {t("info")}
           </NavLink>
+          <a href={linkLang} className="navbar__lang">
+            {toggle}
+          </a>
         </li>
       </div>
     </nav>
