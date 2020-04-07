@@ -11,7 +11,7 @@ const AboutUs = ({ t }) => {
   const volunteers = t("volunteers", { returnObjects: true });
   return (
     <React.Fragment>
-      <section>
+      <section className="about-us__header">
         <h4 className="about-us__title title">{t("header")}</h4>
         <div className="about-us__description">
           <p className="body">{t("p1")}</p>
@@ -22,7 +22,6 @@ const AboutUs = ({ t }) => {
             </a>
           </p>
         </div>
-        <hr className="line" />
       </section>
       <section>
         <div className="about-us__body">

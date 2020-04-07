@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import GiftIcon from "../../assets/gift.svg";
 import { withTranslation } from "react-i18next";
 
 const Supporters = ({ t }) => {
@@ -9,18 +10,18 @@ const Supporters = ({ t }) => {
 
   return (
     <React.Fragment>
-      <h4 className="supporters__title title">{t("header")}</h4>
-      <div>
-        <p className="supporters__description body">{t("description")}</p>
-        <p className="supporters__contact body">
-          {t("contact")}
-          <a className="email-link" href="mailto:flattenofficial@gmail.com">
-            flattenofficial@gmail.com
-          </a>
-        </p>
+      <div className="body supporters__header">
+        <h4 className="title">{t("header")}</h4>
+        {t("description")}
+        <br />
+        <br />
+        {t("contact")}
+        <a className="email-link" href="mailto:flattenofficial@gmail.com">
+          flattenofficial@gmail.com
+        </a>
+        <GiftIcon className="supporters__icon" />
       </div>
 
-      <hr className="line" />
       {companies.map((company, index) => (
         <div key={index} className="supporters__card">
           <a
