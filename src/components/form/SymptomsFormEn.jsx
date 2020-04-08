@@ -135,21 +135,18 @@ const SymptomsForm = ({ change, handleSubmit }) => {
             </div>
           </div>
         ))}
-        <div className="symptoms-form__recaptcha">
-          <Recaptcha
-            sitekey={RecaptchaKey()}
-            render="explicit"
-            onloadCallback={recaptchaLoaded}
-            verifyCallback={handleRecaptchaVerified}
-            expiredCallback={handleRecaptchaExpired}
-          />
-          <Field
-            component={TextInput}
-            name="recaptchaVerification"
-            type="hidden"
-          />
-          <Field component={TextInput} name="isFormSubmission" type="hidden" />
-        </div>
+        <Recaptcha
+          sitekey={RecaptchaKey()}
+          render="explicit"
+          onloadCallback={recaptchaLoaded}
+          verifyCallback={handleRecaptchaVerified}
+          expiredCallback={handleRecaptchaExpired}
+        />
+        <Field
+          component={TextInput}
+          name="recaptchaVerification"
+          type="hidden"
+        />
         <div className="symptoms-form__acknowledgement">
           <Field
             name="acknowledgement"
