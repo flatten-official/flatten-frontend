@@ -32,10 +32,18 @@ const HomePage = ({ cookieStatus, t }) => {
       <div className="home__content">
         <img className="home__logo" src={logo} alt="logo" />
         <div className="body home__description">
-          {t("chunk1")}
+          <Trans t={t} i18nKey="chunk1">
+            Flatten is a not-for-profit that focuses on using the
+            <b>self-reported data of Canadians</b> to enable a tool that helps
+            to slow the spread of COVID-19.
+          </Trans>
           <br />
           <br />
-          {t("chunk2")}
+          <Trans t={t} i18nKey="chunk2">
+            To do your part, <b>fill in the form once a day</b>,
+            <b>share with all of your friends</b>, and then tell them to
+            <b>do the same</b>.
+          </Trans>
         </div>
         <PrimaryButton
           className="home__button body"
