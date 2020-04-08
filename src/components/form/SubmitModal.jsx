@@ -18,11 +18,11 @@ const SubmitModal = ({ onClose }) => {
   return (
     <Modal className="submit-modal" onClose={onClose}>
       <div className="submit-modal__content body">
-          <b>Thank you for submitting our form!</b>
-          <br />
-          You'll be taken to the heatmap now.
-        </div>
-        <GiftIcon className="submit-modal__gift-icon" />
+        <b>Thank you for submitting our form!</b>
+        <br />
+        Exit to go to the heatmap.
+      </div>
+      <GiftIcon className="submit-modal__gift-icon" />
     </Modal>
   );
 };

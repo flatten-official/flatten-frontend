@@ -92,7 +92,7 @@ const HomePage = ({ cookieStatus, t }) => {
       );
   }
 
-  return cookieStatus !== "v" ? (
+  return (
     <div className="home">
       <div className="home__content">
         <img className="home__logo" src={logo} alt="logo" />
@@ -119,7 +119,7 @@ const HomePage = ({ cookieStatus, t }) => {
         />
       )}
     </div>
-  ) : null;
+  );
 };
 
 export default withTranslation("HomePage")(HomePage);
