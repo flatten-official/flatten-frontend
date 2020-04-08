@@ -1,6 +1,6 @@
 {
-  "chunk1": "FLATTEN a été conçu pour <1>recueillir des données sur les soins de santé actuelles</1> et <1> sensibiliser la nation</1> à la COVID-19 pendant ce temps difficile.",
-  "chunk2": "Notre but ultime est d’aplatir la courbe de la COVID-19. Vous pouvez faire votre part en  <1>remplissant notre formulaire une fois par jour</1>.",
+  "chunk1": "Flatten est un organisme sans but lucratif qui utilise <1>les données auto-déclarées des canadiens</1> pour ralentir la propagation de la COVID-19.",
+  "chunk2": "Vous pouvez faire votre part <1>en remplissant notre formulaire</1> <1>une fois par jour</1>, et <1>en partageant ce site avec vos amis et collègues.</1>",
   "returningUserButton": "Utilisateur existant",
-  "newUserButton": "Utilisateur déjà inscrit"
+  "newUserButton": "Nouvel utilisateur"
 }

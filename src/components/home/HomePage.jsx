@@ -7,6 +7,16 @@ import ReturningUserModal from "./ReturningUserModal";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 import logo from "../../assets/logo-black.png";
 
+import { animateScroll as scroll, scroller } from "react-scroll";
+
+const scrollToForm = () => {
+  scroller.scrollTo("symptoms", {
+    duration: 800,
+    delay: 0,
+    smooth: "easeInOutQuad",
+    offset: -70,
+  });
+};
 
 const HomePage = ({ cookieStatus, t }) => {
   const [showModal, setShowModal] = useState(false);
@@ -23,16 +33,16 @@ const HomePage = ({ cookieStatus, t }) => {
         <img className="home__logo" src={logo} alt="logo" />
         <div className="body home__description">
           <Trans t={t} i18nKey="chunk1">
-            Flatten is designed to collect <b>real-time healthcare data</b>
-            and
-            <b> increase national awareness</b> throughout this difficult time
-            during COVID-19.
+            Flatten is a not-for-profit that focuses on using the
+            <b>self-reported data of Canadians</b> to enable a tool that helps
+            to slow the spread of COVID-19.
           </Trans>
           <br />
           <br />
           <Trans t={t} i18nKey="chunk2">
-            Our ultimate goal is to flatten the curve of COVID-19, and you can
-            do your part by <b>filling out our form once a day</b>.
+            To do your part, <b>fill in the form once a day</b>,
+            <b>share with all of your friends</b>, and then tell them to
+            <b>do the same</b>.
           </Trans>
         </div>
         <PrimaryButton
@@ -43,7 +53,7 @@ const HomePage = ({ cookieStatus, t }) => {
         </PrimaryButton>
         <br />
         {!cookieStatus && (
-          <PrimaryButton className="home__button body">
+          <PrimaryButton className="home__button body" onClick={scrollToForm}>
             {t("newUserButton")}
           </PrimaryButton>
         )}

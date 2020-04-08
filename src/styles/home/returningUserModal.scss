@@ -6,11 +6,38 @@
   padding-bottom: 32px;
 }
 
-.returning-user__submit {
-  padding-top: 30px;
+.returning-user__body {
+  & .text-input__container {
+    width: 100%;
+    text-align: center;
+  }
+
+  & .text-input__label {
+    display: inline-block;
+  }
+
+  & input {
+    display: inline-block;
+  }
 }
 
 .returning-user__submit-button {
-  height: 50px;
-  width: 100px;
+  margin-top: 30px;
+  height: 80px;
+  width: 150px;
+}
+
+.text-xs-center {
+  text-align: center;
+}
+
+#g-recaptcha {
+  padding-top: 16px;
+  display: inline-block;
+}
+
+@media only screen and (max-width: 600px) {
+  .returning-user {
+    width: 75%;
+  }
 }
