@@ -3,6 +3,16 @@ import PrimaryButton from "../common/buttons/PrimaryButton";
 import logo from "../../assets/logo-black.png";
 import { Trans, withTranslation } from "react-i18next";
 
+import { animateScroll as scroll, scroller } from "react-scroll";
+
+const scrollToForm = () => {
+  scroller.scrollTo("symptoms", {
+    duration: 800,
+    delay: 0,
+    smooth: "easeInOutQuad",
+  });
+};
+
 const HomePage = ({ cookieStatus, t }) => {
   return cookieStatus !== "v" ? (
     <div className="home">
@@ -27,7 +37,7 @@ const HomePage = ({ cookieStatus, t }) => {
         </PrimaryButton>
         <br />
         {!cookieStatus && (
-          <PrimaryButton className="home__button body">
+          <PrimaryButton className="home__button body" onClick={scrollToForm}>
             {t("button2")}
           </PrimaryButton>
         )}

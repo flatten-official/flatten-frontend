@@ -13,7 +13,7 @@ import SyringeIcon from "../../assets/syringe.svg";
 import SymptomsFormEn from "./SymptomsFormEn";
 import SymptomsFormFr from "./SymptomsFormFr";
 
-const TrackYourSymptoms = ({ t }) => {
+const TrackYourSymptoms = ({ t }, submittedToday) => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
@@ -44,8 +44,8 @@ const TrackYourSymptoms = ({ t }) => {
       component = <SymptomsFormEn onSubmit={handleSubmit} />;
   }
 
-  return (
-    <div className="symptoms" id="symptoms">
+  return !submittedToday.exists ? (
+    <div className="symptoms" id="symptoms" name="symptoms">
       <div className="symptoms__header">
         <div className="symptoms__title">
           <div className="title">{t("header")}</div>
@@ -67,7 +67,7 @@ const TrackYourSymptoms = ({ t }) => {
       </div>
       {showModal && <SubmitModal onClose={() => setShowModal(false)} />}
     </div>
-  );
+  ) : null;
 };
 
 export default withTranslation("Form")(TrackYourSymptoms);

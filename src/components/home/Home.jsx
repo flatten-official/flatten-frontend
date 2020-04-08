@@ -21,7 +21,7 @@ const Home = ({ dispatch, cookie }) => {
     <React.Fragment>
       <Navbar />
       <HomePage cookieStatus={cookie.status} />
-      <TrackYourSymptoms />
+      <TrackYourSymptoms submittedToday={cookie.daily} />
       <Heatmap />
       <EsriLink />
     </React.Fragment>

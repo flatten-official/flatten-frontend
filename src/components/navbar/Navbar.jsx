@@ -27,7 +27,7 @@ const Navbar = ({ t }) => {
   }
   let linkLang = `/?lang=${toggle}`;
 
-  if (location.pathname == ("/" || "#symtpoms" || "#heatmap")) {
+  if (location.pathname == ("/" || "#symptoms" || "#heatmap")) {
     logoLink = (
       <Link
         activeClass="active"
