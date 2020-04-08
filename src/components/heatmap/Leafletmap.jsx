@@ -1,8 +1,9 @@
 import React from "react";
 import { render } from "react-dom";
 import PrimaryButton from "../common/buttons/PrimaryButton";
-import { Map, Marker, Popup, TileLayer, GeoJSON } from "react-leaflet";
+import { Map, Marker, Popup, TileLayer, GeoJSON, LayersControl } from "react-leaflet";
 import convertedBoundaries from "./converted_boundaries.js";
+import Legend from "./Legend";
 
 console.log("converted", convertedBoundaries);
 
@@ -202,7 +203,7 @@ class Leafletmap extends React.Component {
       styleFunc = create_style_function(
         this.state.formData,
         COLOUR_SCHEME,
-        HIGH_RISK_SCHEME_THRESHOLDS,
+        BOTH_SCHEME_THRESHOLDS,
         "both"
       );
     }
@@ -270,6 +271,7 @@ class Leafletmap extends React.Component {
               bindPopupOnEachFeature,
               this.state.tab
             )}
+            <Legend />
           </Map>
         </div>
         <div className="TabSelectors btn_group">
