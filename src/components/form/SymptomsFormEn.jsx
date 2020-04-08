@@ -120,6 +120,7 @@ const SymptomsForm = ({ change, handleSubmit }) => {
   const handleRecaptchaVerified = (response) => {
     if (response) {
       change("recaptchaVerification", response);
+      change("isFormSubmission", true);
     }
   };
 

@@ -15,7 +15,7 @@ const emailValidation = [
   ["recaptchaVerification", "Please prove you are not a robot."],
 ];
 
-const ReturningUserModal = ({ handleSubmit, onClose }) => {
+const ReturningUserModal = ({ handleSubmit, onClose, change }) => {
   const recaptchaLoaded = () => {
     //console.log("Loaded");
   };
@@ -25,8 +25,10 @@ const ReturningUserModal = ({ handleSubmit, onClose }) => {
   };
 
   const handleRecaptchaVerified = (response) => {
+    console.log("hi");
     if (response) {
       change("recaptchaVerification", response);
+      change("isFormSubmission", false);
     }
   };
   return (
