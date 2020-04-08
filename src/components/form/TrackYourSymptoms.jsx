@@ -67,7 +67,9 @@ const TrackYourSymptoms = ({ t }, submittedToday) => {
       </div>
       {showModal && <SubmitModal onClose={() => setShowModal(false)} />}
     </div>
-  ) : null;
+  ) : (
+    <div className="title symptomsSubmitted">{t("submitted")}</div>
+  );
 };
 
 export default withTranslation("Form")(TrackYourSymptoms);
