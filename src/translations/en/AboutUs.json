@@ -107,12 +107,6 @@
       "role": "Software Developer"
     },
     {
-      "name": "Charlie Chen",
-      "src": "./headshots/charlie.png",
-      "link": "https://www.linkedin.com/in/hyu-chen/",
-      "role": "Software Developer"
-    },
-    {
       "name": "William Wen",
       "src": "./headshots/william.png",
       "link": "https://www.linkedin.com/in/william-wen360/",
@@ -140,6 +134,24 @@
       "name": "Owen Brake",
       "src": "./headshots/owen.png",
       "link": "https://OwenBrake.com",
+      "role": "Software Developer"
+    },
+    {
+      "name": "Eric Zhai",
+      "src": "",
+      "link": "https://www.linkedin.com/in/eric-zhai/",
+      "role": "Software Developer"
+    },
+    {
+      "name": "Ethan Chen",
+      "src": "./headshots/ethan.png",
+      "link": "https://www.linkedin.com/in/ethanjc/",
+      "role": "Software Developer"
+    },
+    {
+      "name": "Charlie Chen",
+      "src": "./headshots/charlie.png",
+      "link": "https://www.linkedin.com/in/hyu-chen/",
       "role": "Software Developer"
     },
     {
@@ -171,12 +183,6 @@
       "src": "./headshots/maanav.png",
       "link": "https://www.linkedin.com/in/maanavdalal/",
       "role": "Design"
-    },
-    {
-      "name": "Eric Zhai",
-      "src": "",
-      "link": "https://www.linkedin.com/in/eric-zhai/",
-      "role": "Software Developer"
     },
     {
       "name": "Ivan Nesterovic",
