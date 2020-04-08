@@ -8,6 +8,17 @@ import PrimaryButton from "../common/buttons/PrimaryButton";
 import logo from "../../assets/logo-black.png";
 
 
+import { animateScroll as scroll, scroller } from "react-scroll";
+
+const scrollToForm = () => {
+  scroller.scrollTo("symptoms", {
+    duration: 800,
+    delay: 0,
+    smooth: "easeInOutQuad",
+    offset: -70
+  });
+};
+
 const HomePage = ({ cookieStatus, t }) => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
@@ -43,7 +54,7 @@ const HomePage = ({ cookieStatus, t }) => {
         </PrimaryButton>
         <br />
         {!cookieStatus && (
-          <PrimaryButton className="home__button body">
+          <PrimaryButton className="home__button body" onClick={scrollToForm}>
             {t("newUserButton")}
           </PrimaryButton>
         )}
