@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { reduxForm, Field } from "redux-form";
 import Recaptcha from "react-recaptcha";
 
@@ -16,6 +16,13 @@ const emailValidation = [
 ];
 
 const ReturningUserModal = ({ handleSubmit, onClose, change }) => {
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const handleFormSubmit = (values) => {
+    handleSubmit(values);
+    setFormSubmitted(true);
+  };
+
   const recaptchaLoaded = () => {
     //console.log("Loaded");
   };
@@ -32,27 +39,41 @@ const ReturningUserModal = ({ handleSubmit, onClose, change }) => {
   };
   return (
     <Modal className="returning-user" onClose={onClose}>
-      <div className="returning-user__title title">Returning user?</div>
-      <form className="body returning-user__body" onSubmit={handleSubmit}>
-        <Field name="email" label="Email" component={TextInput} />
-        <div className="text-center">
-          <Recaptcha
-            sitekey={RecaptchaKey()}
-            render="explicit"
-            onloadCallback={recaptchaLoaded}
-            verifyCallback={handleRecaptchaVerified}
-            expiredCallback={handleRecaptchaExpired}
-          />
-          <Field
-            component={TextInput}
-            name="recaptchaVerification"
-            type="hidden"
-          />
+      <div className="returning-user__title title">
+        {!formSubmitted
+          ? "Returning user?"
+          : "Please check your email for a verification code."}
+      </div>
+
+      {!formSubmitted && (
+        <div className="returning-user__body body">
+          <form onSubmit={handleFormSubmit}>
+            <Field
+              name="email"
+              label="Email"
+              className="returning-user__input"
+              component={TextInput}
+            />
+            <Recaptcha
+              sitekey={RecaptchaKey()}
+              render="explicit"
+              onloadCallback={recaptchaLoaded}
+              verifyCallback={handleRecaptchaVerified}
+              expiredCallback={handleRecaptchaExpired}
+            />
+            <Field
+              component={TextInput}
+              name="recaptchaVerification"
+              type="hidden"
+            />
+            <div className="returning-user__submit">
+              <PrimaryButton className="returning-user__submit-button">
+                Sign In
+              </PrimaryButton>
+            </div>
+          </form>
         </div>
-        <PrimaryButton className="returning-user__submit-button">
-          Sign In
-        </PrimaryButton>
-      </form>
+      )}
     </Modal>
   );
 };
