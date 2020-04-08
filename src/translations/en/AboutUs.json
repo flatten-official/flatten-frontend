@@ -35,6 +35,12 @@
       "role": "Maps Team Front End Lead and DevOps"
     },
     {
+      "name": "Ivan Nesterovic",
+      "src": "./headshots/ivan.png",
+      "link": "https://www.linkedin.com/in/ivan-nesterovic/",
+      "role": "Data Team Lead and DevOps"
+    },
+    {
       "name": "Shafi  U. Bhuiyan",
       "src": "./headshots/shafi.png",
       "role": "Public Health Advisor",
@@ -183,12 +189,6 @@
       "src": "./headshots/maanav.png",
       "link": "https://www.linkedin.com/in/maanavdalal/",
       "role": "Design"
-    },
-    {
-      "name": "Ivan Nesterovic",
-      "src": "./headshots/ivan.png",
-      "link": "https://www.linkedin.com/in/ivan-nesterovic/",
-      "role": "Software Developer"
     },
     {
       "name": "Miraal Kabir",
