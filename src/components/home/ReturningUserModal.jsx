@@ -32,9 +32,9 @@ const ReturningUserModal = ({ handleSubmit, onClose }) => {
   return (
     <Modal className="returning-user" onClose={onClose}>
       <div className="returning-user__title title">Returning user?</div>
-      <div className="returning-user__body body">
-        <form onSubmit={handleSubmit}>
-          <Field name="email" label="Email" component={TextInput} />
+      <form className="body returning-user__body" onSubmit={handleSubmit}>
+        <Field name="email" label="Email" component={TextInput} />
+        <div className="text-center">
           <Recaptcha
             sitekey={RecaptchaKey()}
             render="explicit"
@@ -47,13 +47,11 @@ const ReturningUserModal = ({ handleSubmit, onClose }) => {
             name="recaptchaVerification"
             type="hidden"
           />
-          <div className="returning-user__submit">
-            <PrimaryButton className="returning-user__submit-button">
-              Sign In
-            </PrimaryButton>
-          </div>
-        </form>
-      </div>
+        </div>
+        <PrimaryButton className="returning-user__submit-button">
+          Sign In
+        </PrimaryButton>
+      </form>
     </Modal>
   );
 };
