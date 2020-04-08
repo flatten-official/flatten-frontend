@@ -28,7 +28,6 @@ const HomePage = ({ cookieStatus, t }) => {
   };
 
   let buttons = null;
-  console.log(cookieStatus);
   switch (cookieStatus) {
     case "n":
       buttons = (
