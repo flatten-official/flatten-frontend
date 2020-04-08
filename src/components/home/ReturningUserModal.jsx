@@ -25,7 +25,6 @@ const ReturningUserModal = ({ handleSubmit, onClose, change }) => {
   };
 
   const handleRecaptchaVerified = (response) => {
-    console.log("hi");
     if (response) {
       change("recaptchaVerification", response);
       change("isFormSubmission", false);

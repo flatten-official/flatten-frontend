@@ -17,8 +17,6 @@ const Home = ({ dispatch, user, daily }) => {
     readCookieAction();
   }, []);
   let homeStatus;
-  console.log(user);
-  console.log(daily);
   if (user) {
     homeStatus = user.status;
   }

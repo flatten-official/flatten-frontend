@@ -74,12 +74,13 @@ const TrackYourSymptoms = ({ daily }) => {
       {showModal && <SubmitModal onClose={() => setShowModal(false)} />}
     </div>
   ) : (
-    <div className="title symptomsSubmitted">{t("submitted")}</div>
+    <div className="title symptomsSubmitted" id="symptoms">
+      {t("submitted")}
+    </div>
   );
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   if (state.cookie.status) {
     return { daily: state.cookie.status.daily };
   }

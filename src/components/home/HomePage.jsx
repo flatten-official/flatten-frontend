@@ -7,7 +7,7 @@ import ReturningUserModal from "./ReturningUserModal";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 import logo from "../../assets/logo-black.png";
 
-import { animateScroll as scroll, scroller } from "react-scroll";
+import { scroller } from "react-scroll";
 
 const scrollToForm = () => {
   scroller.scrollTo("symptoms", {
@@ -27,6 +27,71 @@ const HomePage = ({ cookieStatus, t }) => {
     setShowModal(false);
   };
 
+  let buttons = null;
+  console.log(cookieStatus);
+  switch (cookieStatus) {
+    case "n":
+      buttons = (
+        <React.Fragment>
+          <PrimaryButton
+            className="home__button body"
+            onClick={() => setShowModal(true)}
+          >
+            {t("returningUserButton")}
+          </PrimaryButton>
+          <br />
+
+          <PrimaryButton className="home__button body" onClick={scrollToForm}>
+            {t("newUserButton")}
+          </PrimaryButton>
+        </React.Fragment>
+      );
+      break;
+    case "a":
+      buttons = (
+        <React.Fragment>
+          <PrimaryButton
+            className="home__button body"
+            onClick={() => setShowModal(true)}
+          >
+            {t("returningUserButton")}
+          </PrimaryButton>
+        </React.Fragment>
+      );
+      break;
+    case "e":
+      buttons = (
+        <React.Fragment>
+          <PrimaryButton
+            className="home__button body"
+            onClick={() => setShowModal(true)}
+          >
+            {t("returningUserButton")}
+          </PrimaryButton>
+        </React.Fragment>
+      );
+      break;
+    case "v":
+      buttons = null;
+      break;
+    default:
+      buttons = (
+        <React.Fragment>
+          <PrimaryButton
+            className="home__button body"
+            onClick={() => setShowModal(true)}
+          >
+            {t("returningUserButton")}
+          </PrimaryButton>
+          <br />
+
+          <PrimaryButton className="home__button body" onClick={scrollToForm}>
+            {t("newUserButton")}
+          </PrimaryButton>
+        </React.Fragment>
+      );
+  }
+
   return cookieStatus !== "v" ? (
     <div className="home">
       <div className="home__content">
@@ -45,18 +110,7 @@ const HomePage = ({ cookieStatus, t }) => {
             <b>do the same</b>.
           </Trans>
         </div>
-        <PrimaryButton
-          className="home__button body"
-          onClick={() => setShowModal(true)}
-        >
-          {t("returningUserButton")}
-        </PrimaryButton>
-        <br />
-        {!cookieStatus && (
-          <PrimaryButton className="home__button body" onClick={scrollToForm}>
-            {t("newUserButton")}
-          </PrimaryButton>
-        )}
+        {buttons}
       </div>
       {showModal && (
         <ReturningUserModal

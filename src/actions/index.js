@@ -1,7 +1,6 @@
 import backend from "../apis/backend";
 
 export const submitForm = (formValues) => async (dispatch) => {
-  console.log(formValues);
   let submitSuccess;
   try {
     const response = await backend.post("/submit", formValues);
