@@ -120,6 +120,7 @@ const SymptomsForm = ({ change, handleSubmit }) => {
   const handleRecaptchaVerified = (response) => {
     if (response) {
       change("recaptchaVerification", response);
+      change("isFormSubmission", true);
     }
   };
 
@@ -147,6 +148,7 @@ const SymptomsForm = ({ change, handleSubmit }) => {
             name="recaptchaVerification"
             type="hidden"
           />
+          <Field component={TextInput} name="isFormSubmission" type="hidden" />
         </div>
         <div className="symptoms-form__acknowledgement">
           <Field

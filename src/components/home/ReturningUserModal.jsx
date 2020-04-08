@@ -22,6 +22,7 @@ const ReturningUserModal = ({ handleSubmit, onClose, change }) => {
 
   const handleRecaptchaExpired = () => {
     change("recaptchaVerification", false);
+    change("isFormSubmission", false);
   };
 
   const handleRecaptchaVerified = (response) => {
@@ -48,6 +49,7 @@ const ReturningUserModal = ({ handleSubmit, onClose, change }) => {
             name="recaptchaVerification"
             type="hidden"
           />
+          <Field component={TextInput} name="isFormSubmission" type="hidden" />
           <div className="returning-user__submit">
             <PrimaryButton className="returning-user__submit-button">
               Sign In
