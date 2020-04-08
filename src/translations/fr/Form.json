@@ -3,6 +3,6 @@
   "description": "Vos réponses seront colligées et partagées anonymement sur notre carte pour aider les intervenants du réseau de la santé, les chercheurs, ainsi que les membres de la communauté à évaluer la propagation de la COVID-19. Le questionnaire s'appuie sur le meilleur encadrement fourni par les agences de santé publique canadiennes et est conçu afin de recueillir des données sur les facteurs de risque pour la COVID-19. Ce sondage n’a pas pour but de faciliter le diagnostic, ni de servir d’auto-évaluation pour la COVID-19. Si vous soupçonnez être atteint de la COVID-19, veuillez vous adresser à un professionnel de la santé. Veuillez consulter nos Conditions d’utilisations ainsi que notre Politique de confidentialité pour obtenir plus de renseignements.",
   "disclaimer": "Veuillez compléter ce formulaire, même si vous n’avez aucun symptôme.",
   "submit": "Soumettez",
-  "verify": "En soumettant votre compte, vous confirmez avoir au moins 18 ans et vous consentez aux Conditions d’utilisation et à la Politique de confidentialité de Flatten.",
-  "submitted": "Merci beaucoup de votre exposé aujourd'hui"
+  "verify": "En soumettant, vous certifiez que vous avez au moins l'âge de la majorité dans votre province / territoire et acceptez les conditions d'utilisation et la politique de confidentialité de Flatten.",
+  "submitted": "Merci beaucoup de votre exposé aujourd'hui!"
 }
