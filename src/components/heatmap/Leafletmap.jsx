@@ -271,7 +271,8 @@ class Leafletmap extends React.Component {
               bindPopupOnEachFeature,
               this.state.tab
             )}
-            <Legend />
+            <Legend colourScheme={COLOUR_SCHEME} tab={this.state.tab} />
+            <h1> hello </h1>
           </Map>
         </div>
         <div className="TabSelectors btn_group">

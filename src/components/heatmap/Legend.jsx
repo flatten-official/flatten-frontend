@@ -2,53 +2,74 @@ import { useLeaflet } from "react-leaflet";
 import L from "leaflet";
 import { useEffect } from "react";
 
-const Legend = () => {
+const CONF_SCHEME_THRESHOLDS = [5, 25, 100, 250];
+const POT_SCHEME_THRESHOLDS = [0.02, 0.05, 0.1, 0.25];
+const HIGH_RISK_SCHEME_THRESHOLDS = [0.15, 0.25, 0.35, 0.5];
+const BOTH_SCHEME_THRESHOLDS = [0.01, 0.02, 0.05, 0.1];
+const NOT_ENOUGH_GRAY = '#909090';
+
+const Legend = (props) => {
+    // pick a color threshold and legend title
+    let colorThresholds;
+    let legendTitle;
+    switch (props.tab) {
+        case "conf":
+            colorThresholds = CONF_SCHEME_THRESHOLDS;
+            legendTitle = "Number of Cases";
+            break;
+        case "pot":
+            colorThresholds = POT_SCHEME_THRESHOLDS;
+            legendTitle = "% of Responses";
+            break;
+        case "vuln":
+            colorThresholds = HIGH_RISK_SCHEME_THRESHOLDS;
+            legendTitle = "% of Responses";
+            break;
+        case "both":
+            colorThresholds = BOTH_SCHEME_THRESHOLDS;
+            legendTitle = "% of Responses";
+            break;
+    }
+
+    // colour scheme and tab are passed through props
+    let colourScheme = props.colourScheme;
+    let tab = props.tab;
+
+    let percent;
+    let not_enough_data;
+    if (tab === "conf") {
+        percent = false;
+        not_enough_data = false;
+    } else {
+        percent = true;
+        not_enough_data = true;
+    }
+
     const { map } = useLeaflet();
     console.log(map);
 
     useEffect(() => {
-        // get color depending on population density value
-        const getColor = d => {
-            return d > 1000
-                ? "#800026"
-                : d > 500
-                    ? "#BD0026"
-                    : d > 200
-                        ? "#E31A1C"
-                        : d > 100
-                            ? "#FC4E2A"
-                            : d > 50
-                                ? "#FD8D3C"
-                                : d > 20
-                                    ? "#FEB24C"
-                                    : d > 10
-                                        ? "#FED976"
-                                        : "#FFEDA0";
-        };
+        let legend_content = "<h3> " + legendTitle + " </h3>";
+        if (not_enough_data)
+            legend_content += '<i style="background:' + NOT_ENOUGH_GRAY + '"></i> ' + "Not Enough Data" + '<br>';
+
+        // Loop through our density intervals and generate a label with a coloured square for each interval.
+        for (let i = 0; i < colourScheme.length; i++) {
+            // Place square
+            legend_content += '<i style="background:' + colourScheme[i] + '"></i>';
+
+            const threshold = i === 0 ? 0 : colorThresholds[i - 1];
+
+            if (percent) legend_content += '> ' + threshold * 100 + '%<br>';
+            else legend_content += '> ' + threshold + '<br>';
+        }
 
         const legend = L.control({ position: "bottomright" });
 
         legend.onAdd = () => {
             const div = L.DomUtil.create("div", "info legend");
-            const grades = [0, 10, 20, 50, 100, 200, 500, 1000];
-            let labels = [];
-            let from;
-            let to;
 
-            for (let i = 0; i < grades.length; i++) {
-                from = grades[i];
-                to = grades[i + 1];
-
-                labels.push(
-                    '<i style="background:' +
-                    getColor(from + 1) +
-                    '"></i> ' +
-                    from +
-                    (to ? "&ndash;" + to : "+")
-                );
-            }
-
-            div.innerHTML = labels.join("<br>");
+            div.innerHTML = legend_content;
             return div;
         };
 
