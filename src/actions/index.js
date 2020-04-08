@@ -16,30 +16,8 @@ export const submitForm = (formValues) => async (dispatch) => {
 
 export const readCookie = () => async (dispatch) => {
   const { data } = await backend.get("/read-cookie");
-  if (data.exists) {
-    dispatch({
-      type: "COOKIE_EXISTS",
-      payload: true,
-    });
-  } else {
-    dispatch({ type: "NO_COOKIE", payload: false });
-  }
-};
-
-export const signIn = (response) => async (dispatch) => {
-  if (response.profileObj) {
-    backend.post("/login", { tokenId: response.tokenId });
-    localStorage.setItem("imageURL", response.profileObj.imageUrl);
-    dispatch({
-      type: "SIGN_IN",
-      payload: response.tokenId,
-    });
-  }
-};
-
-export const signOut = () => async (dispatch) => {
   dispatch({
-    type: "SIGN_OUT",
-    payload: true,
+    type: "COOKIE_EXISTS",
+    payload: data,
   });
 };

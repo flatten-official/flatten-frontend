@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { submit } from "redux-form";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import { connect } from "react-redux";
 
 import { submitForm } from "../../actions/index";
 import PrimaryButton from "../common/buttons/PrimaryButton";
@@ -13,9 +14,11 @@ import SyringeIcon from "../../assets/syringe.svg";
 import SymptomsFormEn from "./SymptomsFormEn";
 import SymptomsFormFr from "./SymptomsFormFr";
 
-const TrackYourSymptoms = ({ t }, submittedToday) => {
+const TrackYourSymptoms = ({ daily }) => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
+
+  const { t } = useTranslation("Form");
 
   const handleClick = () => {
     dispatch(submit(symptomsFormName));
@@ -43,8 +46,11 @@ const TrackYourSymptoms = ({ t }, submittedToday) => {
     default:
       component = <SymptomsFormEn onSubmit={handleSubmit} />;
   }
-
-  return !submittedToday.exists ? (
+  let status = true;
+  if (daily) {
+    status = !daily.exists;
+  }
+  return status ? (
     <div className="symptoms" id="symptoms" name="symptoms">
       <div className="symptoms__header">
         <div className="symptoms__title">
@@ -72,4 +78,12 @@ const TrackYourSymptoms = ({ t }, submittedToday) => {
   );
 };
 
-export default withTranslation("Form")(TrackYourSymptoms);
+const mapStateToProps = (state) => {
+  console.log(state);
+  if (state.cookie.status) {
+    return { daily: state.cookie.status.daily };
+  }
+  return state;
+};
+
+export default connect(mapStateToProps)(TrackYourSymptoms);
