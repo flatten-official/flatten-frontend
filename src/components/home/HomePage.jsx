@@ -104,7 +104,7 @@ const HomePage = ({ cookieStatus, t }) => {
           <br />
           <br />
           <Trans t={t} i18nKey="chunk2">
-            To do your part, <b>fill in the form once a day</b>,
+            To do your part, <b>fill in the form when your symptoms change</b>,
             <b>share with all of your friends</b>, and then tell them to
             <b>do the same</b>.
           </Trans>
