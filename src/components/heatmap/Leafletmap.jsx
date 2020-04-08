@@ -15,6 +15,7 @@ const height = "800px";
 
 // white, yellow, orange, brown, red, black
 const COLOUR_SCHEME = ["#ffffb2", "#fecc5c", "#fd8d3c", "#f03b20", "#bd0026"];
+const CONF_SCHEME_THRESHOLDS = [5, 25, 100, 250];
 const POT_SCHEME_THRESHOLDS = [0.02, 0.05, 0.1, 0.25];
 const HIGH_RISK_SCHEME_THRESHOLDS = [0.15, 0.25, 0.35, 0.5];
 const BOTH_SCHEME_THRESHOLDS = [0.01, 0.02, 0.05, 0.1];
@@ -61,6 +62,16 @@ function create_style_function(formData, colour_scheme, thresholds, data_tag) {
           colour = getColour(num_cases / num_total, colour_scheme, thresholds);
       }
     }
+    else {
+      // case if data_tag is the confirmed cases
+      const num_cases = feature.properties["CaseCount"]
+
+      if (num_cases === 0) {
+        opacity = 0;
+      } else {
+        colour = getColour(num_cases, colour_scheme, thresholds);
+      }
+    }
 
     return {
       // define the outlines of the map
@@ -92,20 +103,22 @@ function getColour(cases, colour_scheme, color_thresholds) {
 class Leafletmap extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { tab: "vuln", formData: null };
+    this.state = { tab: "vuln", formData: null, confirmed_cases: null };
     this.setTab = this.setTab.bind(this);
-    this.getData = this.getData.bind(this);
+    this.getFormData = this.getFormData.bind(this);
+    this.getConfirmedCasesData = this.getConfirmedCasesData.bind(this);
   }
 
   componentDidMount() {
-    this.getData();
+    this.getFormData();
+    this.getConfirmedCasesData();
   }
 
   setTab(tabID) {
     this.setState({ tab: tabID });
   }
 
-  getData() {
+  getFormData() {
     console.log("getting form data");
     let url =
       "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json";
@@ -118,13 +131,58 @@ class Leafletmap extends React.Component {
       .then(formData => this.setState({ formData }));
   }
 
+  getConfirmedCasesData() {
+    console.log("getting confirmed cases data");
+    let url =
+      "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson";
+    fetch(url)
+      .then(r => r.json())
+      .then(d => {
+        console.log(d);
+        return d;
+      })
+      .then(confirmed_cases => this.setState({ confirmed_cases }));
+  }
+
+  renderMap(formData, confirmed_cases, styleFunc, bindPopupOnEachFeature, tab) {
+    let data;
+    if (formData !== null && (tab === "both" || tab === "pot" || tab === "vuln")) {
+      data = convertedBoundaries;
+    }
+    else if (tab == "conf") {
+      data = confirmed_cases;
+    }
+    else {
+      return null;
+    }
+
+    return (
+      <GeoJSON
+        data={data}
+        style={styleFunc}
+        onEachFeature={bindPopupOnEachFeature}
+        key={tab}
+      />
+    );
+  }
+
   render() {
     let legend;
     let styleFunc;
     let title;
 
+    console.log(this.state.formData)
+
     if (this.state.tab === "conf") {
-      title = "Confirmed Cases";
+      //potential cases style function just for example
+      styleFunc = create_style_function(
+        this.state.formData,
+        COLOUR_SCHEME,
+        CONF_SCHEME_THRESHOLDS,
+        "conf"
+      );
+      // legend = confirmedLegend;
+    } else if (this.state.tab === "pot") {
       //potential cases style function just for example
       styleFunc = create_style_function(
         this.state.formData,
@@ -134,12 +192,18 @@ class Leafletmap extends React.Component {
       );
       // legend = confirmedLegend;
     } else if (this.state.tab === "vuln") {
-      title = "Vulnerable cases";
       styleFunc = create_style_function(
         this.state.formData,
         COLOUR_SCHEME,
         HIGH_RISK_SCHEME_THRESHOLDS,
         "risk"
+      );
+    } else if (this.state.tab === "both") {
+      styleFunc = create_style_function(
+        this.state.formData,
+        COLOUR_SCHEME,
+        HIGH_RISK_SCHEME_THRESHOLDS,
+        "both"
       );
     }
 
@@ -161,9 +225,17 @@ class Leafletmap extends React.Component {
       // `FSA data: ${JSON.stringify(fsaData)}`
 
       if (this.state.tab === "vuln") {
-        content += `Vulnerable cases: ${fsaData["pot"]}`;
+        content += `Vulnerable cases: ${fsaData["risk"]} <br/>`;
       } else if (this.state.tab === "conf") {
-        content += `Confirmed: ${fsaData["number_reports"]}`;
+        content = `${feature.properties["ENGNAME"]} <br/><br/>` + `${feature.properties["CaseCount"]} confirmed cases <br />` + `Last Updated: ${feature.properties["Last_Updated"]}`;
+      } else if (this.state.tab === "both") {
+        content += `Potential and Vulnerable: ${fsaData["both"]} <br/>`;
+      } else if (this.state.tab === "pot") {
+        content += `Potential Cases: ${fsaData["pot"]} <br/>`;
+      }
+
+      if (this.state.tab !== "conf") {
+        content += `We received ${fsaData["number_reports"]} reports total.`
       }
       layer.bindPopup(content);
     };
@@ -179,11 +251,8 @@ class Leafletmap extends React.Component {
     // unbinding all popups and recreating them with the correct data.
     return (
       <div>
-        <div className="PageTitle">
-          {title}
-
-        </div>
         <div style={{ height }}>
+          <div> {title} </div>
           <Map
             maxBounds={CANADA_BOUNDS}
             center={ONTARIO}
@@ -195,22 +264,20 @@ class Leafletmap extends React.Component {
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               minZoom={4}
             />
-            {this.state.formData !== null ? (
-              <GeoJSON
-                data={convertedBoundaries}
-                style={styleFunc}
-                onEachFeature={bindPopupOnEachFeature}
-                key={this.state.tab}
-              />
-            ) : null}
+            {this.renderMap(this.state.formData,
+              this.state.confirmed_cases,
+              styleFunc,
+              bindPopupOnEachFeature,
+              this.state.tab
+            )}
           </Map>
         </div>
         <div className="TabSelectors btn_group">
-            <PrimaryButton onClick={e => this.setTab("vuln")}>Potential and Vulnerable cases</PrimaryButton>
-            <PrimaryButton onClick={e => this.setTab("vuln")}>Potential cases</PrimaryButton>
-            <PrimaryButton onClick={e => this.setTab("vuln")}>Vulnerable individuals</PrimaryButton>
-            <PrimaryButton onClick={e => this.setTab("conf")}>Confirmed cases</PrimaryButton>
-          </div>
+          <PrimaryButton onClick={e => this.setTab("both")}>Potential and Vulnerable cases</PrimaryButton>
+          <PrimaryButton onClick={e => this.setTab("pot")}>Potential cases</PrimaryButton>
+          <PrimaryButton onClick={e => this.setTab("vuln")}>Vulnerable individuals</PrimaryButton>
+          <PrimaryButton onClick={e => this.setTab("conf")}>Confirmed cases</PrimaryButton>
+        </div>
       </div>
     );
   }
