@@ -22,13 +22,13 @@ const ReturningUserModal = ({ handleSubmit, onClose, change }) => {
 
   const handleRecaptchaExpired = () => {
     change("recaptchaVerification", false);
-    change("isFormSubmission", false);
   };
 
   const handleRecaptchaVerified = (response) => {
     console.log("hi");
     if (response) {
       change("recaptchaVerification", response);
+      change("isFormSubmission", false);
     }
   };
   return (
