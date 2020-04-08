@@ -109,6 +109,9 @@ const questions = [
 
 const SymptomsForm = ({ change, handleSubmit }) => {
   const { t } = useTranslation("Form");
+  const recaptchaLoaded = () => {
+    //console.log("Loaded");
+  };
 
   const handleRecaptchaExpired = () => {
     change("recaptchaVerification", false);
@@ -135,6 +138,7 @@ const SymptomsForm = ({ change, handleSubmit }) => {
           <Recaptcha
             sitekey={RecaptchaKey()}
             render="explicit"
+            onloadCallback={recaptchaLoaded}
             verifyCallback={handleRecaptchaVerified}
             expiredCallback={handleRecaptchaExpired}
           />
