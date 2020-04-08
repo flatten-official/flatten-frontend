@@ -34,6 +34,12 @@
       "role": "Chef d'équipe de Carte frontale et DevOps"
     },
     {
+      "name": "Ivan Nesterovic",
+      "src": "./headshots/ivan.png",
+      "link": "https://www.linkedin.com/in/ivan-nesterovic/",
+      "role": "Chef d'équipe de Données et DevOps"
+    },
+    {
       "name": "Shafi U. Bhuiyan",
       "src": "./headshots/shafi.png",
       "role": "Public Health Advisor",
@@ -182,13 +188,6 @@
       "name": "Maanav Dalal",
       "src": "./headshots/maanav.png",
       "link": "https://www.linkedin.com/in/maanavdalal/",
-      "role": "Développeur de logiciels"
-    },
-
-    {
-      "name": "Ivan Nesterovic",
-      "src": "./headshots/ivan.png",
-      "link": "https://www.linkedin.com/in/ivan-nesterovic/",
       "role": "Développeur de logiciels"
     },
     {
