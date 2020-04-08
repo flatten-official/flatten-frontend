@@ -3,7 +3,12 @@
 }
 
 .returning-user__title {
+  padding-top: 32px;
   padding-bottom: 32px;
+}
+
+.returning-user__input {
+  width: 250px;
 }
 
 .returning-user__submit {
@@ -12,5 +17,5 @@
 
 .returning-user__submit-button {
   height: 50px;
-  width: 100px;
+  width: 200px;
 }

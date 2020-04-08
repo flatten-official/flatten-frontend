@@ -1,6 +1,11 @@
 import React from "react";
 
-const TextInput = ({ label, input, meta, ...props }) => {
+const TextInput = ({
+  label,
+  input,
+  meta,
+  ...props
+}) => {
   return (
     <div className="text-input">
       <div className="text-input__container">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { reduxForm, Field } from "redux-form";
 import Modal from "../common/modal/Modal";
 import TextInput from "../common/fields/TextInput";
@@ -16,25 +16,36 @@ const emailValidation = [
 ];
 
 const ReturningUserModal = ({ handleSubmit, onClose }) => {
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const handleFormSubmit = values => {
+    handleSubmit(values);
+    setFormSubmitted(true);
+  };
+
   return (
     <Modal className="returning-user" onClose={onClose}>
       <div className="returning-user__title title">
-        Returning user?
+        {!formSubmitted ? "Returning user?" : "Please check your email for a verification code."} 
       </div>
-      <div className="returning-user__body body">
-        <form onSubmit={handleSubmit}>
-          <Field
-            name="email"
-            label="Email"
-            component={TextInput}
-          />
-          <div className="returning-user__submit">
-            <PrimaryButton className="returning-user__submit-button">
-              Sign In
-            </PrimaryButton>
-          </div>
-        </form>
-      </div>
+      {!formSubmitted && (
+        <div className="returning-user__body body">
+          <form onSubmit={handleFormSubmit}>
+            <Field
+              name="email"
+              label="Email"
+              className= "returning-user__input"
+              component={TextInput}
+            />
+            <div className="returning-user__submit">
+              <PrimaryButton className="returning-user__submit-button">
+                Sign In
+              </PrimaryButton>
+            </div>
+          </form>
+        </div>
+      )}
+      
     </Modal>
   );
 };
