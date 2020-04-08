@@ -8,11 +8,21 @@ input[type="text"] {
 }
 
 .text-input {
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .text-input__container {
-  display: flex;
   text-align: left;
-  padding-left: 32px;
+}
+
+.text-input__label {
+  padding: 8px;
+  padding-left: 0px;
+}
+
+.text-input__error {
+  padding: 3px;
 }
