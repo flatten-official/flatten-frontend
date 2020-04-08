@@ -28,6 +28,7 @@ i18n
     detection: {
       lookupQuerystring: "lang",
     },
+    fallbackLng: "en",
     resources: {
       en: {
         HomePage: EnHomePage,
