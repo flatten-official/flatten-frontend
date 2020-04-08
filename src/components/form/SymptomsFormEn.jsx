@@ -1,6 +1,7 @@
 import React from "react";
 import { reduxForm, Field } from "redux-form";
 import Recaptcha from "react-recaptcha";
+import { useTranslation } from "react-i18next";
 
 import RadioButtonGroup from "../common/fields/RadioButtonGroup";
 import Checkbox from "../common/fields/Checkbox";
@@ -13,7 +14,7 @@ import {
   SEX_OPTIONS,
   SYMPTOM_OPTIONS,
   YES_NO_OPTIONS,
-} from "./SymptomsFormUtils";
+} from "./SymptomsFormUtilsEn";
 import {
   validate,
   isValidPostalCode,
@@ -107,6 +108,11 @@ const questions = [
 ];
 
 const SymptomsForm = ({ change, handleSubmit }) => {
+  const { t } = useTranslation("Form");
+  const recaptchaLoaded = () => {
+    //console.log("Loaded");
+  };
+
   const handleRecaptchaExpired = () => {
     change("recaptchaVerification", false);
   };
@@ -114,6 +120,7 @@ const SymptomsForm = ({ change, handleSubmit }) => {
   const handleRecaptchaVerified = (response) => {
     if (response) {
       change("recaptchaVerification", response);
+      change("isFormSubmission", true);
     }
   };
 
@@ -128,28 +135,24 @@ const SymptomsForm = ({ change, handleSubmit }) => {
             </div>
           </div>
         ))}
-        <div className="symptoms-form__recaptcha">
-          <Recaptcha
-            sitekey={RecaptchaKey()}
-            render="explicit"
-            verifyCallback={handleRecaptchaVerified}
-            expiredCallback={handleRecaptchaExpired}
-          />
-          <Field
-            component={TextInput}
-            name="recaptchaVerification"
-            type="hidden"
-          />
-        </div>
+        <Recaptcha
+          sitekey={RecaptchaKey()}
+          render="explicit"
+          onloadCallback={recaptchaLoaded}
+          verifyCallback={handleRecaptchaVerified}
+          expiredCallback={handleRecaptchaExpired}
+        />
+        <Field
+          component={TextInput}
+          name="recaptchaVerification"
+          type="hidden"
+        />
         <div className="symptoms-form__acknowledgement">
           <Field
             name="acknowledgement"
             label={
               <p className="body">
-                <i>
-                  By submitting this form, you certify that you are 18+ and
-                  agree to our Terms of Service and Privacy Policy.
-                </i>
+                <i>{t("verify")}</i>
               </p>
             }
             component={Checkbox}

@@ -1,18 +1,16 @@
-.supporters__title {
+.supporters__header {
   width: 60%;
   text-align: center;
   margin: 40px auto;
-}
-
-.supporters__description {
-  margin: 15px auto;
-  width: 80%;
-}
-
-.supporters__contact {
+  margin-top: 150px;
   text-align: center;
-  margin: 20px auto;
-  width: 60%;
+}
+
+.supporters__icon {
+  display: block;
+  width: 100px;
+  height: 150px;
+  margin: 0 auto;
 }
 
 .supporters__card {
@@ -32,11 +30,6 @@
 }
 
 @media only screen and (min-width: 1200px) {
-  .supporters__description {
-    margin: 15px auto;
-    width: 60%;
-  }
-
   .supporters__card {
     text-align: center;
     width: 30%;
