@@ -144,6 +144,18 @@ class Leafletmap extends React.Component {
       .then(confirmed_cases => this.setState({ confirmed_cases }));
   }
 
+  getHospitalData() {
+    console.log("getting hospital data");
+    let url = 'https://opendata.arcgis.com/datasets/1973e081296445f4b85bab94f99d2390_0.geojson';
+    fetch(url)
+      .then(r => r.json())
+      .then(d => {
+        console.log(d);
+        return d;
+      })
+      .then(hospital_data => this.setState({ hospital_data }));
+  }
+
   renderMap(formData, confirmed_cases, styleFunc, bindPopupOnEachFeature, tab) {
     let data;
     if (formData !== null && (tab === "both" || tab === "pot" || tab === "vuln")) {
@@ -202,7 +214,7 @@ class Leafletmap extends React.Component {
       styleFunc = create_style_function(
         this.state.formData,
         COLOUR_SCHEME,
-        HIGH_RISK_SCHEME_THRESHOLDS,
+        BOTH_SCHEME_THRESHOLDS,
         "both"
       );
     }
@@ -221,11 +233,11 @@ class Leafletmap extends React.Component {
         fsaData = {}; // instead of an error, it will say 'undefined' in the popup
       }
 
-      let content = `FSA ID: ${fsaID} <br/>`;
+      let content = `<b>${fsaID}</b><br/>`;
       // `FSA data: ${JSON.stringify(fsaData)}`
 
       if (this.state.tab === "vuln") {
-        content += `Vulnerable cases: ${fsaData["risk"]} <br/>`;
+        content += `Vulnerable Cases: ${fsaData["risk"]} <br/>`;
       } else if (this.state.tab === "conf") {
         content = `${feature.properties["ENGNAME"]} <br/><br/>` + `${feature.properties["CaseCount"]} confirmed cases <br />` + `Last Updated: ${feature.properties["Last_Updated"]}`;
       } else if (this.state.tab === "both") {
@@ -273,10 +285,10 @@ class Leafletmap extends React.Component {
           </Map>
         </div>
         <div className="TabSelectors btn_group">
-          <PrimaryButton onClick={e => this.setTab("both")}>Potential and Vulnerable cases</PrimaryButton>
-          <PrimaryButton onClick={e => this.setTab("pot")}>Potential cases</PrimaryButton>
-          <PrimaryButton onClick={e => this.setTab("vuln")}>Vulnerable individuals</PrimaryButton>
-          <PrimaryButton onClick={e => this.setTab("conf")}>Confirmed cases</PrimaryButton>
+          <PrimaryButton onClick={e => this.setTab("both")}>Potential and Vulnerable Cases</PrimaryButton>
+          <PrimaryButton onClick={e => this.setTab("pot")}>Potential Cases</PrimaryButton>
+          <PrimaryButton onClick={e => this.setTab("vuln")}>Vulnerable Individuals</PrimaryButton>
+          <PrimaryButton onClick={e => this.setTab("conf")}>Confirmed Cases</PrimaryButton>
         </div>
       </div>
     );
