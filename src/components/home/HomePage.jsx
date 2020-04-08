@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Trans, withTranslation } from "react-i18next";
+
+import { submitForm } from "../../actions/index";
+import ReturningUserModal from "./ReturningUserModal";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 import logo from "../../assets/logo-black.png";
-import { Trans, withTranslation } from "react-i18next";
+
 
 import { animateScroll as scroll, scroller } from "react-scroll";
 
@@ -10,10 +15,19 @@ const scrollToForm = () => {
     duration: 800,
     delay: 0,
     smooth: "easeInOutQuad",
+    offset: -70
   });
 };
 
 const HomePage = ({ cookieStatus, t }) => {
+  const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleReturningUserSubmit = async (values) => {
+    await dispatch(submitForm(values));
+    setShowModal(false);
+  };
+
   return cookieStatus !== "v" ? (
     <div className="home">
       <div className="home__content">
@@ -32,16 +46,25 @@ const HomePage = ({ cookieStatus, t }) => {
             do your part by <b>filling out our form once a day</b>.
           </Trans>
         </div>
-        <PrimaryButton className="home__button body">
-          {t("button1")}
+        <PrimaryButton
+          className="home__button body"
+          onClick={() => setShowModal(true)}
+        >
+          {t("returningUserButton")}
         </PrimaryButton>
         <br />
         {!cookieStatus && (
           <PrimaryButton className="home__button body" onClick={scrollToForm}>
-            {t("button2")}
+            {t("newUserButton")}
           </PrimaryButton>
         )}
       </div>
+      {showModal && (
+        <ReturningUserModal
+          onClose={() => setShowModal(false)}
+          onSubmit={handleReturningUserSubmit}
+        />
+      )}
     </div>
   ) : null;
 };
