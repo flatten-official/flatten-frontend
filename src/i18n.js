@@ -9,6 +9,7 @@ import EnHeatmap from "./translations/en/Heatmap.json";
 import EnAboutUs from "./translations/en/AboutUs.json";
 import EnEsriGsiMap from "./translations/en/EsriGsiMap.json";
 import EnFooter from "./translations/en/Footer.json";
+import EnLeafletmap from "./translations/en/Leafletmap.json";
 import EnInfo from "./translations/en/Info.json";
 import EnForm from "./translations/en/Form.json";
 
@@ -19,6 +20,7 @@ import FrHeatmap from "./translations/fr/Heatmap.json";
 import FrAboutUs from "./translations/fr/AboutUs.json";
 import FrEsriGsiMap from "./translations/fr/EsriGsiMap.json";
 import FrFooter from "./translations/fr/Footer.json";
+import FrLeafletmap from "./translations/fr/Leafletmap.json";
 import FrInfo from "./translations/fr/Info.json";
 import FrForm from "./translations/fr/Form.json";
 i18n
@@ -26,7 +28,7 @@ i18n
   .use(initReactI18next)
   .init({
     detection: {
-      lookupQuerystring: "lang",
+      lookupQuerystring: "lang"
     },
     fallbackLng: "en",
     resources: {
@@ -38,8 +40,9 @@ i18n
         AboutUs: EnAboutUs,
         EsriGsiMap: EnEsriGsiMap,
         Footer: EnFooter,
+        Leafletmap: EnLeafletmap,
         Info: EnInfo,
-        Form: EnForm,
+        Form: EnForm
       },
       fr: {
         HomePage: FrHomePage,
@@ -49,10 +52,11 @@ i18n
         AboutUs: FrAboutUs,
         EsriGsiMap: FrEsriGsiMap,
         Footer: FrFooter,
+        Leafletmap: FrLeafletmap,
         Info: FrInfo,
-        Form: FrForm,
-      },
-    },
+        Form: FrForm
+      }
+    }
   });
 
 export default i18n;

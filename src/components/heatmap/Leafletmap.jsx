@@ -1,7 +1,15 @@
 import React from "react";
 import { render } from "react-dom";
+import { withTranslation } from "react-i18next";
 import PrimaryButton from "../common/buttons/PrimaryButton";
-import { Map, Marker, Popup, TileLayer, GeoJSON, LayersControl } from "react-leaflet";
+import {
+  Map,
+  Marker,
+  Popup,
+  TileLayer,
+  GeoJSON,
+  LayersControl
+} from "react-leaflet";
 import convertedBoundaries from "./converted_boundaries.js";
 import Legend from "./Legend";
 
@@ -62,10 +70,9 @@ function create_style_function(formData, colour_scheme, thresholds, data_tag) {
         } else
           colour = getColour(num_cases / num_total, colour_scheme, thresholds);
       }
-    }
-    else {
+    } else {
       // case if data_tag is the confirmed cases
-      const num_cases = feature.properties["CaseCount"]
+      const num_cases = feature.properties["CaseCount"];
 
       if (num_cases === 0) {
         opacity = 0;
@@ -147,7 +154,8 @@ class Leafletmap extends React.Component {
 
   getHospitalData() {
     // console.log("getting hospital data");
-    let url = 'https://opendata.arcgis.com/datasets/1973e081296445f4b85bab94f99d2390_0.geojson';
+    let url =
+      "https://opendata.arcgis.com/datasets/1973e081296445f4b85bab94f99d2390_0.geojson";
     fetch(url)
       .then(r => r.json())
       .then(d => {
@@ -159,13 +167,14 @@ class Leafletmap extends React.Component {
 
   renderMap(formData, confirmed_cases, styleFunc, bindPopupOnEachFeature, tab) {
     let data;
-    if (formData !== null && (tab === "both" || tab === "pot" || tab === "vuln")) {
+    if (
+      formData !== null &&
+      (tab === "both" || tab === "pot" || tab === "vuln")
+    ) {
       data = convertedBoundaries;
-    }
-    else if (tab == "conf") {
+    } else if (tab == "conf") {
       data = confirmed_cases;
-    }
-    else {
+    } else {
       return null;
     }
 
@@ -180,6 +189,7 @@ class Leafletmap extends React.Component {
   }
 
   render() {
+    let { t } = this.props;
     let legend;
     let styleFunc;
     let title;
@@ -238,15 +248,17 @@ class Leafletmap extends React.Component {
       if (this.state.tab === "vuln") {
         content += `Vulnerable Cases: ${fsaData["risk"]} <br/>`;
       } else if (this.state.tab === "conf") {
-        content = `${feature.properties["ENGNAME"]} <br/><br/>` + `${feature.properties["CaseCount"]} confirmed cases <br />` + `Last Updated: ${feature.properties["Last_Updated"]}`;
+        content =
+          `${feature.properties["ENGNAME"]} <br/><br/>` +
+          `${feature.properties["CaseCount"]} confirmed cases <br />` +
+          `Last Updated: ${feature.properties["Last_Updated"]}`;
       } else if (this.state.tab === "both") {
         content += `Potential and Vulnerable: ${fsaData["both"]} <br/>`;
       } else if (this.state.tab === "pot") {
         content += `Potential Cases: ${fsaData["pot"]} <br/>`;
       }
-
       if (this.state.tab !== "conf") {
-        content += `We received ${fsaData["number_reports"]} reports total.`
+        content += `We received ${fsaData["number_reports"]} reports total.`;
       }
       layer.bindPopup(content);
     };
@@ -275,7 +287,8 @@ class Leafletmap extends React.Component {
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               minZoom={4}
             />
-            {this.renderMap(this.state.formData,
+            {this.renderMap(
+              this.state.formData,
               this.state.confirmed_cases,
               styleFunc,
               bindPopupOnEachFeature,
@@ -286,14 +299,22 @@ class Leafletmap extends React.Component {
           </Map>
         </div>
         <div className="TabSelectors btn_group">
-          <PrimaryButton onClick={e => this.setTab("both")}>Potential and Vulnerable Cases</PrimaryButton>
-          <PrimaryButton onClick={e => this.setTab("pot")}>Potential Cases</PrimaryButton>
-          <PrimaryButton onClick={e => this.setTab("vuln")}>Vulnerable Individuals</PrimaryButton>
-          <PrimaryButton onClick={e => this.setTab("conf")}>Confirmed Cases</PrimaryButton>
+          <PrimaryButton onClick={e => this.setTab("both")}>
+            Potential and Vulnerable Cases
+          </PrimaryButton>
+          <PrimaryButton onClick={e => this.setTab("pot")}>
+            Potential Cases
+          </PrimaryButton>
+          <PrimaryButton onClick={e => this.setTab("vuln")}>
+            Vulnerable Individuals
+          </PrimaryButton>
+          <PrimaryButton onClick={e => this.setTab("conf")}>
+            Confirmed Cases
+          </PrimaryButton>
         </div>
       </div>
     );
   }
 }
 
-export default Leafletmap;
+export default withTranslation("Leafletmap")(Leafletmap);
