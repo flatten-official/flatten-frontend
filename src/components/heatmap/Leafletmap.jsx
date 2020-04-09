@@ -234,31 +234,41 @@ class Leafletmap extends React.Component {
     // use the FSA polygon FSA ID to get the FSA data from `formData`
     let bindPopupOnEachFeature = (feature, layer) => {
       let fsaID = feature.properties["CFSAUID"];
-      if (!this.state.formData.fsa[fsaID]) {
-        console.log("no data for fsa ID", fsaID);
-      }
       let fsaData = this.state.formData.fsa[fsaID];
       if (!fsaData) {
+        console.log("no data for fsa ID", fsaID);
         fsaData = {}; // instead of an error, it will say 'undefined' in the popup
       }
 
-      let content = `<b>${fsaID}</b><br/>`;
-      // `FSA data: ${JSON.stringify(fsaData)}`
+      let content;
 
-      if (this.state.tab === "vuln") {
-        content += `Vulnerable Cases: ${fsaData["risk"]} <br/>`;
-      } else if (this.state.tab === "conf") {
+      if (this.state.tab === "conf") {
         content =
           `${feature.properties["ENGNAME"]} <br/><br/>` +
-          `${feature.properties["CaseCount"]} confirmed cases <br />` +
-          `Last Updated: ${feature.properties["Last_Updated"]}`;
-      } else if (this.state.tab === "both") {
-        content += `Potential and Vulnerable: ${fsaData["both"]} <br/>`;
-      } else if (this.state.tab === "pot") {
-        content += `Potential Cases: ${fsaData["pot"]} <br/>`;
-      }
-      if (this.state.tab !== "conf") {
-        content += `We received ${fsaData["number_reports"]} reports total.`;
+          `${feature.properties["CaseCount"]} ${t("confirmed_cases")} <br />` +
+          `${t("last_updated")}: ${feature.properties["Last_Updated"]}`;
+      } else {
+        let XXX;
+        let YYY = fsaData["number_reports"];
+        let one = YYY === one;
+
+        if (this.state.tab === "vuln") {
+          XXX = fsaData["risk"];
+          if (one) content = t("vul_case_popup_1");
+          else content = t("vul_case_popup");
+        } else if (this.state.tab === "both") {
+          XXX = fsaData["both"];
+          if (one) content = t("pot_vul_popup_1");
+          else content = t("pot_vul_popup");
+        } else if (this.state.tab === "pot") {
+          XXX = fsaData["pot"];
+          if (one) content = t("pot_case_popup_1");
+          else content = t("pot_case_popup");
+        }
+        content = content
+          .replace("FSA", fsaID)
+          .replace("XXX", XXX)
+          .replace("YYY", YYY);
       }
       layer.bindPopup(content);
     };
