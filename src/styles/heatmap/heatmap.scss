@@ -27,17 +27,9 @@
   overflow: hidden;
   position: relative;
   margin-top: 1%;
+  width: 80%;
+  margin: auto;
   display: grid;
-  grid-template-columns: 70% 30%;
-}
-
-.test{
-  height: 200px;
-  background-color: $navy-blue;
-  margin: 5%;
-  padding: 5%;
-  border-radius: 8px;
-  color: white;
 }
 
 .heatmap__analytics {

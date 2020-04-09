@@ -87,16 +87,6 @@ class HeatMap extends React.Component {
 
         <div className="heatmap__container" >
           <Leafletmap></Leafletmap>
-          <div className="Info Components">
-            <div className="test">
-              Potential cases Among Vulnerable Individuals
-
-            </div>
-            <div className="test">
-              Potential cases Among Non-Vulnerable Individuals
-            </div>
-          </div>
-
         </div>
 
       </div>
