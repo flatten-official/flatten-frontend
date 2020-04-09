@@ -1,6 +1,7 @@
 import { useLeaflet } from "react-leaflet";
 import L from "leaflet";
 import { useEffect } from "react";
+import { withTranslation } from "react-i18next";
 
 const CONF_SCHEME_THRESHOLDS = [5, 25, 100, 250];
 const POT_SCHEME_THRESHOLDS = [0.02, 0.05, 0.1, 0.25];
@@ -10,24 +11,25 @@ const NOT_ENOUGH_GRAY = '#909090';
 
 const Legend = (props) => {
     // pick a color threshold and legend title
+    let { t } = props
     let colorThresholds;
     let legendTitle;
     switch (props.tab) {
         case "conf":
             colorThresholds = CONF_SCHEME_THRESHOLDS;
-            legendTitle = "Number of Cases";
+            legendTitle = t('number_of_cases');
             break;
         case "pot":
             colorThresholds = POT_SCHEME_THRESHOLDS;
-            legendTitle = "% of Responses";
+            legendTitle = t("pct_responses");
             break;
         case "vuln":
             colorThresholds = HIGH_RISK_SCHEME_THRESHOLDS;
-            legendTitle = "% of Responses";
+            legendTitle = t("pct_responses");
             break;
         case "both":
             colorThresholds = BOTH_SCHEME_THRESHOLDS;
-            legendTitle = "% of Responses";
+            legendTitle = t("pct_responses");
             break;
     }
 
@@ -48,9 +50,10 @@ const Legend = (props) => {
     const { map } = useLeaflet();
 
     useEffect(() => {
-        let legend_content = "<h3> " + legendTitle + " </h3>";
+        let legend_content = "<h4> " + legendTitle + " </h4>";
         if (not_enough_data)
-            legend_content += '<i style="background:' + NOT_ENOUGH_GRAY + '"></i> ' + "Not Enough Data" + '<br>';
+            legend_content += '<i style="background:' + NOT_ENOUGH_GRAY + '"></i> '
+                + t("not_enough_data_legend") + '<br>';
 
         // Loop through our density intervals and generate a label with a coloured square for each interval.
         for (let i = 0; i < colourScheme.length; i++) {
@@ -81,4 +84,4 @@ const Legend = (props) => {
     return null;
 };
 
-export default Legend;
+export default withTranslation('Leafletmap')(Legend);

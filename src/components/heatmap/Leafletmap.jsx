@@ -305,21 +305,20 @@ class Leafletmap extends React.Component {
               this.state.tab
             )}
             <Legend colourScheme={COLOUR_SCHEME} tab={this.state.tab} />
-            <h1> hello </h1>
           </Map>
         </div>
         <div className="TabSelectors btn_group">
           <PrimaryButton onClick={e => this.setTab("both")}>
-            Potential and Vulnerable Cases
+            {t("pot_vul_button")}
           </PrimaryButton>
           <PrimaryButton onClick={e => this.setTab("pot")}>
-            Potential Cases
+            {t("pot_button")}
           </PrimaryButton>
           <PrimaryButton onClick={e => this.setTab("vuln")}>
-            Vulnerable Individuals
+            {t("vul_button")}
           </PrimaryButton>
           <PrimaryButton onClick={e => this.setTab("conf")}>
-            Confirmed Cases
+            {t("cul_button")}
           </PrimaryButton>
         </div>
       </div>

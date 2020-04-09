@@ -44,5 +44,7 @@
   "pot_vul_button": "Individus vulnérables symptomatiques",
   "pot_vul_popup": "<h3>FSA</h3><p>Nous avons reçu XXX rapports de individus vulnérables qui sont également des cas potentiels.</p><p>Nous avons reçus YYY rapports en tout.</p>",
   "pot_vul_popup_1": "<h3>FSA</h3><p>Nous avons reçu 1 rapport d'une personne vulnérable qui est également un cas potentiel.</p><p>Nous avons reçus YYY rapports en tout.</p>",
-  "not_enough_data_legend": "Pas assez de données"
+  "not_enough_data_legend": "Pas assez de données",
+  "number_of_cases": "Nombre de cas",
+  "pct_responses": "% de réponses"
 }
