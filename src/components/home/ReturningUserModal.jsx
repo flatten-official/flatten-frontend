@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { reduxForm, Field } from "redux-form";
-import Recaptcha from "react-recaptcha";
+import RecaptchaField from "../common/fields/Recaptcha/RecaptchaField";
 
 import Modal from "../common/modal/Modal";
 import TextInput from "../common/fields/TextInput";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 import { validate, isValidEmail } from "../../utils/formValidation";
-import { RecaptchaKey } from "../form/Recaptcha.js";
-
+import i18next from "i18next";
 export const returningUserFormName = "returningUserForm";
 
 const emailValidation = [
@@ -16,6 +15,7 @@ const emailValidation = [
 ];
 
 const ReturningUserModal = ({ handleSubmit, onClose, change }) => {
+  const lang = i18next.language;
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleFormSubmit = (values) => {
@@ -54,12 +54,11 @@ const ReturningUserModal = ({ handleSubmit, onClose, change }) => {
               className="returning-user__input"
               component={TextInput}
             />
-            <Recaptcha
-              sitekey={RecaptchaKey()}
-              render="explicit"
-              onloadCallback={recaptchaLoaded}
-              verifyCallback={handleRecaptchaVerified}
-              expiredCallback={handleRecaptchaExpired}
+            <RecaptchaField
+              lang={lang}
+              recaptchaLoaded={recaptchaLoaded}
+              recaptchaExpired={handleRecaptchaVerified}
+              verifyCallback={handleRecaptchaExpired}
             />
             <Field
               component={TextInput}
