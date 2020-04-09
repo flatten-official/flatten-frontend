@@ -15,15 +15,20 @@ const Navbar = ({ t }) => {
 
   const i18nlang = i18next.language;
   let toggle;
+  let current;
   switch (i18nlang) {
     case "en":
       toggle = "fr";
+      current = "en"
+      
       break;
     case "fr":
       toggle = "en";
+      current = "fr"
       break;
     default:
       toggle = "fr";
+      current = "en"
   }
   let linkLang = `/?lang=${toggle}`;
 
@@ -105,14 +110,16 @@ const Navbar = ({ t }) => {
     <nav className="nav">
       <div className="nav__content body">
         <li className="nav__item navbar__logo-container">{logoLink}</li>
-        <li className="nav__item nav__optional">{homeLink}</li>
-        <li className="nav__item">{symptomsLink}</li>
-        <li className="nav__item">{heatmapLink}</li>
-        <li className="nav__info">
-          <NavLink className="navbar__covid" exact to="/info">
+        <li className={`nav__item_en nav__optional`}>{homeLink}</li>
+        <li className={`nav__item_${current}`}>{symptomsLink}</li>
+        <li className={`nav__item_${current}`}>{heatmapLink}</li>
+        <li className={`nav__info_${current}`}>
+          <NavLink className={`navbar__covid_${current}`} exact to="/info">
             {t("info")}
           </NavLink>
-          <a href={linkLang} className="navbar__lang">
+        </li>
+        <li className="navbar__lang">
+          <a className={`navbar__covid_${current} nav__a`} href={linkLang}>
             {toggle}
           </a>
         </li>

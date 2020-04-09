@@ -20,10 +20,23 @@
   }
 }
 
-.nav__item {
+.nav__item_en {
   font-size: 16px;
   display: inline;
   margin-left: 2rem;
+  color: $dark-grey;
+  &:hover {
+    color: $black-main;
+    cursor: pointer;
+  }
+}
+
+.nav__item_fr {
+  font-size: 16px;
+  display: inline;
+  margin-left: 2rem;
+  text-align: center;
+  width: 230px;
   color: $dark-grey;
   &:hover {
     color: $black-main;
@@ -40,53 +53,90 @@
   }
 }
 
-.nav__info {
+.nav__info_en {
   position: absolute;
-  right: 2%;
+  right: 80px;
+  display: flex;
+}
+
+.nav__info_fr {
+  text-align: center;
+  width: 80px;
+  position: absolute;
+  right: 110px;
   display: flex;
 }
 
 .navbar__logo {
   width: 120px;
+  padding-left: 10px;
 }
 
 .navbar__lang {
-  margin-left: 20px;
+  position: absolute;
+  right: 40px;
+  display: flex;
+}
+
+.navbar__logo-container {
+  list-style-type: none;
+}
+
+.navbar__covid_en {
+  vertical-align: middle;
+  color: $navy-blue;
+  text-decoration: none;
+  font-size: 16px;
+}
+.navbar__covid_fr {
+  vertical-align: middle;
   color: $navy-blue;
   text-decoration: none;
   font-size: 16px;
 }
 
-.navbar__covid {
-  color: $navy-blue;
-  text-decoration: none;
-  font-size: 16px;
+@media screen and (max-width: 1023px) {
+  .nav__item_fr {
+    vertical-align: middle;
+    display: inline;
+    width: 120px;
+  }
 }
 
 @media screen and (max-width: 860px) {
-  .nav__item {
+  .nav__item_en {
     text-align: center;
     vertical-align: middle;
     display: inline;
     width: 120px;
   }
-  .nav__info {
-    text-align: center;
-    display: inline;
-    width: 100px;
-  }
+
   .nav__optional {
     display: none;
   }
-  .navbar__covid {
+  .navbar__covid_en {
     color: $navy-blue;
     text-decoration: none;
     font-size: 16px;
     line-height: normal;
   }
+  .nav__info_en {
+    text-align: center;
+    display: inline;
+    width: 80px;
+    position: absolute;
+    right: 100px;
+    display: flex;
+  }
+  
+  .navbar__lang {
+    position: absolute;
+    right: 30px;
+    display: flex;
+  }
 }
 
-@media screen and (max-width: 571px) {
+@media screen and (max-width: 700px) {
   .nav__content {
     margin: 0;
     padding: 0;
@@ -94,7 +144,14 @@
     align-items: center;
     height: 100%;
   }
-  .nav__item {
+  .nav__item_en {
+    margin-left: 5px;
+    margin-right: 5px;
+    color: $dark-grey;
+    font-size: 10px;
+    width: 85px;
+  }
+  .nav__item_fr {
     margin-left: 5px;
     margin-right: 5px;
     color: $dark-grey;
@@ -107,17 +164,55 @@
   .navbar__logo-container {
     width: 70px;
   }
-  .navbar__covid {
+  .navbar__covid_en {
     font-size: 10px;
+  }
+  .navbar__covid_fr {
+    font-size: 10px;
+  }
+  .nav__info_en {
+    right: 50px;
+  }
+  .nav__info_fr {
+    width: 120px;
+    right: 60px
   }
 }
 
-@media screen and (max-width: 350px) {
-  .nav__item {
-    margin-left: 0px;
-    margin-right: 0px;
+@media screen and (max-width: 420px) {
+  .nav__item_fr {
+    font-size: 8px;
   }
-  .nav__info {
+  .nav__info_en {
+    right: 32px;
+  }
+  .navbar__lang {
+    right: 15px;
+  }
+  .navbar__covid_fr {
+    font-size: 8px;
+  }
+  .nav__info_fr {
     width: 80px;
+    right: 8%;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .nav__item_en {
+    margin-left: 3px;
+    margin-right: 0px;
+    width: 70px;
+  }
+  .nav__info_en {
+    width: 80px;
+  }
+  .nav__info_fr {
+    width: 80px;
+    right: 35px;
+  }
+
+  .nav__item_fr {
+    width: 50px;
   }
 }
