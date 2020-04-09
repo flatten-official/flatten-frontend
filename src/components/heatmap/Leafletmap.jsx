@@ -5,7 +5,7 @@ import { Map, Marker, Popup, TileLayer, GeoJSON, LayersControl } from "react-lea
 import convertedBoundaries from "./converted_boundaries.js";
 import Legend from "./Legend";
 
-console.log("converted", convertedBoundaries);
+// console.log("converted", convertedBoundaries);
 
 // stays in Canada
 const CANADA_BOUNDS = [[38, -150], [87, -45]];
@@ -120,38 +120,38 @@ class Leafletmap extends React.Component {
   }
 
   getFormData() {
-    console.log("getting form data");
+    // console.log("getting form data");
     let url =
       "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json";
     fetch(url)
       .then(r => r.json())
       .then(d => {
-        console.log(d);
+        // console.log(d);
         return d;
       })
       .then(formData => this.setState({ formData }));
   }
 
   getConfirmedCasesData() {
-    console.log("getting confirmed cases data");
+    // console.log("getting confirmed cases data");
     let url =
       "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson";
     fetch(url)
       .then(r => r.json())
       .then(d => {
-        console.log(d);
+        // console.log(d);
         return d;
       })
       .then(confirmed_cases => this.setState({ confirmed_cases }));
   }
 
   getHospitalData() {
-    console.log("getting hospital data");
+    // console.log("getting hospital data");
     let url = 'https://opendata.arcgis.com/datasets/1973e081296445f4b85bab94f99d2390_0.geojson';
     fetch(url)
       .then(r => r.json())
       .then(d => {
-        console.log(d);
+        // console.log(d);
         return d;
       })
       .then(hospital_data => this.setState({ hospital_data }));
@@ -183,8 +183,6 @@ class Leafletmap extends React.Component {
     let legend;
     let styleFunc;
     let title;
-
-    console.log(this.state.formData)
 
     if (this.state.tab === "conf") {
       //potential cases style function just for example
