@@ -123,6 +123,7 @@ const SymptomsForm = (props) => {
   const verifyCallback = (response) => {
     if (response) {
       props.change("recaptchaVerification", response);
+      props.change("isFormSubmission", true);
     }
   };
   return (
@@ -152,6 +153,7 @@ const SymptomsForm = (props) => {
           name="recaptchaVerification"
           type="hidden"
         />
+        <Field component={TextInput} name="isFormSubmission" type="hidden" />
         <div className="symptoms-form__acknowledgement">
           <Field
             name="acknowledgement"

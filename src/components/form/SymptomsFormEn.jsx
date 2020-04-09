@@ -109,6 +109,9 @@ const questions = [
 
 const SymptomsForm = ({ change, handleSubmit }) => {
   const { t } = useTranslation("Form");
+  const recaptchaLoaded = () => {
+    //console.log("Loaded");
+  };
 
   const handleRecaptchaExpired = () => {
     change("recaptchaVerification", false);
@@ -117,6 +120,7 @@ const SymptomsForm = ({ change, handleSubmit }) => {
   const handleRecaptchaVerified = (response) => {
     if (response) {
       change("recaptchaVerification", response);
+      change("isFormSubmission", true);
     }
   };
 
@@ -131,19 +135,18 @@ const SymptomsForm = ({ change, handleSubmit }) => {
             </div>
           </div>
         ))}
-        <div className="symptoms-form__recaptcha">
-          <Recaptcha
-            sitekey={RecaptchaKey()}
-            render="explicit"
-            verifyCallback={handleRecaptchaVerified}
-            expiredCallback={handleRecaptchaExpired}
-          />
-          <Field
-            component={TextInput}
-            name="recaptchaVerification"
-            type="hidden"
-          />
-        </div>
+        <Recaptcha
+          sitekey={RecaptchaKey()}
+          render="explicit"
+          onloadCallback={recaptchaLoaded}
+          verifyCallback={handleRecaptchaVerified}
+          expiredCallback={handleRecaptchaExpired}
+        />
+        <Field
+          component={TextInput}
+          name="recaptchaVerification"
+          type="hidden"
+        />
         <div className="symptoms-form__acknowledgement">
           <Field
             name="acknowledgement"

@@ -34,6 +34,12 @@
       "role": "Chef d'équipe de Carte frontale et DevOps"
     },
     {
+      "name": "Ivan Nesterovic",
+      "src": "./headshots/ivan.png",
+      "link": "https://www.linkedin.com/in/ivan-nesterovic/",
+      "role": "Chef d'équipe de Données et DevOps"
+    },
+    {
       "name": "Shafi U. Bhuiyan",
       "src": "./headshots/shafi.png",
       "role": "Public Health Advisor",
@@ -105,12 +111,7 @@
       "link": "https://www.linkedin.com/in/samuelhao/",
       "role": "Développeur de logiciels"
     },
-    {
-      "name": "Charlie Chen",
-      "src": "./headshots/charlie.png",
-      "link": "https://www.linkedin.com/in/hyu-chen/",
-      "role": "Développeur de logiciels"
-    },
+
     {
       "name": "William Wen",
       "src": "./headshots/william.png",
@@ -142,6 +143,24 @@
       "role": "Développeur de logiciels"
     },
     {
+      "name": "Eric Zhai",
+      "src": "",
+      "link": "https://www.linkedin.com/in/eric-zhai/",
+      "role": "Développeur de logiciels"
+    },
+    {
+      "name": "Ethan Chen",
+      "src": "./headshots/ethan.png",
+      "link": "https://www.linkedin.com/in/ethanjc/",
+      "role": "Développeur de logiciels"
+    },
+    {
+      "name": "Charlie Chen",
+      "src": "./headshots/charlie.png",
+      "link": "https://www.linkedin.com/in/hyu-chen/",
+      "role": "Développeur de logiciels"
+    },
+    {
       "name": "Siyan Zhao",
       "src": "./headshots/siyan.png",
       "link": "https://www.linkedin.com/in/siyanzhao/",
@@ -169,18 +188,6 @@
       "name": "Maanav Dalal",
       "src": "./headshots/maanav.png",
       "link": "https://www.linkedin.com/in/maanavdalal/",
-      "role": "Développeur de logiciels"
-    },
-    {
-      "name": "Eric Zhai",
-      "src": "",
-      "link": "https://www.linkedin.com/in/eric-zhai/",
-      "role": "Développeur de logiciels"
-    },
-    {
-      "name": "Ivan Nesterovic",
-      "src": "./headshots/ivan.png",
-      "link": "https://www.linkedin.com/in/ivan-nesterovic/",
       "role": "Développeur de logiciels"
     },
     {

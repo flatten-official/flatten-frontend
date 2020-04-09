@@ -4,6 +4,11 @@
   box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.5);
 }
 
+.symptomsSubmitted {
+  padding: 5% 0%;
+  text-align: center;
+}
+
 .symptoms__header {
   padding: 10px;
 }
@@ -14,7 +19,7 @@
   align-items: center;
 }
 
-.symptoms__syringe-icon{
+.symptoms__syringe-icon {
   height: 3rem;
   width: 3rem;
   margin-left: 14px;
