@@ -15,7 +15,7 @@ steps:
     entrypoint: "npm"
     args: ["run", "build"]
   - name: gcr.io/cloud-builders/gsutil
-    args: ["cp", "app.$BRANCH_NAME.yaml", "app.yaml"] # Branch name to use map-staging app config
+    args: ["cp", "deployment/app.$BRANCH_NAME.yaml", "app.yaml"] # Branch name to use map-staging app config
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy"]
 timeout: "1600s"
