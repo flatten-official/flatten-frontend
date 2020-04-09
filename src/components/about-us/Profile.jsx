@@ -20,7 +20,7 @@ const Profile = ({ link, src, name, role, titles, degrees }) => (
         {degrees}
       </p>
       <p className="profile__role">{role}</p>
-      <p className="profile__title">{titles}</p>
+      {titles ? <p className="profile__title">{titles}</p> : null}
     </div>
   </div>
 );
