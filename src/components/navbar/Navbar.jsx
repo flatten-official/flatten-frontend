@@ -48,6 +48,7 @@ const Navbar = ({ t }) => {
         smooth={true}
         offset={-70}
         duration={1000}
+        hashSpy={true}
       >
         {t("home")}
       </Link>
@@ -60,6 +61,7 @@ const Navbar = ({ t }) => {
         smooth={true}
         offset={-70}
         duration={1000}
+        hashSpy={true}
       >
         {t("form")}
       </Link>
@@ -72,6 +74,7 @@ const Navbar = ({ t }) => {
         smooth={true}
         offset={-70}
         duration={1000}
+        hashSpy={true}
       >
         {t("heatmap")}
       </Link>
