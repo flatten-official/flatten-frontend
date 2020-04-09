@@ -55,26 +55,31 @@
 
 .nav__info_en {
   position: absolute;
-  right: 6%;
+  right: 80px;
   display: flex;
 }
 
 .nav__info_fr {
   text-align: center;
-  width: 200px;
+  width: 80px;
   position: absolute;
-  right: 6%;
+  right: 110px;
   display: flex;
 }
 
 .navbar__logo {
   width: 120px;
+  padding-left: 10px;
 }
 
 .navbar__lang {
   position: absolute;
-  right: 3%;
+  right: 40px;
   display: flex;
+}
+
+.navbar__logo-container {
+  list-style-type: none;
 }
 
 .navbar__covid_en {
@@ -118,15 +123,15 @@
   .nav__info_en {
     text-align: center;
     display: inline;
-    width: 100px;
+    width: 80px;
     position: absolute;
-    right: 7%;
+    right: 100px;
     display: flex;
   }
   
   .navbar__lang {
     position: absolute;
-    right: 3%;
+    right: 30px;
     display: flex;
   }
 }
@@ -165,8 +170,12 @@
   .navbar__covid_fr {
     font-size: 10px;
   }
+  .nav__info_en {
+    right: 50px;
+  }
   .nav__info_fr {
     width: 120px;
+    right: 60px
   }
 }
 
@@ -174,21 +183,33 @@
   .nav__item_fr {
     font-size: 8px;
   }
+  .nav__info_en {
+    right: 32px;
+  }
+  .navbar__lang {
+    right: 15px;
+  }
   .navbar__covid_fr {
     font-size: 8px;
   }
   .nav__info_fr {
     width: 80px;
+    right: 8%;
   }
 }
 
-@media screen and (max-width: 350px) {
-  .nav__item {
-    margin-left: 0px;
+@media screen and (max-width: 360px) {
+  .nav__item_en {
+    margin-left: 3px;
     margin-right: 0px;
+    width: 70px;
   }
   .nav__info_en {
     width: 80px;
+  }
+  .nav__info_fr {
+    width: 80px;
+    right: 35px;
   }
 
   .nav__item_fr {

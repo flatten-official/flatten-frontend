@@ -45,7 +45,7 @@ const TrackYourSymptoms = ({ t }) => {
   }
 
   return (
-    <div className="symptoms" id="symptoms">
+    <div className="symptoms" id="symptoms" >
       <div className="symptoms__header">
         <div className="symptoms__title">
           <div className="title">{t("header")}</div>
