@@ -29,3 +29,4 @@ yarn-error.log*
 /src/components/form/Recaptcha.js
 
 .idea
+dispatch.yaml
