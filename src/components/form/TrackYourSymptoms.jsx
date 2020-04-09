@@ -46,6 +46,7 @@ const TrackYourSymptoms = ({ daily }) => {
     default:
       component = <SymptomsFormEn onSubmit={handleSubmit} />;
   }
+
   let status = true;
   if (daily) {
     status = !daily.exists;
