@@ -46,7 +46,6 @@ const Legend = (props) => {
     }
 
     const { map } = useLeaflet();
-    console.log(map);
 
     useEffect(() => {
         let legend_content = "<h3> " + legendTitle + " </h3>";
@@ -73,7 +72,11 @@ const Legend = (props) => {
             return div;
         };
 
-        legend.addTo(map);
+        map.addControl(legend);
+        return function cleanup() {
+            map.removeControl(legend);
+        }
+
     });
     return null;
 };
