@@ -1,0 +1,12 @@
+.checkbox-group__container--columns-2 {
+  column-count: 2;
+  padding-left: 32px;
+}
+
+@media only screen and (max-width: 600px) {
+  .checkbox-group__container--columns-2 {
+    display: flex;
+    flex-direction: column;
+    padding-left: 32px;
+  }
+}

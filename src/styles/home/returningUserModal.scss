@@ -1,0 +1,43 @@
+.returning-user {
+  padding: 32px;
+}
+
+.returning-user__title {
+  padding-bottom: 32px;
+}
+
+.returning-user__body {
+  & .text-input__container {
+    width: 100%;
+    text-align: center;
+  }
+
+  & .text-input__label {
+    display: inline-block;
+  }
+
+  & input {
+    display: inline-block;
+  }
+}
+
+.returning-user__submit-button {
+  margin-top: 30px;
+  height: 80px;
+  width: 150px;
+}
+
+.text-xs-center {
+  text-align: center;
+}
+
+#g-recaptcha {
+  padding-top: 16px;
+  display: inline-block;
+}
+
+@media only screen and (max-width: 600px) {
+  .returning-user {
+    width: 75%;
+  }
+}

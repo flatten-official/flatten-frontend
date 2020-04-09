@@ -1,0 +1,25 @@
+.submit-modal {
+  height: 30%;
+  padding: 64px;
+}
+
+.submit-modal__content {
+  padding: 30px;
+}
+
+.submit-modal__gift-icon {
+  height: 100px;
+  width: 100px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .heatmap__header {
+    padding: 10% 10%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .submit-modal {
+    padding: 32px;
+  }
+}

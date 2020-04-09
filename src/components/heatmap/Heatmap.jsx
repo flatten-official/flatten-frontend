@@ -1,4 +1,6 @@
 import React from "react";
+import { Trans, withTranslation } from "react-i18next";
+
 import MapIcon from "../../assets/map.svg";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 import Leafletmap from "./Leafletmap";
@@ -35,57 +37,54 @@ class HeatMap extends React.Component {
 
   render() {
     const ratio = `${this.state.ratio}%`;
-    let title = "Canadian Coronavirus Map"
+    const { t } = this.props;
 
     return (
-      <div className="heatmap">
+      <div className="heatmap" id="heatmap">
         <div className="heatmap__header">
           <div className="heatmap__title">
-            <div className="title">View Virus Data</div>
+            <div className="title">{t("header")}</div>
             <MapIcon className="heatmap__map-icon"></MapIcon>
           </div>
 
           <div className="heatmap__description body">
+            <p>{t("p1")}</p>
+          </div>
+
+          <div className="heatmap__description body">
             <p>
-              Welcome to our interactive heat map! To view information about
-              your region, click on your municipality or postal code region. To
-              easily locate yourself, let Flatten access your location.
+              <Trans t={t} i18nKey="p2">
+                <b>Potential and Vulnerable Cases:</b> This tab displays all
+                individuals that are especially vulnerable to COVID-19 in Canada
+                that are also deemed potential cases, based on data inputted
+                into Flatten's form.
+              </Trans>
+            </p>
+
+            <p>
+              <Trans t={t} i18nKey="p3">
+                <b>Potential Cases:</b> This tab displays all of the potential
+                cases of COVID-19 in Canada, based on data inputted into
+                Flatten's form.
+              </Trans>
+            </p>
+
+            <p>
+              <Trans t={t} i18nKey="p4">
+                <b>Vulnerable Individuals:</b> This tab displays all individuals
+                that are especially vulnerable to COVID-19 in Canada, based on
+                data inputted into Flatten's form.
+              </Trans>
             </p>
           </div>
 
           <div className="heatmap__description body">
             <p>
-              <b>Potential and Vulnerable Cases:</b> This tab displays all
-              individuals that are especially vulnerable to COVID-19 in Canada
-              that are also deemed potential cases, based on data inputted into
-              Flatten's form.
-            </p>
-
-            <p>
-              <b>Potential Cases:</b> This tab displays all of the potential
-              cases of COVID-19 in Canada, based on data inputted into Flatten's
-              form.
-            </p>
-
-            <p>
-              <b>Vulnerable Individuals: </b> This tab displays all individuals
-              that are especially vulnerable to COVID-19 in Canada, based on
-              data inputted into Flatten's form.
-            </p>
-          </div>
-
-          <div className="heatmap__description body">
-            <p>
-              <i>
-                In order to ensure non-trolling we use cookies, recaptcha and
-                track suspicious IP addresses.
-              </i>
+              <i>{t("p5")}</i>
             </p>
           </div>
         </div>
-        <div className="PageTitle">
-          <h3> {title} </h3>
-        </div>
+
         <div className="heatmap__container" >
           <Leafletmap></Leafletmap>
           <div className="Info Components">
@@ -105,4 +104,4 @@ class HeatMap extends React.Component {
   }
 }
 
-export default HeatMap;
+export default withTranslation("Heatmap")(HeatMap);

@@ -5,13 +5,6 @@ steps:
     args:
       [
         "cp",
-        "src/components/header/OAuth.$_BRANCH.js",
-        "src/components/header/OAuth.js",
-      ]
-  - name: gcr.io/cloud-builders/gsutil
-    args:
-      [
-        "cp",
         "src/components/form/Recaptcha.$_BRANCH.js",
         "src/components/form/Recaptcha.js",
       ]
