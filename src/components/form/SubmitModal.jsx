@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { scroller } from "react-scroll";
-import CloseIcon from "../../assets/close.svg";
+import Modal from "../common/modal/Modal";
 import GiftIcon from "../../assets/gift.svg";
 
 const SubmitModal = ({ onClose }) => {
@@ -16,18 +16,14 @@ const SubmitModal = ({ onClose }) => {
   );
 
   return (
-    <div className="submit-modal">
-      <div className="submit-modal__container">
-        <CloseIcon className="submit-modal__close-icon" onClick={onClose} />
-        <div className="submit-modal__content body">
-          <b>Thank you for submitting our form!</b>
-          <br />
-          <br />
-          You'll be taken to the heatmap now.
-        </div>
-        <GiftIcon className="submit-modal__gift-icon" />
+    <Modal className="submit-modal" onClose={onClose}>
+      <div className="submit-modal__content body">
+        <b>Thank you for submitting our form!</b>
+        <br />
+        Exit to go to the heatmap.
       </div>
-    </div>
+      <GiftIcon className="submit-modal__gift-icon" />
+    </Modal>
   );
 };
 

@@ -4,10 +4,11 @@
   width: 100%;
   min-width: 300px;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("/src/assets/background.png");
+    url("../assets/background.png");
+  // PATH NEEDS TO BE RELATIVE TO import.scss (weird, but easiest workaround for now)
   background-attachment: fixed;
   background-size: cover;
-
+  background-position: center center;
   display: flex;
   flex-direction: column;
   justify-content: center;

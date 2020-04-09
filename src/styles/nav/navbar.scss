@@ -31,14 +31,30 @@
   }
 }
 
+.nav__a {
+  text-decoration: none;
+  color: $dark-grey;
+  &:hover {
+    color: $black-main;
+    cursor: pointer;
+  }
+}
+
 .nav__info {
   position: absolute;
-  display: inline;
   right: 2%;
+  display: flex;
 }
 
 .navbar__logo {
   width: 120px;
+}
+
+.navbar__lang {
+  margin-left: 20px;
+  color: $navy-blue;
+  text-decoration: none;
+  font-size: 16px;
 }
 
 .navbar__covid {
