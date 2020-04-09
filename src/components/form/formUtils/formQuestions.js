@@ -14,6 +14,8 @@ import {
 
 import i18next from "i18next";
 
+console.log(i18next.language);
+
 switch (i18next.language) {
   case "en":
     questions = [
@@ -208,6 +210,68 @@ switch (i18next.language) {
     ];
     break;
   default:
+    questions = [
+      {
+        body:
+          "Which of the following symptoms are you currently experiencing? Select all that apply.",
+        name: "symptoms",
+        component: CheckboxGroup,
+        options: SYMPTOM_OPTIONS,
+        maxColumns: 2,
+      },
+      {
+        body: "What is your age?",
+        name: "age",
+        component: RadioButtonGroup,
+        options: AGE_OPTIONS,
+        maxColumns: 2,
+      },
+      {
+        body:
+          "Select any medical conditions you have been diagnosed with. Check all that apply.",
+        name: "conditions",
+        component: CheckboxGroup,
+        options: CONDITION_OPTIONS,
+        maxColumns: 2,
+      },
+      {
+        body: `Have you had close contact with someone who is coughing, has a fever, or is otherwise
+             sick and has been outside of Canada in the last 14 days or has been diagnosed with
+             COVID-19?`,
+        name: "contactWithIllness",
+        component: RadioButtonGroup,
+        options: YES_NO_OPTIONS,
+      },
+      {
+        body: "Have you traveled outside of Canada within the last 14 days?",
+        name: "travelOutsideCanada",
+        component: RadioButtonGroup,
+        options: YES_NO_OPTIONS,
+      },
+      {
+        body: "Have you tested positive for COVID-19?",
+        name: "testedPositive",
+        component: RadioButtonGroup,
+        options: YES_NO_OPTIONS,
+      },
+      {
+        body:
+          "What are the three first characters of the postal code of your current residence?",
+        name: "postalCode",
+        component: PostalCodeInput,
+      },
+      {
+        body: "What is your sex?",
+        name: "sex",
+        component: RadioButtonGroup,
+        options: SEX_OPTIONS,
+      },
+      {
+        body: "What is your email? (optional)",
+        name: "email",
+        component: TextInput,
+      },
+    ];
 }
 
 export let questions;

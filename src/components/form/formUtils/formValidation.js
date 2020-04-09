@@ -93,4 +93,23 @@ switch (i18next.language) {
     ];
     break;
   default:
+    formValidation = [
+      ["age", "Age is required"],
+      ["contactWithIllness", "Field is required"],
+      ["travelOutsideCanada", "Field is required"],
+      ["testedPositive", "Field is required"],
+      [
+        "postalCode",
+        "Postal code is required (ie. A1A)",
+        ({ postalCode }) => isValidPostalCode(postalCode),
+      ],
+      ["sex", "Field is required"],
+      ["acknowledgement", "Please accept the Terms and Conditions."],
+      ["recaptchaVerification", "Please prove you are not a robot."],
+      [
+        "email",
+        "Please enter a valid email",
+        ({ email }) => !email || isValidEmail(email),
+      ],
+    ];
 }
