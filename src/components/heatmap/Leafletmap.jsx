@@ -35,8 +35,8 @@ const BOTH_SCHEME_THRESHOLDS = [0.01, 0.02, 0.05, 0.1];
 const POLYGON_OPACITY = 0.4;
 const NOT_ENOUGH_GRAY = "#909090";
 // max size circle can be on map
-const MAX_CIRCLE_RAD = 35;
-const MIN_CIRCLE_RADIUS = 6;
+const MAX_CIRCLE_RAD = 25;
+const MIN_CIRCLE_RADIUS = 3;
 const MAX_CASES = 10000;
 const CON_SCHEME_THRESHOLDS = [5, 25, 100, 250];
 const URLS = {
@@ -88,6 +88,15 @@ function create_style_function(formData, colour_scheme, thresholds, data_tag) {
       fillColor: colour,
       fillOpacity: opacity
     };
+  };
+}
+
+function create_style_function_USA(form_data, data_tag) {
+  return {
+    weight: 0,
+    color: "red",
+    fillColor: "red",
+    fillOpacity: 0.5
   };
 }
 
@@ -181,12 +190,13 @@ class Leafletmap extends React.Component {
     );
   }
 
-  renderMap_USA(formData, confirmed_cases, bindPopupOnEachFeature, tab, pointToLayer) {
+  renderMap_USA(formData, confirmed_cases, bindPopupOnEachFeature, tab, pointToLayer, styleFunc) {
     let data = confirmed_cases;
 
     return (
       <GeoJSON
         data={data}
+        style={styleFunc}
         onEachFeature={bindPopupOnEachFeature}
         pointToLayer={pointToLayer}
         key={tab}
@@ -236,12 +246,20 @@ class Leafletmap extends React.Component {
 
     let pointToLayer = (feature, latlng) => {
       let radius = MIN_CIRCLE_RADIUS;
-      let percent = feature['properties']['Confirmed']/MAX_CASES;
+      let cases = feature['properties']['Confirmed'];
 
-      if (percent > 1) {
+      if (cases > 10000) {
         radius = MAX_CIRCLE_RAD;
-      } else if (percent > 0.05) {
-        radius = percent * MAX_CIRCLE_RAD;
+      } else if (cases > 5000) {
+        radius = MAX_CIRCLE_RAD * (4/5);
+      } else if (cases > 2500) {
+        radius = MAX_CIRCLE_RAD * (3/5);
+      } else if (cases > 1000) {
+        radius = MAX_CIRCLE_RAD / 2;
+      } else if (cases > 500) {
+        radius = MAX_CIRCLE_RAD * (2/5);
+      } else if (cases > 100) {
+        radius = MAX_CIRCLE_RAD / 5;
       }
 
       return L.circleMarker(latlng, {
@@ -251,12 +269,15 @@ class Leafletmap extends React.Component {
 
     // for USA
     let bindPopupOnEachFeature_USA = (feature, layer) => {
-      let loc = "<b>"+ feature.properties["Combined_Key"] + "</b>";
-      let numbers = "<p>Confirmed Cases: " + feature.properties["Confirmed"] + "</p>";
+      let content;
 
-      let content = loc + numbers;
+      if (this.state.tab === "conf") {
+        content = "<b>"+ feature.properties["Combined_Key"] + "</b>" + "<p>Confirmed Cases: " + feature.properties["Confirmed"] + "</p>"
+      }
 
-      layer.bindPopup(content);
+      const popup = L.popup().setLatLng(layer.getLatLng()).setContent(content);
+
+      layer.bindPopup(popup);
     };
 
     // this function is called with each polygon when the GeoJSON polygons are rendered
@@ -325,14 +346,15 @@ class Leafletmap extends React.Component {
             <TileLayer
               url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              minZoom={4}
+              minZoom={5}
             />
             {this.renderMap_USA(
               this.state.formData,
               this.state.confirmed_cases,
               bindPopupOnEachFeature_USA,
               this.state.tab,
-              pointToLayer
+              pointToLayer,
+              create_style_function_USA
             )}
             <Legend colourScheme={COLOUR_SCHEME} tab={this.state.tab} />
           </Map>
