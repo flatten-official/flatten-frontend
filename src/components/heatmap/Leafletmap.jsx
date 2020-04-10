@@ -23,10 +23,12 @@ const i18nlang = "enUS";
 
 // stays in Canada
 const CANADA_BOUNDS = [[38, -150], [87, -45]];
+const USA_BOUNDS = [[15, -180], [77, -60]];
 // starts you in ontario
 const ONTARIO = [51.2538, -85.3232];
+const USA_CENTER = [37.0902, -95.7129];
 const INITIAL_ZOOM = 5;
-const height = "800px";
+const height = "650px";
 
 // white, yellow, orange, brown, red, black
 const COLOUR_SCHEME = ["#ffffb2", "#fecc5c", "#fd8d3c", "#f03b20", "#bd0026"];
@@ -43,10 +45,12 @@ const MAX_CASES = 10000;
 const CON_SCHEME_THRESHOLDS = [5, 25, 100, 250];
 const URLS = {
   "cadForm": "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
-  "usaForm": "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json",
+  "usaForm": "https://storage.googleapis.com/flatten-staging-271921.appspot.com/form_data_usa.json",
   "cadConf": "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson",
   "usaConf": "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
 };
+
+const test = { "time": 1586532492, "total_responses": 2, "county": { "Anchorage Municipality": { "number_reports": 1, "pot": 1, "risk": 1, "both": 1, "fsa_excluded": false }, "Daviess": { "number_reports": 1, "pot": 1, "risk": 1, "both": 1, "fsa_excluded": false } } }
 
 // this will work for USA once we have data to fetch for usa FORMS
 function create_style_function(formData, colour_scheme, thresholds, data_tag) {
@@ -54,9 +58,17 @@ function create_style_function(formData, colour_scheme, thresholds, data_tag) {
     let opacity = POLYGON_OPACITY; // If no data, is transparent
     let colour = NOT_ENOUGH_GRAY; // Default color if not enough data
 
-    const post_code_data = formData
-      ? formData["fsa"][feature.properties.CFSAUID]
-      : null;
+    let post_code_data;
+
+    if (i18nlang === "enUS") {
+      post_code_data = test
+        ? test["county"][feature.properties.NAME]
+        : null;
+    } else {
+      post_code_data = formData
+        ? formData["fsa"][feature.properties.CFSAUID]
+        : null;
+    }
 
     // only set numbers if it exists in form_data_obj
     if (post_code_data && data_tag in post_code_data) {
@@ -70,7 +82,7 @@ function create_style_function(formData, colour_scheme, thresholds, data_tag) {
         } else
           colour = getColour(num_cases / num_total, colour_scheme, thresholds);
       }
-    } else {
+    } else if (data_tag === "conf") {
       // case if data_tag is the confirmed cases
       const num_cases = feature.properties["CaseCount"];
 
@@ -93,7 +105,7 @@ function create_style_function(formData, colour_scheme, thresholds, data_tag) {
   };
 }
 // for circles
-function create_style_function_USA(form_data, data_tag) {
+function create_style_function_USA() {
   return {
     weight: 0,
     color: "red",
@@ -124,14 +136,14 @@ class Leafletmap extends React.Component {
     let confUrl;
 
     if (i18nlang === "enUS") {
-      formUrl = URLS["cadForm"];
+      formUrl = URLS["usaForm"];
       confUrl = URLS["usaConf"];
     } else {
       formUrl = URLS["cadForm"];
       confUrl = URLS["cadConf"];
     }
 
-    this.state = { tab: "both", formURL: formUrl, confURL: confUrl, formData: null, confirmed_cases: null };
+    this.state = { tab: "both", formURL: formUrl, confURL: confUrl, formData: {}, confirmed_cases: {}};
     this.setTab = this.setTab.bind(this);
 
     this.getFormData = this.getFormData.bind(this);
@@ -151,6 +163,7 @@ class Leafletmap extends React.Component {
     fetch(this.state.formURL)
       .then(r => r.json())
       .then(d => {
+        console.log(d);
         return d;
       })
       .then(formData => this.setState({ formData }));
@@ -207,7 +220,11 @@ class Leafletmap extends React.Component {
   render() {
     let { t } = this.props;
     let styleFunc;
-    let title;
+    let title = (i18nlang === "fr") ? "Réponse totales: " + this.state.formData['total_responses'] +
+      " | Dernière mise à jour: " + new Date(1000 * this.state.formData["time"])
+      : "Total Responses: " + this.state.formData['total_responses'] + " | Last update: " + new Date(1000 * this.state.formData["time"]);
+    let bounds = (i18nlang === "enUS") ? USA_BOUNDS : CANADA_BOUNDS;
+    let center = (i18nlang === "enUS") ? USA_CENTER : ONTARIO
 
     if (this.state.tab === "conf") {
       styleFunc = create_style_function(
@@ -242,11 +259,35 @@ class Leafletmap extends React.Component {
     // needs more info for potential cases by county
     let bindPopupOnEachFeature_USA = (feature, layer) => {
       let content;
+      let countyID = feature.properties.NAME;
+      //let countyData = this.state.formData.county[countyID];
+      let countyData = test.county[countyID];
+      let countyReports;
+      try {
+        countyReports = countyData.number_reports;
+      } catch {
+        countyReports = 0;
+      }
 
-      if (this.state.tab === "conf") {
-        content = "<b>" + feature.properties["Combined_Key"] + "</b>" + "<p>Confirmed Cases: " + feature.properties["Confirmed"] + "</p>"
+      if (countyData) {
+        if (countyReports < 25) {
+          content = "<b>" + feature.properties["NAME"] + "</b><br/>" + "We don't have enough data for this region";
+        } else {
+          content = "<b>" + feature.properties["NAME"] + "</b>";
+          if (this.state.tab === "vuln") {
+            content += "<p>" + countyData["risk"] + " vulnerable individuals<br/>" + countyData["number_reports"] + " reports in total</p>";
+          } else if (this.state.tab === "both") {
+            //content += "<p>" + countyData["both"] + "<br/>" + countyData["number_reports"] + "</p>";
+          } else if (this.state.tab === "pot") {
+            content += "<p>" + countyData["pot"] + " potential cases<br/>" + countyData["number_reports"] + " reports in total</p>";
+          }
+        }
       } else {
-        content = "<b>" + feature.properties["NAME"] + "</b>"
+        if (this.state.tab === "conf") {
+          content = "<b>" + feature.properties["Combined_Key"] + "</b>" + "<p>Confirmed Cases: " + feature.properties["Confirmed"] + "</p>"
+        } else {
+          content = "<b>" + feature.properties["NAME"] + "</b><br/>" + "We don't have enough data for this region";
+        }
       }
 
       layer.bindPopup(content);
@@ -305,7 +346,7 @@ class Leafletmap extends React.Component {
       pointToLayer = (feature, latlng) => {
         let radius = MIN_CIRCLE_RADIUS;
         let cases = feature['properties']['Confirmed'];
-  
+
         if (cases > 10000) {
           radius = MAX_CIRCLE_RAD;
         } else if (cases > 5000) {
@@ -319,7 +360,7 @@ class Leafletmap extends React.Component {
         } else if (cases > 100) {
           radius = MAX_CIRCLE_RAD / 5;
         }
-  
+
         return L.circleMarker(latlng, {
           radius: radius
         });
@@ -335,14 +376,13 @@ class Leafletmap extends React.Component {
     // the geojson layer when the tab changes. This does the work of
     // unbinding all popups and recreating them with the correct data.
 
-    //at the this.rendermap code bloc, we want to toggle between canadian or american data (setting pointotlayer to null or not)
     return (
       <div>
         <div style={{ height }}>
-          <div> {title} </div>
+          <div className="body"> {title} </div>
           <Map
-            maxBounds={CANADA_BOUNDS}
-            center={ONTARIO}
+            maxBounds={bounds}
+            center={center}
             zoom={INITIAL_ZOOM}
             style={{ height, zIndex: 0 }}
           >
