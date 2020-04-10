@@ -3,6 +3,7 @@ import { Link } from "react-scroll";
 import { NavLink, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import i18next from "i18next";
+import history from "../../history";
 
 import logo from "../../assets/logo-black.png";
 
@@ -14,23 +15,39 @@ const Navbar = ({ t }) => {
   let heatmapLink = null;
 
   const i18nlang = i18next.language;
+  console.log(i18nlang);
   let toggle;
   let current;
+  let selectedEn = false;
+  let selectedUs = false;
+  let selectedFr = false;
   switch (i18nlang) {
     case "en":
       toggle = "fr";
-      current = "en"
-      
+      current = "en";
+      selectedEn = true;
+      break;
+    case "enUS":
+      toggle = "fr";
+      current = "en";
+      selectedUs = true;
       break;
     case "fr":
       toggle = "en";
-      current = "fr"
+      current = "fr";
+      selectedFr = true;
       break;
     default:
       toggle = "fr";
-      current = "en"
+      current = "en";
+      selectedEn = true;
   }
-  let linkLang = `/?lang=${toggle}`;
+
+  const languageHandler = (event) => {
+    let lang = event.currentTarget.value;
+    let linkLang = `${location.pathname}?lang=${lang}`;
+    history.push(linkLang);
+  };
 
   if (location.pathname == ("/" || "#symptoms" || "#heatmap")) {
     logoLink = (
@@ -42,7 +59,7 @@ const Navbar = ({ t }) => {
         offset={-70}
         duration={1000}
       >
-        <img className="navbar__logo" src={logo} />
+        <img className="nav__logo" src={logo} />
       </Link>
     );
     homeLink = (
@@ -87,7 +104,7 @@ const Navbar = ({ t }) => {
   } else {
     logoLink = (
       <a href="/">
-        <img className="navbar__logo" src={logo} />
+        <img className="nav__logo" src={logo} />
       </a>
     );
     homeLink = (
@@ -106,23 +123,28 @@ const Navbar = ({ t }) => {
       </a>
     );
   }
+
   return (
     <nav className="nav">
       <div className="nav__content body">
-        <li className="nav__item navbar__logo-container">{logoLink}</li>
-        <li className={`nav__item_en nav__optional`}>{homeLink}</li>
-        <li className={`nav__item_${current}`}>{symptomsLink}</li>
-        <li className={`nav__item_${current}`}>{heatmapLink}</li>
-        <li className={`nav__info_${current}`}>
-          <NavLink className={`navbar__covid_${current}`} exact to="/info">
-            {t("info")}
-          </NavLink>
-        </li>
-        <li className="navbar__lang">
-          <a className={`navbar__covid_${current} nav__a`} href={linkLang}>
-            {toggle}
-          </a>
-        </li>
+        <li className="nav__item nav__logo-container">{logoLink}</li>
+        <li className={`nav__item-en nav__optional`}>{homeLink}</li>
+        <li className={`nav__item-${current}`}>{symptomsLink}</li>
+        <li className={`nav__item-${current}`}>{heatmapLink}</li>
+        <NavLink className={`nav__covid-${current}`} exact to="/info">
+          {t("info")}
+        </NavLink>
+        <select className="body nav__lang" onChange={languageHandler}>
+          <option className="body" value="en" selected={selectedEn}>
+            en-ca
+          </option>
+          <option className="body" value="enUS" selected={selectedUs}>
+            en-us
+          </option>
+          <option className="body" value="fr" selected={selectedFr}>
+            fr
+          </option>
+        </select>
       </div>
     </nav>
   );
