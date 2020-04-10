@@ -59,7 +59,7 @@ const Navbar = ({ t }) => {
         offset={-70}
         duration={1000}
       >
-        <img className="navbar__logo" src={logo} />
+        <img className="nav__logo" src={logo} />
       </Link>
     );
     homeLink = (
@@ -104,7 +104,7 @@ const Navbar = ({ t }) => {
   } else {
     logoLink = (
       <a href="/">
-        <img className="navbar__logo" src={logo} />
+        <img className="nav__logo" src={logo} />
       </a>
     );
     homeLink = (
@@ -127,14 +127,14 @@ const Navbar = ({ t }) => {
   return (
     <nav className="nav">
       <div className="nav__content body">
-        <li className="nav__item navbar__logo-container">{logoLink}</li>
+        <li className="nav__item nav__logo-container">{logoLink}</li>
         <li className={`nav__item_en nav__optional`}>{homeLink}</li>
         <li className={`nav__item_${current}`}>{symptomsLink}</li>
         <li className={`nav__item_${current}`}>{heatmapLink}</li>
-        <NavLink className={`navbar__covid_${current}`} exact to="/info">
+        <NavLink className={`nav__covid_${current}`} exact to="/info">
           {t("info")}
         </NavLink>
-        <select className="body navbar__lang" onChange={languageHandler}>
+        <select className="body nav__lang" onChange={languageHandler}>
           <option className="body" value="en" selected={selectedEn}>
             en-ca
           </option>

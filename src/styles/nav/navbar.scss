@@ -20,6 +20,24 @@
   }
 }
 
+.nav__a {
+  text-decoration: none;
+  color: $dark-grey;
+  &:hover {
+    color: $black-main;
+    cursor: pointer;
+  }
+}
+
+.nav__logo {
+  width: 120px;
+  padding-left: 10px;
+}
+
+.nav__logo-container {
+  list-style-type: none;
+}
+
 .nav__item_en {
   font-size: 16px;
   display: inline;
@@ -44,31 +62,7 @@
   }
 }
 
-.nav__a {
-  text-decoration: none;
-  color: $dark-grey;
-  &:hover {
-    color: $black-main;
-    cursor: pointer;
-  }
-}
-
-.navbar__logo {
-  width: 120px;
-  padding-left: 10px;
-}
-
-.navbar__lang {
-  position: absolute;
-  right: 10px;
-  display: flex;
-}
-
-.navbar__logo-container {
-  list-style-type: none;
-}
-
-.navbar__covid_en {
+.nav__covid_en {
   position: absolute;
   right: 120px;
   display: flex;
@@ -78,7 +72,7 @@
   font-size: 16px;
 }
 
-.navbar__covid_fr {
+.nav__covid_fr {
   text-align: center;
   width: 80px;
   position: absolute;
@@ -90,10 +84,14 @@
   font-size: 16px;
 }
 
+.nav__lang {
+  position: absolute;
+  right: 10px;
+  display: flex;
+}
+
 @media screen and (max-width: 1023px) {
   .nav__item_fr {
-    vertical-align: middle;
-    display: inline;
     width: 120px;
   }
 }
@@ -110,20 +108,14 @@
     display: none;
   }
 
-  .navbar__covid_en {
+  .nav__covid_en {
     text-align: center;
     display: inline;
     width: 80px;
-    position: absolute;
     right: 100px;
-    display: flex;
-    color: $navy-blue;
-    text-decoration: none;
-    font-size: 16px;
-    line-height: normal;
   }
 
-  .navbar__lang {
+  .nav__lang {
     font-size: 16px;
   }
 }
@@ -132,41 +124,42 @@
   .nav__content {
     margin: 0;
     padding: 0;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
   }
+
+  .nav__logo {
+    width: 60px;
+  }
+
+  .nav__logo-container {
+    width: 70px;
+  }
+
   .nav__item_en {
     margin-left: 5px;
     margin-right: 5px;
-    color: $dark-grey;
-    font-size: 10px;
-    width: 85px;
-  }
-  .nav__item_fr {
-    margin-left: 5px;
-    margin-right: 5px;
-    color: $dark-grey;
     font-size: 10px;
     width: 85px;
   }
 
-  .navbar__lang {
+  .nav__item_fr {
+    margin-left: 5px;
+    margin-right: 5px;
     font-size: 10px;
+    width: 85px;
   }
-  .navbar__logo {
-    width: 60px;
-  }
-  .navbar__logo-container {
-    width: 70px;
-  }
-  .navbar__covid_en {
+
+  .nav__covid_en {
     right: 60px;
     font-size: 10px;
   }
-  .navbar__covid_fr {
+
+  .nav__covid_fr {
     width: 120px;
     right: 60px;
+    font-size: 10px;
+  }
+
+  .nav__lang {
     font-size: 10px;
   }
 }
@@ -184,13 +177,14 @@
     right: 45px;
   }
 
-  .navbar__covid_fr {
-    width: 80px;
-    right: 8%;
+  .nav__covid_fr {
+    width: 40px;
+    right: 70px;
     font-size: 8px;
   }
 
-  .navbar__lang {
+  .nav__lang {
+    right: 1px;
     font-size: 8px;
   }
 }
@@ -211,7 +205,7 @@
   }
 
   .nav__covid_fr {
-    width: 80px;
+    width: 40px;
     right: 35px;
   }
 }
