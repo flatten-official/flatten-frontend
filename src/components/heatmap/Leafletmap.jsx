@@ -49,6 +49,9 @@ const URLS = {
   "usaConf": "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
 };
 
+//Current button
+let currTab = 0;
+
 const test = { "time": 1586532492, "total_responses": 2, "county": { "Anchorage Municipality": { "number_reports": 1, "pot": 1, "risk": 1, "both": 1, "fsa_excluded": false }, "Daviess": { "number_reports": 1, "pot": 1, "risk": 1, "both": 1, "fsa_excluded": false } } }
 
 // this will work for USA once we have data to fetch for usa FORMS
@@ -153,9 +156,14 @@ class Leafletmap extends React.Component {
     this.getFormData();
     this.getConfirmedCasesData();
   }
+  
+  setTab(tabID, index) {
+    document.getElementById("tabs").children[currTab].classList.remove('active');
+    document.getElementById("tabs").children[index].classList.add("active");
+    currTab = index;
 
-  setTab(tabID) {
     this.setState({ tab: tabID });
+
   }
 
   getFormData() {
@@ -381,8 +389,8 @@ class Leafletmap extends React.Component {
 
     return (
       <div>
+        <div className="PageTitle body"> {title} </div>
         <div style={{ height }}>
-          <div className="body"> {title} </div>
           <Map
             maxBounds={bounds}
             center={center}
@@ -405,17 +413,17 @@ class Leafletmap extends React.Component {
             <Legend colourScheme={COLOUR_SCHEME} tab={this.state.tab} />
           </Map>
         </div>
-        <div className="TabSelectors btn_group">
-          <PrimaryButton onClick={e => this.setTab("both")}>
+        <div id="tabs" className="TabSelectors btn_group">
+          <PrimaryButton className="active" onClick={e => this.setTab("both", 0)}>
             {t("pot_vul_button")}
           </PrimaryButton>
-          <PrimaryButton onClick={e => this.setTab("pot")}>
+          <PrimaryButton onClick={e => this.setTab("pot", 1)}>
             {t("pot_button")}
           </PrimaryButton>
-          <PrimaryButton onClick={e => this.setTab("vuln")}>
+          <PrimaryButton onClick={e => this.setTab("vuln", 2)}>
             {t("vul_button")}
           </PrimaryButton>
-          <PrimaryButton onClick={e => this.setTab("conf")}>
+          <PrimaryButton onClick={e => this.setTab("conf", 3)}>
             {t("cul_button")}
           </PrimaryButton>
         </div>
