@@ -48,7 +48,7 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
       {showModal && <SubmitModal onClose={() => setShowModal(false)} />}
     </div>
   ) : (
-    <div className="symptoms symptoms--submitted title" id="symptoms">
+    <div className="symptoms symptoms__submitted title" id="symptoms">
       {t("submitted")}
     </div>
   );
@@ -61,6 +61,6 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-const TrackYourSymptomsConnected = connect(mapStateToProps)(TrackYourSymptoms)
+const TrackYourSymptomsConnected = connect(mapStateToProps)(TrackYourSymptoms);
 
 export default withTranslation("Form")(TrackYourSymptomsConnected);

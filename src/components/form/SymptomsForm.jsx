@@ -47,8 +47,8 @@ const SymptomsForm = ({ change, handleSubmit }) => {
         <RecaptchaField
           lang={lang}
           recaptchaLoaded={recaptchaLoaded}
-          recaptchaExpired={handleRecaptchaVerified}
-          verifyCallback={handleRecaptchaExpired}
+          handleRecaptchaExpired={handleRecaptchaExpired}
+          handleRecaptchaVerified={handleRecaptchaVerified}
         />
         <Field
           component={TextInput}
