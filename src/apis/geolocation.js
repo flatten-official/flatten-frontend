@@ -1,6 +1,6 @@
 import React from "react";
 
-import backend from "../apis/backend";
+import backend from "./backend";
 
 import i18next from "i18next";
 
