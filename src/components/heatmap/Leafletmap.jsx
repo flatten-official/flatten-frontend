@@ -61,8 +61,8 @@ function create_style_function(formData, colour_scheme, thresholds, data_tag) {
     let post_code_data;
 
     if (i18nlang === "enUS") {
-      post_code_data = test
-        ? test["county"][feature.properties.NAME]
+      post_code_data = formData
+        ? formData["county"][feature.properties.NAME]
         : null;
     } else {
       post_code_data = formData
@@ -143,7 +143,7 @@ class Leafletmap extends React.Component {
       confUrl = URLS["cadConf"];
     }
 
-    this.state = { tab: "both", formURL: formUrl, confURL: confUrl, formData: {}, confirmed_cases: {}};
+    this.state = { tab: "both", formURL: formUrl, confURL: confUrl, formData: null, confirmed_cases: null};
     this.setTab = this.setTab.bind(this);
 
     this.getFormData = this.getFormData.bind(this);
@@ -163,7 +163,6 @@ class Leafletmap extends React.Component {
     fetch(this.state.formURL)
       .then(r => r.json())
       .then(d => {
-        console.log(d);
         return d;
       })
       .then(formData => this.setState({ formData }));
@@ -179,8 +178,10 @@ class Leafletmap extends React.Component {
   }
 
   // default map renderer. it only renders circles if pointTolayer is defined
-  renderMap(formData, confirmed_cases, styleFunc, bindPopupOnEachFeature, tab, pointToLayer, styleFuncCircles) {
+  renderMap(formData, confirmed_cases, bindPopupOnEachFeature, tab, pointToLayer, styleFuncCircles) {
     let data;
+    let styleFunc;
+
     if (
       formData !== null &&
       (tab === "both" || tab === "pot" || tab === "vuln")
@@ -190,8 +191,37 @@ class Leafletmap extends React.Component {
       } else {
         data = convertedBoundaries;
       }
+
+      if (tab === "pot") {
+        styleFunc = create_style_function(
+          formData,
+          COLOUR_SCHEME,
+          POT_SCHEME_THRESHOLDS,
+          "pot"
+        );
+      } else if (tab === "vuln") {
+        styleFunc = create_style_function(
+          formData,
+          COLOUR_SCHEME,
+          HIGH_RISK_SCHEME_THRESHOLDS,
+          "risk"
+        );
+      } else if (tab === "both") {
+        styleFunc = create_style_function(
+          formData,
+          COLOUR_SCHEME,
+          BOTH_SCHEME_THRESHOLDS,
+          "both"
+        );
+      }
     } else if (tab == "conf") {
       data = confirmed_cases;
+      styleFunc = create_style_function(
+        formData,
+        COLOUR_SCHEME,
+        CONF_SCHEME_THRESHOLDS,
+        "conf"
+      );
       if (i18nlang === "enUS") {
         return (
           <GeoJSON
@@ -219,42 +249,16 @@ class Leafletmap extends React.Component {
 
   render() {
     let { t } = this.props;
-    let styleFunc;
-    let title = (i18nlang === "fr") ? "Réponse totales: " + this.state.formData['total_responses'] +
+    let title;
+    if (this.state.formData !== null) {
+      title = (i18nlang === "fr") ? "Réponse totales: " + this.state.formData['total_responses'] +
       " | Dernière mise à jour: " + new Date(1000 * this.state.formData["time"])
       : "Total Responses: " + this.state.formData['total_responses'] + " | Last update: " + new Date(1000 * this.state.formData["time"]);
+    } else {
+      title = (i18nlang === "fr") ? "Chargement..." : "Loading...";
+    }
     let bounds = (i18nlang === "enUS") ? USA_BOUNDS : CANADA_BOUNDS;
     let center = (i18nlang === "enUS") ? USA_CENTER : ONTARIO
-
-    if (this.state.tab === "conf") {
-      styleFunc = create_style_function(
-        this.state.formData,
-        COLOUR_SCHEME,
-        CONF_SCHEME_THRESHOLDS,
-        "conf"
-      );
-    } else if (this.state.tab === "pot") {
-      styleFunc = create_style_function(
-        this.state.formData,
-        COLOUR_SCHEME,
-        POT_SCHEME_THRESHOLDS,
-        "pot"
-      );
-    } else if (this.state.tab === "vuln") {
-      styleFunc = create_style_function(
-        this.state.formData,
-        COLOUR_SCHEME,
-        HIGH_RISK_SCHEME_THRESHOLDS,
-        "risk"
-      );
-    } else if (this.state.tab === "both") {
-      styleFunc = create_style_function(
-        this.state.formData,
-        COLOUR_SCHEME,
-        BOTH_SCHEME_THRESHOLDS,
-        "both"
-      );
-    }
 
     // needs more info for potential cases by county
     let bindPopupOnEachFeature_USA = (feature, layer) => {
@@ -394,7 +398,6 @@ class Leafletmap extends React.Component {
             {this.renderMap(
               this.state.formData,
               this.state.confirmed_cases,
-              styleFunc,
               bindPopups,
               this.state.tab,
               pointToLayer,
