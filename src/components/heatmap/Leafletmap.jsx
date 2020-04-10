@@ -12,12 +12,11 @@ import {
   LayersControl
 } from "react-leaflet";
 import convertedBoundaries from "./converted_boundaries.js";
-import zipcodes from "./zipcode_geo.js";
+import counties from "./county_boundaries.js";
 import Legend from "./Legend";
 import L from "leaflet";
 import i18next from "i18next";
 
-console.log(zipcodes)
 // checks language 
 const i18nlang = i18next.language;
 
@@ -48,7 +47,7 @@ const URLS = {
   "usaConf": "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
 };
 
-
+// this will work for USA once we have data to fetch for usa FORMS
 function create_style_function(formData, colour_scheme, thresholds, data_tag) {
   return feature => {
     let opacity = POLYGON_OPACITY; // If no data, is transparent
@@ -92,8 +91,10 @@ function create_style_function(formData, colour_scheme, thresholds, data_tag) {
     };
   };
 }
-
+// for circles
 function create_style_function_USA(form_data, data_tag) {
+  
+
   return {
     weight: 0,
     color: "red",
@@ -102,7 +103,6 @@ function create_style_function_USA(form_data, data_tag) {
   };
 }
 
-// Don't have tabs
 
 // assigns color based on thresholds
 function getColour(cases, colour_scheme, color_thresholds) {
@@ -170,15 +170,31 @@ class Leafletmap extends React.Component {
       .then(confirmed_cases => this.setState({ confirmed_cases }));
   }
 
-  renderMap(formData, confirmed_cases, styleFunc, bindPopupOnEachFeature, tab) {
+  // default map renderer. it only renders circles if pointTolayer is defined
+  renderMap(formData, confirmed_cases, styleFunc, bindPopupOnEachFeature, tab, pointToLayer, styleFuncCircles) {
     let data;
     if (
       formData !== null &&
       (tab === "both" || tab === "pot" || tab === "vuln")
     ) {
-      data = convertedBoundaries;
+      if (pointToLayer !== null) {
+        data = counties;
+      } else {
+        data = convertedBoundaries;
+      }
     } else if (tab == "conf") {
       data = confirmed_cases;
+      if (pointToLayer !== null) {
+        return (
+          <GeoJSON
+            data={data}
+            style={styleFuncCircles}
+            onEachFeature={bindPopupOnEachFeature}
+            pointToLayer={pointToLayer}
+            key={tab}
+          />
+        );
+      }
     } else {
       return null;
     }
@@ -191,32 +207,6 @@ class Leafletmap extends React.Component {
         key={tab}
       />
     );
-  }
-
-  renderMap_USA(formData, confirmed_cases, bindPopupOnEachFeature, tab, pointToLayer, styleFunc) {
-    let data;
-
-    //add a condition if formdata exists later
-    if (tab === "both" || tab === "pot" || tab === "vuln") {
-      data = zipcodes;
-    } else if (tab == "conf") {
-      data = confirmed_cases;
-    } else {
-      return null;
-    }
-
-    console.log(data)
-
-    return (
-      <GeoJSON
-        data={data}
-        style={styleFunc}
-        onEachFeature={bindPopupOnEachFeature}
-        pointToLayer={pointToLayer}
-        key={tab}
-      />
-    );
-
   }
 
   render() {
@@ -225,23 +215,19 @@ class Leafletmap extends React.Component {
     let title;
 
     if (this.state.tab === "conf") {
-      //potential cases style function just for example
       styleFunc = create_style_function(
         this.state.formData,
         COLOUR_SCHEME,
         CONF_SCHEME_THRESHOLDS,
         "conf"
       );
-      // legend = confirmedLegend;
     } else if (this.state.tab === "pot") {
-      //potential cases style function just for example
       styleFunc = create_style_function(
         this.state.formData,
         COLOUR_SCHEME,
         POT_SCHEME_THRESHOLDS,
         "pot"
       );
-      // legend = confirmedLegend;
     } else if (this.state.tab === "vuln") {
       styleFunc = create_style_function(
         this.state.formData,
@@ -257,7 +243,8 @@ class Leafletmap extends React.Component {
         "both"
       );
     }
-
+    
+    // Converts points from GeoJSON to circles
     let pointToLayer = (feature, latlng) => {
       let radius = MIN_CIRCLE_RADIUS;
       let cases = feature['properties']['Confirmed'];
@@ -265,13 +252,13 @@ class Leafletmap extends React.Component {
       if (cases > 10000) {
         radius = MAX_CIRCLE_RAD;
       } else if (cases > 5000) {
-        radius = MAX_CIRCLE_RAD * (4/5);
+        radius = MAX_CIRCLE_RAD * (4 / 5);
       } else if (cases > 2500) {
-        radius = MAX_CIRCLE_RAD * (3/5);
+        radius = MAX_CIRCLE_RAD * (3 / 5);
       } else if (cases > 1000) {
         radius = MAX_CIRCLE_RAD / 2;
       } else if (cases > 500) {
-        radius = MAX_CIRCLE_RAD * (2/5);
+        radius = MAX_CIRCLE_RAD * (2 / 5);
       } else if (cases > 100) {
         radius = MAX_CIRCLE_RAD / 5;
       }
@@ -281,17 +268,17 @@ class Leafletmap extends React.Component {
       });
     }
 
-    // for USA
+    // needs more info for potential cases by county
     let bindPopupOnEachFeature_USA = (feature, layer) => {
       let content;
 
       if (this.state.tab === "conf") {
-        content = "<b>"+ feature.properties["Combined_Key"] + "</b>" + "<p>Confirmed Cases: " + feature.properties["Confirmed"] + "</p>"
+        content = "<b>" + feature.properties["Combined_Key"] + "</b>" + "<p>Confirmed Cases: " + feature.properties["Confirmed"] + "</p>"
+      } else {
+        content = "<b>" + feature.properties["NAME"] + "</b>"
       }
 
-      const popup = L.popup().setLatLng(layer.getLatLng()).setContent(content);
-
-      layer.bindPopup(popup);
+      layer.bindPopup(content);
     };
 
     // this function is called with each polygon when the GeoJSON polygons are rendered
@@ -347,6 +334,8 @@ class Leafletmap extends React.Component {
     // the key prop on the GeoJSON component ensures React will re-render
     // the geojson layer when the tab changes. This does the work of
     // unbinding all popups and recreating them with the correct data.
+
+    //at the this.rendermap code bloc, we want to toggle between canadian or american data (setting pointotlayer to null or not)
     return (
       <div>
         <div style={{ height }}>
@@ -362,9 +351,10 @@ class Leafletmap extends React.Component {
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               minZoom={5}
             />
-            {this.renderMap_USA(
+            {this.renderMap(
               this.state.formData,
               this.state.confirmed_cases,
+              create_style_function,
               bindPopupOnEachFeature_USA,
               this.state.tab,
               pointToLayer,
