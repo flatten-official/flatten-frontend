@@ -12,10 +12,12 @@ import {
   LayersControl
 } from "react-leaflet";
 import convertedBoundaries from "./converted_boundaries.js";
+import zipcodes from "./zipcode_geo.js";
 import Legend from "./Legend";
 import L from "leaflet";
 import i18next from "i18next";
 
+console.log(zipcodes)
 // checks language 
 const i18nlang = i18next.language;
 
@@ -131,9 +133,9 @@ class Leafletmap extends React.Component {
     }*/
 
     formUrl = URLS["usaForm"];
-    confUrl = URLS["usaConf"]; 
+    confUrl = URLS["usaConf"];
 
-    this.state = { tab: "both", formURL: formUrl, confURL: confUrl, formData: null, confirmed_cases: null};
+    this.state = { tab: "both", formURL: formUrl, confURL: confUrl, formData: null, confirmed_cases: null };
     this.setTab = this.setTab.bind(this);
 
     this.getFormData = this.getFormData.bind(this);
@@ -162,6 +164,7 @@ class Leafletmap extends React.Component {
     fetch(this.state.confURL)
       .then(r => r.json())
       .then(d => {
+        console.log(d)
         return d;
       })
       .then(confirmed_cases => this.setState({ confirmed_cases }));
@@ -191,7 +194,18 @@ class Leafletmap extends React.Component {
   }
 
   renderMap_USA(formData, confirmed_cases, bindPopupOnEachFeature, tab, pointToLayer, styleFunc) {
-    let data = confirmed_cases;
+    let data;
+
+    //add a condition if formdata exists later
+    if (tab === "both" || tab === "pot" || tab === "vuln") {
+      data = zipcodes;
+    } else if (tab == "conf") {
+      data = confirmed_cases;
+    } else {
+      return null;
+    }
+
+    console.log(data)
 
     return (
       <GeoJSON
