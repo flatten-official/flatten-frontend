@@ -5,8 +5,8 @@ steps:
     args:
       [
         "cp",
-        "src/components/form/Recaptcha.$_ENVIRONMENT.js",
-        "src/components/form/Recaptcha.js",
+        "src/components/common/fields/Recaptcha/Recaptcha.$_ENVIRONMENT.js",
+        "src/components/common/fields/Recaptcha/Recaptcha.js",
       ]
   - name: "gcr.io/cloud-builders/npm"
     entrypoint: "npm"

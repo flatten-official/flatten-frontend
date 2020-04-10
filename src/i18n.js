@@ -44,6 +44,17 @@ i18n
         Info: EnInfo,
         Form: EnForm
       },
+      enUS: {
+        HomePage: EnHomePage,
+        Supporters: EnSupporters,
+        Navbar: EnNavbar,
+        Heatmap: EnHeatmap,
+        AboutUs: EnAboutUs,
+        EsriGsiMap: EnEsriGsiMap,
+        Footer: EnFooter,
+        Info: EnInfo,
+        Form: EnForm,
+      },
       fr: {
         HomePage: FrHomePage,
         Supporters: FrSuppporters,
