@@ -18,7 +18,8 @@ import L from "leaflet";
 import i18next from "i18next";
 
 // checks language 
-const i18nlang = i18next.language;
+//const i18nlang = i18next.language;
+const i18nlang = "enUS";
 
 // stays in Canada
 const CANADA_BOUNDS = [[38, -150], [87, -45]];
@@ -93,8 +94,6 @@ function create_style_function(formData, colour_scheme, thresholds, data_tag) {
 }
 // for circles
 function create_style_function_USA(form_data, data_tag) {
-  
-
   return {
     weight: 0,
     color: "red",
@@ -124,8 +123,8 @@ class Leafletmap extends React.Component {
     let formUrl;
     let confUrl;
 
-    if (i18nlang === "enUS") {      
-      formUrl = URLS["usaForm"];
+    if (i18nlang === "enUS") {
+      formUrl = URLS["cadForm"];
       confUrl = URLS["usaConf"];
     } else {
       formUrl = URLS["cadForm"];
@@ -173,14 +172,14 @@ class Leafletmap extends React.Component {
       formData !== null &&
       (tab === "both" || tab === "pot" || tab === "vuln")
     ) {
-      if (pointToLayer !== null) {
+      if (i18nlang === "enUS") {
         data = counties;
       } else {
         data = convertedBoundaries;
       }
     } else if (tab == "conf") {
       data = confirmed_cases;
-      if (pointToLayer !== null) {
+      if (i18nlang === "enUS") {
         return (
           <GeoJSON
             data={data}
@@ -238,30 +237,6 @@ class Leafletmap extends React.Component {
         BOTH_SCHEME_THRESHOLDS,
         "both"
       );
-    }
-    
-    // Converts points from GeoJSON to circles
-    let pointToLayer = (feature, latlng) => {
-      let radius = MIN_CIRCLE_RADIUS;
-      let cases = feature['properties']['Confirmed'];
-
-      if (cases > 10000) {
-        radius = MAX_CIRCLE_RAD;
-      } else if (cases > 5000) {
-        radius = MAX_CIRCLE_RAD * (4 / 5);
-      } else if (cases > 2500) {
-        radius = MAX_CIRCLE_RAD * (3 / 5);
-      } else if (cases > 1000) {
-        radius = MAX_CIRCLE_RAD / 2;
-      } else if (cases > 500) {
-        radius = MAX_CIRCLE_RAD * (2 / 5);
-      } else if (cases > 100) {
-        radius = MAX_CIRCLE_RAD / 5;
-      }
-
-      return L.circleMarker(latlng, {
-        radius: radius
-      });
     }
 
     // needs more info for potential cases by county
@@ -322,6 +297,35 @@ class Leafletmap extends React.Component {
       layer.bindPopup(content);
     };
 
+    let pointToLayer;
+    let bindPopups = bindPopupOnEachFeature;
+
+    if (i18nlang === "enUS") {
+      bindPopups = bindPopupOnEachFeature_USA;
+      pointToLayer = (feature, latlng) => {
+        let radius = MIN_CIRCLE_RADIUS;
+        let cases = feature['properties']['Confirmed'];
+  
+        if (cases > 10000) {
+          radius = MAX_CIRCLE_RAD;
+        } else if (cases > 5000) {
+          radius = MAX_CIRCLE_RAD * (4 / 5);
+        } else if (cases > 2500) {
+          radius = MAX_CIRCLE_RAD * (3 / 5);
+        } else if (cases > 1000) {
+          radius = MAX_CIRCLE_RAD / 2;
+        } else if (cases > 500) {
+          radius = MAX_CIRCLE_RAD * (2 / 5);
+        } else if (cases > 100) {
+          radius = MAX_CIRCLE_RAD / 5;
+        }
+  
+        return L.circleMarker(latlng, {
+          radius: radius
+        });
+      }
+    }
+
     //
     // we wait until the formData is not null before rendering the GeoJSON.
     // otherwise it will try to create a popup for every FSA but the data won't
@@ -351,9 +355,9 @@ class Leafletmap extends React.Component {
               this.state.formData,
               this.state.confirmed_cases,
               styleFunc,
-              bindPopupOnEachFeature_USA,
+              bindPopups,
               this.state.tab,
-              null,
+              pointToLayer,
               create_style_function_USA
             )}
             <Legend colourScheme={COLOUR_SCHEME} tab={this.state.tab} />
