@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-scroll";
 import { NavLink, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { getGeolocation } from "../../actions";
 import i18next from "i18next";
-import history from "../../history";
 
-import Geolocation from "../../apis/geolocation";
+import history from "../../history";
 
 import logo from "../../assets/logo-black.png";
 
-const Navbar = ({ t }) => {
+const Navbar = ({ t, getGeolocation }) => {
+  useEffect(() => {
+    getGeolocation();
+  }, []);
   let location = useLocation();
   let logoLink = null;
   let homeLink = null;
@@ -148,9 +152,10 @@ const Navbar = ({ t }) => {
           </option>
         </select>
       </div>
-      <Geolocation />
     </nav>
   );
 };
 
-export default withTranslation("Navbar")(Navbar);
+export default connect(null, { getGeolocation })(
+  withTranslation("Navbar")(Navbar)
+);

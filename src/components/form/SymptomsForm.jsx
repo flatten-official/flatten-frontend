@@ -2,21 +2,22 @@ import React from "react";
 import { reduxForm, Field } from "redux-form";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-
-import { formValidation } from "./formUtils/formValidation";
-import { questions } from "./formUtils/formQuestions";
+import { connect } from "react-redux";
+import { getFormValidation } from "./formUtils/formValidation";
+import { getQuestions } from "./formUtils/formQuestions";
 
 import Checkbox from "../common/fields/Checkbox";
 import TextInput from "../common/fields/TextInput";
 import RecaptchaField from "../common/fields/Recaptcha/RecaptchaField";
 
 import { validate } from "../../utils/formValidation";
-
-export const symptomsFormName = "trackYourSymptoms";
-
 const lang = i18next.language;
 
-const SymptomsForm = ({ change, handleSubmit }) => {
+export const symptomsFormName = "trackYourSymptoms";
+const formValidation = getFormValidation(lang);
+
+const SymptomsForm = ({ change, handleSubmit, location }) => {
+  const questions = getQuestions(location);
   const { t } = useTranslation("Form");
   const recaptchaLoaded = () => {
     //console.log("Loaded");
@@ -33,7 +34,7 @@ const SymptomsForm = ({ change, handleSubmit }) => {
     }
   };
 
-  return (
+  return location ? (
     <form onSubmit={handleSubmit}>
       <div className="symptoms-form">
         {questions.map(({ body, ...question }) => (
@@ -68,7 +69,14 @@ const SymptomsForm = ({ change, handleSubmit }) => {
         </div>
       </div>
     </form>
-  );
+  ) : null;
+};
+
+const mapStateToProps = (state) => {
+  if (state.locationChange.status) {
+    return { location: state.locationChange.status };
+  }
+  return { location: false };
 };
 
 export default reduxForm({
@@ -79,4 +87,4 @@ export default reduxForm({
     conditions: [],
     needs: [],
   },
-})(SymptomsForm);
+})(connect(mapStateToProps)(SymptomsForm));
