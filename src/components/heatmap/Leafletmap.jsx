@@ -13,8 +13,11 @@ import {
 } from "react-leaflet";
 import convertedBoundaries from "./converted_boundaries.js";
 import Legend from "./Legend";
+import L from "leaflet";
+import i18next from "i18next";
 
-// console.log("converted", convertedBoundaries);
+// checks language 
+const i18nlang = i18next.language;
 
 // stays in Canada
 const CANADA_BOUNDS = [[38, -150], [87, -45]];
@@ -34,21 +37,15 @@ const NOT_ENOUGH_GRAY = "#909090";
 // max size circle can be on map
 const MAX_CIRCLE_RAD = 35;
 const MIN_CIRCLE_RADIUS = 6;
+const MAX_CASES = 10000;
 const CON_SCHEME_THRESHOLDS = [5, 25, 100, 250];
+const URLS = {
+  "cadForm": "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
+  "usaForm": "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json",
+  "cadConf": "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson",
+  "usaConf": "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
+};
 
-function styleConfirmedPolygons(feature) {
-  const case_num = feature.properties["CaseCount"];
-
-  return {
-    // define the outlines of the map
-    weight: 0.9,
-    color: "gray",
-    dashArray: "3",
-    // define the color and opacity of each polygon
-    fillColor: getColour(case_num, COLOUR_SCHEME, CON_SCHEME_THRESHOLDS),
-    fillOpacity: case_num === 0 ? 0 : POLYGON_OPACITY
-  };
-}
 
 function create_style_function(formData, colour_scheme, thresholds, data_tag) {
   return feature => {
@@ -112,17 +109,31 @@ function getColour(cases, colour_scheme, color_thresholds) {
 class Leafletmap extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { tab: "vuln", formData: null, confirmed_cases: null, USA_confirmed_cases: null };
+
+    let formUrl;
+    let confUrl;
+
+    /*if (i18nlang === "enUS") {      
+      formUrl = URLS["usaForm"];
+      confUrl = URLS["usaConf"];
+    } else {
+      formUrl = URLS["cadForm"];
+      confUrl = URLS["cadConf"];
+    }*/
+
+    formUrl = URLS["usaForm"];
+    confUrl = URLS["usaConf"]; 
+
+    this.state = { tab: "both", formURL: formUrl, confURL: confUrl, formData: null, confirmed_cases: null};
     this.setTab = this.setTab.bind(this);
+
     this.getFormData = this.getFormData.bind(this);
     this.getConfirmedCasesData = this.getConfirmedCasesData.bind(this);
-    this.getUSAConfirmedCasesData = this.getUSAConfirmedCasesData.bind(this);
   }
 
   componentDidMount() {
     this.getFormData();
     this.getConfirmedCasesData();
-    this.getUSAConfirmedCasesData();
   }
 
   setTab(tabID) {
@@ -130,55 +141,21 @@ class Leafletmap extends React.Component {
   }
 
   getFormData() {
-    // console.log("getting form data");
-    let url =
-      "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json";
-    fetch(url)
+    fetch(this.state.formURL)
       .then(r => r.json())
       .then(d => {
-        // console.log(d);
         return d;
       })
       .then(formData => this.setState({ formData }));
   }
 
   getConfirmedCasesData() {
-    // console.log("getting confirmed cases data");
-    let url =
-      "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson";
-    fetch(url)
+    fetch(this.state.confURL)
       .then(r => r.json())
       .then(d => {
-        // console.log(d);
         return d;
       })
       .then(confirmed_cases => this.setState({ confirmed_cases }));
-  }
-
-  getUSAConfirmedCasesData() {
-    // console.log("getting confirmed cases data");
-    let url =
-      "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson";
-    fetch(url)
-      .then(r => r.json())
-      .then(d => {
-        console.log(d);
-        return d;
-      })
-      .then(USA_confirmed_cases => this.setState({ USA_confirmed_cases }));
-  }
-
-  getHospitalData() {
-    // console.log("getting hospital data");
-    let url =
-      "https://opendata.arcgis.com/datasets/1973e081296445f4b85bab94f99d2390_0.geojson";
-    fetch(url)
-      .then(r => r.json())
-      .then(d => {
-        // console.log(d);
-        return d;
-      })
-      .then(hospital_data => this.setState({ hospital_data }));
   }
 
   renderMap(formData, confirmed_cases, styleFunc, bindPopupOnEachFeature, tab) {
@@ -204,9 +181,22 @@ class Leafletmap extends React.Component {
     );
   }
 
+  renderMap_USA(formData, confirmed_cases, bindPopupOnEachFeature, tab, pointToLayer) {
+    let data = confirmed_cases;
+
+    return (
+      <GeoJSON
+        data={data}
+        onEachFeature={bindPopupOnEachFeature}
+        pointToLayer={pointToLayer}
+        key={tab}
+      />
+    );
+
+  }
+
   render() {
     let { t } = this.props;
-    let legend;
     let styleFunc;
     let title;
 
@@ -243,6 +233,31 @@ class Leafletmap extends React.Component {
         "both"
       );
     }
+
+    let pointToLayer = (feature, latlng) => {
+      let radius = MIN_CIRCLE_RADIUS;
+      let percent = feature['properties']['Confirmed']/MAX_CASES;
+
+      if (percent > 1) {
+        radius = MAX_CIRCLE_RAD;
+      } else if (percent > 0.05) {
+        radius = percent * MAX_CIRCLE_RAD;
+      }
+
+      return L.circleMarker(latlng, {
+        radius: radius
+      });
+    }
+
+    // for USA
+    let bindPopupOnEachFeature_USA = (feature, layer) => {
+      let loc = "<b>"+ feature.properties["Combined_Key"] + "</b>";
+      let numbers = "<p>Confirmed Cases: " + feature.properties["Confirmed"] + "</p>";
+
+      let content = loc + numbers;
+
+      layer.bindPopup(content);
+    };
 
     // this function is called with each polygon when the GeoJSON polygons are rendered
     // just creates the popup content and binds a popup to each polygon
@@ -289,7 +304,6 @@ class Leafletmap extends React.Component {
       layer.bindPopup(content);
     };
 
-    // feel free to change classNames I just named them
     //
     // we wait until the formData is not null before rendering the GeoJSON.
     // otherwise it will try to create a popup for every FSA but the data won't
@@ -313,16 +327,13 @@ class Leafletmap extends React.Component {
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               minZoom={4}
             />
-            {this.renderMap(
+            {this.renderMap_USA(
               this.state.formData,
               this.state.confirmed_cases,
-              styleFunc,
-              bindPopupOnEachFeature,
-              this.state.tab
+              bindPopupOnEachFeature_USA,
+              this.state.tab,
+              pointToLayer
             )}
-            <CircleMarker center={[48.720315, -99.010106]} color="red" radius={20}>
-              <Popup> Popup in CircleMarker </Popup>
-            </CircleMarker>
             <Legend colourScheme={COLOUR_SCHEME} tab={this.state.tab} />
           </Map>
         </div>
