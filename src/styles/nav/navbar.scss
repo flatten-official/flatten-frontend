@@ -87,6 +87,7 @@
   text-decoration: none;
   font-size: 16px;
 }
+
 .navbar__covid_fr {
   vertical-align: middle;
   color: $navy-blue;
@@ -129,7 +130,7 @@
     right: 100px;
     display: flex;
   }
-  
+
   .navbar__lang {
     position: absolute;
     right: 30px;
@@ -172,11 +173,11 @@
     font-size: 10px;
   }
   .nav__info_en {
-    right: 50px;
+    right: 14%;
   }
   .nav__info_fr {
     width: 120px;
-    right: 60px
+    right: 60px;
   }
 }
 
@@ -185,7 +186,7 @@
     font-size: 8px;
   }
   .nav__info_en {
-    right: 32px;
+    right: 16%;
   }
   .navbar__lang {
     right: 15px;
@@ -205,6 +206,7 @@
     margin-right: 0px;
     width: 70px;
   }
+
   .nav__info_en {
     width: 80px;
   }
