@@ -8,7 +8,9 @@ const AboutUs = ({ t }) => {
     window.scrollTo(0, 0);
   }, []);
 
-  const volunteers = t("volunteers", { returnObjects: true });
+  const devs = t("devs", { returnObjects: true });
+  const advisors = t("advisors", { returnObjects: true });
+  const team = t("team", { returnObjects: true });
   return (
     <React.Fragment>
       <section className="about-us__header">
@@ -23,22 +25,50 @@ const AboutUs = ({ t }) => {
           </p>
         </div>
       </section>
-      <section>
-        <div className="about-us__body">
-          {volunteers.map((volunteer, index) => (
-            <Profile
-              key={index}
-              link={volunteer.link}
-              name={volunteer.name}
-              src={volunteer.src}
-              key={index}
-              role={volunteer.role}
-              degrees={volunteer.degrees}
-              titles={volunteer.titles}
-            />
-          ))}
-        </div>
-      </section>
+      <div className="about-us__body">
+        {devs.map((dev, index) => (
+          <Profile
+            key={index}
+            link={dev.link}
+            name={dev.name}
+            src={dev.src}
+            key={index}
+            role={dev.role}
+            degrees={dev.degrees}
+            titles={dev.titles}
+          />
+        ))}
+      </div>
+      <h4 className="about-us__title title">{t("advisorsHeader")}</h4>
+      <div className="about-us__body">
+        {advisors.map((advisor, index) => (
+          <Profile
+            key={index}
+            link={advisor.link}
+            name={advisor.name}
+            src={advisor.src}
+            key={index}
+            role={advisor.role}
+            degrees={advisor.degrees}
+            titles={advisor.titles}
+          />
+        ))}
+      </div>
+      <h4 className="about-us__title title">{t("teamHeader")}</h4>
+      <div className="about-us__body">
+        {team.map((member, index) => (
+          <Profile
+            key={index}
+            link={member.link}
+            name={member.name}
+            src={member.src}
+            key={index}
+            role={member.role}
+            degrees={member.degrees}
+            titles={member.titles}
+          />
+        ))}
+      </div>
     </React.Fragment>
   );
 };
