@@ -5,6 +5,8 @@ import { withTranslation } from "react-i18next";
 import i18next from "i18next";
 import history from "../../history";
 
+import Geolocation from "../../apis/geolocation";
+
 import logo from "../../assets/logo-black.png";
 
 const Navbar = ({ t }) => {
@@ -146,6 +148,7 @@ const Navbar = ({ t }) => {
           </option>
         </select>
       </div>
+      <Geolocation />
     </nav>
   );
 };
