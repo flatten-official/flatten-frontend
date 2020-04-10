@@ -19,16 +19,16 @@ const Navbar = ({ t }) => {
   switch (i18nlang) {
     case "en":
       toggle = "fr";
-      current = "en"
-      
+      current = "en";
+
       break;
     case "fr":
       toggle = "en";
-      current = "fr"
+      current = "fr";
       break;
     default:
       toggle = "fr";
-      current = "en"
+      current = "en";
   }
   let linkLang = `/?lang=${toggle}`;
 
@@ -118,11 +118,17 @@ const Navbar = ({ t }) => {
             {t("info")}
           </NavLink>
         </li>
-        <li className="navbar__lang">
-          <a className={`navbar__covid_${current} nav__a`} href={linkLang}>
-            {toggle}
-          </a>
-        </li>
+        <select className="body nav__lang">
+          <option className="body" value="en-ca">
+            en-ca
+          </option>
+          <option className="body" value="en-us">
+            en-us
+          </option>
+          <option className="body" value="fr">
+            fr
+          </option>
+        </select>
       </div>
     </nav>
   );
