@@ -1,6 +1,5 @@
 .nav {
   position: fixed;
-  display: relative;
   top: 0px;
   left: 0px;
   width: 100vw;
@@ -56,13 +55,15 @@
 
 .nav__info_en {
   position: absolute;
-  right: 10%;
+  right: 100px;
   display: flex;
 }
 
-.nav__lang {
+.nav__info_fr {
+  text-align: center;
+  width: 80px;
   position: absolute;
-  right: 1%;
+  right: 130px;
   display: flex;
 }
 
@@ -73,7 +74,7 @@
 
 .navbar__lang {
   position: absolute;
-  right: 40px;
+  right: 0px;
   display: flex;
 }
 
@@ -95,9 +96,8 @@
   font-size: 16px;
 }
 
-@media screen and (max-width: 900px) {
-  .nav__item {
-    text-align: center;
+@media screen and (max-width: 1023px) {
+  .nav__item_fr {
     vertical-align: middle;
     display: inline;
     width: 120px;
@@ -109,8 +109,7 @@
     text-align: center;
     vertical-align: middle;
     display: inline;
-    width: 100px;
-    right: 14%;
+    width: 120px;
   }
 
   .nav__optional {
@@ -122,6 +121,7 @@
     font-size: 16px;
     line-height: normal;
   }
+
   .nav__info_en {
     text-align: center;
     display: inline;
@@ -132,13 +132,11 @@
   }
 
   .navbar__lang {
-    position: absolute;
-    right: 30px;
-    display: flex;
+    font-size: 16px;
   }
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 700px) {
   .nav__content {
     margin: 0;
     padding: 0;
@@ -151,7 +149,7 @@
     margin-right: 5px;
     color: $dark-grey;
     font-size: 10px;
-    width: 60px;
+    width: 85px;
   }
   .nav__item_fr {
     margin-left: 5px;
@@ -159,6 +157,10 @@
     color: $dark-grey;
     font-size: 10px;
     width: 85px;
+  }
+
+  .navbar__lang {
+    font-size: 10px;
   }
   .navbar__logo {
     width: 60px;
@@ -173,7 +175,7 @@
     font-size: 10px;
   }
   .nav__info_en {
-    right: 14%;
+    right: 50px;
   }
   .nav__info_fr {
     width: 120px;
@@ -186,17 +188,22 @@
     font-size: 8px;
   }
   .nav__info_en {
-    right: 16%;
-  }
-  .navbar__lang {
-    right: 15px;
+    right: 32px;
   }
   .navbar__covid_fr {
     font-size: 8px;
   }
+
+  .nav__info_en {
+    right: 10%;
+  }
   .nav__info_fr {
     width: 80px;
     right: 8%;
+  }
+
+  .navbar__lang {
+    font-size: 8px;
   }
 }
 
@@ -206,7 +213,6 @@
     margin-right: 0px;
     width: 70px;
   }
-
   .nav__info_en {
     width: 80px;
   }

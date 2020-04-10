@@ -123,6 +123,7 @@ const Navbar = ({ t }) => {
       </a>
     );
   }
+
   return (
     <nav className="nav">
       <div className="nav__content body">
@@ -135,7 +136,7 @@ const Navbar = ({ t }) => {
             {t("info")}
           </NavLink>
         </li>
-        <select className="body nav__lang" onChange={languageHandler}>
+        <select className="body navbar__lang" onChange={languageHandler}>
           <option className="body" value="en" selected={selectedEn}>
             en-ca
           </option>
