@@ -128,10 +128,10 @@ const Navbar = ({ t }) => {
     <nav className="nav">
       <div className="nav__content body">
         <li className="nav__item nav__logo-container">{logoLink}</li>
-        <li className={`nav__item_en nav__optional`}>{homeLink}</li>
-        <li className={`nav__item_${current}`}>{symptomsLink}</li>
-        <li className={`nav__item_${current}`}>{heatmapLink}</li>
-        <NavLink className={`nav__covid_${current}`} exact to="/info">
+        <li className={`nav__item-en nav__optional`}>{homeLink}</li>
+        <li className={`nav__item-${current}`}>{symptomsLink}</li>
+        <li className={`nav__item-${current}`}>{heatmapLink}</li>
+        <NavLink className={`nav__covid-${current}`} exact to="/info">
           {t("info")}
         </NavLink>
         <select className="body nav__lang" onChange={languageHandler}>

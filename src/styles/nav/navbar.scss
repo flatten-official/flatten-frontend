@@ -38,7 +38,7 @@
   list-style-type: none;
 }
 
-.nav__item_en {
+.nav__item-en {
   font-size: 16px;
   display: inline;
   margin-left: 2rem;
@@ -49,7 +49,7 @@
   }
 }
 
-.nav__item_fr {
+.nav__item-fr {
   font-size: 16px;
   display: inline;
   margin-left: 2rem;
@@ -62,7 +62,7 @@
   }
 }
 
-.nav__covid_en {
+.nav__covid-en {
   position: absolute;
   right: 120px;
   display: flex;
@@ -72,7 +72,7 @@
   font-size: 16px;
 }
 
-.nav__covid_fr {
+.nav__covid-fr {
   text-align: center;
   width: 80px;
   position: absolute;
@@ -91,13 +91,13 @@
 }
 
 @media screen and (max-width: 1023px) {
-  .nav__item_fr {
+  .nav__item-fr {
     width: 120px;
   }
 }
 
 @media screen and (max-width: 860px) {
-  .nav__item_en {
+  .nav__item-en {
     text-align: center;
     vertical-align: middle;
     display: inline;
@@ -108,7 +108,7 @@
     display: none;
   }
 
-  .nav__covid_en {
+  .nav__covid-en {
     text-align: center;
     display: inline;
     width: 80px;
@@ -134,26 +134,26 @@
     width: 70px;
   }
 
-  .nav__item_en {
+  .nav__item-en {
     margin-left: 5px;
     margin-right: 5px;
     font-size: 10px;
     width: 85px;
   }
 
-  .nav__item_fr {
+  .nav__item-fr {
     margin-left: 5px;
     margin-right: 5px;
     font-size: 10px;
     width: 85px;
   }
 
-  .nav__covid_en {
+  .nav__covid-en {
     right: 60px;
     font-size: 10px;
   }
 
-  .nav__covid_fr {
+  .nav__covid-fr {
     width: 120px;
     right: 60px;
     font-size: 10px;
@@ -165,19 +165,19 @@
 }
 
 @media screen and (max-width: 420px) {
-  .nav__item_en {
+  .nav__item-en {
     width: 80px;
   }
 
-  .nav__item_fr {
+  .nav__item-fr {
     font-size: 8px;
   }
 
-  .nav__covid_en {
+  .nav__covid-en {
     right: 45px;
   }
 
-  .nav__covid_fr {
+  .nav__covid-fr {
     width: 40px;
     right: 70px;
     font-size: 8px;
@@ -190,21 +190,21 @@
 }
 
 @media screen and (max-width: 360px) {
-  .nav__item_en {
+  .nav__item-en {
     margin-left: 3px;
     margin-right: 0px;
     width: 70px;
   }
 
-  .nav__item_fr {
+  .nav__item-fr {
     width: 50px;
   }
 
-  .nav__covid_en {
+  .nav__covid-en {
     width: 80px;
   }
 
-  .nav__covid_fr {
+  .nav__covid-fr {
     width: 40px;
     right: 35px;
   }
