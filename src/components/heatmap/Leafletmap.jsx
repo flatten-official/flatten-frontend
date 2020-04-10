@@ -124,16 +124,13 @@ class Leafletmap extends React.Component {
     let formUrl;
     let confUrl;
 
-    /*if (i18nlang === "enUS") {      
+    if (i18nlang === "enUS") {      
       formUrl = URLS["usaForm"];
       confUrl = URLS["usaConf"];
     } else {
       formUrl = URLS["cadForm"];
       confUrl = URLS["cadConf"];
-    }*/
-
-    formUrl = URLS["usaForm"];
-    confUrl = URLS["usaConf"];
+    }
 
     this.state = { tab: "both", formURL: formUrl, confURL: confUrl, formData: null, confirmed_cases: null };
     this.setTab = this.setTab.bind(this);
@@ -164,7 +161,6 @@ class Leafletmap extends React.Component {
     fetch(this.state.confURL)
       .then(r => r.json())
       .then(d => {
-        console.log(d)
         return d;
       })
       .then(confirmed_cases => this.setState({ confirmed_cases }));
@@ -297,7 +293,7 @@ class Leafletmap extends React.Component {
 
       if (this.state.tab === "conf") {
         content =
-          `${feature.properties["ENGNAME"]} <br/><br/>` +
+          `<b>${feature.properties["ENGNAME"]}</b><br/><br/>` +
           `${feature.properties["CaseCount"]} ${t("confirmed_cases")} <br />` +
           `${t("last_updated")}: ${feature.properties["Last_Updated"]}`;
       } else {
@@ -354,10 +350,10 @@ class Leafletmap extends React.Component {
             {this.renderMap(
               this.state.formData,
               this.state.confirmed_cases,
-              create_style_function,
+              styleFunc,
               bindPopupOnEachFeature_USA,
               this.state.tab,
-              pointToLayer,
+              null,
               create_style_function_USA
             )}
             <Legend colourScheme={COLOUR_SCHEME} tab={this.state.tab} />
