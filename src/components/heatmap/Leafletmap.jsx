@@ -52,8 +52,6 @@ const URLS = {
 //Current button
 let currTab = 0;
 
-const test = { "time": 1586532492, "total_responses": 2, "county": { "Anchorage Municipality": { "number_reports": 1, "pot": 1, "risk": 1, "both": 1, "fsa_excluded": false }, "Daviess": { "number_reports": 1, "pot": 1, "risk": 1, "both": 1, "fsa_excluded": false } } }
-
 // this will work for USA once we have data to fetch for usa FORMS
 function create_style_function(formData, colour_scheme, thresholds, data_tag) {
   return feature => {
@@ -64,7 +62,7 @@ function create_style_function(formData, colour_scheme, thresholds, data_tag) {
 
     if (i18nlang === "enUS") {
       post_code_data = formData
-        ? formData["county"][feature.properties.NAME]
+        ? formData["county"][feature.properties.COUNTYNS]
         : null;
     } else {
       post_code_data = formData
@@ -170,6 +168,7 @@ class Leafletmap extends React.Component {
     fetch(this.state.formURL)
       .then(r => r.json())
       .then(d => {
+        console.log(d);
         return d;
       })
       .then(formData => this.setState({ formData }));
@@ -270,9 +269,9 @@ class Leafletmap extends React.Component {
     // needs more info for potential cases by county
     let bindPopupOnEachFeature_USA = (feature, layer) => {
       let content;
-      let countyID = feature.properties.NAME;
+      let countyID = feature.properties.COUNTYNS;
       //let countyData = this.state.formData.county[countyID];
-      let countyData = test.county[countyID];
+      let countyData = this.state.formData.county[countyID];
       let countyReports;
       try {
         countyReports = countyData.number_reports;
@@ -282,9 +281,9 @@ class Leafletmap extends React.Component {
 
       if (countyData) {
         if (countyReports < 25) {
-          content = "<b>" + feature.properties["NAME"] + "</b><br/>" + "We don't have enough data for this region";
+          content = "<b>" + feature.properties["NAME"] + " County</b><br/>" + "We don't have enough data for this region";
         } else {
-          content = "<b>" + feature.properties["NAME"] + "</b>";
+          content = "<b>" + feature.properties["NAME"] + " County</b>";
           if (this.state.tab === "vuln") {
             content += "<p>" + countyData["risk"] + " vulnerable individuals<br/>" + countyData["number_reports"] + " reports in total</p>";
           } else if (this.state.tab === "both") {
@@ -297,7 +296,7 @@ class Leafletmap extends React.Component {
         if (this.state.tab === "conf") {
           content = "<b>" + feature.properties["Combined_Key"] + "</b>" + "<p>Confirmed Cases: " + feature.properties["Confirmed"] + "</p>"
         } else {
-          content = "<b>" + feature.properties["NAME"] + "</b><br/>" + "We don't have enough data for this region";
+          content = "<b>" + feature.properties["NAME"] + " County</b><br/>" + "We don't have enough data for this region";
         }
       }
 
