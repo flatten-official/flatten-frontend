@@ -281,7 +281,7 @@ class Leafletmap extends React.Component {
           if (this.state.tab === "vuln") {
             content += "<p>" + countyData["risk"] + " vulnerable individuals<br/>" + countyData["number_reports"] + " reports in total</p>";
           } else if (this.state.tab === "both") {
-            //content += "<p>" + countyData["both"] + "<br/>" + countyData["number_reports"] + "</p>";
+            content += "<p>" + countyData["both"] + "<br/>" + countyData["number_reports"] + "</p>";
           } else if (this.state.tab === "pot") {
             content += "<p>" + countyData["pot"] + " potential cases<br/>" + countyData["number_reports"] + " reports in total</p>";
           }
