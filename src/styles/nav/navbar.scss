@@ -8,6 +8,10 @@
   height: 70px;
   display: flex;
   box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.5);
+
+  & li {
+    list-style: none;
+  }
 }
 
 .nav__content {
@@ -40,7 +44,6 @@
 
 .nav__item-en {
   font-size: 16px;
-  display: inline;
   margin-left: 2rem;
   color: $dark-grey;
   &:hover {
@@ -64,12 +67,13 @@
 
 .nav__covid-en {
   position: absolute;
-  right: 120px;
-  display: flex;
   vertical-align: middle;
-  color: $navy-blue;
+  text-align: center;
   text-decoration: none;
+  display: flex;
+  right: 120px;
   font-size: 16px;
+  color: $navy-blue;
 }
 
 .nav__covid-fr {
@@ -98,9 +102,6 @@
 
 @media screen and (max-width: 860px) {
   .nav__item-en {
-    text-align: center;
-    vertical-align: middle;
-    display: inline;
     width: 120px;
   }
 
@@ -109,8 +110,6 @@
   }
 
   .nav__covid-en {
-    text-align: center;
-    display: inline;
     width: 80px;
     right: 100px;
   }
