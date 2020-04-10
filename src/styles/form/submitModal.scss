@@ -1,6 +1,5 @@
 .submit-modal {
-  height: 30%;
-  padding: 64px;
+  padding: 48px;
 }
 
 .submit-modal__content {
@@ -10,6 +9,11 @@
 .submit-modal__gift-icon {
   height: 100px;
   width: 100px;
+}
+
+.submit-modal__share {
+  display: flex;
+  justify-content: center;
 }
 
 @media only screen and (max-width: 1000px) {
