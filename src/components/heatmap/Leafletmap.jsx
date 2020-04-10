@@ -18,8 +18,7 @@ import L from "leaflet";
 import i18next from "i18next";
 
 // checks language 
-//const i18nlang = i18next.language;
-const i18nlang = "enUS";
+const i18nlang = i18next.language;
 
 // stays in Canada
 const CANADA_BOUNDS = [[38, -150], [87, -45]];
