@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import { withTranslation } from "react-i18next";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 import {
+  CircleMarker,
   Map,
   Marker,
   Popup,
@@ -111,15 +112,17 @@ function getColour(cases, colour_scheme, color_thresholds) {
 class Leafletmap extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { tab: "vuln", formData: null, confirmed_cases: null };
+    this.state = { tab: "vuln", formData: null, confirmed_cases: null, USA_confirmed_cases: null };
     this.setTab = this.setTab.bind(this);
     this.getFormData = this.getFormData.bind(this);
     this.getConfirmedCasesData = this.getConfirmedCasesData.bind(this);
+    this.getUSAConfirmedCasesData = this.getUSAConfirmedCasesData.bind(this);
   }
 
   componentDidMount() {
     this.getFormData();
     this.getConfirmedCasesData();
+    this.getUSAConfirmedCasesData();
   }
 
   setTab(tabID) {
@@ -150,6 +153,19 @@ class Leafletmap extends React.Component {
         return d;
       })
       .then(confirmed_cases => this.setState({ confirmed_cases }));
+  }
+
+  getUSAConfirmedCasesData() {
+    // console.log("getting confirmed cases data");
+    let url =
+      "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson";
+    fetch(url)
+      .then(r => r.json())
+      .then(d => {
+        console.log(d);
+        return d;
+      })
+      .then(USA_confirmed_cases => this.setState({ USA_confirmed_cases }));
   }
 
   getHospitalData() {
@@ -304,6 +320,9 @@ class Leafletmap extends React.Component {
               bindPopupOnEachFeature,
               this.state.tab
             )}
+            <CircleMarker center={[48.720315, -99.010106]} color="red" radius={20}>
+              <Popup> Popup in CircleMarker </Popup>
+            </CircleMarker>
             <Legend colourScheme={COLOUR_SCHEME} tab={this.state.tab} />
           </Map>
         </div>
