@@ -1,5 +1,5 @@
 .about-us__header {
-  padding: 0 10%;
+  margin-top: 150px;
 }
 
 .about-us__description {
@@ -10,12 +10,11 @@
   justify-content: center;
   display: flex;
   flex-flow: row wrap;
-  margin: 50px 80px 50px 80px;
+  margin: 40px 80px 10px 80px;
 }
 
 .about-us__title {
-  margin: 30px auto;
+  margin: 0px auto;
   text-align: center;
   width: 60%;
-  margin-top: 150px;
 }

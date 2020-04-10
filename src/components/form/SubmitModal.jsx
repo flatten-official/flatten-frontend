@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { scroller } from "react-scroll";
 import Modal from "../common/modal/Modal";
 import GiftIcon from "../../assets/gift.svg";
+import FacebookButton from "../common/buttons/FacebookButton";
+import TwitterButton from "../common/buttons/TwitterButton";
 
 const SubmitModal = ({ onClose }) => {
   useEffect(
@@ -23,6 +25,10 @@ const SubmitModal = ({ onClose }) => {
         Exit to go to the heatmap.
       </div>
       <GiftIcon className="submit-modal__gift-icon" />
+      <div className="submit-modal__share">
+        <FacebookButton />
+        <TwitterButton />
+      </div>
     </Modal>
   );
 };
