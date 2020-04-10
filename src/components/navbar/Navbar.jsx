@@ -6,6 +6,9 @@ import i18next from "i18next";
 
 import logo from "../../assets/logo-black.png";
 
+const options = ["en-ca", "en-us", "fr"];
+const defaultOption = options[0];
+
 const Navbar = ({ t }) => {
   let location = useLocation();
   let logoLink = null;
@@ -118,11 +121,17 @@ const Navbar = ({ t }) => {
             {t("info")}
           </NavLink>
         </li>
-        <li className="navbar__lang">
-          <a className={`navbar__covid_${current} nav__a`} href={linkLang}>
-            {toggle}
-          </a>
-        </li>
+        <select className="body nav__lang">
+          <option className="body" value="en-ca">
+            en-ca
+          </option>
+          <option className="body" value="en-us">
+            en-us
+          </option>
+          <option className="body" value="fr">
+            fr
+          </option>
+        </select>
       </div>
     </nav>
   );

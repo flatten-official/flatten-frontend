@@ -1,5 +1,6 @@
 .nav {
   position: fixed;
+  display: relative;
   top: 0px;
   left: 0px;
   width: 100vw;
@@ -55,15 +56,13 @@
 
 .nav__info_en {
   position: absolute;
-  right: 80px;
+  right: 10%;
   display: flex;
 }
 
-.nav__info_fr {
-  text-align: center;
-  width: 80px;
+.nav__lang {
   position: absolute;
-  right: 110px;
+  right: 1%;
   display: flex;
 }
 
@@ -95,8 +94,9 @@
   font-size: 16px;
 }
 
-@media screen and (max-width: 1023px) {
-  .nav__item_fr {
+@media screen and (max-width: 900px) {
+  .nav__item {
+    text-align: center;
     vertical-align: middle;
     display: inline;
     width: 120px;
@@ -108,7 +108,8 @@
     text-align: center;
     vertical-align: middle;
     display: inline;
-    width: 120px;
+    width: 100px;
+    right: 14%;
   }
 
   .nav__optional {
@@ -136,7 +137,7 @@
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 620px) {
   .nav__content {
     margin: 0;
     padding: 0;
@@ -149,7 +150,7 @@
     margin-right: 5px;
     color: $dark-grey;
     font-size: 10px;
-    width: 85px;
+    width: 60px;
   }
   .nav__item_fr {
     margin-left: 5px;
