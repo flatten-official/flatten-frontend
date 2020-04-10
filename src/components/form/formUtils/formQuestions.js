@@ -14,8 +14,6 @@ import {
 
 import i18next from "i18next";
 
-console.log(i18next.language);
-
 switch (i18next.language) {
   case "en":
     questions = [

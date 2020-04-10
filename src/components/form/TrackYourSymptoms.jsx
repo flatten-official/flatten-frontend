@@ -1,43 +1,30 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { submit } from "redux-form";
-import { useTranslation } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 
 import { submitForm } from "../../actions/index";
 import PrimaryButton from "../common/buttons/PrimaryButton";
-// DO NOT REPLACE
-import { symptomsFormName } from "./SymptomsForm";
+
+import SymptomsForm, { symptomsFormName } from "./SymptomsForm";
 import SubmitModal from "./SubmitModal";
 import SyringeIcon from "../../assets/syringe.svg";
 
-import SymptomsForm from "./SymptomsForm";
-
-const TrackYourSymptoms = ({ daily }) => {
+const TrackYourSymptoms = ({ t, dispatch, daily }) => {
   const [showModal, setShowModal] = useState(false);
-  const dispatch = useDispatch();
-
-  const { t } = useTranslation("Form");
 
   const handleClick = () => {
     dispatch(submit(symptomsFormName));
   };
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = (values) => {
     setShowModal(true);
-    await dispatch(submitForm(values));
+    dispatch(submitForm(values));
   };
 
-  const handleSubmitSuccess = () => {
-    // once the submitForm action is working, close the modal if submission was successful
-    // setShowModal(false);
-  };
+  const dailySubmissionStatus = daily && daily.exists;
 
-  let status = true;
-  if (daily) {
-    status = !daily.exists;
-  }
-  return status ? (
+  return !dailySubmissionStatus ? (
     <div className="symptoms" id="symptoms" name="symptoms">
       <div className="symptoms__header">
         <div className="symptoms__title">
@@ -49,7 +36,6 @@ const TrackYourSymptoms = ({ daily }) => {
           <b>{t("disclaimer")} </b>
         </p>
       </div>
-      {/* {component} */}
       <SymptomsForm onSubmit={handleSubmit} />
       <div className="symptoms__submit">
         <PrimaryButton
@@ -62,7 +48,7 @@ const TrackYourSymptoms = ({ daily }) => {
       {showModal && <SubmitModal onClose={() => setShowModal(false)} />}
     </div>
   ) : (
-    <div className="title symptomsSubmitted" id="symptoms">
+    <div className="symptoms symptoms__submitted title" id="symptoms">
       {t("submitted")}
     </div>
   );
@@ -75,4 +61,6 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default connect(mapStateToProps)(TrackYourSymptoms);
+const TrackYourSymptomsConnected = connect(mapStateToProps)(TrackYourSymptoms);
+
+export default withTranslation("Form")(TrackYourSymptomsConnected);

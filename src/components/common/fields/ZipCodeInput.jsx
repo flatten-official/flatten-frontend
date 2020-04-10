@@ -6,7 +6,6 @@ const ZipCodeInput = (props) => {
 
   const handleChange = (event) => {
     const zipCode = event.target.value;
-    console.log(zipCode);
     if (
       zipCode.match(
         /^($|[0-9]|[0-9][0-9]|[0-9][0-9][0-9]|[0-9][0-9][0-9][0-9]|[0-9][0-9][0-9][0-9][0-9])$/
