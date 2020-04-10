@@ -53,20 +53,6 @@
   }
 }
 
-.nav__info_en {
-  position: absolute;
-  right: 120px;
-  display: flex;
-}
-
-.nav__info_fr {
-  text-align: center;
-  width: 80px;
-  position: absolute;
-  right: 130px;
-  display: flex;
-}
-
 .navbar__logo {
   width: 120px;
   padding-left: 10px;
@@ -83,6 +69,9 @@
 }
 
 .navbar__covid_en {
+  position: absolute;
+  right: 120px;
+  display: flex;
   vertical-align: middle;
   color: $navy-blue;
   text-decoration: none;
@@ -90,6 +79,11 @@
 }
 
 .navbar__covid_fr {
+  text-align: center;
+  width: 80px;
+  position: absolute;
+  right: 130px;
+  display: flex;
   vertical-align: middle;
   color: $navy-blue;
   text-decoration: none;
@@ -115,20 +109,18 @@
   .nav__optional {
     display: none;
   }
-  .navbar__covid_en {
-    color: $navy-blue;
-    text-decoration: none;
-    font-size: 16px;
-    line-height: normal;
-  }
 
-  .nav__info_en {
+  .navbar__covid_en {
     text-align: center;
     display: inline;
     width: 80px;
     position: absolute;
     right: 100px;
     display: flex;
+    color: $navy-blue;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: normal;
   }
 
   .navbar__lang {
@@ -169,17 +161,13 @@
     width: 70px;
   }
   .navbar__covid_en {
+    right: 60px;
     font-size: 10px;
   }
   .navbar__covid_fr {
-    font-size: 10px;
-  }
-  .nav__info_en {
-    right: 60px;
-  }
-  .nav__info_fr {
     width: 120px;
     right: 60px;
+    font-size: 10px;
   }
 }
 
@@ -187,22 +175,19 @@
   .nav__item_en {
     width: 80px;
   }
+
   .nav__item_fr {
     font-size: 8px;
   }
-  .nav__info_en {
+
+  .nav__covid_en {
     right: 45px;
   }
-  .navbar__covid_fr {
-    font-size: 8px;
-  }
 
-  .nav__info_en {
-    right: 15%;
-  }
-  .nav__info_fr {
+  .navbar__covid_fr {
     width: 80px;
     right: 8%;
+    font-size: 8px;
   }
 
   .navbar__lang {
@@ -216,15 +201,17 @@
     margin-right: 0px;
     width: 70px;
   }
-  .nav__info_en {
-    width: 80px;
-  }
-  .nav__info_fr {
-    width: 80px;
-    right: 35px;
-  }
 
   .nav__item_fr {
     width: 50px;
+  }
+
+  .nav__covid_en {
+    width: 80px;
+  }
+
+  .nav__covid_fr {
+    width: 80px;
+    right: 35px;
   }
 }

@@ -131,11 +131,9 @@ const Navbar = ({ t }) => {
         <li className={`nav__item_en nav__optional`}>{homeLink}</li>
         <li className={`nav__item_${current}`}>{symptomsLink}</li>
         <li className={`nav__item_${current}`}>{heatmapLink}</li>
-        <li className={`nav__info_${current}`}>
-          <NavLink className={`navbar__covid_${current}`} exact to="/info">
-            {t("info")}
-          </NavLink>
-        </li>
+        <NavLink className={`navbar__covid_${current}`} exact to="/info">
+          {t("info")}
+        </NavLink>
         <select className="body navbar__lang" onChange={languageHandler}>
           <option className="body" value="en" selected={selectedEn}>
             en-ca
