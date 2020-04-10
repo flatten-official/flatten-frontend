@@ -73,7 +73,7 @@ const SymptomsForm = ({ change, handleSubmit }) => {
 
 export default reduxForm({
   form: symptomsFormName,
-  // validate: validate(formValidation),
+  validate: validate(formValidation),
   initialValues: {
     symptoms: [],
     conditions: [],
