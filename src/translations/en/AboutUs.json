@@ -111,13 +111,6 @@
       "titles": "Chair, Board of Directors, Canadian Coalition for Global Health Research"
     },
     {
-      "name": "Ranjani Somayaji",
-      "src": "./headshots/somayaji.png",
-      "role": "Advisor",
-      "degrees": ", MD, MPH, FRCPC",
-      "titles": "Infectious Disease Specialist and Epidemiologist"
-    },
-    {
       "name": "Mint Jain",
       "src": "./headshots/minto.png",
       "link": "https://www.linkedin.com/in/minto-jain-19380333/",
@@ -135,6 +128,13 @@
     }
   ],
   "team": [
+    {
+      "name": "Ranjani Somayaji",
+      "src": "./headshots/somayaji.png",
+      "role": "Advisor",
+      "degrees": ", MD, MPH, FRCPC",
+      "titles": "Infectious Disease Specialist and Epidemiologist"
+    },
     {
       "name": "Rassam Yazdi",
       "src": "./headshots/rassam.png",

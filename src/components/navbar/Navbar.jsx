@@ -3,6 +3,7 @@ import { Link } from "react-scroll";
 import { NavLink, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import i18next from "i18next";
+import history from "../../history";
 
 import logo from "../../assets/logo-black.png";
 
@@ -14,23 +15,39 @@ const Navbar = ({ t }) => {
   let heatmapLink = null;
 
   const i18nlang = i18next.language;
+  console.log(i18nlang);
   let toggle;
   let current;
+  let selectedEn = false;
+  let selectedUs = false;
+  let selectedFr = false;
   switch (i18nlang) {
     case "en":
       toggle = "fr";
       current = "en";
-
+      selectedEn = true;
+      break;
+    case "enUS":
+      toggle = "fr";
+      current = "en";
+      selectedUs = true;
       break;
     case "fr":
       toggle = "en";
       current = "fr";
+      selectedFr = true;
       break;
     default:
       toggle = "fr";
       current = "en";
+      selectedEn = true;
   }
-  let linkLang = `/?lang=${toggle}`;
+
+  const languageHandler = (event) => {
+    let lang = event.currentTarget.value;
+    let linkLang = `${location.pathname}?lang=${lang}`;
+    history.push(linkLang);
+  };
 
   if (location.pathname == ("/" || "#symptoms" || "#heatmap")) {
     logoLink = (
@@ -118,14 +135,14 @@ const Navbar = ({ t }) => {
             {t("info")}
           </NavLink>
         </li>
-        <select className="body nav__lang">
-          <option className="body" value="en-ca">
+        <select className="body nav__lang" onChange={languageHandler}>
+          <option className="body" value="en" selected={selectedEn}>
             en-ca
           </option>
-          <option className="body" value="en-us">
+          <option className="body" value="enUS" selected={selectedUs}>
             en-us
           </option>
-          <option className="body" value="fr">
+          <option className="body" value="fr" selected={selectedFr}>
             fr
           </option>
         </select>
