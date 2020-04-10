@@ -2,5 +2,5 @@ dispatch:
   # Send all work to the one static backend.
   - url: "api.staging.flatten.ca/*"
     service: backend-staging
-  - url: "staging.flatten.ca/"
+  - url: "staging.flatten.ca/*"
     service: default
