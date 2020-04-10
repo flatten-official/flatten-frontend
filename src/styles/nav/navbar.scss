@@ -46,6 +46,7 @@
   font-size: 16px;
   margin-left: 2rem;
   color: $dark-grey;
+  text-align: center;
   &:hover {
     color: $black-main;
     cursor: pointer;
@@ -78,7 +79,7 @@
 
 .nav__covid-fr {
   text-align: center;
-  width: 80px;
+  width: 150px;
   position: absolute;
   right: 130px;
   display: flex;
@@ -98,9 +99,12 @@
   .nav__item-fr {
     width: 120px;
   }
+  .nav__covid-fr {
+    width: 120px;
+  }
 }
 
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 900px) {
   .nav__item-en {
     width: 120px;
   }
@@ -112,6 +116,10 @@
   .nav__covid-en {
     width: 80px;
     right: 100px;
+  }
+
+  .nav__covid-fr {
+    width: 80px;
   }
 
   .nav__lang {
