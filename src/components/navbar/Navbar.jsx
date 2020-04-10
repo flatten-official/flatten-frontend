@@ -6,9 +6,6 @@ import i18next from "i18next";
 
 import logo from "../../assets/logo-black.png";
 
-const options = ["en-ca", "en-us", "fr"];
-const defaultOption = options[0];
-
 const Navbar = ({ t }) => {
   let location = useLocation();
   let logoLink = null;
@@ -22,16 +19,16 @@ const Navbar = ({ t }) => {
   switch (i18nlang) {
     case "en":
       toggle = "fr";
-      current = "en"
-      
+      current = "en";
+
       break;
     case "fr":
       toggle = "en";
-      current = "fr"
+      current = "fr";
       break;
     default:
       toggle = "fr";
-      current = "en"
+      current = "en";
   }
   let linkLang = `/?lang=${toggle}`;
 
