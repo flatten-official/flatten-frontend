@@ -91,7 +91,8 @@
 
 .nav__lang {
   position: absolute;
-  right: 10px;
+  right: 25px;
+  font-size: 16px;
   display: flex;
 }
 
@@ -115,7 +116,7 @@
 
   .nav__covid-en {
     width: 80px;
-    right: 100px;
+    right: 120px;
   }
 
   .nav__covid-fr {
@@ -156,7 +157,7 @@
   }
 
   .nav__covid-en {
-    right: 60px;
+    right: 80px;
     font-size: 10px;
   }
 
