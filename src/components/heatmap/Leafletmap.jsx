@@ -40,8 +40,7 @@ const NOT_ENOUGH_GRAY = "#909090";
 // max size circle can be on map
 const MAX_CIRCLE_RAD = 25;
 const MIN_CIRCLE_RADIUS = 3;
-const MAX_CASES = 10000;
-const CON_SCHEME_THRESHOLDS = [5, 25, 100, 250];
+
 const URLS = {
   "cadForm": "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
   "usaForm": "https://storage.googleapis.com/flatten-staging-271921.appspot.com/form_data_usa_.json",
@@ -74,7 +73,7 @@ function create_style_function(formData, colour_scheme, thresholds, data_tag) {
     if (post_code_data && data_tag in post_code_data) {
       const num_total = post_code_data["number_reports"];
 
-      if (num_total > 25) {
+      if (num_total >= 25) {
         const num_cases = post_code_data[data_tag];
 
         if (num_cases === 0) {
