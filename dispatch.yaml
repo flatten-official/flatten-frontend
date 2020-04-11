@@ -2,7 +2,5 @@ dispatch:
   # Send all work to the one static backend.
   - url: "api.flatten.ca/*"
     service: production
-  - url: "flatten.ca/*"
-    service: default
-  - url: "flatten.org/*"
+  - url: "flatten.ca/"
     service: default
