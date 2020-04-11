@@ -43,7 +43,7 @@ const MIN_CIRCLE_RADIUS = 3;
 
 const URLS = {
   "cadForm": "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
-  "usaForm": "https://storage.googleapis.com/flatten-staging-271921.appspot.com/form_data_usa_.json",
+  "usaForm": "https://storage.googleapis.com/flatten-staging-271921.appspot.com/form_data_usa.json",
   "cadConf": "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson",
   "usaConf": "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
 };
@@ -149,9 +149,23 @@ class Leafletmap extends React.Component {
     this.getConfirmedCasesData = this.getConfirmedCasesData.bind(this);
   }
 
+  updateDimensions() {
+    const height = window.innerWidth >= 992 ? window.innerHeight : 400
+    this.setState({ height: height })
+  }
+
   componentDidMount() {
     this.getFormData();
     this.getConfirmedCasesData();
+    window.addEventListener("resize", this.updateDimensions.bind(this));
+  }
+
+  componentWillMount() {
+    this.updateDimensions()
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions.bind(this));
   }
   
   setTab(tabID, index) {
@@ -167,7 +181,6 @@ class Leafletmap extends React.Component {
     fetch(this.state.formURL)
       .then(r => r.json())
       .then(d => {
-        console.log(d);
         return d;
       })
       .then(formData => this.setState({ formData }));
@@ -387,12 +400,12 @@ class Leafletmap extends React.Component {
     return (
       <div>
         <div className="PageTitle body"> {title} </div>
-        <div style={{ height }}>
+        <div style={{ height: this.state.height }}>
           <Map
             maxBounds={bounds}
             center={center}
             zoom={INITIAL_ZOOM}
-            style={{ height, zIndex: 0 }}
+            style={{ height: this.state.height , zIndex: 0 }}
           >
             <TileLayer
               url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
