@@ -68,7 +68,7 @@ export const getQuestions = (lang) => {
           component: PostalCodeInput,
         },
         {
-          body: "Quel est votre sexe ?",
+          body: "Quel est votre sexe?",
           name: "sex",
           component: RadioButtonGroup,
           options: SEX_OPTIONS,
@@ -107,14 +107,14 @@ export const getQuestions = (lang) => {
         },
         {
           body: `Have you had close contact with someone who is coughing, has a fever, or is otherwise
-             sick and has been outside of Canada in the last 14 days or has been diagnosed with
+             sick and has been outside of the US in the last 14 days or has been diagnosed with
              COVID-19?`,
           name: "contactWithIllness",
           component: RadioButtonGroup,
           options: YES_NO_OPTIONS,
         },
         {
-          body: "Have you traveled outside of Canada within the last 14 days?",
+          body: "Have you traveled outside of the US within the last 14 days?",
           name: "travelOutsideCanada",
           component: RadioButtonGroup,
           options: YES_NO_OPTIONS,

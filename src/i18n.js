@@ -2,6 +2,9 @@ import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
+import EnHomePageUS from "./translations/en/HomePageUS.json";
+import EnHeatmapUS from "./translations/en/HeatmapUS.json";
+
 import EnHomePage from "./translations/en/HomePage.json";
 import EnSupporters from "./translations/en/Supporters.json";
 import EnNavbar from "./translations/en/Navbar.json";
@@ -42,10 +45,10 @@ i18n
         Form: EnForm,
       },
       enUS: {
-        HomePage: EnHomePage,
+        HomePage: EnHomePageUS,
         Supporters: EnSupporters,
         Navbar: EnNavbar,
-        Heatmap: EnHeatmap,
+        Heatmap: EnHeatmapUS,
         AboutUs: EnAboutUs,
         EsriGsiMap: EnEsriGsiMap,
         Footer: EnFooter,
