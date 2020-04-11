@@ -13,8 +13,8 @@ class Footer extends React.Component {
               <p>
                 <b>{t("feedback")}</b>
               </p>
-              <a>
-                <p>{t("feedback-link")}</p>
+              <a className="footer__link" href="https://blog.flatten.ca">
+                <p>Blog</p>
               </a>
             </div>
             <div className="footer__section body">
@@ -50,9 +50,6 @@ class Footer extends React.Component {
                 href="mailto:flattenofficial@gmail.com"
               >
                 <p>flattenofficial@gmail.com</p>
-              </a>
-              <a className="footer__link" href="https://blog.flatten.ca">
-                <p>blog</p>
               </a>
             </div>
           </div>
