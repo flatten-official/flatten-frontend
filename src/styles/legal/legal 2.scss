@@ -1,0 +1,19 @@
+.legal__title {
+  margin: 150px auto 30px auto;
+  width: 80%;
+  text-align: center;
+}
+
+.legal__body {
+  margin: 0 auto;
+  width: 50%;
+  height: 100%;
+  display: block;
+  text-align: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .legal__body {
+    width: 90%;
+  }
+}

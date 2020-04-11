@@ -1,0 +1,10 @@
+{
+  "header": "Voir les renseignements sur le virus",
+  "p1": "Bienvenue dans le plan interactif de FLATTEN! Pour voir l’information propre à votre région,cliquez sur votre municipalité ou région liée au code postal!",
+  "p2": "<0>Individus vulnérables manifestant les symptomes :</0> Cet onglet affiche les cas potentiels de COVID-19 des individus particulièrement vulnérables au Canada, basé sur les données de Flatten.",
+  "p3": "<0>Cas potentiels :</0> Cet onglet illustre tous les cas potentiels de COVID-19 au Canada, selon les données enregistrées dans le formulaire de Flatten.",
+  "p4": "<0>Personnes vulnérables :</0> Cet onglet illustre toutes les personnes qui sont particulièrement vulnérables à la COVID-19 au Canada, selon les données enregistrées dans le formulaire de Flatten.",
+  "p5": "Afin d’éviter les trolls, nous utilisons des cookies, recaptcha et nous retraçons les adresses IP suspectes.",
+  "maplink": "https://flatten-271620.web.app/?lang=fr",
+  "error": "Désolé, la carte n'a pas été chargée."
+}
