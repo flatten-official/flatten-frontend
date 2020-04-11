@@ -44,7 +44,7 @@ const MAX_CASES = 10000;
 const CON_SCHEME_THRESHOLDS = [5, 25, 100, 250];
 const URLS = {
   "cadForm": "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
-  "usaForm": "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json",
+  "usaForm": "https://storage.googleapis.com/flatten-staging-271921.appspot.com/form_data_usa_.json",
   "cadConf": "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson",
   "usaConf": "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
 };
@@ -270,7 +270,6 @@ class Leafletmap extends React.Component {
     let bindPopupOnEachFeature_USA = (feature, layer) => {
       let content;
       let countyID = feature.properties.COUNTYNS;
-      //let countyData = this.state.formData.county[countyID];
       let countyData = this.state.formData.county[countyID];
       let countyReports;
       try {
@@ -287,7 +286,7 @@ class Leafletmap extends React.Component {
           if (this.state.tab === "vuln") {
             content += "<p>" + countyData["risk"] + " vulnerable individuals<br/>" + countyData["number_reports"] + " reports in total</p>";
           } else if (this.state.tab === "both") {
-            content += "<p>" + countyData["both"] + "<br/>" + countyData["number_reports"] + "</p>";
+            content += "<p>" + countyData["both"] + " vulnerable individuals who are also potential cases<br/>" + countyData["number_reports"] + " reports in total</p>";
           } else if (this.state.tab === "pot") {
             content += "<p>" + countyData["pot"] + " potential cases<br/>" + countyData["number_reports"] + " reports in total</p>";
           }
