@@ -44,7 +44,7 @@ const MAX_CASES = 10000;
 const CON_SCHEME_THRESHOLDS = [5, 25, 100, 250];
 const URLS = {
   "cadForm": "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
-  "usaForm": "https://storage.googleapis.com/flatten-staging-271921.appspot.com/form_data_usa.json",
+  "usaForm": "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json",
   "cadConf": "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson",
   "usaConf": "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
 };
