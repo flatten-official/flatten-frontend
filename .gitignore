@@ -27,6 +27,3 @@ yarn-error.log*
 /src/apis/backend.js
 /src/components/header/OAuth.js
 /src/components/common/fields/Recaptcha/Recaptcha.js
-
-.idea
-dispatch.yaml

@@ -37,15 +37,3 @@ Some helpful google extensions
 - [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) : Very helpful for checking out what your store currently looks like; will also give you a history of your store as you use the application.
 
 Both of these are already setup in the project, so once downloading the extensions, they should work automatically.
-
-## How To:
-
-### Redeploy dispatch.yaml
-
-1. :warning: Ensure you're default project is the correct one in `gcloud` so you don't deploy to the wrong project.
-
-2. Copy either `dispatch.prod.yaml` or `dispatch.staging.yaml` into the root directory under the name `dispatch.yaml`.
-3. Run `gcloud app deploy dispatch.yaml`.
-4. :warning: Before pressing yes to continue, check that you're deploying to the correct project.
-
-Note: running `gcloud app deploy dispatch.staging.yaml` won't work since `gcloud app deploy` expects an `app.yaml` file. `dispatch.yaml` is a special exception.
