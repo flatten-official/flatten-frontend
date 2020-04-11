@@ -43,7 +43,7 @@ const MIN_CIRCLE_RADIUS = 3;
 
 const URLS = {
   "cadForm": "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
-  "usaForm": "https://storage.googleapis.com/flatten-staging-271921.appspot.com/form_data_usa.json",
+  "usaForm": "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json",
   "cadConf": "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson",
   "usaConf": "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
 };
@@ -150,7 +150,7 @@ class Leafletmap extends React.Component {
   }
 
   updateDimensions() {
-    const height = window.innerWidth >= 992 ? window.innerHeight : 400
+    const height = window.innerWidth >= 992 ? window.innerHeight-300 : 400;
     this.setState({ height: height })
   }
 
@@ -276,7 +276,7 @@ class Leafletmap extends React.Component {
       title = (i18nlang === "fr") ? "Chargement..." : "Loading...";
     }
     let bounds = (i18nlang === "enUS") ? USA_BOUNDS : CANADA_BOUNDS;
-    let center = (i18nlang === "enUS") ? USA_CENTER : ONTARIO
+    let center = (i18nlang === "enUS") ? USA_CENTER : ONTARIO;
 
     // needs more info for potential cases by county
     let bindPopupOnEachFeature_USA = (feature, layer) => {
