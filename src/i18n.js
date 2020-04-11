@@ -4,6 +4,7 @@ import { initReactI18next } from "react-i18next";
 
 import EnHomePageUS from "./translations/en/HomePageUS.json";
 import EnHeatmapUS from "./translations/en/HeatmapUS.json";
+import EnFormUS from "./translations/en/FormUS.json";
 
 import EnHomePage from "./translations/en/HomePage.json";
 import EnSupporters from "./translations/en/Supporters.json";
@@ -53,7 +54,7 @@ i18n
         EsriGsiMap: EnEsriGsiMap,
         Footer: EnFooter,
         Info: EnInfo,
-        Form: EnForm,
+        Form: EnFormUS,
       },
       fr: {
         HomePage: FrHomePage,
