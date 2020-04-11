@@ -1,5 +1,6 @@
 import backend from "../apis/backend";
 import i18next from "i18next";
+import history from "../history";
 
 export const submitForm = (formValues) => async (dispatch) => {
   let submitSuccess;
@@ -29,7 +30,7 @@ export const getGeolocation = () => async (dispatch) => {
     const params = new URLSearchParams(window.location.search);
     if (!params.get("lang")) {
       lang = response.data.locale;
-      console.log(lang);
+      history.push(`${window.location.pathname}?lang=${lang}`);
       await i18next.changeLanguage(lang).catch(console.error);
       dispatch({
         type: "LANG_CHANGE",
