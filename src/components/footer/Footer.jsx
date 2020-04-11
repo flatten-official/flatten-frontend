@@ -51,6 +51,9 @@ class Footer extends React.Component {
               >
                 <p>flattenofficial@gmail.com</p>
               </a>
+              <a className="footer__link" href="https://blog.flatten.ca">
+                <p>blog</p>
+              </a>
             </div>
           </div>
         </div>
