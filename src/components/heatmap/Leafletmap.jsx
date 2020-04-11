@@ -16,9 +16,10 @@ import counties from "./county_boundaries.js";
 import Legend from "./Legend";
 import L from "leaflet";
 import i18next from "i18next";
+import {connect} from 'react-redux';
 
 // checks language 
-const i18nlang = i18next.language;
+let i18nlang = i18next.language;
 
 // stays in Canada
 const CANADA_BOUNDS = [[38, -150], [87, -45]];
@@ -43,7 +44,7 @@ const MIN_CIRCLE_RADIUS = 3;
 
 const URLS = {
   "cadForm": "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
-  "usaForm": "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json",
+  "usaForm": "https://storage.googleapis.com/flatten-staging-271921.appspot.com/form_data_usa.json",
   "cadConf": "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson",
   "usaConf": "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
 };
@@ -142,7 +143,7 @@ class Leafletmap extends React.Component {
       confUrl = URLS["cadConf"];
     }
 
-    this.state = { tab: "both", formURL: formUrl, confURL: confUrl, formData: null, confirmed_cases: null};
+    this.state = { tab: "both", formURL: formUrl, confURL: confUrl, formData: null, confirmed_cases: null, location: null};
     this.setTab = this.setTab.bind(this);
 
     this.getFormData = this.getFormData.bind(this);
@@ -150,13 +151,15 @@ class Leafletmap extends React.Component {
   }
 
   updateDimensions() {
-    const height = window.innerWidth >= 992 ? window.innerHeight-300 : 400;
+    const height = window.innerWidth >= 992 ? window.innerHeight : 400
     this.setState({ height: height })
   }
 
   componentDidMount() {
     this.getFormData();
     this.getConfirmedCasesData();
+
+    console.log(this.props);
     window.addEventListener("resize", this.updateDimensions.bind(this));
   }
 
@@ -167,7 +170,7 @@ class Leafletmap extends React.Component {
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateDimensions.bind(this));
   }
-  
+
   setTab(tabID, index) {
     document.getElementById("tabs").children[currTab].classList.remove('active');
     document.getElementById("tabs").children[index].classList.add("active");
@@ -270,13 +273,13 @@ class Leafletmap extends React.Component {
     let title;
     if (this.state.formData !== null) {
       title = (i18nlang === "fr") ? "Réponse totales: " + this.state.formData['total_responses'] +
-      " | Dernière mise à jour: " + new Date(1000 * this.state.formData["time"])
-      : "Total Responses: " + this.state.formData['total_responses'] + " | Last update: " + new Date(1000 * this.state.formData["time"]);
+        " | Dernière mise à jour: " + new Date(1000 * this.state.formData["time"])
+        : "Total Responses: " + this.state.formData['total_responses'] + " | Last update: " + new Date(1000 * this.state.formData["time"]);
     } else {
       title = (i18nlang === "fr") ? "Chargement..." : "Loading...";
     }
     let bounds = (i18nlang === "enUS") ? USA_BOUNDS : CANADA_BOUNDS;
-    let center = (i18nlang === "enUS") ? USA_CENTER : ONTARIO;
+    let center = (i18nlang === "enUS") ? USA_CENTER : ONTARIO
 
     // needs more info for potential cases by county
     let bindPopupOnEachFeature_USA = (feature, layer) => {
@@ -397,7 +400,7 @@ class Leafletmap extends React.Component {
     // the geojson layer when the tab changes. This does the work of
     // unbinding all popups and recreating them with the correct data.
 
-    return (
+    return location ? (
       <div>
         <div className="PageTitle body"> {title} </div>
         <div style={{ height: this.state.height }}>
@@ -405,7 +408,7 @@ class Leafletmap extends React.Component {
             maxBounds={bounds}
             center={center}
             zoom={INITIAL_ZOOM}
-            style={{ height: this.state.height , zIndex: 0 }}
+            style={{ height: this.state.height, zIndex: 0 }}
           >
             <TileLayer
               url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
@@ -438,8 +441,16 @@ class Leafletmap extends React.Component {
           </PrimaryButton>
         </div>
       </div>
-    );
+    ) : null;
   }
 }
 
-export default withTranslation("Leafletmap")(Leafletmap);
+const mapStateToProps = (state) => {
+  console.log(state.locationChange.status);
+  if (state.locationChange.status) {
+    return { location: state.locationChange.status };
+  }
+  return { location: false };
+};
+
+export default (connect(mapStateToProps))(withTranslation("Leafletmap")(Leafletmap));
