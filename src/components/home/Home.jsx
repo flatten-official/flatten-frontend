@@ -1,6 +1,7 @@
 import React from "react";
 import i18next from "i18next";
 import HomePage from "./HomePage";
+import Visualization from "../visualization/Visualization";
 import Heatmap from "../heatmap/Heatmap";
 import TrackYourSymptoms from "../form/TrackYourSymptoms";
 import EsriLink from "../esri-gsi-map/EsriLink";
@@ -12,6 +13,7 @@ const Home = () => {
   return (
     <React.Fragment>
       <HomePage />
+      <Visualization />
       <TrackYourSymptoms />
       {somaliToggle && <Heatmap />}
       {somaliToggle && <EsriLink />}
