@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
 
-import { submitForm } from "../../actions/index";
 import ReturningUserModal from "./ReturningUserModal";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 import logo from "../../assets/logo-black.png";
@@ -20,11 +18,6 @@ const scrollToForm = () => {
 
 const HomePage = ({ cookieStatus, t }) => {
   const [showModal, setShowModal] = useState(false);
-  const dispatch = useDispatch();
-
-  const handleReturningUserSubmit = (values) => {
-    dispatch(submitForm(values));
-  };
 
   let buttons = null;
   switch (cookieStatus) {
@@ -110,12 +103,7 @@ const HomePage = ({ cookieStatus, t }) => {
         </div>
         {buttons}
       </div>
-      {showModal && (
-        <ReturningUserModal
-          onClose={() => setShowModal(false)}
-          onSubmit={handleReturningUserSubmit}
-        />
-      )}
+      {showModal && <ReturningUserModal onClose={() => setShowModal(false)} />}
     </div>
   );
 };
