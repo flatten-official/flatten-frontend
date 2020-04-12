@@ -18,11 +18,6 @@ const ReturningUserModal = ({ handleSubmit, onClose, change }) => {
   const lang = i18next.language;
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const handleFormSubmit = (values) => {
-    handleSubmit(values);
-    setFormSubmitted(true);
-  };
-
   const recaptchaLoaded = () => {
     //console.log("Loaded");
   };
@@ -47,7 +42,7 @@ const ReturningUserModal = ({ handleSubmit, onClose, change }) => {
 
       {!formSubmitted && (
         <div className="returning-user__body body">
-          <form onSubmit={handleFormSubmit}>
+          <form onSubmit={handleSubmit}>
             <Field
               name="email"
               label="Email"
@@ -57,8 +52,8 @@ const ReturningUserModal = ({ handleSubmit, onClose, change }) => {
             <RecaptchaField
               lang={lang}
               recaptchaLoaded={recaptchaLoaded}
-              recaptchaExpired={handleRecaptchaVerified}
-              verifyCallback={handleRecaptchaExpired}
+              handleRecaptchaExpired={handleRecaptchaExpired}
+              handleRecaptchaVerified={handleRecaptchaVerified}
             />
             <Field
               component={TextInput}
@@ -66,7 +61,10 @@ const ReturningUserModal = ({ handleSubmit, onClose, change }) => {
               type="hidden"
             />
             <div className="returning-user__submit">
-              <PrimaryButton className="returning-user__submit-button">
+              <PrimaryButton
+                className="returning-user__submit-button"
+                onClick={() => setFormSubmitted(true)}
+              >
                 Sign In
               </PrimaryButton>
             </div>

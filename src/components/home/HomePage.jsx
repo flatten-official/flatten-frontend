@@ -22,9 +22,8 @@ const HomePage = ({ cookieStatus, t }) => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
-  const handleReturningUserSubmit = async (values) => {
-    await dispatch(submitForm(values));
-    setShowModal(false);
+  const handleReturningUserSubmit = (values) => {
+    dispatch(submitForm(values));
   };
 
   let buttons = null;
