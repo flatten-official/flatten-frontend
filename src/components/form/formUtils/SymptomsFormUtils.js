@@ -21,6 +21,15 @@ export const getUtils = (lang) => {
           { label: "Nez qui coule", value: "runnyNose" },
           { label: "Mal de gorge", value: "soreThroat" },
         ],
+        ETHNICITY_OPTIONS: [
+          { label: "Asiatique", value: "asian" },
+          { label: "Africain(e)", value: "black" },
+          { label: "Caucasien(ne)", value: "caucasian" },
+          { label: "Hispanique", value: "hispanic" },
+          { label: "Américain de naissance", value: "nativeamerican" },
+          { label: "Insulaire Pacifique", value: "pacificislander" },
+          { label: "Je préfère ne pas répondre", value: "na" },
+        ],
         AGE_OPTIONS: [
           { label: "Moins de 18", value: "<18" },
           { label: "18-25", value: "18-25" },
@@ -44,11 +53,14 @@ export const getUtils = (lang) => {
           { label: "Autre", value: "other" },
         ],
         NEED_OPTIONS: [
-          { label: "Financial support", value: "financialSupport" },
-          { label: "Emotional support", value: "emotionalSupport" },
-          { label: "Medication/Pharmacy resources", value: "medication" },
-          { label: "Food/Necessary resources", value: "food" },
-          { label: "Other", value: "other" },
+          { label: "Aide financière", value: "financialSupport" },
+          { label: "Soutien affectif", value: "emotionalSupport" },
+          {
+            label: "Des médicaments/Ressources de la pharmacie",
+            value: "medication",
+          },
+          { label: "Aliments/Ressources nécessaires", value: "food" },
+          { label: "Autre", value: "other" },
         ],
       };
     case "en":
@@ -76,7 +88,15 @@ export const getUtils = (lang) => {
           { label: "Runny nose", value: "runnyNose" },
           { label: "Sore throat", value: "soreThroat" },
         ],
-
+        ETHNICITY_OPTIONS: [
+          { label: "Asian", value: "asian" },
+          { label: "Black/African", value: "black" },
+          { label: "Caucasian", value: "caucasian" },
+          { label: "Hispanic/Latino", value: "hispanic" },
+          { label: "Native American", value: "nativeamerican" },
+          { label: "Pacific Islander", value: "pacificislander" },
+          { label: "Prefer not to answer", value: "na" },
+        ],
         AGE_OPTIONS: [
           { label: "Less than 18", value: "<18" },
           { label: "18-25", value: "18-25" },
@@ -99,7 +119,6 @@ export const getUtils = (lang) => {
           { label: "History of stroke", value: "historyOfStroke" },
           { label: "Other", value: "other" },
         ],
-
         NEED_OPTIONS: [
           { label: "Financial support", value: "financialSupport" },
           { label: "Emotional support", value: "emotionalSupport" },

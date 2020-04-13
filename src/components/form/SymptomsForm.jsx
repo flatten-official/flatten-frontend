@@ -85,6 +85,5 @@ export default reduxForm({
   initialValues: {
     symptoms: [],
     conditions: [],
-    needs: [],
   },
 })(connect(mapStateToProps)(SymptomsForm));

@@ -13,6 +13,8 @@ export const getQuestions = (lang) => {
     SEX_OPTIONS,
     SYMPTOM_OPTIONS,
     YES_NO_OPTIONS,
+    ETHNICITY_OPTIONS,
+    NEED_OPTIONS,
   } = getUtils(lang);
   let questions;
   switch (lang) {
@@ -72,6 +74,20 @@ export const getQuestions = (lang) => {
           name: "sex",
           component: RadioButtonGroup,
           options: SEX_OPTIONS,
+        },
+        {
+          body: "Quelle est votre origine ethnique?",
+          name: "ethnicity",
+          component: RadioButtonGroup,
+          maxColumns: 2,
+          options: ETHNICITY_OPTIONS,
+        },
+        {
+          body: "Quel est votre plus grand besoin en ce moment?",
+          name: "needs",
+          component: RadioButtonGroup,
+          maxColumns: 2,
+          options: NEED_OPTIONS,
         },
         {
           body: "Saisissez votre courriel (facultatif)",
@@ -137,6 +153,20 @@ export const getQuestions = (lang) => {
           options: SEX_OPTIONS,
         },
         {
+          body: "What is your ethnicity?",
+          name: "ethnicity",
+          component: RadioButtonGroup,
+          maxColumns: 2,
+          options: ETHNICITY_OPTIONS,
+        },
+        {
+          body: "What is your greatest need at this moment?",
+          name: "needs",
+          component: RadioButtonGroup,
+          maxColumns: 2,
+          options: NEED_OPTIONS,
+        },
+        {
           body: "What is your email? (optional)",
           name: "email",
           component: TextInput,
@@ -200,6 +230,20 @@ export const getQuestions = (lang) => {
           name: "sex",
           component: RadioButtonGroup,
           options: SEX_OPTIONS,
+        },
+        {
+          body: "What is your ethnicity?",
+          name: "ethnicity",
+          component: RadioButtonGroup,
+          maxColumns: 2,
+          options: ETHNICITY_OPTIONS,
+        },
+        {
+          body: "What is your greatest need at this moment?",
+          name: "needs",
+          component: RadioButtonGroup,
+          maxColumns: 2,
+          options: NEED_OPTIONS,
         },
         {
           body: "What is your email? (optional)",
