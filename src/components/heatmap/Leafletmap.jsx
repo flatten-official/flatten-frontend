@@ -1,26 +1,32 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 import PrimaryButton from "../common/buttons/PrimaryButton";
-import { GeoJSON, Map, TileLayer } from "react-leaflet";
+import { Map, TileLayer, GeoJSON } from "react-leaflet";
 import convertedBoundaries from "./converted_boundaries.js";
 import counties from "./county_boundaries.js";
 import Legend from "./Legend";
 import L from "leaflet";
 import i18next from "i18next";
 
-// checks language 
+// checks language
 const i18nlang = i18next.language;
 
 const CANADA_VIEW = {
-  "bounds": [[38, -150], [87, -33]],
-  "center": [54, -97],
-  "zoom": 4
+  bounds: [
+    [38, -150],
+    [87, -33],
+  ],
+  center: [54, -97],
+  zoom: 4,
 };
 
 const USA_VIEW = {
-  "bounds": [[15, -180], [77, -60]],
-  "center": [38.5, -97.2],
-  "zoom": 5
+  bounds: [
+    [15, -180],
+    [77, -60],
+  ],
+  center: [38.5, -97.2],
+  zoom: 5,
 };
 
 const MIN_ZOOM = 3;
@@ -39,10 +45,14 @@ const MAX_CIRCLE_RAD = 25;
 const MIN_CIRCLE_RADIUS = 3;
 
 const URLS = {
-  "cadForm": "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
-  "usaForm": "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json",
-  "cadConf": "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson",
-  "usaConf": "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
+  cadForm:
+    "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
+  usaForm:
+    "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json",
+  cadConf:
+    "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson",
+  usaConf:
+    "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
 };
 
 //Current button
@@ -50,7 +60,7 @@ let currTab = 0;
 
 // this will work for USA once we have data to fetch for usa FORMS
 function create_style_function(formData, colour_scheme, thresholds, data_tag) {
-  return feature => {
+  return (feature) => {
     let opacity = POLYGON_OPACITY; // If no data, is transparent
     let colour = NOT_ENOUGH_GRAY; // Default color if not enough data
 
@@ -96,7 +106,7 @@ function create_style_function(formData, colour_scheme, thresholds, data_tag) {
       dashArray: "3",
       // define the color and opacity of each polygon
       fillColor: colour,
-      fillOpacity: opacity
+      fillOpacity: opacity,
     };
   };
 }
@@ -107,10 +117,9 @@ function create_style_function_USA() {
     weight: 0,
     color: "red",
     fillColor: "red",
-    fillOpacity: 0.5
+    fillOpacity: 0.5,
   };
 }
-
 
 // assigns color based on thresholds
 function getColour(cases, colour_scheme, color_thresholds) {
@@ -140,7 +149,13 @@ class Leafletmap extends React.Component {
       confUrl = URLS["cadConf"];
     }
 
-    this.state = { tab: "both", formURL: formUrl, confURL: confUrl, formData: null, confirmed_cases: null };
+    this.state = {
+      tab: "both",
+      formURL: formUrl,
+      confURL: confUrl,
+      formData: null,
+      confirmed_cases: null,
+    };
     this.setTab = this.setTab.bind(this);
 
     this.getFormData = this.getFormData.bind(this);
@@ -149,7 +164,7 @@ class Leafletmap extends React.Component {
 
   updateDimensions() {
     const height = window.innerWidth >= 992 ? window.innerHeight - 300 : 400;
-    this.setState({ height: height })
+    this.setState({ height: height });
   }
 
   componentDidMount() {
@@ -159,7 +174,7 @@ class Leafletmap extends React.Component {
   }
 
   componentWillMount() {
-    this.updateDimensions()
+    this.updateDimensions();
   }
 
   componentWillUnmount() {
@@ -167,34 +182,42 @@ class Leafletmap extends React.Component {
   }
 
   setTab(tabID, index) {
-    document.getElementById("tabs").children[currTab].classList.remove('active');
+    document
+      .getElementById("tabs")
+      .children[currTab].classList.remove("active");
     document.getElementById("tabs").children[index].classList.add("active");
     currTab = index;
 
     this.setState({ tab: tabID });
-
   }
 
   getFormData() {
     fetch(this.state.formURL)
-      .then(r => r.json())
-      .then(d => {
+      .then((r) => r.json())
+      .then((d) => {
         return d;
       })
-      .then(formData => this.setState({ formData }));
+      .then((formData) => this.setState({ formData }));
   }
 
   getConfirmedCasesData() {
     fetch(this.state.confURL)
-      .then(r => r.json())
-      .then(d => {
+      .then((r) => r.json())
+      .then((d) => {
         return d;
       })
-      .then(confirmed_cases => this.setState({ confirmed_cases }));
+      .then((confirmed_cases) => this.setState({ confirmed_cases }));
   }
 
   // default map renderer. it only renders circles if pointTolayer is defined
-  renderMap(formData, confirmed_cases, bindPopupOnEachFeature, tab, pointToLayer, styleFuncCircles) {
+  renderMap(
+    formData,
+    confirmed_cases,
+    bindPopupOnEachFeature,
+    tab,
+    pointToLayer,
+    styleFuncCircles
+  ) {
     let data;
     let styleFunc;
 
@@ -253,25 +276,35 @@ class Leafletmap extends React.Component {
       return null;
     }
 
-    return <GeoJSON
-      data={data}
-      style={styleFunc}
-      onEachFeature={bindPopupOnEachFeature}
-      key={tab} />;
+    return (
+      <GeoJSON
+        data={data}
+        style={styleFunc}
+        onEachFeature={bindPopupOnEachFeature}
+        key={tab}
+      />
+    );
   }
 
   render() {
     let { t } = this.props;
     let title;
     if (this.state.formData !== null) {
-      title = (i18nlang === "fr") ? "Réponse totales: " + this.state.formData['total_responses'] +
-        " | Dernière mise à jour: " + new Date(1000 * this.state.formData["time"])
-        : "Total Responses: " + this.state.formData['total_responses'] + " | Last update: " + new Date(1000 * this.state.formData["time"]);
+      title =
+        i18nlang === "fr"
+          ? "Réponse totales: " +
+            this.state.formData["total_responses"] +
+            " | Dernière mise à jour: " +
+            new Date(1000 * this.state.formData["time"])
+          : "Total Responses: " +
+            this.state.formData["total_responses"] +
+            " | Last update: " +
+            new Date(1000 * this.state.formData["time"]);
     } else {
-      title = (i18nlang === "fr") ? "Chargement..." : "Loading...";
+      title = i18nlang === "fr" ? "Chargement..." : "Loading...";
     }
 
-    const view = (i18nlang === "enUS") ? USA_VIEW : CANADA_VIEW;
+    const view = i18nlang === "enUS" ? USA_VIEW : CANADA_VIEW;
 
     // needs more info for potential cases by county
     let bindPopupOnEachFeature_USA = (feature, layer) => {
@@ -287,22 +320,51 @@ class Leafletmap extends React.Component {
 
       if (countyData) {
         if (countyReports < 25) {
-          content = "<b>" + feature.properties["NAME"] + " County</b><br/>" + "We don't have enough data for this region";
+          content =
+            "<b>" +
+            feature.properties["NAME"] +
+            " County</b><br/>" +
+            "We don't have enough data for this region";
         } else {
           content = "<b>" + feature.properties["NAME"] + " County</b>";
           if (this.state.tab === "vuln") {
-            content += "<p>" + countyData["risk"] + " vulnerable individuals<br/>" + countyData["number_reports"] + " reports in total</p>";
+            content +=
+              "<p>" +
+              countyData["risk"] +
+              " vulnerable individuals<br/>" +
+              countyData["number_reports"] +
+              " reports in total</p>";
           } else if (this.state.tab === "both") {
-            content += "<p>" + countyData["both"] + " vulnerable individuals who are also potential cases<br/>" + countyData["number_reports"] + " reports in total</p>";
+            content +=
+              "<p>" +
+              countyData["both"] +
+              " vulnerable individuals who are also potential cases<br/>" +
+              countyData["number_reports"] +
+              " reports in total</p>";
           } else if (this.state.tab === "pot") {
-            content += "<p>" + countyData["pot"] + " potential cases<br/>" + countyData["number_reports"] + " reports in total</p>";
+            content +=
+              "<p>" +
+              countyData["pot"] +
+              " potential cases<br/>" +
+              countyData["number_reports"] +
+              " reports in total</p>";
           }
         }
       } else {
         if (this.state.tab === "conf") {
-          content = "<b>" + feature.properties["Combined_Key"] + "</b>" + "<p>Confirmed Cases: " + feature.properties["Confirmed"] + "</p>"
+          content =
+            "<b>" +
+            feature.properties["Combined_Key"] +
+            "</b>" +
+            "<p>Confirmed Cases: " +
+            feature.properties["Confirmed"] +
+            "</p>";
         } else {
-          content = "<b>" + feature.properties["NAME"] + " County</b><br/>" + "We don't have enough data for this region";
+          content =
+            "<b>" +
+            feature.properties["NAME"] +
+            " County</b><br/>" +
+            "We don't have enough data for this region";
         }
       }
 
@@ -361,7 +423,7 @@ class Leafletmap extends React.Component {
       bindPopups = bindPopupOnEachFeature_USA;
       pointToLayer = (feature, latlng) => {
         let radius = MIN_CIRCLE_RADIUS;
-        let cases = feature['properties']['Confirmed'];
+        let cases = feature["properties"]["Confirmed"];
 
         if (cases > 10000) {
           radius = MAX_CIRCLE_RAD;
@@ -378,9 +440,9 @@ class Leafletmap extends React.Component {
         }
 
         return L.circleMarker(latlng, {
-          radius: radius
+          radius: radius,
         });
-      }
+      };
     }
 
     //
@@ -419,16 +481,19 @@ class Leafletmap extends React.Component {
           </Map>
         </div>
         <div id="tabs" className="TabSelectors btn_group">
-          <PrimaryButton className="active" onClick={_ => this.setTab("both", 0)}>
+          <PrimaryButton
+            className="active"
+            onClick={(_) => this.setTab("both", 0)}
+          >
             {t("pot_vul_button")}
           </PrimaryButton>
-          <PrimaryButton onClick={_ => this.setTab("pot", 1)}>
+          <PrimaryButton onClick={(_) => this.setTab("pot", 1)}>
             {t("pot_button")}
           </PrimaryButton>
-          <PrimaryButton onClick={_ => this.setTab("vuln", 2)}>
+          <PrimaryButton onClick={(_) => this.setTab("vuln", 2)}>
             {t("vul_button")}
           </PrimaryButton>
-          <PrimaryButton onClick={_ => this.setTab("conf", 3)}>
+          <PrimaryButton onClick={(_) => this.setTab("conf", 3)}>
             {t("cul_button")}
           </PrimaryButton>
         </div>

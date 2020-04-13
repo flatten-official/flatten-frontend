@@ -32,7 +32,7 @@ i18n
   .use(initReactI18next)
   .init({
     detection: {
-      lookupQuerystring: "lang"
+      lookupQuerystring: "lang",
     },
     fallbackLng: "en",
     resources: {
@@ -46,7 +46,7 @@ i18n
         Footer: EnFooter,
         Leafletmap: EnLeafletmap,
         Info: EnInfo,
-        Form: EnForm
+        Form: EnForm,
       },
       enUS: {
         HomePage: EnHomePageUS,
@@ -69,9 +69,9 @@ i18n
         Footer: FrFooter,
         Leafletmap: FrLeafletmap,
         Info: FrInfo,
-        Form: FrForm
-      }
-    }
+        Form: FrForm,
+      },
+    },
   });
 
 export default i18n;

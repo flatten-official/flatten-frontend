@@ -8,7 +8,7 @@ const CONF_SCHEME_THRESHOLDS = [5, 25, 100, 250];
 const POT_SCHEME_THRESHOLDS = [0.02, 0.05, 0.1, 0.25];
 const HIGH_RISK_SCHEME_THRESHOLDS = [0.15, 0.25, 0.35, 0.5];
 const BOTH_SCHEME_THRESHOLDS = [0.01, 0.02, 0.05, 0.1];
-const NOT_ENOUGH_GRAY = '#909090';
+const NOT_ENOUGH_GRAY = "#909090";
 const i18nlang = i18next.language;
 
 const Legend = (props) => {
@@ -19,7 +19,7 @@ const Legend = (props) => {
   switch (props.tab) {
     case "conf":
       colorThresholds = CONF_SCHEME_THRESHOLDS;
-      legendTitle = t('number_of_cases');
+      legendTitle = t("number_of_cases");
       break;
     case "pot":
       colorThresholds = POT_SCHEME_THRESHOLDS;
@@ -54,8 +54,12 @@ const Legend = (props) => {
   useEffect(() => {
     let legend_content = "<h4> " + legendTitle + " </h4>";
     if (not_enough_data)
-      legend_content += '<i style="background:' + NOT_ENOUGH_GRAY + '"></i> '
-        + t("not_enough_data_legend") + '<br>';
+      legend_content +=
+        '<i style="background:' +
+        NOT_ENOUGH_GRAY +
+        '"></i> ' +
+        t("not_enough_data_legend") +
+        "<br>";
 
     // Loop through our density intervals and generate a label with a coloured square for each interval.
     for (let i = 0; i < colourScheme.length; i++) {
@@ -64,8 +68,8 @@ const Legend = (props) => {
 
       const threshold = i === 0 ? 0 : colorThresholds[i - 1];
 
-      if (percent) legend_content += '> ' + threshold * 100 + '%<br>';
-      else legend_content += '> ' + threshold + '<br>';
+      if (percent) legend_content += "> " + threshold * 100 + "%<br>";
+      else legend_content += "> " + threshold + "<br>";
     }
 
     const legend = L.control({ position: "bottomright" });
@@ -83,10 +87,9 @@ const Legend = (props) => {
     }
     return function cleanup() {
       map.removeControl(legend);
-    }
-
+    };
   });
   return null;
 };
 
-export default withTranslation('Leafletmap')(Legend);
+export default withTranslation("Leafletmap")(Legend);
