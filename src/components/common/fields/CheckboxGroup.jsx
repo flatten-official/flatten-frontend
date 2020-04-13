@@ -1,21 +1,15 @@
 import React from "react";
 import Checkbox from "./Checkbox";
 
-const CheckboxGroup = ({ 
-  input,
-  label,
-  options,
-  meta,
-  maxColumns
-}) => {
+const CheckboxGroup = ({ input, label, options, meta, maxColumns }) => {
   const containerModifier = maxColumns ? `--columns-${maxColumns}` : "";
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const selectedValues = event.target.checked
       ? [...input.value, event.target.name]
-      : input.value.filter(value => value !== event.target.name)
+      : input.value.filter((value) => value !== event.target.name);
 
-    input.onChange(selectedValues)
+    input.onChange(selectedValues);
   };
 
   return (
@@ -32,9 +26,7 @@ const CheckboxGroup = ({
           />
         ))}
       </div>
-      {(meta.touched && meta.error) && (
-        <div className="error">{meta.error}</div>
-      )}
+      {meta.touched && meta.error && <div className="error">{meta.error}</div>}
     </div>
   );
 };
