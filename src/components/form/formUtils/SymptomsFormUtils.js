@@ -55,11 +55,11 @@ export const getUtils = (lang) => {
         NEED_OPTIONS: [
           { label: "Aide financière", value: "financialSupport" },
           { label: "Soutien affectif", value: "emotionalSupport" },
+          { label: "Aliments/Ressources nécessaires", value: "food" },
           {
-            label: "Des médicaments/Ressources de la pharmacie",
+            label: "Médicaments/Ressources de la pharmacie",
             value: "medication",
           },
-          { label: "Aliments/Ressources nécessaires", value: "food" },
           { label: "Autre", value: "other" },
         ],
       };
