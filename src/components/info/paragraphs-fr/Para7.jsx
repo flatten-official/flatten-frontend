@@ -6,7 +6,7 @@ const Para7 = () => (
   <React.Fragment>
     <p>
       Une personne:
-      <ul class="infoList">
+      <ul className="infoList">
         <li>
           présentant une fièvre (plus de 38 degrés Celsius) ET/OU montrant
           l'apparition d'une toux (ou exacerbation de la toux chronique)

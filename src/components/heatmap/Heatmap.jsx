@@ -2,10 +2,7 @@ import React from "react";
 import { Trans, withTranslation } from "react-i18next";
 
 import MapIcon from "../../assets/map.svg";
-import PrimaryButton from "../common/buttons/PrimaryButton";
 import Leafletmap from "./Leafletmap";
-
-
 
 class HeatMap extends React.Component {
   state = {
@@ -36,7 +33,6 @@ class HeatMap extends React.Component {
   };
 
   render() {
-    const ratio = `${this.state.ratio}%`;
     const { t } = this.props;
 
     return (
@@ -85,10 +81,9 @@ class HeatMap extends React.Component {
           </div>
         </div>
 
-        <div className="heatmap__container" >
+        <div className="heatmap__container">
           <Leafletmap></Leafletmap>
         </div>
-
       </div>
     );
   }

@@ -17,6 +17,12 @@ If you'd like to avoid the above package managers, you can install node [here](h
 
 After making sure you have node and npm on your system, you can run `npm install` and then `npm start` in the root directory to start the project.
 
+### Code formatting and error checking
+
+We use [Prettier](https://prettier.io/) for code formatting and [ESLint](https://eslint.org/) for error checking.
+
+Use [this](https://prettier.io/docs/en/editors.html) and [this](https://eslint.org/docs/user-guide/integrations) guide for setting Prettier and ESLint with your editors respectively. (Basically just install both plugins in your IDE.)
+
 ## Packages currently in use
 
 - [react-router](https://reacttraining.com/react-router/web/guides/quick-start) : Allows you to have different pages based on url (very helpful for nav bar).

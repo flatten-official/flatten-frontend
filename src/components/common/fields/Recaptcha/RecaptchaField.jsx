@@ -8,7 +8,7 @@ const RecaptchaField = ({
   handleRecaptchaVerified,
   handleRecaptchaExpired,
 }) => {
-  let hl = lang.substring(0, 2);
+  const hl = lang.substring(0, 2);
   return (
     <Recaptcha
       sitekey={RecaptchaKey()}
