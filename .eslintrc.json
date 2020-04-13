@@ -23,6 +23,7 @@
   "plugins": ["react"],
   "rules": {
     "react/prop-types": "warn",
-    "react/no-unescaped-entities": "warn"
+    "react/no-unescaped-entities": "warn",
+    "react/jsx-key": "warn"
   }
 }

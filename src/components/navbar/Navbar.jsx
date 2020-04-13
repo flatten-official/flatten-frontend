@@ -14,7 +14,7 @@ const Navbar = ({ t, getGeolocation }) => {
   useEffect(() => {
     getGeolocation();
   }, []);
-  let location = useLocation();
+  const location = useLocation();
   let logoLink = null;
   let homeLink = null;
   let symptomsLink = null;
@@ -22,40 +22,35 @@ const Navbar = ({ t, getGeolocation }) => {
 
   const i18nlang = i18next.language;
   console.log(i18nlang);
-  let toggle;
   let current;
   let selectedEn = false;
   let selectedUs = false;
   let selectedFr = false;
   switch (i18nlang) {
     case "en":
-      toggle = "fr";
       current = "en";
       selectedEn = true;
       break;
     case "enUS":
-      toggle = "fr";
       current = "en";
       selectedUs = true;
       break;
     case "fr":
-      toggle = "en";
       current = "fr";
       selectedFr = true;
       break;
     default:
-      toggle = "fr";
       current = "en";
       selectedEn = true;
   }
 
   const languageHandler = (event) => {
-    let lang = event.currentTarget.value;
-    let linkLang = `${location.pathname}?lang=${lang}`;
+    const lang = event.currentTarget.value;
+    const linkLang = `${location.pathname}?lang=${lang}`;
     history.push(linkLang);
   };
 
-  if (location.pathname == ("/" || "#symptoms" || "#heatmap")) {
+  if (location.pathname === ("/" || "#symptoms" || "#heatmap")) {
     logoLink = (
       <Link
         activeClass="active"

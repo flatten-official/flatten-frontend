@@ -3,15 +3,15 @@ module.exports = {
     [
       "@babel/preset-env",
       {
-        modules: false
-      }
+        modules: false,
+      },
     ],
-    "@babel/preset-react"
+    "@babel/preset-react",
   ],
   plugins: [
     "@babel/plugin-transform-runtime",
     "@babel/plugin-syntax-dynamic-import",
-    "@babel/plugin-proposal-class-properties"
+    "@babel/plugin-proposal-class-properties",
   ],
   env: {
     production: {
@@ -20,12 +20,12 @@ module.exports = {
         [
           "transform-react-remove-prop-types",
           {
-            removeImport: true
-          }
+            removeImport: true,
+          },
         ],
         "@babel/plugin-transform-react-inline-elements",
-        "@babel/plugin-transform-react-constant-elements"
-      ]
-    }
-  }
+        "@babel/plugin-transform-react-constant-elements",
+      ],
+    },
+  },
 };

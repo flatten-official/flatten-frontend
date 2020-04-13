@@ -18,7 +18,7 @@ const ReturningUserForm = ({ handleSubmit, change }) => {
   const lang = i18next.language;
 
   const recaptchaLoaded = () => {
-    //console.log("Loaded");
+    // console.log("Loaded");
   };
 
   const handleRecaptchaExpired = () => {

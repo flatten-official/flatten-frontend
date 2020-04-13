@@ -1,16 +1,7 @@
 import React from "react";
-import { render } from "react-dom";
 import { withTranslation } from "react-i18next";
 import PrimaryButton from "../common/buttons/PrimaryButton";
-import {
-  CircleMarker,
-  Map,
-  Marker,
-  Popup,
-  TileLayer,
-  GeoJSON,
-  LayersControl,
-} from "react-leaflet";
+import { Map, TileLayer, GeoJSON } from "react-leaflet";
 import convertedBoundaries from "./converted_boundaries.js";
 import counties from "./county_boundaries.js";
 import Legend from "./Legend";
@@ -33,7 +24,6 @@ const USA_BOUNDS = [
 const ONTARIO = [51.2538, -85.3232];
 const USA_CENTER = [37.0902, -95.7129];
 const INITIAL_ZOOM = 5;
-const height = "650px";
 
 // white, yellow, orange, brown, red, black
 const COLOUR_SCHEME = ["#ffffb2", "#fecc5c", "#fd8d3c", "#f03b20", "#bd0026"];
