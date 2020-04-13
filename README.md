@@ -21,7 +21,7 @@ After making sure you have node and npm on your system, you can run `npm install
 
 We use [Prettier](https://prettier.io/) for code formatting and [ESLint](https://eslint.org/) for error checking.
 
-Use [this](https://prettier.io/docs/en/editors.html) and [this](https://eslint.org/docs/user-guide/integrations) guide for setting Prettier and ESLint with your editors respectively.
+Use [this](https://prettier.io/docs/en/editors.html) and [this](https://eslint.org/docs/user-guide/integrations) guide for setting Prettier and ESLint with your editors respectively. (Basically just install both plugins in your IDE.)
 
 ## Packages currently in use
 
