@@ -5,13 +5,13 @@ const TextInput = ({ label, input, meta, ...props }) => {
     <div className="text-input">
       <div className="text-input__container">
         {label && <div className="text-input__label">{label}</div>}
-        <input type="text" {...input} {...props}/>
+        <input type="text" {...input} {...props} />
       </div>
-      {(meta.touched && meta.error) && (
+      {meta.touched && meta.error && (
         <div className="text-input__error error">{meta.error}</div>
       )}
     </div>
   );
 };
-  
+
 export default TextInput;

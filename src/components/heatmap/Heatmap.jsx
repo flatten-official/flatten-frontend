@@ -5,8 +5,6 @@ import MapIcon from "../../assets/map.svg";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 import Leafletmap from "./Leafletmap";
 
-
-
 class HeatMap extends React.Component {
   state = {
     width: 0,
@@ -85,10 +83,9 @@ class HeatMap extends React.Component {
           </div>
         </div>
 
-        <div className="heatmap__container" >
+        <div className="heatmap__container">
           <Leafletmap></Leafletmap>
         </div>
-
       </div>
     );
   }
