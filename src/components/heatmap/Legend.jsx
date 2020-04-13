@@ -13,7 +13,7 @@ const i18nlang = i18next.language;
 
 const Legend = (props) => {
     // pick a color threshold and legend title
-    let { t } = props
+    let { t } = props;
     let colorThresholds;
     let legendTitle;
     switch (props.tab) {

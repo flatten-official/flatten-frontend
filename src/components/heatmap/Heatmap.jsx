@@ -86,9 +86,8 @@ class HeatMap extends React.Component {
         </div>
 
         <div className="heatmap__container" >
-          <Leafletmap></Leafletmap>
+          <Leafletmap/>
         </div>
-
       </div>
     );
   }
