@@ -17,6 +17,10 @@ If you'd like to avoid the above package managers, you can install node [here](h
 
 After making sure you have node and npm on your system, you can run `npm install` and then `npm start` in the root directory to start the project.
 
+### Code formatting
+
+We use [Prettier](https://prettier.io/) for code formatting. Follow [this](https://prettier.io/docs/en/editors.html) guide for setup.
+
 ## Packages currently in use
 
 - [react-router](https://reacttraining.com/react-router/web/guides/quick-start) : Allows you to have different pages based on url (very helpful for nav bar).

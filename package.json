@@ -62,10 +62,17 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^5.3.1",
+    "husky": "^4.2.5",
     "prettier": "2.0.4",
+    "pretty-quick": "^2.0.1",
     "url-loader": "^4.0.0",
     "webp-loader": "^0.6.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
