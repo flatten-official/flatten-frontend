@@ -160,7 +160,7 @@ class Leafletmap extends React.Component {
   }
 
   updateDimensions() {
-    const height = window.innerWidth >= 992 ? window.innerHeight - 300 : 400;
+    const height = window.innerWidth >= 992 ? window.innerHeight - 200 : 300;
     this.setState({ height: height });
   }
 
