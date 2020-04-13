@@ -11,6 +11,8 @@ export const getFormValidation = (lang) => {
       formValidation = [
         ["age", "L'âge est requis"],
         ["contactWithIllness", "Champ requis"],
+        ["needs", "Champ requis"],
+        ["ethnicity", "Champ requis"],
         ["travelOutsideCanada", "Champ requis"],
         ["testedPositive", "Champ requis"],
         [
@@ -36,6 +38,8 @@ export const getFormValidation = (lang) => {
     default:
       formValidation = [
         ["age", "Age is required"],
+        ["needs", "Field is required"],
+        ["ethnicity", "Field is required"],
         ["contactWithIllness", "Field is required"],
         ["travelOutsideCanada", "Field is required"],
         ["testedPositive", "Field is required"],
