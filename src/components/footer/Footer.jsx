@@ -1,21 +1,43 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
+} from "react-share";
 
 class Footer extends React.Component {
   render() {
     const { t } = this.props;
+    const url = "www.flatten.ca";
+    const title =
+      "I helped flatten the curve of COVID-19 by filling out a form for an interactive heatmap, check it out here: www.flatten.ca";
+
     return (
       <div className="footer">
         <div className="footer__container">
           <div className="footer__pair">
             <div className="footer__section body">
               <p>
-                <b>{t("social-media")}</b>
+                <b>{t("share")}</b>
               </p>
-              <a className="footer__link" href="https://blog.flatten.ca">
-                <p>Blog</p>
-              </a>
+              <span className="footer__icon">
+                <FacebookShareButton url={url} quote={title}>
+                  <FacebookIcon size={32} round={true} />
+                </FacebookShareButton>
+              </span>
+              <span className="footer__icon">
+                <TwitterShareButton url={url} title={title}>
+                  <TwitterIcon size={32} round={true} />
+                </TwitterShareButton>
+              </span>
+              <LinkedinShareButton url={url} title={title}>
+                <LinkedinIcon size={32} round={true} />
+              </LinkedinShareButton>
             </div>
             <div className="footer__section body">
               <p>
@@ -50,6 +72,9 @@ class Footer extends React.Component {
                 href="mailto:flattenofficial@gmail.com"
               >
                 <p>flattenofficial@gmail.com</p>
+              </a>
+              <a className="footer__link" href="https://blog.flatten.ca">
+                <p>Blog</p>
               </a>
             </div>
           </div>

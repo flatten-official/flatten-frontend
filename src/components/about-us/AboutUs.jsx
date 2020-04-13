@@ -32,7 +32,6 @@ const AboutUs = ({ t }) => {
             link={dev.link}
             name={dev.name}
             src={dev.src}
-            key={index}
             role={dev.role}
             degrees={dev.degrees}
             titles={dev.titles}
@@ -47,7 +46,6 @@ const AboutUs = ({ t }) => {
             link={advisor.link}
             name={advisor.name}
             src={advisor.src}
-            key={index}
             role={advisor.role}
             degrees={advisor.degrees}
             titles={advisor.titles}
@@ -62,7 +60,6 @@ const AboutUs = ({ t }) => {
             link={member.link}
             name={member.name}
             src={member.src}
-            key={index}
             role={member.role}
             degrees={member.degrees}
             titles={member.titles}

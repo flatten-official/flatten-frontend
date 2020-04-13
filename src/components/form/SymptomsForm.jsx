@@ -20,7 +20,7 @@ const SymptomsForm = ({ change, handleSubmit, location }) => {
   const questions = getQuestions(location);
   const { t } = useTranslation("Form");
   const recaptchaLoaded = () => {
-    //console.log("Loaded");
+    // console.log("Loaded");
   };
 
   const handleRecaptchaExpired = () => {

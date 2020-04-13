@@ -40,6 +40,7 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
       <div className="symptoms__submit">
         <PrimaryButton
           className="symptoms__submit-button"
+          id="google-form-submit"
           onClick={handleClick}
         >
           {t("submit")}

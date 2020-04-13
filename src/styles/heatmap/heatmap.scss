@@ -39,17 +39,17 @@
   margin-left: 30%;
   margin-right: 30%;
 }
-.btn_group{
+.btn_group {
   width: 100%;
-  button{
+  button {
     width: 20.5%;
     float: left;
     font-size: medium;
     margin-right: 6%;
     min-height: 40px;
-    border-radius: 0px 0px 8px 8px ;
+    border-radius: 0px 0px 8px 8px;
   }
-  button:last-child{
+  button:last-child {
     margin-right: 0%;
   }
 }
@@ -75,8 +75,8 @@
     // margin: 0;
     grid-template-columns: 100%;
   }
-  .btn_group{
-    button{
+  .btn_group {
+    button {
       font-size: 2.5vw;
       margin-right: 0%;
       width: 25%;
