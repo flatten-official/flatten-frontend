@@ -76,7 +76,23 @@ export const getUtils = (lang) => {
           { label: "Runny nose", value: "runnyNose" },
           { label: "Sore throat", value: "soreThroat" },
         ],
-
+        ETHNICITY_OPTIONS: [
+          { label: "Asian", value: "asian" },
+          { label: "Black/African", value: "black" },
+          { label: "Caucasian", value: "caucasian" },
+          { label: "Hispanic/Latino", value: "hispanic" },
+          { label: "Native American", value: "nativeamerican" },
+          { label: "Pacific Islander", value: "pacificislander" },
+          { label: "Prefer not to answer", value: "na" },
+        ],
+        NEEDS_OPTIONS: [
+          { label: "Emotional", value: "emotional" },
+          { label: "Financial", value: "financial" },
+          { label: "Medical", value: "medical" },
+          { label: "Physical", value: "physicsal" },
+          { label: "Social", value: "social" },
+          { label: "Other", value: "other" },
+        ],
         AGE_OPTIONS: [
           { label: "Less than 18", value: "<18" },
           { label: "18-25", value: "18-25" },

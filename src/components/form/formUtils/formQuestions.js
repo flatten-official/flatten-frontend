@@ -13,6 +13,8 @@ export const getQuestions = (lang) => {
     SEX_OPTIONS,
     SYMPTOM_OPTIONS,
     YES_NO_OPTIONS,
+    ETHNICITY_OPTIONS,
+    NEEDS_OPTIONS,
   } = getUtils(lang);
   let questions;
   switch (lang) {
@@ -135,6 +137,20 @@ export const getQuestions = (lang) => {
           name: "sex",
           component: RadioButtonGroup,
           options: SEX_OPTIONS,
+        },
+        {
+          body: "What is your ethnicity?",
+          name: "ethnicity",
+          component: RadioButtonGroup,
+          maxColumns: 2,
+          options: ETHNICITY_OPTIONS,
+        },
+        {
+          body: "What is your greatest need at this moment?",
+          name: "needs",
+          component: RadioButtonGroup,
+          maxColumns: 2,
+          options: NEEDS_OPTIONS,
         },
         {
           body: "What is your email? (optional)",
