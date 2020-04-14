@@ -50,3 +50,10 @@ export const getGeolocation = () => async (dispatch) => {
     });
   }
 };
+
+export const setDailyCookie = () => async (dispatch) => {
+  await backend.post("/set-daily-cookie");
+  return {
+    type: "SET_COOKIE",
+  };
+};

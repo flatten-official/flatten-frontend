@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { submit } from "redux-form";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 
-import { submitForm } from "../../actions/index";
+import { submitForm, setDailyCookie } from "../../actions/index";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 
 import SymptomsForm, { symptomsFormName } from "./SymptomsForm";
@@ -11,6 +11,13 @@ import SubmitModal from "./SubmitModal";
 import SyringeIcon from "../../assets/syringe.svg";
 
 const TrackYourSymptoms = ({ t, dispatch, daily }) => {
+  useEffect(() => {
+    document.addEventListener("PaperformSubmission", submitSuccess);
+  }, []);
+
+  const submitSuccess = () => {
+    dispatch(setDailyCookie());
+  };
   const [showModal, setShowModal] = useState(false);
 
   const handleClick = () => {
@@ -37,7 +44,7 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
         </p>
       </div>
       {/* <SymptomsForm onSubmit={handleSubmit} /> */}
-
+      <div data-paperform-id="flatten-covid"></div>
       <div className="symptoms__submit">
         <button
           className="primary-button body symptoms__submit-button"
