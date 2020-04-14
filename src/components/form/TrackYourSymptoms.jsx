@@ -17,6 +17,10 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
     dispatch(submit(symptomsFormName));
   };
 
+  const openForm = () => {
+    Paperform.popup("flatten-covid");
+  };
+
   const handleSubmit = (values) => {
     setShowModal(true);
     dispatch(submitForm(values));
@@ -36,8 +40,13 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
           <b>{t("disclaimer")} </b>
         </p>
       </div>
-      <SymptomsForm onSubmit={handleSubmit} />
-      <div className="symptoms__submit">
+      {/* <SymptomsForm onSubmit={handleSubmit} /> */}
+      <div className="sumptoms__submit">
+        <PrimaryButton className="symptoms__submit-button" onClick={openForm}>
+          Open Form
+        </PrimaryButton>
+      </div>
+      {/* <div className="symptoms__submit">
         <PrimaryButton
           className="symptoms__submit-button"
           id="google-form-submit"
@@ -45,7 +54,7 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
         >
           {t("submit")}
         </PrimaryButton>
-      </div>
+      </div> */}
       {showModal && <SubmitModal onClose={() => setShowModal(false)} />}
     </div>
   ) : (
