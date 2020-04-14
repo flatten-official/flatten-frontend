@@ -1,14 +1,14 @@
 .info__para {
-  border: 1px solid $light-grey;
-  border-radius: 7px;
-  margin: 0 auto;
+  border: 1px solid $medium-grey;
+  border-radius: 8px;
+  margin: 30px auto;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
 }
 
 //Desktop
 @media only screen and (min-width: 1200px) {
   .info__para {
     width: 50%;
-    margin: 20px auto;
     &:hover {
       transition: 0.3s;
       -webkit-box-shadow: 4px 4px 10px 0px rgb(211, 185, 185);
@@ -18,12 +18,16 @@
   }
 }
 
+p {
+  width: 100%;
+  padding: 10px 0px;
+}
+
 .info__header {
   font-family: "DM Sans", sans-serif;
-  font-weight: 600;
-  padding: 15px 30px;
+  padding: 30px 30px 20px 30px;
   margin: 0;
-  background-color: $light-grey;
+  color: $header-magenta;
   border-radius: 3px;
 }
 
@@ -31,9 +35,13 @@
   margin: 50px auto;
   width: 60%;
   text-align: center;
-  margin-top: 100px;
+  margin-top: 60px;
 }
 
 .info__body {
-  padding: 10px 30px 15px 30px;
+  padding: 0px 30px 30px 30px;
+}
+
+.info__note {
+  font-style: italic;
 }

@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./Para.css";
-
 const Para4 = () => (
   <React.Fragment>
     <p>
@@ -52,19 +50,11 @@ const Para4 = () => (
       </li>
     </p>
     <span>Sources: </span>
-    <a
-      className="infoLink"
-      target="_blank"
-      href="https://www.quebec.ca/coronavirus"
-    >
+    <a target="_blank" href="https://www.quebec.ca/coronavirus">
       Gouvernement du Québec
     </a>
     <span> et </span>
-    <a
-      className="infoLink"
-      target="_blank"
-      href="https://www.santemontreal.qc.ca"
-    >
+    <a target="_blank" href="https://www.santemontreal.qc.ca">
       Direction de santé publique de Montréal
     </a>
   </React.Fragment>

@@ -7,6 +7,7 @@ import HomePage from "./HomePage";
 import Heatmap from "../heatmap/Heatmap";
 import TrackYourSymptoms from "../form/TrackYourSymptoms";
 import EsriLink from "../esri-gsi-map/EsriLink";
+import Info from "../info/Info";
 
 const Home = ({ dispatch, user, daily }) => {
   const readCookieAction = async () => {
@@ -28,6 +29,7 @@ const Home = ({ dispatch, user, daily }) => {
       <TrackYourSymptoms />
       <Heatmap />
       <EsriLink />
+      <Info />
     </React.Fragment>
   );
 };

@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./Para.css";
-
 const Para7 = () => (
   <React.Fragment>
     <p>
@@ -21,7 +19,6 @@ const Para7 = () => (
             <li>
               A voyagé vers une{" "}
               <a
-                className="infoLink"
                 target="_blank"
                 href="https://www.canada.ca/fr/sante-publique/services/maladies/2019-nouveau-coronavirus/professionnels-sante/liste-regions-touchees-covid-19.html"
               >
@@ -38,7 +35,6 @@ const Para7 = () => (
               A été en contact étroit avec une personne atteinte d'une maladie
               respiratoire aiguë qui s'était rendue dans une{" "}
               <a
-                className="infoLink"
                 target="_blank"
                 href="https://www.canada.ca/fr/sante-publique/services/maladies/2019-nouveau-coronavirus/professionnels-sante/liste-regions-touchees-covid-19.html"
               >
@@ -73,7 +69,7 @@ const Para7 = () => (
         </li>
       </ul>
     </p>
-    <p className="infoNote">
+    <p className="info__note">
       Un contact étroit est défini comme étant une personne qui a prodigué des
       soins au patient, y compris les travailleurs de la santé, les membres de
       la famille ou d'autres personnes soignantes, ou encore une personne ayant
@@ -84,7 +80,6 @@ const Para7 = () => (
 
     <span>Source: </span>
     <a
-      className="infoLink"
       target="_blank"
       href="https://www.canada.ca/fr/sante-publique/services/maladies/2019-nouveau-coronavirus/professionnels-sante/definition-nationale-cas.html "
     >
