@@ -1,5 +1,5 @@
 import React from "react";
-import { reduxForm, Field } from "redux-form";
+import { Field, reduxForm } from "redux-form";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import { connect } from "react-redux";
@@ -11,6 +11,7 @@ import TextInput from "../common/fields/TextInput";
 import RecaptchaField from "../common/fields/Recaptcha/RecaptchaField";
 
 import { validate } from "../../utils/formValidation";
+
 const lang = i18next.language;
 
 export const symptomsFormName = "trackYourSymptoms";
@@ -19,10 +20,6 @@ const formValidation = getFormValidation(lang);
 const SymptomsForm = ({ change, handleSubmit, location }) => {
   const questions = getQuestions(location);
   const { t } = useTranslation("Form");
-  const recaptchaLoaded = () => {
-    // console.log("Loaded");
-  };
-
   const handleRecaptchaExpired = () => {
     change("recaptchaVerification", false);
   };
@@ -47,7 +44,7 @@ const SymptomsForm = ({ change, handleSubmit, location }) => {
         ))}
         <RecaptchaField
           lang={lang}
-          recaptchaLoaded={recaptchaLoaded}
+          // recaptchaLoaded={() => console.log("Loaded")}
           handleRecaptchaExpired={handleRecaptchaExpired}
           handleRecaptchaVerified={handleRecaptchaVerified}
         />
@@ -73,11 +70,10 @@ const SymptomsForm = ({ change, handleSubmit, location }) => {
 };
 
 const mapStateToProps = (state) => {
-  if (state.locationChange.status) {
-    return { location: state.locationChange.status };
-  }
-  return { location: false };
+  return { location: state.locationChange };
 };
+
+const SymptomsFormConnected = connect(mapStateToProps)(SymptomsForm);
 
 export default reduxForm({
   form: symptomsFormName,
@@ -86,4 +82,4 @@ export default reduxForm({
     symptoms: [],
     conditions: [],
   },
-})(connect(mapStateToProps)(SymptomsForm));
+})(SymptomsFormConnected);

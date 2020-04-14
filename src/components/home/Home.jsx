@@ -9,7 +9,11 @@ import TrackYourSymptoms from "../form/TrackYourSymptoms";
 import EsriLink from "../esri-gsi-map/EsriLink";
 
 const Home = ({ readCookie, user, daily }) => {
-  useEffect(() => readCookie(), []);
+  useEffect(() => {
+    // Must be a seperate method because useEffect parameter cannot return a promise;
+    const readCookieWrapper = async () => readCookie();
+    readCookieWrapper();
+  }, []);
 
   let homeStatus;
   if (user) homeStatus = user.status;
@@ -32,10 +36,8 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    readCookie: dispatch(readCookie()),
-  };
+const actionCreators = {
+  readCookie,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, actionCreators)(Home);

@@ -130,8 +130,7 @@ class Leafletmap extends React.Component {
   };
 
   componentDidMount() {
-    this.dispatch(getMapConfirmedData());
-    this.dispatch(getMapFormData());
+    this.props.loadData();
   }
 
   setTab = (tabID, index) => {
@@ -435,15 +434,24 @@ class Leafletmap extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  if (state.status) {
-    return {
-      formData: state.status.formData,
-      confirmedData: state.status.confirmedData,
-    };
-  }
-  return state;
+  return {
+    formData: state.mapData.formData,
+    confirmedData: state.mapData.confirmedData,
+  };
 };
 
-const LeafletMapConnected = connect(mapStateToProps)(Leafletmap);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadData: () => {
+      dispatch(getMapFormData());
+      dispatch(getMapConfirmedData());
+    },
+  };
+};
+
+const LeafletMapConnected = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Leafletmap);
 
 export default withTranslation("Leafletmap")(LeafletMapConnected);
