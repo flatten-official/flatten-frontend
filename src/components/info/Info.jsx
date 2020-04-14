@@ -28,7 +28,9 @@ const Info = ({ t }) => {
     <React.Fragment>
       <h4 id="info" className="title info__title">
         {t("header")}
+        <p className="body info__description">{t("body")}</p>
       </h4>
+
       {component}
     </React.Fragment>
   );
