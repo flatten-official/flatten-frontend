@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import { readCookie } from "../../actions/index";
-import Navbar from "../navbar/Navbar";
 import HomePage from "./HomePage";
 import Heatmap from "../heatmap/Heatmap";
 import TrackYourSymptoms from "../form/TrackYourSymptoms";
@@ -23,7 +22,6 @@ const Home = ({ dispatch, user, daily }) => {
 
   return (
     <React.Fragment>
-      <Navbar />
       <HomePage cookieStatus={homeStatus} />
       <TrackYourSymptoms />
       <Heatmap />

@@ -41,7 +41,7 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
         </p>
       </div>
       {/* <SymptomsForm onSubmit={handleSubmit} /> */}
-      <div className="sumptoms__submit">
+      <div className="symptoms__submit">
         <PrimaryButton className="symptoms__submit-button" onClick={openForm}>
           Open Form
         </PrimaryButton>
