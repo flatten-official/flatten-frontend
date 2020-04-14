@@ -31,7 +31,9 @@ const SymptomsForm = ({ change, handleSubmit, location }) => {
     }
   };
 
-  return location ? (
+  if (!location) return null;
+
+  return (
     <form onSubmit={handleSubmit}>
       <div className="symptoms-form">
         {questions.map(({ body, ...question }) => (
@@ -66,7 +68,7 @@ const SymptomsForm = ({ change, handleSubmit, location }) => {
         </div>
       </div>
     </form>
-  ) : null;
+  );
 };
 
 const mapStateToProps = (state) => {

@@ -11,12 +11,21 @@ const BOTH_SCHEME_THRESHOLDS = [0.01, 0.02, 0.05, 0.1];
 const NOT_ENOUGH_GRAY = "#909090";
 const i18nlang = i18next.language;
 
-const Legend = (props) => {
+const CONFIRMED_SETTINGS = {
+  percent: false,
+  notEnoughData: false,
+};
+
+const FORM_SETTINGS = {
+  percent: true,
+  notEnoughData: true,
+};
+
+const Legend = ({ t, tab, colourScheme }) => {
   // pick a color threshold and legend title
-  const { t } = props;
   let colorThresholds;
   let legendTitle;
-  switch (props.tab) {
+  switch (tab) {
     case "conf":
       colorThresholds = CONF_SCHEME_THRESHOLDS;
       legendTitle = t("number_of_cases");
@@ -35,41 +44,29 @@ const Legend = (props) => {
       break;
   }
 
-  // colour scheme and tab are passed through props
-  const colourScheme = props.colourScheme;
-  const tab = props.tab;
-
-  let percent;
-  let not_enough_data;
-  if (tab === "conf") {
-    percent = false;
-    not_enough_data = false;
-  } else {
-    percent = true;
-    not_enough_data = true;
-  }
+  const settings = tab === "conf" ? CONFIRMED_SETTINGS : FORM_SETTINGS;
 
   const { map } = useLeaflet();
 
   useEffect(() => {
-    let legend_content = "<h4> " + legendTitle + " </h4>";
-    if (not_enough_data)
-      legend_content +=
+    let legendContent = "<h4> " + legendTitle + " </h4>";
+    if (settings.notEnoughData)
+      legendContent +=
         '<i style="background:' +
         NOT_ENOUGH_GRAY +
-        '"></i> ' +
+        '"/> ' +
         t("not_enough_data_legend") +
         "<br>";
 
     // Loop through our density intervals and generate a label with a coloured square for each interval.
     for (let i = 0; i < colourScheme.length; i++) {
       // Place square
-      legend_content += '<i style="background:' + colourScheme[i] + '"></i>';
+      legendContent += '<i style="background:' + colourScheme[i] + '"/>';
 
       const threshold = i === 0 ? 0 : colorThresholds[i - 1];
 
-      if (percent) legend_content += "> " + threshold * 100 + "%<br>";
-      else legend_content += "> " + threshold + "<br>";
+      if (settings.percent) legendContent += "> " + threshold * 100 + "%<br>";
+      else legendContent += "> " + threshold + "<br>";
     }
 
     const legend = L.control({ position: "bottomright" });
@@ -77,12 +74,12 @@ const Legend = (props) => {
     legend.onAdd = () => {
       const div = L.DomUtil.create("div", "info legend");
 
-      div.innerHTML = legend_content;
+      div.innerHTML = legendContent;
       return div;
     };
 
     map.addControl(legend);
-    if (i18nlang === "enUS" && props.tab === "conf") {
+    if (i18nlang === "enUS" && tab === "conf") {
       map.removeControl(legend);
     }
     return function cleanup() {

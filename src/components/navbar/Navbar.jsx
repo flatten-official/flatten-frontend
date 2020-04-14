@@ -3,7 +3,7 @@ import { Link } from "react-scroll";
 import { NavLink, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
-import { getGeolocation } from "../../actions";
+import { getGeolocation } from "../../actions/actions";
 import i18next from "i18next";
 
 import history from "../../history";

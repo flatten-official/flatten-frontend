@@ -14,6 +14,7 @@ class Footer extends React.Component {
   render() {
     const { t } = this.props;
     const url = "www.flatten.ca";
+    // TODO : Include French version (and improve message)
     const title =
       "I helped flatten the curve of COVID-19 by filling out a form for an interactive heatmap, check it out here: www.flatten.ca";
 

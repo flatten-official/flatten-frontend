@@ -4,6 +4,7 @@ import Modal from "../common/modal/Modal";
 import GiftIcon from "../../assets/gift.svg";
 import FacebookButton from "../common/buttons/FacebookButton";
 import TwitterButton from "../common/buttons/TwitterButton";
+import PropTypes from "prop-types";
 
 const SubmitModal = ({ onClose }) => {
   useEffect(
@@ -31,6 +32,10 @@ const SubmitModal = ({ onClose }) => {
       </div>
     </Modal>
   );
+};
+
+SubmitModal.propTypes = {
+  onClose: PropTypes.func,
 };
 
 export default SubmitModal;

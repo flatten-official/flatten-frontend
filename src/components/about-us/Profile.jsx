@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 // In future should add webp img's to serve in order to improve img loading times
 // Need to add a webp loader to the webpack config
@@ -24,5 +25,14 @@ const Profile = ({ link, src, name, role, titles, degrees }) => (
     </div>
   </div>
 );
+
+Profile.propTypes = {
+  name: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
+  link: PropTypes.string,
+  titles: PropTypes.string,
+  degrees: PropTypes.string,
+};
 
 export default Profile;

@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "../../../utils/classNames";
+import PropTypes from "prop-types";
 
 const PrimaryButton = ({ disabled, onClick, className, children }) => {
   return (
@@ -16,6 +17,13 @@ const PrimaryButton = ({ disabled, onClick, className, children }) => {
       {children}
     </button>
   );
+};
+
+PrimaryButton.propTypes = {
+  disabled: PropTypes.bool,
+  onClick: PropTypes.func,
+  className: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
 };
 
 export default PrimaryButton;

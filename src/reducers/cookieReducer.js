@@ -1,4 +1,4 @@
-import { COOKIE_EXISTS } from "../actions";
+import { COOKIE_EXISTS } from "../actions/actions";
 
 export default (state = {}, action) => {
   switch (action.type) {

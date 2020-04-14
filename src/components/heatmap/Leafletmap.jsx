@@ -6,7 +6,7 @@ import convertedBoundaries from "./converted_boundaries.js";
 import counties from "./county_boundaries.js";
 import Legend from "./Legend";
 import L from "leaflet";
-import { getMapConfirmedData, getMapFormData } from "../../actions/index";
+import { getMapConfirmedData, getMapFormData } from "../../actions/actions";
 import i18next from "i18next";
 import { connect } from "react-redux";
 

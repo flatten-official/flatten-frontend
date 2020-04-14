@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import { readCookie } from "../../actions/index";
+import { readCookie } from "../../actions/actions";
 import Navbar from "../navbar/Navbar";
 import HomePage from "./HomePage";
 import Heatmap from "../heatmap/Heatmap";
@@ -36,8 +36,6 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-const actionCreators = {
-  readCookie,
-};
+const actionCreators = { readCookie };
 
 export default connect(mapStateToProps, actionCreators)(Home);

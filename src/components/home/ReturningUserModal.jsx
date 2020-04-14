@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { submitForm } from "../../actions/index";
+import { submitForm } from "../../actions/actions";
 import Modal from "../common/modal/Modal";
 import ReturningUserForm from "./ReturningUserForm";
 

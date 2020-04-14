@@ -5,6 +5,7 @@ import MapIcon from "../../assets/map.svg";
 import Leafletmap from "./Leafletmap";
 
 class HeatMap extends React.Component {
+  // TODO Remove sizing from component (move to .scss)
   state = {
     width: 0,
     height: 0,
@@ -40,7 +41,7 @@ class HeatMap extends React.Component {
         <div className="heatmap__header">
           <div className="heatmap__title">
             <div className="title">{t("header")}</div>
-            <MapIcon className="heatmap__map-icon"></MapIcon>
+            <MapIcon className="heatmap__map-icon" />
           </div>
 
           <div className="heatmap__description body">

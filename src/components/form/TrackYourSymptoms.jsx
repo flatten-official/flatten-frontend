@@ -2,18 +2,19 @@ import React, { useState } from "react";
 import { submit } from "redux-form";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-import { submitForm } from "../../actions/index";
+import { submitForm } from "../../actions/actions";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 
 import SymptomsForm, { symptomsFormName } from "./SymptomsForm";
 import SubmitModal from "./SubmitModal";
 import SyringeIcon from "../../assets/syringe.svg";
 
-const TrackYourSymptoms = ({ t, daily, markSubmit, submitForm }) => {
+const TrackYourSymptoms = ({ t, daily, submit, submitForm }) => {
   const [showModal, setShowModal] = useState(false);
 
-  const handleClick = () => markSubmit(symptomsFormName);
+  const handleClick = () => submit(symptomsFormName);
 
   const handleSubmit = (values) => {
     setShowModal(true);
@@ -51,6 +52,13 @@ const TrackYourSymptoms = ({ t, daily, markSubmit, submitForm }) => {
       {t("submitted")}
     </div>
   );
+};
+
+TrackYourSymptoms.propTypes = {
+  t: PropTypes.func.isRequired,
+  daily: PropTypes.string,
+  submit: PropTypes.func,
+  submitForm: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {

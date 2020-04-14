@@ -1,4 +1,4 @@
-import { MAP_CONFIRMED_DATA, MAP_FORM_DATA } from "../actions";
+import { MAP_CONFIRMED_DATA, MAP_FORM_DATA } from "../actions/actions";
 
 export default (state = {}, action) => {
   switch (action.type) {

@@ -1,4 +1,4 @@
-import { LANG_CHANGE, CURRENT_LANG } from "../actions";
+import { LANG_CHANGE, CURRENT_LANG } from "../actions/actions";
 
 export default (state, action) => {
   switch (action.type) {
