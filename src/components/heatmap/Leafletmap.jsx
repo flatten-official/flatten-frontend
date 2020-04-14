@@ -6,7 +6,9 @@ import convertedBoundaries from "./converted_boundaries.js";
 import counties from "./county_boundaries.js";
 import Legend from "./Legend";
 import L from "leaflet";
+import { getMapConfirmedData, getMapFormData } from "../../actions/index";
 import i18next from "i18next";
+import { connect } from "react-redux";
 
 // checks language
 const i18nlang = i18next.language;
@@ -42,17 +44,6 @@ const NOT_ENOUGH_GRAY = "#909090";
 // max size circle can be on map
 const MAX_CIRCLE_RAD = 25;
 const MIN_CIRCLE_RADIUS = 3;
-
-const URLS = {
-  cadForm:
-    "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
-  usaForm:
-    "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json",
-  cadConf:
-    "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson",
-  usaConf:
-    "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
-};
 
 // Current button
 let currTab = 0;
@@ -132,53 +123,18 @@ function getColour(cases, colourScheme, colorThresholds) {
 }
 
 class Leafletmap extends React.Component {
-  constructor(props) {
-    super(props);
-
-    let formUrl;
-    let confUrl;
-
-    if (i18nlang === "enUS") {
-      formUrl = URLS.usaForm;
-      confUrl = URLS.usaConf;
-    } else {
-      formUrl = URLS.cadForm;
-      confUrl = URLS.cadConf;
-    }
-
-    this.state = {
-      tab: "both",
-      formURL: formUrl,
-      confURL: confUrl,
-      formData: null,
-      confirmed_cases: null,
-    };
-    this.setTab = this.setTab.bind(this);
-
-    this.getFormData = this.getFormData.bind(this);
-    this.getConfirmedCasesData = this.getConfirmedCasesData.bind(this);
-  }
-
-  updateDimensions() {
-    const height = window.innerWidth >= 992 ? window.innerHeight - 200 : 300;
-    this.setState({ height: height });
-  }
+  state = {
+    tab: "both",
+    formData: null,
+    confirmedCases: null,
+  };
 
   componentDidMount() {
-    this.getFormData();
-    this.getConfirmedCasesData();
-    window.addEventListener("resize", this.updateDimensions.bind(this));
+    this.dispatch(getMapConfirmedData());
+    this.dispatch(getMapFormData());
   }
 
-  componentWillMount() {
-    this.updateDimensions();
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions.bind(this));
-  }
-
-  setTab(tabID, index) {
+  setTab = (tabID, index) => {
     document
       .getElementById("tabs")
       .children[currTab].classList.remove("active");
@@ -186,27 +142,7 @@ class Leafletmap extends React.Component {
     currTab = index;
 
     this.setState({ tab: tabID });
-  }
-
-  getFormData() {
-    fetch(this.state.formURL)
-      .then((r) => r.json())
-      .then((d) => {
-        return d;
-      })
-      .then((formData) => this.setState({ formData }));
-  }
-
-  getConfirmedCasesData() {
-    fetch(this.state.confURL)
-      .then((r) => r.json())
-      .then((d) => {
-        return d;
-      })
-      .then((confirmedCases) =>
-        this.setState({ confirmed_cases: confirmedCases })
-      );
-  }
+  };
 
   // default map renderer. it only renders circles if pointTolayer is defined
   renderMap(
@@ -224,11 +160,7 @@ class Leafletmap extends React.Component {
       formData !== null &&
       (tab === "both" || tab === "pot" || tab === "vuln")
     ) {
-      if (i18nlang === "enUS") {
-        data = counties;
-      } else {
-        data = convertedBoundaries;
-      }
+      data = i18nlang === "enUS" ? counties : convertedBoundaries;
 
       if (tab === "pot") {
         styleFunc = createStyleFunction(
@@ -373,7 +305,7 @@ class Leafletmap extends React.Component {
     // this function is called with each polygon when the GeoJSON polygons are rendered
     // just creates the popup content and binds a popup to each polygon
     // `feature` is the GeoJSON feature (the FSA polygon)
-    // use the FSA polygon FSA ID to get the FSA data from `formData`
+    // use the FSA polygon FSA ID to get the FSA data from `confirmedData`
     const bindPopupOnEachFeature = (feature, layer) => {
       const fsaID = feature.properties.CFSAUID;
       let fsaData = this.state.formData.fsa[fsaID];
@@ -387,7 +319,7 @@ class Leafletmap extends React.Component {
       if (this.state.tab === "conf") {
         content =
           `<b>${feature.properties.ENGNAME}</b><br/><br/>` +
-          `${feature.properties.CaseCount} ${t("confirmed_cases")} <br />` +
+          `${feature.properties.CaseCount} ${t("confirmedCases")} <br />` +
           `${t("last_updated")}: ${feature.properties.Last_Updated}`;
       } else {
         let XXX;
@@ -445,7 +377,7 @@ class Leafletmap extends React.Component {
     }
 
     //
-    // we wait until the formData is not null before rendering the GeoJSON.
+    // we wait until the confirmedData is not null before rendering the GeoJSON.
     // otherwise it will try to create a popup for every FSA but the data won't
     // be there yet.
     //
@@ -456,12 +388,13 @@ class Leafletmap extends React.Component {
     return (
       <div>
         <div className="PageTitle body"> {title} </div>
-        <div style={{ height: this.state.height }}>
+        <div className="map-body">
           <Map
             maxBounds={view.bounds}
             center={view.center}
             zoom={view.zoom}
-            style={{ height: this.state.height, zIndex: 0 }}
+            className="map-body"
+            style={{ zIndex: 0 }}
           >
             <TileLayer
               url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
@@ -470,7 +403,7 @@ class Leafletmap extends React.Component {
             />
             {this.renderMap(
               this.state.formData,
-              this.state.confirmed_cases,
+              this.state.confirmedCases,
               bindPopups,
               this.state.tab,
               pointToLayer,
@@ -501,4 +434,16 @@ class Leafletmap extends React.Component {
   }
 }
 
-export default withTranslation("Leafletmap")(Leafletmap);
+const mapStateToProps = (state) => {
+  if (state.status) {
+    return {
+      formData: state.status.formData,
+      confirmedData: state.status.confirmedData,
+    };
+  }
+  return state;
+};
+
+const LeafletMapConnected = connect(mapStateToProps)(Leafletmap);
+
+export default withTranslation("Leafletmap")(LeafletMapConnected);

@@ -1,10 +1,12 @@
-export default (state = {}, action) => {
+import { LANG_CHANGE, CURRENT_LANG } from "../actions";
+
+export default (state, action) => {
   switch (action.type) {
-    case "LANG_CHANGE":
-      return { status: action.payload };
-    case "CURRENT_LANG":
-      return { status: action.payload };
+    case LANG_CHANGE:
+      return action.payload;
+    case CURRENT_LANG:
+      return action.payload;
     default:
-      return state;
+      return null;
   }
 };

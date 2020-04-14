@@ -10,16 +10,14 @@ import SymptomsForm, { symptomsFormName } from "./SymptomsForm";
 import SubmitModal from "./SubmitModal";
 import SyringeIcon from "../../assets/syringe.svg";
 
-const TrackYourSymptoms = ({ t, dispatch, daily }) => {
+const TrackYourSymptoms = ({ t, daily, markSubmit, submitForm }) => {
   const [showModal, setShowModal] = useState(false);
 
-  const handleClick = () => {
-    dispatch(submit(symptomsFormName));
-  };
+  const handleClick = () => markSubmit(symptomsFormName);
 
   const handleSubmit = (values) => {
     setShowModal(true);
-    dispatch(submitForm(values));
+    submitForm(values);
   };
 
   const dailySubmissionStatus = daily && daily.exists;
@@ -56,12 +54,18 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
 };
 
 const mapStateToProps = (state) => {
-  if (state.cookie.status) {
-    return { daily: state.cookie.status.daily };
-  }
-  return state;
+  if (state.cookie) return { daily: state.cookie.daily };
+  return {};
 };
 
-const TrackYourSymptomsConnected = connect(mapStateToProps)(TrackYourSymptoms);
+const actionCreators = {
+  submit,
+  submitForm,
+};
+
+const TrackYourSymptomsConnected = connect(
+  mapStateToProps,
+  actionCreators
+)(TrackYourSymptoms);
 
 export default withTranslation("Form")(TrackYourSymptomsConnected);

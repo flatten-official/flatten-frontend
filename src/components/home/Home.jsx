@@ -8,18 +8,11 @@ import Heatmap from "../heatmap/Heatmap";
 import TrackYourSymptoms from "../form/TrackYourSymptoms";
 import EsriLink from "../esri-gsi-map/EsriLink";
 
-const Home = ({ dispatch, user, daily }) => {
-  const readCookieAction = async () => {
-    await dispatch(readCookie());
-  };
+const Home = ({ readCookie, user, daily }) => {
+  useEffect(() => readCookie(), []);
 
-  useEffect(() => {
-    readCookieAction();
-  }, []);
   let homeStatus;
-  if (user) {
-    homeStatus = user.status;
-  }
+  if (user) homeStatus = user.status;
 
   return (
     <React.Fragment>
@@ -39,4 +32,10 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    readCookie: dispatch(readCookie()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

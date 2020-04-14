@@ -33,7 +33,7 @@
   "vul_case_popup_1": "<h3>FSA</h3><p>Nous avons reçu 1 rapport d'un individu vulnérable</p><p>Nous avons reçus YYY rapports en tout.</p>",
   "msg_noentries": "<h3>FSA</h3><p>Nous n’avons pas encore reçu suffisamment de rapports dans cette région.</p>",
   "confirm_pop": "<h3>PLACE</h3><p>CASES cas confirmés<br/>",
-  "confirmed_cases": "cas confirmés",
+  "confirmedCases": "cas confirmés",
   "confirm_pop_deaths": "XXX décès<br/>",
   "confirm_pop_recov": "XXX guérisons<br/>",
   "confirm_pop_tests": "XXX tests réalisés<br/>",
