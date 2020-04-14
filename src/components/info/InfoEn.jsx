@@ -64,17 +64,17 @@ const InfoEn = ({ t }) => {
   return (
     <React.Fragment>
       {Paragraphs.map((para, index) => (
-        <div className="info__para">
+        <div key={index} className="info__para">
           <input
             type="checkbox"
-            class="activate"
+            className="activate"
             id={`accordion-${index}`}
             name={`accordion-${index}`}
           />
-          <label for={`accordion-${index}`} class="menu-title">
+          <label htmlFor={`accordion-${index}`}>
             <div className="info__header description">{para.header}</div>
           </label>
-          <div class="drop-down">
+          <div className="drop-down">
             <div className="info__body description">{para.body}</div>
           </div>
         </div>

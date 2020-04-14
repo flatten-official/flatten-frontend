@@ -23,6 +23,7 @@ const Navbar = ({ t, getGeolocation }) => {
   let homeLink;
   let symptomsLink;
   let heatmapLink;
+  let infoLink;
 
   const current = value === "fr" ? "fr" : "en";
 
@@ -84,6 +85,19 @@ const Navbar = ({ t, getGeolocation }) => {
         {t("heatmap")}
       </Link>
     );
+    infoLink = (
+      <Link
+        activeClass="active"
+        to="info"
+        spy={true}
+        smooth={true}
+        offset={-70}
+        duration={1000}
+        hashSpy={true}
+      >
+        {t("info")}
+      </Link>
+    );
   } else {
     logoLink = (
       <a href="/">
@@ -105,6 +119,11 @@ const Navbar = ({ t, getGeolocation }) => {
         {t("heatmap")}
       </a>
     );
+    infoLink = (
+      <a className="nav__a" href="/#info">
+        {t("info")}
+      </a>
+    );
   }
 
   return (
@@ -114,9 +133,7 @@ const Navbar = ({ t, getGeolocation }) => {
         <li className={`nav__item-en nav__optional`}>{homeLink}</li>
         <li className={`nav__item-${current}`}>{symptomsLink}</li>
         <li className={`nav__item-${current}`}>{heatmapLink}</li>
-        <NavLink className={`nav__covid-${current}`} exact to="/info">
-          {t("info")}
-        </NavLink>
+        <li className={`nav__item-${current}`}>{infoLink}</li>
         <select
           className="body nav__lang"
           onChange={languageHandler}

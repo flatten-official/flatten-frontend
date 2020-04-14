@@ -26,7 +26,9 @@ const Info = ({ t }) => {
 
   return (
     <React.Fragment>
-      <h4 className="title info__title">{t("header")}</h4>
+      <h4 id="info" className="title info__title">
+        {t("header")}
+      </h4>
       {component}
     </React.Fragment>
   );
