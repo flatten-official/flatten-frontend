@@ -1,12 +1,23 @@
 import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
+import i18next from "i18next";
 
 import { setDailyCookie } from "../../actions/index";
 
 import SyringeIcon from "../../assets/syringe.svg";
 
 const TrackYourSymptoms = ({ t, dispatch, daily }) => {
+  const lang = i18next.language;
+  let formID;
+
+  switch (lang) {
+    case "fr":
+      formID = "flatten-covid-fr";
+      break;
+    default:
+      formID = "flatten-covid";
+  }
   useEffect(() => {
     document.addEventListener("PaperformSubmission", submitSuccess);
   }, []);
@@ -29,7 +40,7 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
           <b>{t("disclaimer")} </b>
         </p>
       </div>
-      <div data-paperform-id="flatten-covid"></div>
+      <div data-paperform-id={formID} />
     </div>
   ) : (
     <div className="symptoms symptoms__submitted title" id="symptoms">
