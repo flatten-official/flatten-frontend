@@ -1,13 +1,6 @@
 steps:
   - name: gcr.io/cloud-builders/gsutil
     args: ["cp", "src/apis/backend.$_ENVIRONMENT.js", "src/apis/backend.js"]
-  - name: gcr.io/cloud-builders/gsutil
-    args:
-      [
-        "cp",
-        "src/components/common/fields/Recaptcha/Recaptcha.$_ENVIRONMENT.js",
-        "src/components/common/fields/Recaptcha/Recaptcha.js",
-      ]
   - name: "gcr.io/cloud-builders/npm"
     entrypoint: "npm"
     args: ["install"]
