@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./Para.css";
-
 const Para8 = () => (
   <React.Fragment>
     <p>
@@ -17,18 +15,17 @@ const Para8 = () => (
       laboratoire de référence doivent être confirmés par un laboratoire de
       référence.
     </p>
-    <p className="infoNote">
+    <p className="info__note">
       Remarque : Les tests d’amplification des acides nucléiques doivent être
       validés pour la détection du virus qui cause la COVID‑19.
     </p>
-    <p className="infoNote">
+    <p className="info__note">
       Remarque : Les tests en laboratoire évoluent pour cet agent pathogène
       émergent, et les recommandations de tests de laboratoire changeront à
       mesure que de nouveaux tests seront développés et validés.
     </p>
     <span>Source: </span>
     <a
-      className="infoLink"
       target="_blank"
       href="https://www.canada.ca/fr/sante-publique/services/maladies/2019-nouveau-coronavirus/professionnels-sante/definition-nationale-cas.html"
     >

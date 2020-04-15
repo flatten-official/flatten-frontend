@@ -45,7 +45,7 @@ const Para7 = () => (
         </li>
       </ul>
     </div>
-    <p className="infoNote">
+    <p className="info__note">
       Note: A close contact is defined as a person who provided care for the
       patient, including healthcare workers, family members or other caregivers,
       or who had other similar close physical contact or who lived with or

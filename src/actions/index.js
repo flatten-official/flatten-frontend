@@ -2,19 +2,6 @@ import backend from "../apis/backend";
 import i18next from "i18next";
 import history from "../history";
 
-export const submitForm = (formValues) => async (dispatch) => {
-  let submitSuccess;
-  try {
-    const response = await backend.post("/submit", formValues);
-    submitSuccess = response.data;
-  } catch (e) {
-    console.error(e);
-    submitSuccess = false;
-  }
-
-  dispatch({ type: "SUBMIT_FORM", payload: submitSuccess });
-};
-
 export const readCookie = () => async (dispatch) => {
   const { data } = await backend.get("/read-cookie");
   dispatch({
@@ -49,4 +36,11 @@ export const getGeolocation = () => async (dispatch) => {
       payload: false,
     });
   }
+};
+
+export const setDailyCookie = () => async (dispatch) => {
+  await backend.post("/set-daily-cookie");
+  return {
+    type: "SET_COOKIE",
+  };
 };

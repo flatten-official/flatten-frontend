@@ -25,10 +25,13 @@ const Info = ({ t }) => {
   }
 
   return (
-    <React.Fragment>
-      <h4 className="title info__title">{t("header")}</h4>
+    <div id="info">
+      <h4 className="title info__title">
+        {t("header")}
+        <p className="body info__description">{t("body")}</p>
+      </h4>
       {component}
-    </React.Fragment>
+    </div>
   );
 };
 

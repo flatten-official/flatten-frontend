@@ -27,7 +27,6 @@ Use [this](https://prettier.io/docs/en/editors.html) and [this](https://eslint.o
 
 - [react-router](https://reacttraining.com/react-router/web/guides/quick-start) : Allows you to have different pages based on url (very helpful for nav bar).
 - [redux](https://redux.js.org/) : A centralized store that all components have access to.
-- [redux-forms](https://redux-form.com/8.3.0/) : Linking redux and forms, to get form responses to a centralized store. Helpful for implementing our wizard form.
 
 And of course on top of that, we're using [React](https://reactjs.org/).
 
