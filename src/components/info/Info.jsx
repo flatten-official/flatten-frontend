@@ -30,7 +30,6 @@ const Info = ({ t }) => {
         {t("header")}
         <p className="body info__description">{t("body")}</p>
       </h4>
-
       {component}
     </div>
   );
