@@ -4,6 +4,7 @@ import HomePage from "./HomePage";
 import Heatmap from "../heatmap/Heatmap";
 import TrackYourSymptoms from "../form/TrackYourSymptoms";
 import EsriLink from "../esri-gsi-map/EsriLink";
+import Info from "../info/Info";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <TrackYourSymptoms />
       <Heatmap />
       <EsriLink />
+      <Info />
     </React.Fragment>
   );
 };

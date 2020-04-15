@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./Para.css";
-
 const Para1 = () => (
   <React.Fragment>
     <p>
@@ -22,7 +20,6 @@ const Para1 = () => (
     </p>
     <span>Source: </span>
     <a
-      className="infoLink"
       target="_blank"
       href="https://www.cdc.gov/coronavirus/2019-ncov/prepare/transmission.html"
     >
