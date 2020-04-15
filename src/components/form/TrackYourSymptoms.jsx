@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { submit } from "redux-form";
+import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 
-import { submitForm, setDailyCookie } from "../../actions/index";
-import PrimaryButton from "../common/buttons/PrimaryButton";
+import { setDailyCookie } from "../../actions/index";
 
-import SymptomsForm, { symptomsFormName } from "./SymptomsForm";
-import SubmitModal from "./SubmitModal";
 import SyringeIcon from "../../assets/syringe.svg";
 
 const TrackYourSymptoms = ({ t, dispatch, daily }) => {
@@ -17,16 +13,6 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
 
   const submitSuccess = () => {
     dispatch(setDailyCookie());
-  };
-  const [showModal, setShowModal] = useState(false);
-
-  const handleClick = () => {
-    dispatch(submit(symptomsFormName));
-  };
-
-  const handleSubmit = (values) => {
-    setShowModal(true);
-    dispatch(submitForm(values));
   };
 
   const dailySubmissionStatus = daily && daily.exists;
@@ -43,27 +29,7 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
           <b>{t("disclaimer")} </b>
         </p>
       </div>
-      {/* <SymptomsForm onSubmit={handleSubmit} /> */}
       <div data-paperform-id="flatten-covid"></div>
-      <div className="symptoms__submit">
-        <button
-          className="primary-button body symptoms__submit-button"
-          data-paperform-id="flatten-covid"
-          data-popup-button="1"
-        >
-          Click me to show the form!
-        </button>
-      </div>
-      {/* <div className="symptoms__submit">
-        <PrimaryButton
-          className="symptoms__submit-button"
-          id="google-form-submit"
-          onClick={handleClick}
-        >
-          {t("submit")}
-        </PrimaryButton>
-      </div> */}
-      {showModal && <SubmitModal onClose={() => setShowModal(false)} />}
     </div>
   ) : (
     <div className="symptoms symptoms__submitted title" id="symptoms">
