@@ -11,6 +11,7 @@ import history from "../history";
 import Footer from "./footer/Footer";
 import TOS from "./legal/TOS";
 import PrivacyPolicy from "./legal/PrivacyPolicy";
+import NotFoundPage from "./notfound/NotFoundPage.jsx";
 
 class App extends React.Component {
   render() {
@@ -26,6 +27,7 @@ class App extends React.Component {
             <Route path="/terms-of-service" exact component={TOS} />
             <Route path="/privacy-policy" exact component={PrivacyPolicy} />
             <Route path="/dashboard-analytics" exact component={EsriGsiMap} />
+            <Route component={NotFoundPage} />
           </Switch>
           <Footer />
         </Router>
