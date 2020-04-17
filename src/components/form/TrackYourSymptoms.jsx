@@ -15,6 +15,9 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
     case "fr":
       formID = "flatten-covid-fr";
       break;
+    case "enUS":
+      formID = "flatten-covid-enus";
+      break;
     default:
       formID = "flatten-covid";
   }
