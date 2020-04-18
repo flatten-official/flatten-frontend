@@ -28,7 +28,7 @@ const Info = ({ t }) => {
     <div id="info">
       <div className="info__headercontainer">
         <h4 className="title info__title">{t("header")}</h4>
-        <p className="body info__description">{t("body")}</p>
+        <div className="body info__description">{t("body")}</div>
       </div>
       {component}
     </div>
