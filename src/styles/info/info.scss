@@ -1,19 +1,23 @@
 .info__para {
-  border: 1px solid $medium-grey;
-  border-radius: 8px;
+  border-top: 2px solid $black-main;
   margin: 30px auto;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   width: 85%;
-  &:hover {
-    transition: 0.3s;
-    -webkit-box-shadow: 4px 4px 10px 0px rgb(211, 185, 185);
-    -moz-box-shadow: 4px 4px 10px 0px rgb(211, 185, 185);
-    box-shadow: 4px 4px 10px 0px rgb(211, 185, 185);
-  }
+}
+
+.info__title {
+  margin: auto;
+  width: 85%;
+  text-align: left;
+  margin-top: 0px;
+  padding-top: 5%;
 }
 
 //Desktop
 @media only screen and (min-width: 1200px) {
+  .info__title {
+    width: 50%;
+  }
+
   .info__para {
     width: 50%;
   }
@@ -30,23 +34,20 @@ p {
 
 .info__header {
   font-family: "DM Sans", sans-serif;
-  font-weight: 600;
-  padding: 20px;
-  margin: 0 auto;
-  color: $header-magenta;
+  font-weight: 500;
+  margin-top: 15px;
   cursor: pointer;
 }
 
-.info__title {
-  margin: auto;
-  width: 60%;
-  text-align: center;
-  margin-top: 0px;
-  padding-top: 5%;
+.info__headercontainer {
+  display: flex;
+  width: 50%;
+  margin: 0 auto;
+  align-content: center;
 }
 
 .info__body {
-  padding: 0px 30px 30px 30px;
+  padding: 0px 30px;
 }
 
 .info__note {
