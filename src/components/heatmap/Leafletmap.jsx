@@ -7,8 +7,9 @@ import counties from "./county_boundaries.js";
 import Legend from "./Legend";
 import L from "leaflet";
 import i18next from "i18next";
+import {connect} from 'react-redux';
 
-// checks language
+// checks language 
 const i18nlang = i18next.language;
 
 // stays in Canada
@@ -162,6 +163,8 @@ class Leafletmap extends React.Component {
   componentDidMount() {
     this.getFormData();
     this.getConfirmedCasesData();
+
+    console.log(this.props);
     window.addEventListener("resize", this.updateDimensions.bind(this));
   }
 
@@ -446,7 +449,7 @@ class Leafletmap extends React.Component {
     // the geojson layer when the tab changes. This does the work of
     // unbinding all popups and recreating them with the correct data.
 
-    return (
+    return location ? (
       <div>
         <div className="PageTitle body"> {title} </div>
         <div style={{ height: this.state.height }}>
@@ -490,8 +493,16 @@ class Leafletmap extends React.Component {
           </PrimaryButton>
         </div>
       </div>
-    );
+    ) : null;
   }
 }
 
-export default withTranslation("Leafletmap")(Leafletmap);
+const mapStateToProps = (state) => {
+  console.log(state.locationChange.status);
+  if (state.locationChange.status) {
+    return { location: state.locationChange.status };
+  }
+  return { location: false };
+};
+
+export default (connect(mapStateToProps))(withTranslation("Leafletmap")(Leafletmap));
