@@ -1,219 +1,127 @@
+// TODO: clean css
+// navbar has fixed font sizes, not vh ...
+
+// FONTS
+.nav__title {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.nav__text {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+// ELEMENTS
 .nav {
+  display: flex;
   position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100vw;
+  width: 100%;
+  height: 75px;
+  top: 0;
   z-index: 2;
-  background-color: $white-paper;
-  height: 70px;
-  display: flex;
-  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.5);
+  background-color: $green-background;
 
-  & li {
-    list-style: none;
-  }
-}
-
-.nav__content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  li:last-child {
-    margin-left: auto;
-  }
-}
-
-.nav__a {
-  text-decoration: none;
-  color: $dark-grey;
-  &:hover {
+  & a {
+    background-color: $green-background;
     color: $black-main;
-    cursor: pointer;
+    text-decoration: none;
+
+    & :hover {
+      cursor: pointer;
+    }
   }
+}
+
+.nav__container {
+  display: inline;
+  width: 100%;
+  padding: 20px 200px 20px 80px;
 }
 
 .nav__logo {
-  width: 120px;
-  padding-left: 10px;
-}
-
-.nav__logo-container {
-  list-style-type: none;
-}
-
-.nav__item-en {
-  font-size: 16px;
-  margin-left: 2rem;
-  color: $dark-grey;
-  text-align: center;
-  &:hover {
-    color: $black-main;
-    cursor: pointer;
-  }
-}
-
-.nav__item-fr {
-  font-size: 16px;
-  display: inline;
-  margin-left: 2rem;
-  text-align: center;
-  width: 230px;
-  color: $dark-grey;
-  &:hover {
-    color: $black-main;
-    cursor: pointer;
-  }
-}
-
-.nav__covid-en {
-  position: absolute;
-  vertical-align: middle;
-  text-align: center;
-  text-decoration: none;
-  display: flex;
-  right: 120px;
-  font-size: 16px;
-  color: $navy-blue;
-}
-
-.nav__covid-fr {
-  text-align: center;
   width: 150px;
+  height: 32px;
+  overflow: hidden;
+  position: relative;
+  transition: all 1s ease-in-out;
+  background-color: $green-background;
+
+  & hr {
+    position: absolute;
+    margin: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+  }
+}
+
+.nav__logo-fixed {
+  background-color: $green-background;
   position: absolute;
-  right: 130px;
-  display: flex;
-  vertical-align: middle;
-  color: $navy-blue;
-  text-decoration: none;
-  font-size: 16px;
+  z-index: 2;
+}
+
+.nav__logo-animation {
+  position: absolute;
+  right: 0;
+  width: max-content;
+}
+
+.nav__link {
+  padding-right: 32px;
+}
+
+.nav__container:hover {
+  .nav__logo {
+    width: 100%;
+  }
 }
 
 .nav__lang {
   position: absolute;
-  right: 25px;
-  font-size: 16px;
-  display: flex;
+  right: 40px;
+  top: 25px;
 }
 
-@media screen and (max-width: 1023px) {
-  .nav__item-fr {
-    width: 120px;
-  }
-  .nav__covid-fr {
-    width: 120px;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .nav__item-en {
-    width: 120px;
+// MEDIA QUERIES
+@media screen and (max-width: 1300px) {
+  .nav__link {
+    padding-right: 16px;
   }
 
-  .nav__optional {
-    display: none;
-  }
-
-  .nav__covid-en {
-    width: 80px;
-    right: 120px;
-  }
-
-  .nav__covid-fr {
-    width: 80px;
+  .nav__container {
+    padding: 20px 150px 20px 60px;
   }
 
   .nav__lang {
-    font-size: 16px;
+    right: 20px;
   }
 }
 
-@media screen and (max-width: 700px) {
-  .nav__content {
-    margin: 0;
-    padding: 0;
+@media screen and (max-width: 800px) {
+  .nav__link {
+    padding-right: 8px;
+  }
+
+  .nav__container {
+    padding: 20px 100px 20px 40px;
+  }
+
+  .nav__lang {
+    right: 10px;
   }
 
   .nav__logo {
-    width: 60px;
+    width: 100%;
+    height: 30px;
   }
 
-  .nav__logo-container {
-    width: 70px;
+  .nav__title {
+    font-size: 21px;
   }
 
-  .nav__item-en {
-    margin-left: 5px;
-    margin-right: 5px;
-    font-size: 10px;
-    width: 85px;
-  }
-
-  .nav__item-fr {
-    margin-left: 5px;
-    margin-right: 5px;
-    font-size: 10px;
-    width: 85px;
-  }
-
-  .nav__covid-en {
-    right: 80px;
-    font-size: 10px;
-  }
-
-  .nav__covid-fr {
-    width: 120px;
-    right: 60px;
-    font-size: 10px;
-  }
-
-  .nav__lang {
-    font-size: 10px;
-  }
-}
-
-@media screen and (max-width: 420px) {
-  .nav__item-en {
-    width: 80px;
-  }
-
-  .nav__item-fr {
-    font-size: 8px;
-  }
-
-  .nav__covid-en {
-    right: 45px;
-  }
-
-  .nav__covid-fr {
-    width: 40px;
-    right: 70px;
-    font-size: 8px;
-  }
-
-  .nav__lang {
-    right: 1px;
-    font-size: 8px;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  .nav__item-en {
-    margin-left: 3px;
-    margin-right: 0px;
-    width: 70px;
-  }
-
-  .nav__item-fr {
-    width: 50px;
-  }
-
-  .nav__covid-en {
-    width: 80px;
-  }
-
-  .nav__covid-fr {
-    width: 40px;
-    right: 35px;
+  .nav__text {
+    font-size: 14px;
   }
 }
