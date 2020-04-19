@@ -1,9 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import { Trans, withTranslation } from "react-i18next";
 
-import { submitForm } from "../../actions/index";
-import ReturningUserModal from "./ReturningUserModal";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 import logo from "../../assets/logo-black.png";
 
@@ -18,79 +15,7 @@ const scrollToForm = () => {
   });
 };
 
-const HomePage = ({ cookieStatus, t }) => {
-  const [showModal, setShowModal] = useState(false);
-  const dispatch = useDispatch();
-
-  const handleReturningUserSubmit = async (values) => {
-    await dispatch(submitForm(values));
-    setShowModal(false);
-  };
-
-  let buttons = null;
-  switch (cookieStatus) {
-    case "n":
-      buttons = (
-        <React.Fragment>
-          <PrimaryButton
-            className="home__button body"
-            onClick={() => setShowModal(true)}
-          >
-            {t("returningUserButton")}
-          </PrimaryButton>
-          <br />
-
-          <PrimaryButton className="home__button body" onClick={scrollToForm}>
-            {t("newUserButton")}
-          </PrimaryButton>
-        </React.Fragment>
-      );
-      break;
-    case "a":
-      buttons = (
-        <React.Fragment>
-          <PrimaryButton
-            className="home__button body"
-            onClick={() => setShowModal(true)}
-          >
-            {t("returningUserButton")}
-          </PrimaryButton>
-        </React.Fragment>
-      );
-      break;
-    case "e":
-      buttons = (
-        <React.Fragment>
-          <PrimaryButton
-            className="home__button body"
-            onClick={() => setShowModal(true)}
-          >
-            {t("returningUserButton")}
-          </PrimaryButton>
-        </React.Fragment>
-      );
-      break;
-    case "v":
-      buttons = null;
-      break;
-    default:
-      buttons = (
-        <React.Fragment>
-          <PrimaryButton
-            className="home__button body"
-            onClick={() => setShowModal(true)}
-          >
-            {t("returningUserButton")}
-          </PrimaryButton>
-          <br />
-
-          <PrimaryButton className="home__button body" onClick={scrollToForm}>
-            {t("newUserButton")}
-          </PrimaryButton>
-        </React.Fragment>
-      );
-  }
-
+const HomePage = ({ t }) => {
   return (
     <div className="home">
       <div className="home__content">
@@ -109,14 +34,10 @@ const HomePage = ({ cookieStatus, t }) => {
             <b>do the same</b>.
           </Trans>
         </div>
-        {buttons}
+        <PrimaryButton className="home__button body" onClick={scrollToForm}>
+          {t("newUserButton")}
+        </PrimaryButton>
       </div>
-      {showModal && (
-        <ReturningUserModal
-          onClose={() => setShowModal(false)}
-          onSubmit={handleReturningUserSubmit}
-        />
-      )}
     </div>
   );
 };

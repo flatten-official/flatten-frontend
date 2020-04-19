@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./Para.css";
-
 const Para3 = () => (
   <React.Fragment>
     <p>
@@ -25,7 +23,6 @@ const Para3 = () => (
       Une liste de produits est disponible sur le site du Gouvernement du
       Canada:
       <a
-        className="infoLink"
         target="_blank"
         href="https://www.canada.ca/fr/sante-canada/services/medicaments-produits-sante/desinfectants/covid-19/liste.html"
       >
@@ -37,7 +34,6 @@ const Para3 = () => (
 
     <span>Source: </span>
     <a
-      className="infoLink"
       target="_blank"
       href="https://www.cdc.gov/coronavirus/2019-ncov/prepare/prevention.html"
     >

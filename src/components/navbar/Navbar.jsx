@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-scroll";
 import { NavLink, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
@@ -14,48 +14,26 @@ const Navbar = ({ t, getGeolocation }) => {
   useEffect(() => {
     getGeolocation();
   }, []);
-  let location = useLocation();
-  let logoLink = null;
-  let homeLink = null;
-  let symptomsLink = null;
-  let heatmapLink = null;
 
-  const i18nlang = i18next.language;
-  console.log(i18nlang);
-  let toggle;
-  let current;
-  let selectedEn = false;
-  let selectedUs = false;
-  let selectedFr = false;
-  switch (i18nlang) {
-    case "en":
-      toggle = "fr";
-      current = "en";
-      selectedEn = true;
-      break;
-    case "enUS":
-      toggle = "fr";
-      current = "en";
-      selectedUs = true;
-      break;
-    case "fr":
-      toggle = "en";
-      current = "fr";
-      selectedFr = true;
-      break;
-    default:
-      toggle = "fr";
-      current = "en";
-      selectedEn = true;
-  }
+  const [value] = useState(i18next.language);
+
+  const location = useLocation();
+
+  let logoLink;
+  let homeLink;
+  let symptomsLink;
+  let heatmapLink;
+  let infoLink;
+
+  const current = value === "fr" ? "fr" : "en";
 
   const languageHandler = (event) => {
-    let lang = event.currentTarget.value;
-    let linkLang = `${location.pathname}?lang=${lang}`;
+    const lang = event.currentTarget.value;
+    const linkLang = `${location.pathname}?lang=${lang}`;
     history.push(linkLang);
   };
 
-  if (location.pathname == ("/" || "#symptoms" || "#heatmap")) {
+  if (location.pathname === ("/" || "#symptoms" || "#heatmap")) {
     logoLink = (
       <Link
         activeClass="active"
@@ -107,6 +85,19 @@ const Navbar = ({ t, getGeolocation }) => {
         {t("heatmap")}
       </Link>
     );
+    infoLink = (
+      <Link
+        activeClass="active"
+        to="info"
+        spy={true}
+        smooth={true}
+        offset={-70}
+        duration={1000}
+        hashSpy={true}
+      >
+        {t("info")}
+      </Link>
+    );
   } else {
     logoLink = (
       <a href="/">
@@ -128,6 +119,11 @@ const Navbar = ({ t, getGeolocation }) => {
         {t("heatmap")}
       </a>
     );
+    infoLink = (
+      <a className="nav__a" href="/#info">
+        {t("info")}
+      </a>
+    );
   }
 
   return (
@@ -137,17 +133,19 @@ const Navbar = ({ t, getGeolocation }) => {
         <li className={`nav__item-en nav__optional`}>{homeLink}</li>
         <li className={`nav__item-${current}`}>{symptomsLink}</li>
         <li className={`nav__item-${current}`}>{heatmapLink}</li>
-        <NavLink className={`nav__covid-${current}`} exact to="/info">
-          {t("info")}
-        </NavLink>
-        <select className="body nav__lang" onChange={languageHandler}>
-          <option className="body" value="en" selected={selectedEn}>
+        <li className={`nav__item-${current}`}>{infoLink}</li>
+        <select
+          className="body nav__lang"
+          onChange={languageHandler}
+          value={value}
+        >
+          <option className="body" value="en">
             en-ca
           </option>
-          <option className="body" value="enUS" selected={selectedUs}>
+          <option className="body" value="enUS">
             en-us
           </option>
-          <option className="body" value="fr" selected={selectedFr}>
+          <option className="body" value="fr">
             fr
           </option>
         </select>

@@ -13,11 +13,11 @@ const Para8 = () => (
       Positive laboratory tests at a non-reference laboratory require additional
       testing at a reference laboratory for confirmation.
     </p>
-    <p className="infoNote">
+    <p className="info__note">
       Note: Nucleic acid amplification tests must be validated for detection of
       the virus that causes COVID-19.
     </p>
-    <p className="infoNote">
+    <p className="info__note">
       Note: Laboratory tests are evolving for this emerging pathogen, and
       laboratory testing recommendations will change accordingly as new assays
       are developed and validated.

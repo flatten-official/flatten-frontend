@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./Para.css";
-
 const Para2 = () => (
   <React.Fragment>
     <p>
@@ -25,11 +23,7 @@ const Para2 = () => (
       pulmonaire, cancer, dialyse ou diabète).
     </p>
     <span>Source: </span>
-    <a
-      className="infoLink"
-      target="_blank"
-      href="https://www.santemontreal.qc.ca"
-    >
+    <a target="_blank" href="https://www.santemontreal.qc.ca">
       Direction de santé publique de Montréal
     </a>
   </React.Fragment>
