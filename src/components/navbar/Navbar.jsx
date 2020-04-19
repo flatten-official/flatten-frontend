@@ -98,23 +98,36 @@ const Navbar = ({ t, getGeolocation }) => {
 
     // for other miscellaneous pages, no scrolling animation
   } else {
-    logoLink = <a href="/">FLATTEN.CA</a>;
+    symptomsLink = (
+      <a className="nav__link nav__text" href="/#symptoms">
+        {t("form")}
+      </a>
+    );
+    heatmapLink = (
+      <a className="nav__link nav__text" href="/#heatmap">
+        {t("heatmap")}
+      </a>
+    );
+    infoLink = (
+      <a className="nav__link nav__text" href="/#info">
+        {t("info")}
+      </a>
+    );
 
-    // symptomsLink = (
-    //   <a className="nav__a" href="/#symptoms">
-    //     {t("form")}
-    //   </a>
-    // );
-    // heatmapLink = (
-    //   <a className="nav__a" href="/#heatmap">
-    //     {t("heatmap")}
-    //   </a>
-    // );
-    // infoLink = (
-    //   <a className="nav__a" href="/#info">
-    //     {t("info")}
-    //   </a>
-    // );
+    navbar = (
+      <a href="/">
+        <div className="nav__logo">
+          <div className="nav__logo-fixed nav__title">FLATTEN</div>
+          <div className="nav__logo-animation nav__title">
+            {symptomsLink}
+            {heatmapLink}
+            {infoLink}
+            .CA
+          </div>
+          <hr />
+        </div>
+      </a>
+    );
   }
 
   return (

@@ -23,8 +23,9 @@
   background-color: $green-background;
 
   & a {
-    text-decoration: none;
     background-color: $green-background;
+    color: $black-main;
+    text-decoration: none;
 
     & :hover {
       cursor: pointer;
