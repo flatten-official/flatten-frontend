@@ -71,8 +71,13 @@ const InfoEn = ({ t }) => {
             id={`accordion-${index}`}
             name={`accordion-${index}`}
           />
-          <label htmlFor={`accordion-${index}`}>
+
+          <label
+            htmlFor={`accordion-${index}`}
+            className="info__paraheadercontainer"
+          >
             <div className="info__header description">{para.header}</div>
+            <i className="info__arrow"></i>
           </label>
           <div className="drop-down">
             <div className="info__body description">{para.body}</div>
