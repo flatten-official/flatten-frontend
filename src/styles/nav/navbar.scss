@@ -1,6 +1,3 @@
-// TODO: clean css
-// navbar has fixed font sizes, not vh ...
-
 // FONTS
 .nav__title {
   font-size: 24px;
@@ -59,16 +56,19 @@
 .nav__logo-fixed {
   background-color: $green-background;
   position: absolute;
+  bottom: 0;
   z-index: 2;
 }
 
 .nav__logo-animation {
   position: absolute;
   right: 0;
+  bottom: 0;
   width: max-content;
 }
 
 .nav__link {
+  text-align: center;
   padding-right: 32px;
 }
 
@@ -123,5 +123,85 @@
 
   .nav__text {
     font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .nav__container {
+    padding: 20px 100px 20px 40px;
+  }
+
+  .nav__lang {
+    right: 10px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .nav__container {
+    padding: 25px 70px 20px 30px;
+  }
+
+  .nav__logo {
+    width: 100%;
+    height: 25px;
+  }
+
+  .nav__title {
+    font-size: 16px;
+  }
+
+  .nav__text {
+    font-size: 12px;
+  }
+
+  .nav__lang {
+    width: 55px;
+    right: 5px;
+    bottom: 24px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .nav__container {
+    padding: 20px 70px 20px 30px;
+  }
+
+  .nav__logo {
+    height: 32px;
+  }
+
+  .nav__link {
+    word-wrap: break-word;
+    width: 80px;
+    display: inline-block;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .nav__container {
+    padding: 10px 50px 20px 20px;
+  }
+
+  .nav__logo {
+    height: 40px;
+  }
+
+  .nav__link {
+    width: 70px;
+    padding-right: 4px;
+  }
+
+  .nav__text {
+    font-size: 10px;
+  }
+
+  .nav__title {
+    font-size: 12px;
+  }
+
+  .nav__lang {
+    width: 50px;
+    right: 0px;
+    top: 32px;
   }
 }
