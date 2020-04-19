@@ -13,7 +13,7 @@ const i18nlang = i18next.language;
 
 const Legend = (props) => {
   // pick a color threshold and legend title
-  let { t } = props;
+  const { t } = props;
   let colorThresholds;
   let legendTitle;
   switch (props.tab) {
@@ -36,25 +36,25 @@ const Legend = (props) => {
   }
 
   // colour scheme and tab are passed through props
-  let colourScheme = props.colourScheme;
-  let tab = props.tab;
+  const colourScheme = props.colourScheme;
+  const tab = props.tab;
 
   let percent;
-  let not_enough_data;
+  let notEnoughData;
   if (tab === "conf") {
     percent = false;
-    not_enough_data = false;
+    notEnoughData = false;
   } else {
     percent = true;
-    not_enough_data = true;
+    notEnoughData = true;
   }
 
   const { map } = useLeaflet();
 
   useEffect(() => {
-    let legend_content = "<h4> " + legendTitle + " </h4>";
-    if (not_enough_data)
-      legend_content +=
+    let legendContent = "<h4> " + legendTitle + " </h4>";
+    if (notEnoughData)
+      legendContent +=
         '<i style="background:' +
         NOT_ENOUGH_GRAY +
         '"></i> ' +
@@ -64,20 +64,20 @@ const Legend = (props) => {
     // Loop through our density intervals and generate a label with a coloured square for each interval.
     for (let i = 0; i < colourScheme.length; i++) {
       // Place square
-      legend_content += '<i style="background:' + colourScheme[i] + '"></i>';
+      legendContent += '<i style="background:' + colourScheme[i] + '"></i>';
 
       const threshold = i === 0 ? 0 : colorThresholds[i - 1];
 
-      if (percent) legend_content += "> " + threshold * 100 + "%<br>";
-      else legend_content += "> " + threshold + "<br>";
+      if (percent) legendContent += "> " + threshold * 100 + "%<br>";
+      else legendContent += "> " + threshold + "<br>";
     }
 
-    const legend = L.control({ position: "bottomright" });
+    const legend = L.control({ position: "bottomleft" });
 
     legend.onAdd = () => {
       const div = L.DomUtil.create("div", "info legend");
 
-      div.innerHTML = legend_content;
+      div.innerHTML = legendContent;
       return div;
     };
 
