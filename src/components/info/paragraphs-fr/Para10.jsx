@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./Para.css";
-
 const Para10 = () => (
   <React.Fragment>
     <p>

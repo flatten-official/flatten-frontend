@@ -9,7 +9,7 @@ import L from "leaflet";
 import i18next from "i18next";
 import {connect} from 'react-redux';
 
-// checks language 
+// checks language
 const i18nlang = i18next.language;
 
 // stays in Canada

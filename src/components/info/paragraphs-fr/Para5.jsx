@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./Para.css";
-
 const Para5 = () => (
   <React.Fragment>
     <p>
@@ -17,19 +15,11 @@ const Para5 = () => (
       a été rendue publique et sera mise à jour périodiquement.
     </p>
     <span>Sources: </span>
-    <a
-      className="infoLink"
-      target="_blank"
-      href="https://www.quebec.ca/coronavirus"
-    >
+    <a target="_blank" href="https://www.quebec.ca/coronavirus">
       Gouvernement du Québec
     </a>
     <span> et </span>
-    <a
-      className="infoLink"
-      target="_blank"
-      href="https://www.santemontreal.qc.ca"
-    >
+    <a target="_blank" href="https://www.santemontreal.qc.ca">
       Direction de santé publique de Montréal
     </a>
   </React.Fragment>

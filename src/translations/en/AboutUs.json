@@ -125,16 +125,16 @@
       "role": "Advisor",
       "degrees": "",
       "titles": "Healthcare IT Specialist"
-    }
-  ],
-  "team": [
+    },
     {
       "name": "Ranjani Somayaji",
       "src": "./headshots/somayaji.png",
       "role": "Advisor",
       "degrees": ", MD, MPH, FRCPC",
       "titles": "Infectious Disease Specialist and Epidemiologist"
-    },
+    }
+  ],
+  "team": [
     {
       "name": "Rassam Yazdi",
       "src": "./headshots/rassam.png",
@@ -169,6 +169,12 @@
       "name": "George Lifchits",
       "src": "./headshots/george.png",
       "link": "https://www.linkedin.com/in/georgelifchits/",
+      "role": "Software Developer"
+    },
+    {
+      "name": "Robert Li",
+      "src": "./headshots/robertli.png",
+      "link": "https://www.linkedin.com/in/jianing-robert-li/",
       "role": "Software Developer"
     },
     {

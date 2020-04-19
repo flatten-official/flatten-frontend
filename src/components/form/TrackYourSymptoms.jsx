@@ -1,25 +1,32 @@
-import React, { useState } from "react";
-import { submit } from "redux-form";
+import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
+import i18next from "i18next";
 
-import { submitForm } from "../../actions/index";
-import PrimaryButton from "../common/buttons/PrimaryButton";
+import { setDailyCookie } from "../../actions/index";
 
-import SymptomsForm, { symptomsFormName } from "./SymptomsForm";
-import SubmitModal from "./SubmitModal";
 import SyringeIcon from "../../assets/syringe.svg";
 
 const TrackYourSymptoms = ({ t, dispatch, daily }) => {
-  const [showModal, setShowModal] = useState(false);
+  const lang = i18next.language;
+  let formID;
 
-  const handleClick = () => {
-    dispatch(submit(symptomsFormName));
-  };
+  switch (lang) {
+    case "fr":
+      formID = "flatten-covid-fr";
+      break;
+    case "enUS":
+      formID = "flatten-covid-enus";
+      break;
+    default:
+      formID = "flatten-covid";
+  }
+  useEffect(() => {
+    document.addEventListener("PaperformSubmission", submitSuccess);
+  }, []);
 
-  const handleSubmit = (values) => {
-    setShowModal(true);
-    dispatch(submitForm(values));
+  const submitSuccess = () => {
+    dispatch(setDailyCookie());
   };
 
   const dailySubmissionStatus = daily && daily.exists;
@@ -36,17 +43,7 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
           <b>{t("disclaimer")} </b>
         </p>
       </div>
-      <SymptomsForm onSubmit={handleSubmit} />
-      <div className="symptoms__submit">
-        <PrimaryButton
-          className="symptoms__submit-button"
-          id="google-form-submit"
-          onClick={handleClick}
-        >
-          {t("submit")}
-        </PrimaryButton>
-      </div>
-      {showModal && <SubmitModal onClose={() => setShowModal(false)} />}
+      <div data-paperform-id={formID} />
     </div>
   ) : (
     <div className="symptoms symptoms__submitted title" id="symptoms">
