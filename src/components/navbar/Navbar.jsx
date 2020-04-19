@@ -15,7 +15,6 @@ const Navbar = ({ t, getGeolocation }) => {
 
   const [value] = useState(i18next.language);
   const location = useLocation();
-  const languageStyle = value === "fr" ? "fr" : "en";
   const languageHandler = (event) => {
     const lang = event.currentTarget.value;
     const linkLang = `${location.pathname}?lang=${lang}`;
