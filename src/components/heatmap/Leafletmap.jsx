@@ -300,6 +300,10 @@ class Leafletmap extends React.Component {
     const center = i18nlang === "enUS" ? USA_CENTER : ONTARIO;
     const initZoom = i18nlang === "enUS" ? 3 : 4;
 
+    const styleOptions = {
+      className: "popupCustom",
+    };
+
     // needs more info for potential cases by county
     const bindPopupOnEachFeatureUSA = (feature, layer) => {
       let content;
@@ -315,54 +319,54 @@ class Leafletmap extends React.Component {
       if (countyData) {
         if (countyReports < 25) {
           content =
-            "<b>" +
+            "<h3>" +
             feature.properties.NAME +
-            " County</b>" +
+            " County</h3>" +
             "We don't have enough data for this region";
         } else {
-          content = "<b>" + feature.properties.NAME + " County</b>";
+          content = "<h3>" + feature.properties.NAME + " County</h3>";
           if (this.state.tab === "vuln") {
             content +=
-              "<p>" +
+              "<h3>" +
               countyData.risk +
               " vulnerable individuals" +
               countyData.number_reports +
-              " reports in total</p>";
+              " reports in total</h3>";
           } else if (this.state.tab === "both") {
             content +=
-              "<p>" +
+              "<h3>" +
               countyData.both +
               " vulnerable individuals who are also potential cases" +
               countyData.number_reports +
-              " reports in total</p>";
+              " reports in total</h3>";
           } else if (this.state.tab === "pot") {
             content +=
-              "<p>" +
+              "<h3>" +
               countyData.pot +
               " potential cases" +
               countyData.number_reports +
-              " reports in total</p>";
+              " reports in total</h3>";
           }
         }
       } else {
         if (this.state.tab === "conf") {
           content =
-            "<b>" +
+            "<h3>" +
             feature.properties.Combined_Key +
-            "</b>" +
+            "</h3>" +
             "<p>Confirmed Cases: " +
             feature.properties.Confirmed +
             "</p>";
         } else {
           content =
-            "<b>" +
+            "<h3>" +
             feature.properties.NAME +
-            " County</b><br/>" +
+            " County</h3>" +
             "We don't have enough data for this region";
         }
       }
 
-      layer.bindPopup(content);
+      layer.bindPopup(content, styleOptions);
     };
 
     const locateOptions = {
@@ -413,7 +417,8 @@ class Leafletmap extends React.Component {
           .replace("XXX", XXX)
           .replace("YYY", YYY);
       }
-      layer.bindPopup(content);
+
+      layer.bindPopup(content, styleOptions);
     };
 
     let pointToLayer;

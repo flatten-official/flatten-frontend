@@ -75,8 +75,7 @@ const Legend = (props) => {
     const legend = L.control({ position: "bottomleft" });
 
     legend.onAdd = () => {
-      const div = L.DomUtil.create("div", "info legend");
-
+      const div = L.DomUtil.create("div", "legend");
       div.innerHTML = legendContent;
       return div;
     };
