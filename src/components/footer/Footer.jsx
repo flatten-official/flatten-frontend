@@ -22,60 +22,57 @@ class Footer extends React.Component {
         <div className="footer__container">
           <div className="footer__pair">
             <div className="footer__section body">
-              <p>
-                <b>{t("share")}</b>
-              </p>
-              <span className="footer__icon">
-                <FacebookShareButton url={url} quote={title}>
-                  <FacebookIcon size={32} round={true} />
-                </FacebookShareButton>
-              </span>
-              <span className="footer__icon">
-                <TwitterShareButton url={url} title={title}>
-                  <TwitterIcon size={32} round={true} />
-                </TwitterShareButton>
-              </span>
-              <LinkedinShareButton url={url} title={title}>
-                <LinkedinIcon size={32} round={true} />
-              </LinkedinShareButton>
-            </div>
-            <div className="footer__section body">
-              <p>
-                <b>{t("additional-info")}</b>
-              </p>
+              <b>{t("additional-info")}</b>
               <Link className="footer__link" to="/about-us">
-                <p>{t("about-us")}</p>
+                {t("about-us")}
               </Link>
               <Link className="footer__link" to="/supporters">
-                <p>{t("supporters")}</p>
+                {t("supporters")}
+              </Link>
+            </div>
+            <div className="footer__section body">
+              <b>{t("legal")}</b>
+              <Link className="footer__link" to="/terms-of-service">
+                {t("tos")}
+              </Link>
+              <Link className="footer__link" to="/privacy-policy">
+                {t("privacy")}
               </Link>
             </div>
           </div>
           <div className="footer__pair">
             <div className="footer__section body">
-              <p>
-                <b>{t("legal")}</b>
-              </p>
-              <Link className="footer__link" to="/terms-of-service">
-                <p>{t("tos")}</p>
-              </Link>
-              <Link className="footer__link" to="/privacy-policy">
-                <p>{t("privacy")}</p>
-              </Link>
-            </div>
-            <div className="footer__section body">
-              <p>
-                <b>{t("contact")}</b>
-              </p>
+              <b>{t("contact")}</b>
               <a
                 className="footer__link"
                 href="mailto:flattenofficial@gmail.com"
               >
-                <p>flattenofficial@gmail.com</p>
+                flattenofficial@gmail.com
               </a>
               <a className="footer__link" href="https://blog.flatten.ca">
-                <p>Blog</p>
+                Blog
               </a>
+            </div>
+
+            <div className="footer__section body">
+              <b>{t("share")}</b>
+              <div className="footer__icon-container">
+                <span className="footer__icon">
+                  <FacebookShareButton url={url} quote={title}>
+                    <FacebookIcon size={32} round bgStyle={{ fill: "black" }} />
+                  </FacebookShareButton>
+                </span>
+                <span className="footer__icon">
+                  <TwitterShareButton url={url} title={title}>
+                    <TwitterIcon size={32} round bgStyle={{ fill: "black" }} />
+                  </TwitterShareButton>
+                </span>
+                <span className="footer__icon">
+                  <LinkedinShareButton url={url} title={title}>
+                    <LinkedinIcon size={32} round bgStyle={{ fill: "black" }} />
+                  </LinkedinShareButton>
+                </span>
+              </div>
             </div>
           </div>
         </div>
