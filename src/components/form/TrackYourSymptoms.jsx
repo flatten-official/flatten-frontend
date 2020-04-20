@@ -1,13 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import i18next from "i18next";
+import SubmitModal from "./SubmitModal";
 
 import { setDailyCookie } from "../../actions/index";
 
 import SyringeIcon from "../../assets/syringe.svg";
 
 const TrackYourSymptoms = ({ t, dispatch, daily }) => {
+  const [showModal, setShowModal] = useState(false);
+
   const lang = i18next.language;
   let formID;
 
@@ -18,15 +21,21 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
     case "enUS":
       formID = "flatten-covid-enus";
       break;
+    case "so":
+      formID = "azzve9ao";
+      break;
     default:
       formID = "flatten-covid";
   }
   useEffect(() => {
     document.addEventListener("PaperformSubmission", submitSuccess);
+    return () =>
+      document.removeEventListener("PaperformSubmission", submitSuccess);
   }, []);
 
   const submitSuccess = () => {
     dispatch(setDailyCookie());
+    setShowModal(true);
   };
 
   const dailySubmissionStatus = daily && daily.exists;
@@ -44,6 +53,7 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
         </p>
       </div>
       <div data-paperform-id={formID} />
+      {showModal && <SubmitModal onClose={() => setShowModal(false)} />}
     </div>
   ) : (
     <div className="symptoms symptoms__submitted title" id="symptoms">
