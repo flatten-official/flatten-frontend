@@ -21,6 +21,9 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
     case "enUS":
       formID = "flatten-covid-enus";
       break;
+    case "so":
+      formID = "azzve9ao";
+      break;
     default:
       formID = "flatten-covid";
   }
