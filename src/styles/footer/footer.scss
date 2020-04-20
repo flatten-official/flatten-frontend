@@ -1,6 +1,6 @@
 .footer__container {
   text-align: center;
-  background-color: $white-paper;
+  background-color: $background-green;
   padding-top: 10px;
   padding-left: 15px;
   padding-right: 15px;
@@ -15,23 +15,41 @@
 .footer__section {
   margin: 40px;
   vertical-align: top;
-  width: fit-content;
   display: inline-block;
-  text-align: right;
+  text-align: left;
 }
 
 .footer__link {
   text-decoration: none;
-  color: $black-main;
+  color: $medium-grey;
   transition-duration: 0.3s;
+  display: block;
 }
 
 .footer__link:hover {
   text-decoration: underline;
 }
 
-@media screen and (max-width: 600px) {
+.footer__icon-container {
+  display: block;
+}
+
+.footer__icon {
+  margin-right: 2px;
+}
+
+@media screen and (min-width: 600px) and (max-width: 1200px) {
   .footer__section {
+    width: 220px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .footer__pair {
+    display: block;
+  }
+  .footer__section {
+    display: block;
     margin: 10px;
   }
 }

@@ -1,39 +1,110 @@
-.info__para {
-  border: 1px solid $light-grey;
-  border-radius: 7px;
+.info__title {
+  width: 100%;
+  text-align: left;
+  margin-top: 30px;
+  margin-bottom: 0px;
+}
+
+.info__headercontainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 85%;
   margin: 0 auto;
+  align-content: center;
+}
+
+.info__header {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 500;
+  margin-top: 15px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.info__description {
+  font-weight: 400;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.info__paraheadercontainer {
+  display: flex;
+}
+
+.info__para {
+  border-top: 2px solid $black-main;
+  margin: 30px auto;
+  width: 85%;
 }
 
 //Desktop
 @media only screen and (min-width: 1200px) {
+  .info__title {
+    width: 50%;
+    margin-top: 60px;
+  }
+
+  .info__header {
+    font-size: 22px;
+  }
+
+  .info__headercontainer {
+    width: 50%;
+  }
+
+  .info__description {
+    width: 50%;
+    margin-top: 60px;
+  }
+
   .info__para {
     width: 50%;
-    margin: 20px auto;
-    &:hover {
-      transition: 0.3s;
-      -webkit-box-shadow: 4px 4px 10px 0px rgb(211, 185, 185);
-      -moz-box-shadow: 4px 4px 10px 0px rgb(211, 185, 185);
-      box-shadow: 4px 4px 10px 0px rgb(211, 185, 185);
-    }
   }
 }
 
-.info__header {
-  font-family: "Open Sans";
-  font-weight: 600;
-  padding: 15px 30px;
-  margin: 0;
-  background-color: $light-grey;
-  border-radius: 3px;
+p {
+  width: 100%;
+  padding: 10px 0px;
 }
 
-.info__title {
-  margin: 50px auto;
-  width: 60%;
-  text-align: center;
-  margin-top: 100px;
+.info__note {
+  font-style: italic;
 }
 
-.info__body {
-  padding: 10px 30px 15px 30px;
+.activate {
+  display: none;
+}
+
+.activate:checked ~ .drop-down {
+  max-height: 1300px;
+}
+
+.activate:checked ~ .info__paraheadercontainer > .info__arrow {
+  transform: rotate(-135deg) translateZ(500px);
+  -webkit-transform: rotate(-135deg) translateZ(500px);
+  -webkit-transition: all 0.3s;
+}
+
+.drop-down {
+  max-height: 0;
+  overflow: hidden;
+  display: block;
+  -webkit-transform: translateZ(0);
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.info__arrow {
+  border: solid black;
+  border-width: 0px 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -webkit-transition: all 0.3s;
+  margin: 20px 5px 0px auto;
+  width: 5px;
+  height: 5px;
 }

@@ -1,5 +1,48 @@
 .PageTitle {
-    text-align: left;
-    font-size: 1.17em;
-    font-weight: bold;
+  text-align: left;
+  font-size: 1.17em;
+}
+
+.popupCustom .leaflet-popup-tip,
+.popupCustom .leaflet-popup-content-wrapper {
+  font-family: "DM Sans", sans-serif;
+  background: #f5f3f2;
+  color: #000000;
+}
+
+.legend {
+  font-family: "DM Sans", sans-serif;
+  font-size: calc(12px + 0.3vw);
+  line-height: 18px;
+  opacity: 1;
+}
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+}
+
+@media screen and (min-width: 1600px) {
+  .legend {
+    font-size: 18px;
+  }
+}
+
+.leaflet-control-container
+  .leaflet-top
+  .leaflet-control-zoom
+  a.leaflet-control-zoom-in {
+  background-color: transparent;
+}
+
+.leaflet-control-container
+  .leaflet-top
+  .leaflet-control-zoom
+  a.leaflet-control-zoom-out {
+  background-color: transparent;
+}
+
+.leaflet-control-locate a {
+  background-color: transparent;
 }

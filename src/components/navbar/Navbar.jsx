@@ -1,63 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-scroll";
-import { NavLink, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { getGeolocation } from "../../actions";
 import i18next from "i18next";
 
-import logo from "../../assets/logo-black.png";
+import history from "../../history";
 
-const Navbar = ({ t }) => {
-  let location = useLocation();
-  let logoLink = null;
-  let homeLink = null;
-  let symptomsLink = null;
-  let heatmapLink = null;
+const Navbar = ({ t, getGeolocation }) => {
+  useEffect(() => {
+    getGeolocation();
+  }, []);
 
-  const i18nlang = i18next.language;
-  let toggle;
-  let current;
-  switch (i18nlang) {
-    case "en":
-      toggle = "fr";
-      current = "en"
-      
-      break;
-    case "fr":
-      toggle = "en";
-      current = "fr"
-      break;
-    default:
-      toggle = "fr";
-      current = "en"
-  }
-  let linkLang = `/?lang=${toggle}`;
+  const [value] = useState(i18next.language);
+  const location = useLocation();
+  const languageHandler = (event) => {
+    const lang = event.currentTarget.value;
+    const linkLang = `${location.pathname}?lang=${lang}`;
+    history.push(linkLang);
+  };
 
-  if (location.pathname == ("/" || "#symptoms" || "#heatmap")) {
-    logoLink = (
-      <Link
-        activeClass="active"
-        to="home"
-        spy={true}
-        smooth={true}
-        offset={-70}
-        duration={1000}
-      >
-        <img className="navbar__logo" src={logo} />
-      </Link>
-    );
-    homeLink = (
-      <Link
-        activeClass="active"
-        to="home"
-        spy={true}
-        smooth={true}
-        offset={-70}
-        duration={1000}
-        hashSpy={true}
-      >
-        {t("home")}
-      </Link>
-    );
+  let navbar;
+  let symptomsLink;
+  let heatmapLink;
+  let infoLink;
+
+  // for homepage scrolling links, scrolling animation
+  if (location.pathname === ("/" || "#symptoms" || "#heatmap" || "#info")) {
     symptomsLink = (
       <Link
         activeClass="active"
@@ -67,10 +37,12 @@ const Navbar = ({ t }) => {
         offset={-70}
         duration={1000}
         hashSpy={true}
+        className="nav__link nav__text"
       >
         {t("form")}
       </Link>
     );
+
     heatmapLink = (
       <Link
         activeClass="active"
@@ -80,52 +52,103 @@ const Navbar = ({ t }) => {
         offset={-70}
         duration={1000}
         hashSpy={true}
+        className="nav__link nav__text"
       >
         {t("heatmap")}
       </Link>
     );
+
+    infoLink = (
+      <Link
+        activeClass="active"
+        to="info"
+        spy={true}
+        smooth={true}
+        offset={-70}
+        duration={1000}
+        hashSpy={true}
+        className="nav__link nav__text"
+      >
+        {t("info")}
+      </Link>
+    );
+
+    navbar = (
+      <Link
+        activeClass="active"
+        to="home"
+        spy={true}
+        smooth={true}
+        offset={-70}
+        duration={1000}
+      >
+        <div className="nav__logo">
+          <div className="nav__logo-fixed nav__title">FLATTEN</div>
+          <div className="nav__logo-animation nav__title">
+            {symptomsLink}
+            {heatmapLink}
+            {infoLink}
+            .CA
+          </div>
+          <hr />
+        </div>
+      </Link>
+    );
+
+    // for other miscellaneous pages, no scrolling animation
   } else {
-    logoLink = (
-      <a href="/">
-        <img className="navbar__logo" src={logo} />
-      </a>
-    );
-    homeLink = (
-      <a className="nav__a" href="/">
-        {t("home")}
-      </a>
-    );
     symptomsLink = (
-      <a className="nav__a" href="/#symptoms">
+      <a className="nav__link nav__text" href="/#symptoms">
         {t("form")}
       </a>
     );
     heatmapLink = (
-      <a className="nav__a" href="/#heatmap">
+      <a className="nav__link nav__text" href="/#heatmap">
         {t("heatmap")}
       </a>
     );
+    infoLink = (
+      <a className="nav__link nav__text" href="/#info">
+        {t("info")}
+      </a>
+    );
+
+    navbar = (
+      <a href="/">
+        <div className="nav__logo">
+          <div className="nav__logo-fixed nav__title">FLATTEN</div>
+          <div className="nav__logo-animation nav__title">
+            {symptomsLink}
+            {heatmapLink}
+            {infoLink}
+            .CA
+          </div>
+          <hr />
+        </div>
+      </a>
+    );
   }
+
   return (
-    <nav className="nav">
-      <div className="nav__content body">
-        <li className="nav__item navbar__logo-container">{logoLink}</li>
-        <li className={`nav__item_en nav__optional`}>{homeLink}</li>
-        <li className={`nav__item_${current}`}>{symptomsLink}</li>
-        <li className={`nav__item_${current}`}>{heatmapLink}</li>
-        <li className={`nav__info_${current}`}>
-          <NavLink className={`navbar__covid_${current}`} exact to="/info">
-            {t("info")}
-          </NavLink>
-        </li>
-        <li className="navbar__lang">
-          <a className={`navbar__covid_${current} nav__a`} href={linkLang}>
-            {toggle}
-          </a>
-        </li>
+    <nav className="body nav">
+      <div className="nav__container">
+        {navbar}
+
+        {/* language dropdown */}
+        <select
+          className="nav__lang nav__text"
+          onChange={languageHandler}
+          value={value}
+        >
+          <option value="en">en-ca</option>
+          <option value="enUS">en-us</option>
+          <option value="fr">fr</option>
+        </select>
       </div>
     </nav>
   );
 };
 
-export default withTranslation("Navbar")(Navbar);
+export default connect(null, { getGeolocation })(
+  withTranslation("Navbar")(Navbar)
+);

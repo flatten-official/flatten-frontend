@@ -1,13 +1,6 @@
 steps:
   - name: gcr.io/cloud-builders/gsutil
     args: ["cp", "src/apis/backend.$_ENVIRONMENT.js", "src/apis/backend.js"]
-  - name: gcr.io/cloud-builders/gsutil
-    args:
-      [
-        "cp",
-        "src/components/form/Recaptcha.$_ENVIRONMENT.js",
-        "src/components/form/Recaptcha.js",
-      ]
   - name: "gcr.io/cloud-builders/npm"
     entrypoint: "npm"
     args: ["install"]
@@ -15,7 +8,7 @@ steps:
     entrypoint: "npm"
     args: ["run", "build"]
   - name: gcr.io/cloud-builders/gsutil
-    args: ["cp", "deployment/app.$BRANCH_NAME.yaml", "app.yaml"] # Branch name to use map-staging app config
+    args: ["cp", "deployment/app.$_ENVIRONMENT.yaml", "app.yaml"] # Branch name to use map-staging app config
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy"]
 timeout: "1600s"

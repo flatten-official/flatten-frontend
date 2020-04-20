@@ -1,6 +1,5 @@
 {
-  "home": "Accueil",
-  "form": "Informez nous de vos symptômes",
-  "heatmap": "Visionner les renseignements sur le virus",
-  "info": "Informations sur la COVID-19"
+  "form": "Ajoutez vos données",
+  "heatmap": "Données sur les virus",
+  "info": "Informations"
 }

@@ -1,22 +1,18 @@
 import React from "react";
 
-import "./Para.css";
-
 const Para10 = () => (
   <React.Fragment>
     <p>
       <a href="https://www.santemontreal.qc.ca">
-        <p>Direction de santé publique de Montréal</p>
+        Direction de santé publique de Montréal
       </a>
     </p>
     <p>
-      <a href="https://www.quebec.ca/coronavirus">
-        <p>Gouvernement du Québec</p>
-      </a>
+      <a href="https://www.quebec.ca/coronavirus">Gouvernement du Québec</a>
     </p>
     <p>
       <a href="https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19.html">
-        <p>Gouvernement du Canada</p>
+        Gouvernement du Canada
       </a>
     </p>
     <p>
