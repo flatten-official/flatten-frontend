@@ -461,6 +461,23 @@ class Leafletmap extends React.Component {
 
     return location ? (
       <div>
+        <div id="tabs" className="TabSelectors btn_group">
+          <PrimaryButton onClick={(e) => this.setTab("conf", 3)}>
+            {t("cul_button")}
+          </PrimaryButton>
+          <PrimaryButton onClick={(e) => this.setTab("pot", 1)}>
+            {t("pot_button")}
+          </PrimaryButton>
+          <PrimaryButton onClick={(e) => this.setTab("vuln", 2)}>
+            {t("vul_button")}
+          </PrimaryButton>
+          <PrimaryButton
+            className="active"
+            onClick={(e) => this.setTab("both", 0)}
+          >
+            {t("pot_vul_button")}
+          </PrimaryButton>
+        </div>
         <div className="PageTitle body"> {title} </div>
         <div style={{ height: this.state.height }}>
           <Map
@@ -485,23 +502,6 @@ class Leafletmap extends React.Component {
             <LocateControl options={locateOptions} />
             <Legend colourScheme={colourScheme} tab={this.state.tab} />
           </Map>
-        </div>
-        <div id="tabs" className="TabSelectors btn_group">
-          <PrimaryButton
-            className="active"
-            onClick={(e) => this.setTab("both", 0)}
-          >
-            {t("pot_vul_button")}
-          </PrimaryButton>
-          <PrimaryButton onClick={(e) => this.setTab("pot", 1)}>
-            {t("pot_button")}
-          </PrimaryButton>
-          <PrimaryButton onClick={(e) => this.setTab("vuln", 2)}>
-            {t("vul_button")}
-          </PrimaryButton>
-          <PrimaryButton onClick={(e) => this.setTab("conf", 3)}>
-            {t("cul_button")}
-          </PrimaryButton>
         </div>
       </div>
     ) : null;
