@@ -10,10 +10,10 @@ const AboutUs = ({ t }) => {
 
   const devs = t("devs", { returnObjects: true });
   const advisors = t("advisors", { returnObjects: true });
-  const team = t("team", { returnObjects: true });
+  // const team = t("team", { returnObjects: true });
   return (
     <React.Fragment>
-      <section className="about-us__header">
+      <section className="about-us__headercontainer">
         <h4 className="about-us__title title">{t("header")}</h4>
         <div className="about-us__description">
           <p className="body">{t("p1")}</p>
@@ -38,7 +38,9 @@ const AboutUs = ({ t }) => {
           />
         ))}
       </div>
-      <h4 className="about-us__title title">{t("advisorsHeader")}</h4>
+      <section className="about-us__headercontainer">
+        <h4 className="about-us__title title">{t("advisorsHeader")}</h4>
+      </section>
       <div className="about-us__body">
         {advisors.map((advisor, index) => (
           <Profile
@@ -52,20 +54,11 @@ const AboutUs = ({ t }) => {
           />
         ))}
       </div>
-      <h4 className="about-us__title title">{t("teamHeader")}</h4>
-      <div className="about-us__body">
-        {team.map((member, index) => (
-          <Profile
-            key={index}
-            link={member.link}
-            name={member.name}
-            src={member.src}
-            role={member.role}
-            degrees={member.degrees}
-            titles={member.titles}
-          />
-        ))}
-      </div>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
     </React.Fragment>
   );
 };

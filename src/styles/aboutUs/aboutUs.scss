@@ -1,9 +1,16 @@
-.about-us__header {
-  margin-top: 150px;
+.about-us__description {
+  text-align: left;
+  width: 100%;
+  margin-top: -10px;
 }
 
-.about-us__description {
-  text-align: center;
+.about-us__headercontainer {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 85%;
+  margin: 0 auto;
+  margin-top: 150px;
+  align-content: center;
 }
 
 .about-us__body {
@@ -11,10 +18,11 @@
   display: flex;
   flex-flow: row wrap;
   margin: 40px 80px 10px 80px;
+  margin-bottom: -100px;
 }
 
 .about-us__title {
-  margin: 0px auto;
-  text-align: center;
+  margin: 0px 15px;
+  text-align: left;
   width: 60%;
 }

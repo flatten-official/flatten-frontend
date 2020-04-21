@@ -43,6 +43,12 @@
       "role": "Chef d'équipe du tableau de bord"
     },
     {
+      "name": "Anastasia Razdaibiedina",
+      "src": "./headshots/anastasia.png",
+      "link": "https://www.linkedin.com/in/anastasia-razdaibiedina-438929197/",
+      "role": "Assistant de Recherche et Développeur de logiciels"
+    },
+    {
       "name": "Sejal Jain",
       "src": "./headshots/sejal.png",
       "link": "https://www.linkedin.com/in/sejal-jain-25029817b",
@@ -55,10 +61,58 @@
       "role": "UI/UX et Développeur de logiciels"
     },
     {
-      "name": "Anastasia Razdaibiedina",
-      "src": "./headshots/anastasia.png",
-      "link": "https://www.linkedin.com/in/anastasia-razdaibiedina-438929197/",
-      "role": "Assistant de Recherche et Développeur de logiciels"
+      "name": "Miraal Kabir",
+      "src": "./headshots/miraal.png",
+      "link": "https://www.linkedin.com/in/miraalkabir/",
+      "role": "UI/UX et Développeur de logiciels"
+    },
+    {
+      "name": "Charlie Chen",
+      "src": "./headshots/charlie.png",
+      "link": "https://www.linkedin.com/in/hyu-chen/",
+      "role": "Développeur de logiciels"
+    },
+    {
+      "name": "Eric Zhai",
+      "src": "",
+      "link": "https://www.linkedin.com/in/eric-zhai/",
+      "role": "Développeur de logiciels"
+    },
+    {
+      "name": "Ethan Chen",
+      "src": "./headshots/ethan.png",
+      "link": "https://www.linkedin.com/in/ethanjc/",
+      "role": "Développeur de logiciels"
+    },
+    {
+      "name": "George Lifchits",
+      "src": "./headshots/george.png",
+      "link": "https://www.linkedin.com/in/georgelifchits/",
+      "role": "Développeur de logiciels"
+    },
+    {
+      "name": "Maanav Dalal",
+      "src": "./headshots/maanav.png",
+      "link": "https://www.linkedin.com/in/maanavdalal/",
+      "role": "Développeur de logiciels"
+    },
+    {
+      "name": "Rassam Yazdi",
+      "src": "./headshots/rassam.png",
+      "link": "https://www.linkedin.com/in/rassam-yazdi-3a256319a/",
+      "role": "Développeur de logiciels"
+    },
+    {
+      "name": "Robert Li",
+      "src": "./headshots/robertli.png",
+      "link": "https://www.linkedin.com/in/jianing-robert-li/",
+      "role": "Développeur de logiciels"
+    },
+    {
+      "name": "Robert Wu",
+      "src": "./headshots/robertwu.png",
+      "link": "https://linkedin.com/in/wu-robert",
+      "role": "Développeur de logiciels"
     },
     {
       "name": "Samuel Hao",
@@ -67,9 +121,9 @@
       "role": "Développeur de logiciels"
     },
     {
-      "name": "Eric Zhai",
-      "src": "",
-      "link": "https://www.linkedin.com/in/eric-zhai/",
+      "name": "Siyan Zhao",
+      "src": "./headshots/siyan.png",
+      "link": "https://www.linkedin.com/in/siyanzhao/",
       "role": "Développeur de logiciels"
     },
     {
@@ -132,62 +186,6 @@
       "role": "Conseiller",
       "degrees": ", MD, MPH, FRCPC",
       "titles": "Spécialiste des maladies infectieuses et épidémiologiste"
-    }
-  ],
-  "team": [
-    {
-      "name": "Rassam Yazdi",
-      "src": "./headshots/rassam.png",
-      "link": "https://www.linkedin.com/in/rassam-yazdi-3a256319a/",
-      "role": "Développeur de logiciels"
-    },
-    {
-      "name": "Miraal Kabir",
-      "src": "./headshots/miraal.png",
-      "link": "https://www.linkedin.com/in/miraalkabir/",
-      "role": "Développeur de logiciels"
-    },
-    {
-      "name": "Ethan Chen",
-      "src": "./headshots/ethan.png",
-      "link": "https://www.linkedin.com/in/ethanjc/",
-      "role": "Développeur de logiciels"
-    },
-    {
-      "name": "Charlie Chen",
-      "src": "./headshots/charlie.png",
-      "link": "https://www.linkedin.com/in/hyu-chen/",
-      "role": "Développeur de logiciels"
-    },
-    {
-      "name": "Siyan Zhao",
-      "src": "./headshots/siyan.png",
-      "link": "https://www.linkedin.com/in/siyanzhao/",
-      "role": "Développeur de logiciels"
-    },
-    {
-      "name": "George Lifchits",
-      "src": "./headshots/george.png",
-      "link": "https://www.linkedin.com/in/georgelifchits/",
-      "role": "Développeur de logiciels"
-    },
-    {
-      "name": "Robert Li",
-      "src": "./headshots/robertli.png",
-      "link": "https://www.linkedin.com/in/jianing-robert-li/",
-      "role": "Développeur de logiciels"
-    },
-    {
-      "name": "Robert Wu",
-      "src": "./headshots/robertwu.png",
-      "link": "https://linkedin.com/in/wu-robert",
-      "role": "Développeur de logiciels"
-    },
-    {
-      "name": "Maanav Dalal",
-      "src": "./headshots/maanav.png",
-      "link": "https://www.linkedin.com/in/maanavdalal/",
-      "role": "Développeur de logiciels"
     }
   ]
 }
