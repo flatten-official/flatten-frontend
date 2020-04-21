@@ -5,7 +5,7 @@ import utils from "./vis_utils.js";
 
 let config = {
   height: 180,
-  margin: { top: 20, right: 30, bottom: 30, left: 40 },
+  margin: { top: 20, right: 60, bottom: 30, left: 40 },
 };
 
 function genData(raw, province, timeSeriesProperty = "Time Series (Daily)") {
@@ -50,14 +50,9 @@ let drawCasesChart = (t, name, container_selector) => {
     let y = d3
       .scaleLinear()
       .range([config.height - config.margin.bottom, config.margin.top]);
-    //
-    // let line = d3
-    //   .line()
-    //   .x((d) => x(d.date))
-    //   .y((d) => y(d.total.confirmed_cases));
 
     let xAxis = d3.axisBottom().scale(x);
-    let yAxis = d3.axisLeft().scale(y);
+    let yAxis = d3.axisRight().scale(y);
     svg
       .append("g")
       .attr("id", `${name}-xaxis`)
@@ -68,26 +63,31 @@ let drawCasesChart = (t, name, container_selector) => {
     svg
       .append("g")
       .attr("id", `${name}-yaxis`)
-      .attr("transform", `translate(${config.margin.left},0)`);
+      .attr("transform", `translate(${width - config.margin.right},0)`);
 
-    svg
-      .append("path")
-      .attr("id", `${name}-line`)
-      .attr("fill", "none")
-      .attr("stroke", "steelblue");
+    function addBars(rect) {
+      rect
+        .attr("x", (d) => x(d.date) - x_band.bandwidth())
+        .attr("y", (d) => y(d.total.confirmed_cases))
+        .attr("width", x_band.bandwidth())
+        .attr("height", (d) => y(0) - y(d.total.confirmed_cases));
+    }
 
-    let bars = svg.append("g"); //.attr("transform", `translate(0,${-config.margin.bottom})`);
+    let data = genData(raw, "ONTARIO");
+    let bars = svg
+      .append("g")
+      .attr("fill", "steelblue")
+      .selectAll("rect")
+      .data(data, (d) => d.date.toDateString())
+      .join("rect")
+      .call(addBars);
 
     function update(selectedGroup) {
-      // Create new data with the selection?
-      // var dataFilter = data.map(function(d){return {time: d.date, value:d[selectedGroup]} })
       let data = genData(raw, selectedGroup);
-      console.log(data);
 
       let t = d3.transition().duration(300).ease(d3.easeLinear);
 
       let dates = data.map((d) => d.date);
-      console.log(dates);
       x.domain(d3.extent(dates));
       x_band.domain(dates);
 
@@ -97,31 +97,17 @@ let drawCasesChart = (t, name, container_selector) => {
         Math.max(d.total.deaths, d.total.confirmed_cases)
       );
       y_extent = [0, y_extent[1] > 10 ? y_extent[1] : 10];
-      console.log(y_extent);
       y.domain(y_extent);
       svg.selectAll(`#${name}-yaxis`).transition(t).call(yAxis);
 
-      console.log(y(0));
-      console.log(y(3000));
-
-      console.log(x_band.bandwidth());
       // create the bars
       bars
-        .selectAll(".bar")
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("class", "bar")
-        .attr("x", (d) => x(d.date) - x_band.bandwidth() / 2)
-        .attr("y", (d) => y(d.total.confirmed_cases))
-        .attr("width", x_band.bandwidth())
-        .attr("height", (d) => y(0) - y(d.total.confirmed_cases))
-        .attr("fill", "steelblue");
-
-      // Give these new data to update line
-      // d3.select(`#${name}-line`).transition(t).attr("d", line(data));
+        .data(data, (d) => d.date.toDateString())
+        .call((bar) => bar.transition(t).call(addBars));
     }
+    let defaultProvince = "ONTARIO";
 
+    let select = svg.append("select").attr("id", "viz-select");
     // add the options to the button
     d3.select("#viz-select")
       .selectAll("myOptions")
@@ -131,9 +117,7 @@ let drawCasesChart = (t, name, container_selector) => {
       .text(function (d) {
         return d;
       }) // text showed in the menu
-      .attr("value", function (d) {
-        return d;
-      }); // corresponding value returned by the button
+      .property("selected", (d) => d === defaultProvince); // corresponding value returned by the button
 
     d3.select("#viz-select").on("change", function (d) {
       // recover the option that has been chosen
@@ -142,7 +126,7 @@ let drawCasesChart = (t, name, container_selector) => {
       update(selectedOption);
     });
 
-    update("ONTARIO");
+    update(defaultProvince);
   });
 };
 
@@ -154,7 +138,7 @@ function Visualization({ t }) {
   return (
     <div className="visualization">
       <div>
-        <select id="viz-select"></select>
+        <select id="viz-select" selected></select>
       </div>
       <div id="cases-chart" className="chart" />
       {/*<div id="cases-chart2" className="chart" />*/}
