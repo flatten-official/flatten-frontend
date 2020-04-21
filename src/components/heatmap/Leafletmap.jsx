@@ -116,8 +116,11 @@ function getColour(cases, colourScheme, colorThresholds) {
 class Leafletmap extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       tab: "both",
+      formData: null,
+      confirmedCases: null,
     };
     this.setTab = this.setTab.bind(this);
   }
@@ -129,12 +132,13 @@ class Leafletmap extends React.Component {
 
   componentDidMount() {
     console.log(this.props);
-    this.updateDimensions();
     window.addEventListener("resize", this.updateDimensions.bind(this));
   }
 
   // eslint-disable-next-line react/no-deprecated
-  componentWillMount() {}
+  componentWillMount() {
+    this.updateDimensions();
+  }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateDimensions.bind(this));
@@ -229,6 +233,7 @@ class Leafletmap extends React.Component {
 
   render() {
     const { t } = this.props;
+    const title = "title";
     const bounds = i18nlang === "enUS" ? USA_BOUNDS : CANADA_BOUNDS;
     const center = i18nlang === "enUS" ? USA_CENTER : ONTARIO;
     const initZoom = i18nlang === "enUS" ? 3 : 4;
@@ -391,11 +396,15 @@ class Leafletmap extends React.Component {
     // the key prop on the GeoJSON component ensures React will re-render
     // the geojson layer when the tab changes. This does the work of
     // unbinding all popups and recreating them with the correct data.
+
     return location ? (
       <div>
         <div id="tabs" className="TabSelectors btn_group">
-          <PrimaryButton onClick={(e) => this.setTab("conf", 3)}>
-            {t("cul_button")}
+          <PrimaryButton
+            className="active"
+            onClick={(e) => this.setTab("both", 0)}
+          >
+            {t("pot_vul_button")}
           </PrimaryButton>
           <PrimaryButton onClick={(e) => this.setTab("pot", 1)}>
             {t("pot_button")}
@@ -403,13 +412,11 @@ class Leafletmap extends React.Component {
           <PrimaryButton onClick={(e) => this.setTab("vuln", 2)}>
             {t("vul_button")}
           </PrimaryButton>
-          <PrimaryButton
-            className="active"
-            onClick={(e) => this.setTab("both", 0)}
-          >
-            {t("pot_vul_button")}
+          <PrimaryButton onClick={(e) => this.setTab("conf", 3)}>
+            {t("cul_button")}
           </PrimaryButton>
         </div>
+        <div className="mapTitle"> {title} </div>
         <div style={{ height: this.state.height }}>
           <Map
             maxBounds={bounds}

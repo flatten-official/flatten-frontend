@@ -1,7 +1,8 @@
 import React from "react";
-import { Trans, withTranslation } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import i18next from "i18next";
 import Leafletmap from "./Leafletmap";
+import { connect } from "react-redux";
 
 const i18nlang = i18next.language;
 const URLS = {
@@ -42,28 +43,11 @@ class HeatMap extends React.Component {
     this.getFormData = this.getFormData.bind(this);
     this.getConfirmedCasesData = this.getConfirmedCasesData.bind(this);
   }
+
   componentDidMount() {
     this.getFormData();
     this.getConfirmedCasesData();
-    this.updateWindowDimensions();
-    window.addEventListener("resize", this.updateWindowDimensions);
   }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateWindowDimensions);
-  }
-
-  updateWindowDimensions = () => {
-    if (window.innerWidth < 1024) {
-      this.setState({
-        width: window.innerWidth,
-        height: window.innerHeight,
-        ratio: Math.floor((window.innerHeight / window.innerWidth) * 100),
-      });
-    } else {
-      this.setState({ ratio: 56.25 });
-    }
-  };
 
   getFormData() {
     fetch(this.state.formURL)
@@ -85,22 +69,18 @@ class HeatMap extends React.Component {
 
   render() {
     const { t } = this.props;
-    let title;
+
+    let date = "Loading";
+    let totalResponses = "Loading";
+
     if (this.state.formData !== null) {
-      title =
-        i18nlang === "fr"
-          ? "Réponse totales: " +
-            this.state.formData.total_responses +
-            " | Dernière mise à jour: " +
-            new Date(1000 * this.state.formData.time)
-          : "Total Responses: " +
-            this.state.formData.total_responses +
-            " | Last update: " +
-            new Date(1000 * this.state.formData.time);
-    } else {
-      title = i18nlang === "fr" ? "Chargement..." : "Loading...";
+      date = "" + new Date(1000 * this.state.formData.time);
+      totalResponses = "" + this.state.formData.total_responses;
+      // Adds commas to number
+      totalResponses = totalResponses.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-    return (
+
+    return location ? (
       <div className="heatmap" id="heatmap">
         <div className="heatmap__header">
           &nbsp; &nbsp;
@@ -113,17 +93,17 @@ class HeatMap extends React.Component {
                 <b>{t("p1")}</b>
                 <br></br>
                 <br></br>
-                <div className="heatmap__minidescription body">{t("p9")}</div>
               </p>
             </div>
           </div>
         </div>
         <div className="heatmap__container">
-          <div className="PageTitle body"> {title} </div>
-          <Leafletmap
-            formData={this.state.formData}
-            confirmedCases={this.state.confirmedCases}
-          ></Leafletmap>
+          {this.state.formData && this.state.confirmedCases && (
+            <Leafletmap
+              formData={this.state.formData}
+              confirmedCases={this.state.confirmedCases}
+            ></Leafletmap>
+          )}
         </div>
 
         <div className="heatmap__header">
@@ -135,6 +115,14 @@ class HeatMap extends React.Component {
                 <b>{t("p7")}</b>
               </p>
             </div>
+
+            <div className="heatmap__minidescription body">
+              <b>{t("p9")}</b>
+              <p>{totalResponses}</p>
+              <b>{t("p10")}</b>
+              <p>{date}</p>
+            </div>
+
             <div className="heatmap__minidescription body">
               <p>
                 {t("p8")}
@@ -146,7 +134,7 @@ class HeatMap extends React.Component {
           </div>
         </div>
       </div>
-    );
+    ) : null;
   }
 }
 
