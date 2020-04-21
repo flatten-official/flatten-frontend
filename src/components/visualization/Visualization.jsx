@@ -8,18 +8,18 @@ let config = {
   margin: { top: 20, right: 30, bottom: 30, left: 40 },
 };
 
-function genData(
-  raw,
-  province,
-  graphProperty,
-  timeSeriesProperty = "Time Series (Daily)"
-) {
+function genData(raw, province, timeSeriesProperty = "Time Series (Daily)") {
   let timeSeries = raw[province][timeSeriesProperty];
   let dates = Object.keys(timeSeries);
   let provinces = Object.keys(raw);
   return dates.map((date) => ({
     date: new Date(date),
-    value: timeSeries[date][graphProperty],
+    total: {
+      deaths: timeSeries[date]["Total Deaths"],
+      tested: timeSeries[date]["Total Tested"],
+      confirmed_cases: timeSeries[date]["Total Cases"],
+      recovered: timeSeries[date]["Total Recovered"],
+    },
   }));
 }
 
@@ -43,14 +43,18 @@ let drawCasesChart = (t, name, container_selector) => {
       .scaleTime()
       .range([config.margin.left, width - config.margin.right]);
 
+    let x_band = d3
+      .scaleBand()
+      .range([config.margin.left, width - config.margin.right]);
+
     let y = d3
       .scaleLinear()
       .range([config.height - config.margin.bottom, config.margin.top]);
-
-    let line = d3
-      .line()
-      .x((d) => x(d.date))
-      .y((d) => y(d.value));
+    //
+    // let line = d3
+    //   .line()
+    //   .x((d) => x(d.date))
+    //   .y((d) => y(d.total.confirmed_cases));
 
     let xAxis = d3.axisBottom().scale(x);
     let yAxis = d3.axisLeft().scale(y);
@@ -72,21 +76,50 @@ let drawCasesChart = (t, name, container_selector) => {
       .attr("fill", "none")
       .attr("stroke", "steelblue");
 
+    let bars = svg.append("g"); //.attr("transform", `translate(0,${-config.margin.bottom})`);
+
     function update(selectedGroup) {
       // Create new data with the selection?
       // var dataFilter = data.map(function(d){return {time: d.date, value:d[selectedGroup]} })
-      let data = genData(raw, selectedGroup, "Total Deaths");
+      let data = genData(raw, selectedGroup);
+      console.log(data);
 
       let t = d3.transition().duration(300).ease(d3.easeLinear);
 
-      x.domain(d3.extent(data, (d) => d.date));
+      let dates = data.map((d) => d.date);
+      console.log(dates);
+      x.domain(d3.extent(dates));
+      x_band.domain(dates);
+
       svg.selectAll(`#${name}-xaxis`).transition(t).call(xAxis);
 
-      y.domain(d3.extent(data, (d) => d.value));
+      let y_extent = d3.extent(data, (d) =>
+        Math.max(d.total.deaths, d.total.confirmed_cases)
+      );
+      y_extent = [0, y_extent[1] > 10 ? y_extent[1] : 10];
+      console.log(y_extent);
+      y.domain(y_extent);
       svg.selectAll(`#${name}-yaxis`).transition(t).call(yAxis);
 
+      console.log(y(0));
+      console.log(y(3000));
+
+      console.log(x_band.bandwidth());
+      // create the bars
+      bars
+        .selectAll(".bar")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("x", (d) => x(d.date) - x_band.bandwidth() / 2)
+        .attr("y", (d) => y(d.total.confirmed_cases))
+        .attr("width", x_band.bandwidth())
+        .attr("height", (d) => y(0) - y(d.total.confirmed_cases))
+        .attr("fill", "steelblue");
+
       // Give these new data to update line
-      d3.select(`#${name}-line`).transition(t).attr("d", line(data));
+      // d3.select(`#${name}-line`).transition(t).attr("d", line(data));
     }
 
     // add the options to the button
