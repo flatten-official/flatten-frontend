@@ -38,17 +38,6 @@ const NOT_ENOUGH_GRAY = "#909090";
 const MAX_CIRCLE_RAD = 25;
 const MIN_CIRCLE_RADIUS = 3;
 
-const URLS = {
-  cadForm:
-    "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
-  usaForm:
-    "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json",
-  cadConf:
-    "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson",
-  usaConf:
-    "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
-};
-
 // Current button
 let currTab = 0;
 
@@ -128,28 +117,12 @@ class Leafletmap extends React.Component {
   constructor(props) {
     super(props);
 
-    let formUrl;
-    let confUrl;
-
-    if (i18nlang === "enUS") {
-      formUrl = URLS.usaForm;
-      confUrl = URLS.usaConf;
-    } else {
-      formUrl = URLS.cadForm;
-      confUrl = URLS.cadConf;
-    }
-
     this.state = {
       tab: "both",
-      formURL: formUrl,
-      confURL: confUrl,
       formData: null,
       confirmedCases: null,
     };
     this.setTab = this.setTab.bind(this);
-
-    this.getFormData = this.getFormData.bind(this);
-    this.getConfirmedCasesData = this.getConfirmedCasesData.bind(this);
   }
 
   updateDimensions() {
@@ -158,9 +131,6 @@ class Leafletmap extends React.Component {
   }
 
   componentDidMount() {
-    this.getFormData();
-    this.getConfirmedCasesData();
-
     console.log(this.props);
     window.addEventListener("resize", this.updateDimensions.bind(this));
   }
@@ -182,24 +152,6 @@ class Leafletmap extends React.Component {
     currTab = index;
 
     this.setState({ tab: tabID });
-  }
-
-  getFormData() {
-    fetch(this.state.formURL)
-      .then((r) => r.json())
-      .then((d) => {
-        return d;
-      })
-      .then((formData) => this.setState({ formData }));
-  }
-
-  getConfirmedCasesData() {
-    fetch(this.state.confURL)
-      .then((r) => r.json())
-      .then((d) => {
-        return d;
-      })
-      .then((confirmedCases) => this.setState({ confirmedCases }));
   }
 
   // default map renderer. it only renders circles if pointTolayer is defined
@@ -281,21 +233,7 @@ class Leafletmap extends React.Component {
 
   render() {
     const { t } = this.props;
-    let title;
-    if (this.state.formData !== null) {
-      title =
-        i18nlang === "fr"
-          ? "Réponse totales: " +
-            this.state.formData.total_responses +
-            " | Dernière mise à jour: " +
-            new Date(1000 * this.state.formData.time)
-          : "Total Responses: " +
-            this.state.formData.total_responses +
-            " | Last update: " +
-            new Date(1000 * this.state.formData.time);
-    } else {
-      title = i18nlang === "fr" ? "Chargement..." : "Loading...";
-    }
+    const title = "title";
     const bounds = i18nlang === "enUS" ? USA_BOUNDS : CANADA_BOUNDS;
     const center = i18nlang === "enUS" ? USA_CENTER : ONTARIO;
     const initZoom = i18nlang === "enUS" ? 3 : 4;
@@ -308,7 +246,7 @@ class Leafletmap extends React.Component {
     const bindPopupOnEachFeatureUSA = (feature, layer) => {
       let content;
       const countyID = feature.properties.COUNTYNS;
-      const countyData = this.state.formData.county[countyID];
+      const countyData = this.props.formData.county[countyID];
       let countyReports;
       try {
         countyReports = countyData.number_reports;
@@ -381,7 +319,7 @@ class Leafletmap extends React.Component {
     // use the FSA polygon FSA ID to get the FSA data from `formData`
     const bindPopupOnEachFeature = (feature, layer) => {
       const fsaID = feature.properties.CFSAUID;
-      let fsaData = this.state.formData.fsa[fsaID];
+      let fsaData = this.props.formData.fsa[fsaID];
       if (!fsaData) {
         console.log("no data for fsa ID", fsaID);
         fsaData = {}; // instead of an error, it will say 'undefined' in the popup
@@ -462,8 +400,11 @@ class Leafletmap extends React.Component {
     return location ? (
       <div>
         <div id="tabs" className="TabSelectors btn_group">
-          <PrimaryButton onClick={(e) => this.setTab("conf", 3)}>
-            {t("cul_button")}
+          <PrimaryButton
+            className="active"
+            onClick={(e) => this.setTab("both", 0)}
+          >
+            {t("pot_vul_button")}
           </PrimaryButton>
           <PrimaryButton onClick={(e) => this.setTab("pot", 1)}>
             {t("pot_button")}
@@ -471,14 +412,11 @@ class Leafletmap extends React.Component {
           <PrimaryButton onClick={(e) => this.setTab("vuln", 2)}>
             {t("vul_button")}
           </PrimaryButton>
-          <PrimaryButton
-            className="active"
-            onClick={(e) => this.setTab("both", 0)}
-          >
-            {t("pot_vul_button")}
+          <PrimaryButton onClick={(e) => this.setTab("conf", 3)}>
+            {t("cul_button")}
           </PrimaryButton>
         </div>
-        <div className="PageTitle body"> {title} </div>
+        <div className="mapTitle"> {title} </div>
         <div style={{ height: this.state.height }}>
           <Map
             maxBounds={bounds}
@@ -492,8 +430,8 @@ class Leafletmap extends React.Component {
               minZoom={initZoom}
             />
             {this.renderMap(
-              this.state.formData,
-              this.state.confirmedCases,
+              this.props.formData,
+              this.props.confirmedCases,
               bindPopups,
               this.state.tab,
               pointToLayer,

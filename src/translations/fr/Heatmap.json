@@ -5,6 +5,8 @@
   "p3": "<0>Cas potentiels :</0> Cet onglet illustre tous les cas potentiels de COVID-19 au Canada, selon les données enregistrées dans le formulaire de Flatten.",
   "p4": "<0>Personnes vulnérables :</0> Cet onglet illustre toutes les personnes qui sont particulièrement vulnérables à la COVID-19 au Canada, selon les données enregistrées dans le formulaire de Flatten.",
   "p5": "Afin d’éviter les trolls, nous utilisons des cookies, recaptcha et nous retraçons les adresses IP suspectes.",
+  "p9": "Réponse totales:",
+  "p10": "Dernière mise à jour:",
   "maplink": "https://flatten-271620.web.app/?lang=fr",
   "error": "Désolé, la carte n'a pas été chargée."
 }
