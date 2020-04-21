@@ -26,10 +26,10 @@ const Info = ({ t }) => {
 
   return (
     <div id="info">
-      <h4 className="title info__title">
-        {t("header")}
-        <p className="body info__description">{t("body")}</p>
-      </h4>
+      <div className="info__headercontainer">
+        <h4 className="title info__title">{t("header")}</h4>
+        <div className="body info__description">{t("body")}</div>
+      </div>
       {component}
     </div>
   );
