@@ -9,6 +9,8 @@ import LocateControl from "./LocateControl";
 import L from "leaflet";
 import i18next from "i18next";
 import { connect } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 // checks language
 const i18nlang = i18next.language;
