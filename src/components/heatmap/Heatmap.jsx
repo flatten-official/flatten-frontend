@@ -2,7 +2,6 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 import i18next from "i18next";
 import Leafletmap from "./Leafletmap";
-import { connect } from "react-redux";
 
 const i18nlang = i18next.language;
 const URLS = {
