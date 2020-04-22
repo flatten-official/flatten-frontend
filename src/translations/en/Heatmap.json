@@ -1,10 +1,15 @@
 {
-  "header": "View Virus Data",
-  "p1": "Welcome to our interactive heat map! To view information about your region, click on your municipality or postal code region.",
+  "header": "Track The Spread",
+  "p1": "Welcome to our interactive map tracking COVID-19 cases across Canada in real-time. To see how your region is doing, zoom in or let Flatten access your current location.",
   "p2": "<0>High-risk Potential Cases:</0> This tab displays all individuals that are especially vulnerable to COVID-19 in Canada that are also deemed potential cases, based on data inputted into Flatten's form.",
   "p3": "<0>Potential Cases:</0> This tab displays all of the potential cases of COVID-19 in Canada, based on data inputted into Flatten's form.",
   "p4": "<0>Vulnerable Individuals: </0> This tab displays all individuals that are especially vulnerable to COVID-19 in Canada, based on data inputted into Flatten's form.",
   "p5": "In order to ensure non-trolling we use cookies, recaptcha and track suspicious IP addresses.",
+  "p6": "COVID-19 in Canada",
+  "p7": "Real Time Update",
+  "p8": "Results are based on preliminary models and evolving data and should not be considered final. As testing and development continues, our findings should be interpreted with caution. This map identifies the status of individuals reporting on FLATTEN.ORG in a given region and does not determine safe or at-risk areas.",
+  "p9": "Total Responses",
+  "p10": "Last Update",
   "maplink": "https://flatten-271620.web.app/?lang=en",
   "error": "Sorry, the heat-map did not load."
 }

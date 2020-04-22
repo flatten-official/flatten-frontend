@@ -1,13 +1,13 @@
 .primary-button {
   width: 100%;
   border-radius: 16px;
-  border: solid 2px $navy-blue;
-  background-color: $navy-blue;
+  border: solid 0px;
+  background-color: $accent;
   color: $white-main;
 
   &:hover {
-    background-color: $white-main;
-    color: $navy-blue;
+    background-color: $background-grey;
+    color: $accent;
     transition: 0.3s;
     cursor: pointer;
   }
