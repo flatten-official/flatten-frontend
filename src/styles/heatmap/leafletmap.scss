@@ -6,8 +6,8 @@
 .popupCustom .leaflet-popup-tip,
 .popupCustom .leaflet-popup-content-wrapper {
   font-family: "DM Sans", sans-serif;
-  background: #f5f3f2;
-  color: #000000;
+  background: $background-grey;
+  color: $black-main;
 }
 
 .mapTitle {
