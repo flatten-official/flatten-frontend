@@ -10,27 +10,8 @@
   color: #000000;
 }
 
-.legend {
-  font-family: "DM Sans", sans-serif;
-  font-size: calc(12px + 0.3vw);
-  line-height: 18px;
-  opacity: 1;
-}
-.legend i {
-  width: 18px;
-  height: 18px;
-  float: left;
-  margin-right: 8px;
-}
-
 .mapTitle {
   color: transparent;
-}
-
-@media screen and (min-width: 1600px) {
-  .legend {
-    font-size: 18px;
-  }
 }
 
 .leaflet-control-container
