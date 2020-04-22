@@ -60,8 +60,20 @@
     font-size: medium;
     margin-right: 6%;
     min-height: 40px;
-    border-radius: 0px 0px 8px 8px;
+    border: solid 0px;
     background-color: $background-grey;
+    color: $darkgrey-text;
+  }
+  button:hover {
+    background-color: $background-grey;
+    color: $accent;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  button:focus {
+    outline: none;
+    color: $black-main;
   }
   button:last-child {
     margin-right: 0%;

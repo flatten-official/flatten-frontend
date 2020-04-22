@@ -1,9 +1,9 @@
 .primary-button {
   width: 100%;
   border-radius: 16px;
-  border: solid 0px;
-  background-color: $background-grey;
-  color: $darkgrey-text;
+  border: solid 2px $accent;
+  background-color: $accent;
+  color: $white-main;
 
   &:hover {
     background-color: $background-grey;
