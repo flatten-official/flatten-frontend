@@ -23,9 +23,16 @@ const USA_BOUNDS = [
   [15, -180],
   [77, -60],
 ];
+
+const SOMALIA_BOUNDS = [
+  [-1.68325, 40.98105],
+  [12.02464, 51.13387],
+];
+
 // starts you in ontario
 const ONTARIO = [56.1304, -106.3468];
 const USA_CENTER = [37.0902, -95.7129];
+const SOMALIA_CENTER = [5.1521, 46.1996];
 
 // white, yellow, orange, brown, red, black
 const colourScheme = ["#FAE0A6", "#FABD05", "#FF7800", "#EB4236", "#C70505"];
