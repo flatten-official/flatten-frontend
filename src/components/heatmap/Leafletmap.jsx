@@ -4,6 +4,7 @@ import PrimaryButton from "../common/buttons/PrimaryButton";
 import { Map, TileLayer, GeoJSON } from "react-leaflet";
 import convertedBoundaries from "./converted_boundaries.js";
 import counties from "./county_boundaries.js";
+import somalia from "./somalia_boundaries.js";
 import Legend from "./Legend";
 import LocateControl from "./LocateControl";
 import L from "leaflet";
