@@ -4,8 +4,14 @@ import * as d3 from "d3";
 import utils from "./vis_utils.js";
 
 let config = {
-  height: 180,
+  height: window.innerHeight / 4,
   margin: { top: 20, right: 60, bottom: 30, left: 40 },
+};
+
+let palette = {
+  confirmed_cases: "#E33E33",
+  deaths: "#000805",
+  recovered: "#97B85D",
 };
 
 function genData(raw, province, timeSeriesProperty = "Time Series (Daily)") {
@@ -45,14 +51,15 @@ let drawCasesChart = (t, name, container_selector) => {
 
     let x_band = d3
       .scaleBand()
+      .paddingInner(0.1)
       .range([config.margin.left, width - config.margin.right]);
 
     let y = d3
       .scaleLinear()
       .range([config.height - config.margin.bottom, config.margin.top]);
 
-    let xAxis = d3.axisBottom().scale(x);
-    let yAxis = d3.axisRight().scale(y);
+    let xAxis = d3.axisBottom().scale(x).ticks(3);
+    let yAxis = d3.axisRight().scale(y).ticks(4);
     svg
       .append("g")
       .attr("id", `${name}-xaxis`)
@@ -88,11 +95,32 @@ let drawCasesChart = (t, name, container_selector) => {
       return bar;
     }
 
-    let barsConfirmed = genBars().attr("fill", "#E33E33");
+    var textConfirmed = svg
+      .append("text")
+      .attr("class", `${name}-text`)
+      .attr("x", config.margin.left)
+      .attr("y", config.height * 0.6)
+      .attr("fill", palette.confirmed_cases);
 
-    let barsDeaths = genBars().attr("fill", "#000805");
+    var textDeaths = svg
+      .append("text")
+      .attr("class", `${name}-text`)
+      .attr("x", config.margin.left)
+      .attr("y", config.height * 0.425)
+      .attr("fill", palette.deaths);
 
-    let barsRecovered = genBars().attr("fill", "#97B85D");
+    var textRecovered = svg
+      .append("text")
+      .attr("class", `${name}-text`)
+      .attr("x", config.margin.left)
+      .attr("y", config.height * 0.25)
+      .attr("fill", palette.recovered);
+
+    let barsConfirmed = genBars().attr("fill", palette.confirmed_cases);
+
+    let barsDeaths = genBars().attr("fill", palette.deaths);
+
+    let barsRecovered = genBars().attr("fill", palette.recovered);
 
     function update(selectedGroup) {
       let data = genData(raw, selectedGroup);
@@ -113,7 +141,11 @@ let drawCasesChart = (t, name, container_selector) => {
       y.domain(y_extent);
       svg.selectAll(`#${name}-yaxis`).transition(t).call(yAxis);
 
-      // create the bars
+      let latest = data[data.length - 1];
+      textConfirmed.text(`${latest.total.confirmed_cases} Confirmed Cases`);
+      textDeaths.text(`${latest.total.deaths} Deaths`);
+      textRecovered.text(`${latest.total.recovered} People Recovered`);
+
       barsConfirmed
         .data(data, (d) => d.date.toDateString())
         .call((bar) => bar.transition(t).call(updateBars("confirmed_cases")));
@@ -174,7 +206,11 @@ function Visualization({ t }) {
   return (
     <div className="visualization">
       <div>
-        <select id="viz-select" selected></select>
+        <div id="viz-select-container">
+          In &nbsp;
+          <select id="viz-select" selected></select>
+          &nbsp; there are...
+        </div>
       </div>
       <div id="cases-chart" className="chart" />
       {/*<div id="cases-chart2" className="chart" />*/}

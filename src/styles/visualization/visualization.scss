@@ -3,3 +3,13 @@
   .chart {
   }
 }
+
+.confirmed-cases-chart-text {
+  font-family: "Source Code Pro", Consolas, Monaco, monospace;
+}
+
+@media only screen and (max-width: 768px) {
+  .confirmed-cases-chart-text {
+    font-size: 10px;
+  }
+}
