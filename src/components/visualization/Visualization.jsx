@@ -65,22 +65,34 @@ let drawCasesChart = (t, name, container_selector) => {
       .attr("id", `${name}-yaxis`)
       .attr("transform", `translate(${width - config.margin.right},0)`);
 
-    function addBars(rect) {
-      rect
-        .attr("x", (d) => x(d.date) - x_band.bandwidth())
-        .attr("y", (d) => y(d.total.confirmed_cases))
-        .attr("width", x_band.bandwidth())
-        .attr("height", (d) => y(0) - y(d.total.confirmed_cases));
+    function updateBars(field, vertical_offset = (d) => 0) {
+      // need to return a function here to allow this to be called
+      // with the rect as the argument
+      return (rect) => {
+        rect
+          .attr("x", (d) => x(d.date) - x_band.bandwidth())
+          .attr("y", (d) => y(d.total[field]) - vertical_offset(d))
+          .attr("width", x_band.bandwidth())
+          .attr("height", (d) => y(0) - y(d.total[field]));
+      };
     }
 
     let data = genData(raw, "ONTARIO");
-    let bars = svg
-      .append("g")
-      .attr("fill", "steelblue")
-      .selectAll("rect")
-      .data(data, (d) => d.date.toDateString())
-      .join("rect")
-      .call(addBars);
+
+    function genBars() {
+      let bar = svg
+        .append("g")
+        .selectAll("rect")
+        .data(data, (d) => d.date.toDateString())
+        .join("rect");
+      return bar;
+    }
+
+    let barsConfirmed = genBars().attr("fill", "#E33E33");
+
+    let barsDeaths = genBars().attr("fill", "#000805");
+
+    let barsRecovered = genBars().attr("fill", "#97B85D");
 
     function update(selectedGroup) {
       let data = genData(raw, selectedGroup);
@@ -93,17 +105,41 @@ let drawCasesChart = (t, name, container_selector) => {
 
       svg.selectAll(`#${name}-xaxis`).transition(t).call(xAxis);
 
-      let y_extent = d3.extent(data, (d) =>
-        Math.max(d.total.deaths, d.total.confirmed_cases)
+      let y_extent = d3.extent(
+        data,
+        (d) => d.total.deaths + d.total.confirmed_cases + d.total.recovered
       );
       y_extent = [0, y_extent[1] > 10 ? y_extent[1] : 10];
       y.domain(y_extent);
       svg.selectAll(`#${name}-yaxis`).transition(t).call(yAxis);
 
       // create the bars
-      bars
+      barsConfirmed
         .data(data, (d) => d.date.toDateString())
-        .call((bar) => bar.transition(t).call(addBars));
+        .call((bar) => bar.transition(t).call(updateBars("confirmed_cases")));
+
+      barsDeaths
+        .data(data, (d) => d.date.toDateString())
+        .call((bar) =>
+          bar
+            .transition(t)
+            .call(
+              updateBars("deaths", (d) => y(0) - y(d.total.confirmed_cases))
+            )
+        );
+
+      barsRecovered
+        .data(data, (d) => d.date.toDateString())
+        .call((bar) =>
+          bar
+            .transition(t)
+            .call(
+              updateBars(
+                "recovered",
+                (d) => y(0) - y(d.total.confirmed_cases + d.total.deaths)
+              )
+            )
+        );
     }
     let defaultProvince = "ONTARIO";
 
