@@ -3,43 +3,18 @@ import { withTranslation } from "react-i18next";
 import * as d3 from "d3";
 import utils from "./vis_utils.js";
 
-let config = {
-  height: window.innerHeight / 4,
-  margin: { top: 20, right: 60, bottom: 30, left: 40 },
-};
-
 let palette = {
   confirmed_cases: "#E33E33",
   deaths: "#000805",
   recovered: "#97B85D",
 };
 
-function genData(raw, province, timeSeriesProperty = "Time Series (Daily)") {
-  let timeSeries = raw[province][timeSeriesProperty];
-  let dates = Object.keys(timeSeries);
-  let provinces = Object.keys(raw);
-  return dates.map((date) => ({
-    date: new Date(date),
-    total: {
-      deaths: timeSeries[date]["Total Deaths"],
-      tested: timeSeries[date]["Total Tested"],
-      confirmed_cases: timeSeries[date]["Total Cases"],
-      recovered: timeSeries[date]["Total Recovered"],
-    },
-  }));
-}
 
-// d3 example
-let drawCasesChart = (t, name, container_selector) => {
+
+let drawCasesChart = (t, name, container_selector, config) => {
   let width = document.querySelector(container_selector).offsetWidth;
 
-  let svg = d3
-    .select(container_selector)
-    .append("svg")
-    .attr("viewBox", [0, 0, width, config.height])
-    .attr("width", width)
-    .attr("height", config.height)
-    .call(utils.responsivefy);
+  let svg = utils.getSvg(container_selector, [width, config.height]);
 
   let url =
     "https://storage.googleapis.com/flatten-staging-271921.appspot.com/confirmed_time_series.json";
@@ -84,7 +59,7 @@ let drawCasesChart = (t, name, container_selector) => {
       };
     }
 
-    let data = genData(raw, "ONTARIO");
+    let data = utils.genConfirmedData(raw, "ONTARIO");
 
     function genBars() {
       let bar = svg
@@ -123,7 +98,7 @@ let drawCasesChart = (t, name, container_selector) => {
     let barsRecovered = genBars().attr("fill", palette.recovered);
 
     function update(selectedGroup) {
-      let data = genData(raw, selectedGroup);
+      let data = utils.genConfirmedData(raw, selectedGroup);
 
       let t = d3.transition().duration(300).ease(d3.easeLinear);
 
@@ -200,8 +175,10 @@ let drawCasesChart = (t, name, container_selector) => {
 
 function Visualization({ t }) {
   useEffect(() => {
-    drawCasesChart(t, "confirmed-cases-chart", "#cases-chart");
-    // drawCasesChart(t, "other-cases-chart", "#cases-chart2");
+    drawCasesChart(t, "confirmed-cases-chart", "#cases-chart", {
+      height: window.innerHeight / 4,
+      margin: { top: 20, right: 60, bottom: 30, left: 40 },
+    });
   }, []);
   return (
     <div className="visualization">
