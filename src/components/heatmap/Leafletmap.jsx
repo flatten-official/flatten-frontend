@@ -252,6 +252,10 @@ class Leafletmap extends React.Component {
 
   render() {
     const { t } = this.props;
+
+    if (!this.props.data.form || !this.props.data.confirmed)
+      return <p>t("loading")</p>;
+
     const title = "title";
     let view;
 
@@ -279,10 +283,10 @@ class Leafletmap extends React.Component {
 
       if (i18nlang === "enUS") {
         regionID = feature.properties.COUNTYNS;
-        regionData = this.props.formData.county[regionID];
+        regionData = this.props.data.form.county[regionID];
       } else {
         regionID = feature.properties.name;
-        regionData = this.props.formData.region[regionID];
+        regionData = this.props.data.form.region[regionID];
         somaliaMultiplier = 25;
       }
 
@@ -375,7 +379,7 @@ class Leafletmap extends React.Component {
     // use the FSA polygon FSA ID to get the FSA data from `formData`
     const bindPopupOnEachFeature = (feature, layer) => {
       const fsaID = feature.properties.CFSAUID;
-      let fsaData = this.props.formData.fsa[fsaID];
+      let fsaData = this.props.data.form.fsa[fsaID];
       if (!fsaData) {
         console.log("no data for fsa ID", fsaID);
         fsaData = {}; // instead of an error, it will say 'undefined' in the popup
@@ -429,11 +433,11 @@ class Leafletmap extends React.Component {
         } else {
           somaliaMultiplier = 0.025;
           if (this.state.tab === "pot") {
-            cases = this.props.formData[feature.properties.NAME].pot;
+            cases = this.props.data.form[feature.properties.NAME].pot;
           } else if (this.state.tab === "vuln") {
-            cases = this.props.formData[feature.properties.NAME].risk;
+            cases = this.props.data.form[feature.properties.NAME].risk;
           } else if (this.state.tab === "both") {
-            cases = this.props.formData[feature.properties.NAME].both;
+            cases = this.props.data.form[feature.properties.NAME].both;
           }
         }
 
@@ -499,8 +503,8 @@ class Leafletmap extends React.Component {
               minZoom={view.zoom}
             />
             {this.renderMap(
-              this.props.formData,
-              this.props.confirmedCases,
+              this.props.data.form,
+              this.props.data.confirmed,
               bindPopups,
               this.state.tab,
               pointToLayer,

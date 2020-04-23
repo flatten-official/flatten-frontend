@@ -48,9 +48,7 @@ const HeatMap = ({ t, data, loadData }) => {
         </div>
       </div>
       <div className="heatmap__container">
-        {data.form && data.confirmed && (
-          <Leafletmap formData={data.form} confirmedCases={data.confirmed} />
-        )}
+        <Leafletmap data={data} />
       </div>
 
       <div className="heatmap__header">
