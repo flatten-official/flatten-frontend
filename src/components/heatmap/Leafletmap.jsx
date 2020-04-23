@@ -4,7 +4,7 @@ import PrimaryButton from "../common/buttons/PrimaryButton";
 import { Map, TileLayer, GeoJSON } from "react-leaflet";
 import convertedBoundaries from "./converted_boundaries.js";
 import counties from "./county_boundaries.js";
-import somalia from "./somalia_boundaries.js";
+import monga from "./mongadishu_coords.js";
 import Legend from "./Legend";
 import LocateControl from "./LocateControl";
 import L from "leaflet";
@@ -32,7 +32,7 @@ const SOMALIA_BOUNDS = [
 // starts you in ontario
 const ONTARIO = [56.1304, -106.3468];
 const USA_CENTER = [37.0902, -95.7129];
-const SOMALIA_CENTER = [5.1521, 46.1996];
+const MONGA_CENTER = [2.0469, 45.3182];
 
 // white, yellow, orange, brown, red, black
 const colourScheme = ["#FAE0A6", "#FABD05", "#FF7800", "#EB4236", "#C70505"];
@@ -180,25 +180,27 @@ class Leafletmap extends React.Component {
     ) {
       if (i18nlang === "enUS") {
         data = counties;
+      } else if (i18nlang === "so") {
+        data = monga;
       } else {
         data = convertedBoundaries;
       }
 
-      if (tab === "pot") {
+      if (tab === "pot" && i18nlang !== "so") {
         styleFunc = createStyleFunction(
           formData,
           colourScheme,
           POT_SCHEME_THRESHOLDS,
           "pot"
         );
-      } else if (tab === "vuln") {
+      } else if (tab === "vuln" && i18nlang !== "so") {
         styleFunc = createStyleFunction(
           formData,
           colourScheme,
           HIGH_RISK_SCHEME_THRESHOLDS,
           "risk"
         );
-      } else if (tab === "both") {
+      } else if (tab === "both" && i18nlang !== "so") {
         styleFunc = createStyleFunction(
           formData,
           colourScheme,
@@ -206,15 +208,17 @@ class Leafletmap extends React.Component {
           "both"
         );
       }
-    } else if (tab === "conf") {
-      data = confirmedCases;
-      styleFunc = createStyleFunction(
-        formData,
-        colourScheme,
-        CONF_SCHEME_THRESHOLDS,
-        "conf"
-      );
-      if (i18nlang === "enUS") {
+    } else if (tab === "conf" || i18nlang === "so") {
+      if (i18nlang !== "so") {
+        data = confirmedCases;
+        styleFunc = createStyleFunction(
+          formData,
+          colourScheme,
+          CONF_SCHEME_THRESHOLDS,
+          "conf"
+        );
+      }
+      if (i18nlang === "enUS" || i18nlang === "so") {
         return (
           <GeoJSON
             data={data}
@@ -242,67 +246,105 @@ class Leafletmap extends React.Component {
   render() {
     const { t } = this.props;
     const title = "title";
-    const bounds = i18nlang === "enUS" ? USA_BOUNDS : CANADA_BOUNDS;
-    const center = i18nlang === "enUS" ? USA_CENTER : ONTARIO;
-    const initZoom = i18nlang === "enUS" ? 3 : 4;
+    const bounds =
+      i18nlang === "enUS"
+        ? USA_BOUNDS
+        : i18nlang === "so"
+        ? SOMALIA_BOUNDS
+        : CANADA_BOUNDS;
+    const center =
+      i18nlang === "enUS"
+        ? USA_CENTER
+        : i18nlang === "so"
+        ? MONGA_CENTER
+        : ONTARIO;
+    const initZoom = i18nlang === "enUS" ? 3 : i18nlang === "so" ? 8 : 4;
 
     const styleOptions = {
       className: "popupCustom",
     };
 
     // needs more info for potential cases by county
-    const bindPopupOnEachFeatureUSA = (feature, layer) => {
+    const bindPopupOnEachFeatureINT = (feature, layer) => {
       let content;
-      const countyID = feature.properties.COUNTYNS;
-      const countyData = this.props.formData.county[countyID];
-      let countyReports;
-      try {
-        countyReports = countyData.number_reports;
-      } catch {
-        countyReports = 0;
+      let regionID = "";
+      let regionData;
+      let somaliaMultiplier = 1;
+
+      if (i18nlang === "enUS") {
+        regionID = feature.properties.COUNTYNS;
+        regionData = this.props.formData.county[regionID];
+      } else {
+        regionID = feature.properties.name;
+        regionData = this.props.formData.region[regionID];
+        somaliaMultiplier = 25;
       }
 
-      if (countyData) {
-        if (countyReports < 25) {
+      let regionReports;
+      try {
+        regionReports = regionData.number_reports;
+      } catch {
+        regionReports = 0;
+      }
+
+      if (regionData) {
+        if (regionReports < 25 / somaliaMultiplier) {
           content =
             "<h3>" +
             feature.properties.NAME +
             " County</h3>" +
             "We don't have enough data for this region";
         } else {
-          content = "<h3>" + feature.properties.NAME + " County</h3>";
+          content = "<h3>" + feature.properties.NAME;
+
+          if (i18nlang === "enUS") {
+            content += " County</h3>";
+          } else {
+            content += "</h3>";
+          }
+
           if (this.state.tab === "vuln") {
             content +=
               "<h3>" +
-              countyData.risk +
+              regionData.risk +
               " vulnerable individuals" +
-              countyData.number_reports +
+              regionData.number_reports +
               " reports in total</h3>";
           } else if (this.state.tab === "both") {
             content +=
               "<h3>" +
-              countyData.both +
+              regionData.both +
               " vulnerable individuals who are also potential cases" +
-              countyData.number_reports +
+              regionData.number_reports +
               " reports in total</h3>";
           } else if (this.state.tab === "pot") {
             content +=
               "<h3>" +
-              countyData.pot +
+              regionData.pot +
               " potential cases" +
-              countyData.number_reports +
+              regionData.number_reports +
               " reports in total</h3>";
           }
         }
       } else {
         if (this.state.tab === "conf") {
-          content =
-            "<h3>" +
-            feature.properties.Combined_Key +
-            "</h3>" +
-            "<p>Confirmed Cases: " +
-            feature.properties.Confirmed +
-            "</p>";
+          if (i18nlang === "enUS") {
+            content =
+              "<h3>" +
+              feature.properties.Combined_Key +
+              "</h3>" +
+              "<p>Confirmed Cases: " +
+              feature.properties.Confirmed +
+              "</p>";
+          } else {
+            content =
+              "<h3>" +
+              feature.properties.COUNTRY +
+              "</h3>" +
+              "<p>Confirmed Cases: " +
+              feature.properties.CONFIRMED +
+              "</p>";
+          }
         } else {
           content =
             "<h3>" +
@@ -370,23 +412,27 @@ class Leafletmap extends React.Component {
     let pointToLayer;
     let bindPopups = bindPopupOnEachFeature;
 
-    if (i18nlang === "enUS") {
-      bindPopups = bindPopupOnEachFeatureUSA;
+    if (i18nlang === "enUS" || i18nlang === "so") {
+      bindPopups = bindPopupOnEachFeatureINT;
       pointToLayer = (feature, latlng) => {
         let radius = MIN_CIRCLE_RADIUS;
         const cases = feature.properties.Confirmed;
+        let somaliaMultiplier = 1;
+        if (i18nlang === "so") {
+          somaliaMultiplier = 0.025;
+        }
 
-        if (cases > 10000) {
+        if (cases > 10000 * somaliaMultiplier) {
           radius = MAX_CIRCLE_RAD;
-        } else if (cases > 5000) {
+        } else if (cases > 5000 * somaliaMultiplier) {
           radius = MAX_CIRCLE_RAD * (4 / 5);
-        } else if (cases > 2500) {
+        } else if (cases > 2500 * somaliaMultiplier) {
           radius = MAX_CIRCLE_RAD * (3 / 5);
-        } else if (cases > 1000) {
+        } else if (cases > 1000 * somaliaMultiplier) {
           radius = MAX_CIRCLE_RAD / 2;
-        } else if (cases > 500) {
+        } else if (cases > 500 * somaliaMultiplier) {
           radius = MAX_CIRCLE_RAD * (2 / 5);
-        } else if (cases > 100) {
+        } else if (cases > 100 * somaliaMultiplier) {
           radius = MAX_CIRCLE_RAD / 5;
         }
 
