@@ -73,6 +73,10 @@ const Navbar = ({ t, getGeolocation }) => {
       </Link>
     );
 
+    if (value === "so") {
+      heatmapLink = null;
+    }
+
     navbar = (
       <Link
         activeClass="active"
@@ -113,6 +117,10 @@ const Navbar = ({ t, getGeolocation }) => {
       </a>
     );
 
+    if (value === "so") {
+      heatmapLink = null;
+    }
+
     navbar = (
       <a href="/">
         <div className="nav__logo">
@@ -143,6 +151,7 @@ const Navbar = ({ t, getGeolocation }) => {
           <option value="en">en-ca</option>
           <option value="enUS">en-us</option>
           <option value="fr">fr</option>
+          <option value="so">so</option>
         </select>
       </div>
     </nav>
