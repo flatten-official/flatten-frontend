@@ -4,12 +4,10 @@ import * as d3 from "d3";
 import utils from "./vis_utils.js";
 
 let palette = {
-  confirmed_cases: "#E33E33",
-  deaths: "#000805",
-  recovered: "#97B85D",
+  confirmed_cases: "#EB3246",
+  deaths: "#000000",
+  recovered: "#4285F4",
 };
-
-
 
 let drawCasesChart = (t, name, container_selector, config) => {
   let width = document.querySelector(container_selector).offsetWidth;
@@ -103,7 +101,13 @@ let drawCasesChart = (t, name, container_selector, config) => {
       let t = d3.transition().duration(300).ease(d3.easeLinear);
 
       let dates = data.map((d) => d.date);
-      x.domain(d3.extent(dates));
+      let latestDate = d3.max(dates);
+      let earliestDate = latestDate - 1000 * 60 * 60 * 24 * 30 * 2; // 2 months
+
+      data = data.filter((d) => d.date > earliestDate);
+      dates = dates.filter((d) => d > earliestDate);
+
+      x.domain([earliestDate, latestDate]);
       x_band.domain(dates);
 
       svg.selectAll(`#${name}-xaxis`).transition(t).call(xAxis);
@@ -117,9 +121,9 @@ let drawCasesChart = (t, name, container_selector, config) => {
       svg.selectAll(`#${name}-yaxis`).transition(t).call(yAxis);
 
       let latest = data[data.length - 1];
-      textConfirmed.text(`${latest.total.confirmed_cases} Confirmed Cases`);
+      textConfirmed.text(`${latest.total.confirmed_cases} Cases`);
       textDeaths.text(`${latest.total.deaths} Deaths`);
-      textRecovered.text(`${latest.total.recovered} People Recovered`);
+      textRecovered.text(`${latest.total.recovered} Recovered`);
 
       barsConfirmed
         .data(data, (d) => d.date.toDateString())
