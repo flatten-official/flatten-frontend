@@ -45,11 +45,8 @@ class HeatMap extends React.Component {
   constructor(props) {
     super(props);
 
-    const urls = i18nlang === "enUS" ? URLS.usa : URLS.cad;
-
     this.state = {
-      formURL: urls.form,
-      confURL: urls.confirmed,
+      urls: i18nlang === "enUS" ? URLS.usa : URLS.cad,
       confirmedCases: null,
       formData: null,
       width: 0,
@@ -64,13 +61,13 @@ class HeatMap extends React.Component {
   }
 
   getFormData = async () => {
-    const response = await fetch(this.state.formURL);
+    const response = await fetch(this.state.urls.form);
     const formData = await response.json();
     this.setState({ formData });
   };
 
   getConfirmedCasesData = async () => {
-    const response = await fetch(this.state.confURL);
+    const response = await fetch(this.state.urls.confirmed);
     const confirmedCases = await response.json();
     this.setState({ confirmedCases });
   };
