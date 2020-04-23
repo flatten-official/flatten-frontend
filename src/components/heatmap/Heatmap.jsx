@@ -26,74 +26,58 @@ MapDataFooter.propTypes = {
   formData: PropTypes.object,
 };
 
-class HeatMap extends React.Component {
-  constructor(props) {
-    super(props);
+const HeatMap = ({ t, data, loadData }) => {
+  loadData();
 
-    this.state = {
-      width: 0,
-      height: 0,
-      ratio: 190,
-    };
+  if (!location) return null;
 
-    this.props.loadData();
-  }
-
-  render() {
-    const t = this.props.t;
-    const formData = this.props.data.form;
-    const confirmedData = this.props.data.confirmed;
-
-    if (!location) return null;
-
-    return (
-      <div className="heatmap" id="heatmap">
-        <div className="heatmap__header">
-          &nbsp; &nbsp;
-          <div className="heatmap__headercontainer">
-            <div className="heatmap__title">
-              <div className="title">{t("header")}</div>
-            </div>
-            <div className="heatmap__description body">
-              <p>
-                <b>{t("p1")}</b>
-                <br />
-              </p>
-            </div>
+  return (
+    <div className="heatmap" id="heatmap">
+      <div className="heatmap__header">
+        &nbsp; &nbsp;
+        <div className="heatmap__headercontainer">
+          <div className="heatmap__title">
+            <div className="title">{t("header")}</div>
           </div>
-        </div>
-        <div className="heatmap__container">
-          {formData && confirmedData && (
-            <Leafletmap formData={formData} confirmedCases={confirmedData} />
-          )}
-        </div>
-
-        <div className="heatmap__header">
-          <div className="heatmap__headercontainer">
-            <div className="heatmap__description body">
-              <p>
-                <b>{t("p6")}</b>
-                <br />
-                <b>{t("p7")}</b>
-              </p>
-            </div>
-
-            <MapDataFooter t={t} formData={formData} />
-
-            <div className="heatmap__minidescription body">
-              <p>
-                {t("p8")}
-                <br />
-                <br />
-                {t("p5")}
-              </p>
-            </div>
+          <div className="heatmap__description body">
+            <p>
+              <b>{t("p1")}</b>
+              <br />
+            </p>
           </div>
         </div>
       </div>
-    );
-  }
-}
+      <div className="heatmap__container">
+        {data.form && data.confirmed && (
+          <Leafletmap formData={data.form} confirmedCases={data.confirmed} />
+        )}
+      </div>
+
+      <div className="heatmap__header">
+        <div className="heatmap__headercontainer">
+          <div className="heatmap__description body">
+            <p>
+              <b>{t("p6")}</b>
+              <br />
+              <b>{t("p7")}</b>
+            </p>
+          </div>
+
+          <MapDataFooter t={t} formData={data.form} />
+
+          <div className="heatmap__minidescription body">
+            <p>
+              {t("p8")}
+              <br />
+              <br />
+              {t("p5")}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => ({ data: state.mapData });
 
