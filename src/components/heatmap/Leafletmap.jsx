@@ -134,7 +134,10 @@ class Leafletmap extends React.Component {
 
     this.state = {
       tab: "both",
+      formData: null,
+      confirmedCases: null,
     };
+    this.setTab = this.setTab.bind(this);
   }
 
   updateDimensions() {
@@ -156,7 +159,7 @@ class Leafletmap extends React.Component {
     window.removeEventListener("resize", this.updateDimensions.bind(this));
   }
 
-  setTab = (tabID, index) => {
+  setTab(tabID, index) {
     document
       .getElementById("tabs")
       .children[currTab].classList.remove("active");
@@ -164,13 +167,19 @@ class Leafletmap extends React.Component {
     currTab = index;
 
     this.setState({ tab: tabID });
-  };
+  }
 
   // default map renderer. it only renders circles if pointTolayer is defined
-  renderMap(data, bindPopupOnEachFeature, tab, pointToLayer, styleFuncCircles) {
+  renderMap(
+    formData,
+    confirmedCases,
+    bindPopupOnEachFeature,
+    tab,
+    pointToLayer,
+    styleFuncCircles
+  ) {
+    let data;
     let styleFunc;
-    const formData = data.form;
-    const confirmedCases = data.confirmed;
 
     if (
       formData !== null &&
@@ -367,7 +376,7 @@ class Leafletmap extends React.Component {
     // this function is called with each polygon when the GeoJSON polygons are rendered
     // just creates the popup content and binds a popup to each polygon
     // `feature` is the GeoJSON feature (the FSA polygon)
-    // use the FSA polygon FSA ID to get the FSA data from `data.form`
+    // use the FSA polygon FSA ID to get the FSA data from `formData`
     const bindPopupOnEachFeature = (feature, layer) => {
       const fsaID = feature.properties.CFSAUID;
       let fsaData = this.props.data.form.fsa[fsaID];
@@ -453,7 +462,7 @@ class Leafletmap extends React.Component {
     }
 
     //
-    // we wait until the data.form is not null before rendering the GeoJSON.
+    // we wait until the formData is not null before rendering the GeoJSON.
     // otherwise it will try to create a popup for every FSA but the data won't
     // be there yet.
     //
@@ -494,7 +503,8 @@ class Leafletmap extends React.Component {
               minZoom={view.zoom}
             />
             {this.renderMap(
-              this.props.data,
+              this.props.data.form,
+              this.props.data.confirmed,
               bindPopups,
               this.state.tab,
               pointToLayer,
