@@ -35,9 +35,7 @@ class HeatMap extends React.Component {
       height: 0,
       ratio: 190,
     };
-  }
 
-  componentDidMount() {
     this.props.loadData();
   }
 
