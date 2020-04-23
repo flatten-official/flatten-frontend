@@ -6,14 +6,18 @@ import PropTypes from "prop-types";
 
 const i18nlang = i18next.language;
 const URLS = {
-  cadForm:
-    "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
-  usaForm:
-    "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json",
-  cadConf:
-    "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson",
-  usaConf:
-    "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
+  cad: {
+    form:
+      "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
+    confirmed:
+      "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson",
+  },
+  usa: {
+    form:
+      "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json",
+    confirmed:
+      "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
+  },
 };
 
 const MapDataFooter = ({ t, formData }) => {
@@ -46,20 +50,11 @@ class HeatMap extends React.Component {
   constructor(props) {
     super(props);
 
-    let formUrl;
-    let confUrl;
-
-    if (i18nlang === "enUS") {
-      formUrl = URLS.usaForm;
-      confUrl = URLS.usaConf;
-    } else {
-      formUrl = URLS.cadForm;
-      confUrl = URLS.cadConf;
-    }
+    const urls = i18nlang === "enUS" ? URLS.usa : URLS.cad;
 
     this.state = {
-      formURL: formUrl,
-      confURL: confUrl,
+      formURL: urls.form,
+      confURL: urls.confirmed,
       confirmedCases: null,
       formData: null,
       width: 0,
