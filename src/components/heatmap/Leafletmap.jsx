@@ -129,16 +129,7 @@ function getColour(cases, colourScheme, colorThresholds) {
 }
 
 class Leafletmap extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      tab: "both",
-      formData: null,
-      confirmedCases: null,
-    };
-    this.setTab = this.setTab.bind(this);
-  }
+  state = { tab: "both" };
 
   updateDimensions() {
     const height = window.innerWidth >= 992 ? window.innerHeight - 200 : 500;
@@ -159,7 +150,7 @@ class Leafletmap extends React.Component {
     window.removeEventListener("resize", this.updateDimensions.bind(this));
   }
 
-  setTab(tabID, index) {
+  setTab = (tabID, index) => {
     document
       .getElementById("tabs")
       .children[currTab].classList.remove("active");
@@ -167,7 +158,7 @@ class Leafletmap extends React.Component {
     currTab = index;
 
     this.setState({ tab: tabID });
-  }
+  };
 
   // default map renderer. it only renders circles if pointTolayer is defined
   renderMap(
