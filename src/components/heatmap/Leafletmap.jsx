@@ -14,25 +14,32 @@ import { connect } from "react-redux";
 // checks language
 const i18nlang = i18next.language;
 
-// stays in Canada
-const CANADA_BOUNDS = [
-  [38, -150],
-  [87, -45],
-];
-const USA_BOUNDS = [
-  [15, -180],
-  [77, -60],
-];
-
-const SOMALIA_BOUNDS = [
-  [-1.68325, 40.98105],
-  [12.02464, 51.13387],
-];
-
-// starts you in ontario
-const ONTARIO = [56.1304, -106.3468];
-const USA_CENTER = [37.0902, -95.7129];
-const MONGA_CENTER = [2.0469, 45.3182];
+const VIEWS = {
+  canada: {
+    bounds: [
+      [38, -150],
+      [87, -45],
+    ],
+    zoom: 4,
+    start: [56.1304, -106.3468],
+  },
+  usa: {
+    bounds: [
+      [15, -180],
+      [77, -60],
+    ],
+    start: [37.0902, -95.7129],
+    zoom: 3,
+  },
+  somalia: {
+    bounds: [
+      [-1.68325, 40.98105],
+      [12.02464, 51.13387],
+    ],
+    start: [2.0469, 45.3182],
+    zoom: 8,
+  },
+};
 
 // white, yellow, orange, brown, red, black
 const colourScheme = ["#FAE0A6", "#FABD05", "#FF7800", "#EB4236", "#C70505"];
@@ -245,20 +252,23 @@ class Leafletmap extends React.Component {
 
   render() {
     const { t } = this.props;
+
+    if (!this.props.data.form || !this.props.data.confirmed)
+      return <p>{t("loading")}</p>;
+
     const title = "title";
-    const bounds =
-      i18nlang === "enUS"
-        ? USA_BOUNDS
-        : i18nlang === "so"
-        ? SOMALIA_BOUNDS
-        : CANADA_BOUNDS;
-    const center =
-      i18nlang === "enUS"
-        ? USA_CENTER
-        : i18nlang === "so"
-        ? MONGA_CENTER
-        : ONTARIO;
-    const initZoom = i18nlang === "enUS" ? 3 : i18nlang === "so" ? 8 : 4;
+    let view;
+
+    switch (i18nlang) {
+      case "enUS":
+        view = VIEWS.usa;
+        break;
+      case "so":
+        view = VIEWS.somalia;
+        break;
+      default:
+        view = VIEWS.canada;
+    }
 
     const styleOptions = {
       className: "popupCustom",
@@ -273,10 +283,10 @@ class Leafletmap extends React.Component {
 
       if (i18nlang === "enUS") {
         regionID = feature.properties.COUNTYNS;
-        regionData = this.props.formData.county[regionID];
+        regionData = this.props.data.form.county[regionID];
       } else {
         regionID = feature.properties.name;
-        regionData = this.props.formData.region[regionID];
+        regionData = this.props.data.form.region[regionID];
         somaliaMultiplier = 25;
       }
 
@@ -369,7 +379,7 @@ class Leafletmap extends React.Component {
     // use the FSA polygon FSA ID to get the FSA data from `formData`
     const bindPopupOnEachFeature = (feature, layer) => {
       const fsaID = feature.properties.CFSAUID;
-      let fsaData = this.props.formData.fsa[fsaID];
+      let fsaData = this.props.data.form.fsa[fsaID];
       if (!fsaData) {
         console.log("no data for fsa ID", fsaID);
         fsaData = {}; // instead of an error, it will say 'undefined' in the popup
@@ -385,7 +395,7 @@ class Leafletmap extends React.Component {
       } else {
         let XXX;
         const YYY = fsaData.number_reports;
-        let one = YYY === one;
+        const one = YYY === one;
 
         if (this.state.tab === "vuln") {
           XXX = fsaData.risk;
@@ -423,11 +433,11 @@ class Leafletmap extends React.Component {
         } else {
           somaliaMultiplier = 0.025;
           if (this.state.tab === "pot") {
-            cases = this.props.formData[feature.properties.NAME].pot;
+            cases = this.props.data.form[feature.properties.NAME].pot;
           } else if (this.state.tab === "vuln") {
-            cases = this.props.formData[feature.properties.NAME].risk;
+            cases = this.props.data.form[feature.properties.NAME].risk;
           } else if (this.state.tab === "both") {
-            cases = this.props.formData[feature.properties.NAME].both;
+            cases = this.props.data.form[feature.properties.NAME].both;
           }
         }
 
@@ -482,19 +492,19 @@ class Leafletmap extends React.Component {
         <div className="mapTitle"> {title} </div>
         <div style={{ height: this.state.height }}>
           <Map
-            maxBounds={bounds}
-            center={center}
-            zoom={initZoom}
+            maxBounds={view.bounds}
+            center={view.start}
+            zoom={view.zoom}
             style={{ height: this.state.height, zIndex: 0 }}
           >
             <TileLayer
               url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              minZoom={initZoom}
+              minZoom={view.zoom}
             />
             {this.renderMap(
-              this.props.formData,
-              this.props.confirmedCases,
+              this.props.data.form,
+              this.props.data.confirmed,
               bindPopups,
               this.state.tab,
               pointToLayer,

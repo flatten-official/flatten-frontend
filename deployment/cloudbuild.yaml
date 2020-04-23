@@ -1,3 +1,5 @@
+# GCloud build must define $_ENVIRONMENT to either "staging" or "prod"
+
 steps:
   - name: gcr.io/cloud-builders/gsutil
     args: ["cp", "src/apis/backend.$_ENVIRONMENT.js", "src/apis/backend.js"]
@@ -8,7 +10,10 @@ steps:
     entrypoint: "npm"
     args: ["run", "build"]
   - name: gcr.io/cloud-builders/gsutil
-    args: ["cp", "deployment/app.$_ENVIRONMENT.yaml", "app.yaml"] # Branch name to use map-staging app config
+    # $BRANCH_NAME is automatically defined by GCloud Build.
+    # https://cloud.google.com/cloud-build/docs/configuring-builds/substitute-variable-values
+    # We use $BRANCH_NAME instead of $_ENVIRONMENT because the app.yaml for staging and map-staging is different.
+    args: ["cp", "deployment/app.$BRANCH_NAME.yaml", "app.yaml"]
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy"]
 timeout: "1600s"
