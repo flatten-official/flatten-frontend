@@ -21,22 +21,17 @@ const URLS = {
 };
 
 const MapDataFooter = ({ t, formData }) => {
-  let date = "Loading...";
-  let totalResponses = "Loading...";
+  const getNumResponses = (formData) =>
+    formData.total_responses.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Adds commas to number
 
-  if (formData) {
-    date = new Date(1000 * formData.time).toString();
-    totalResponses = formData.total_responses.toString();
-    // Adds commas to number
-    totalResponses = totalResponses.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
+  const getDate = (formData) => new Date(1000 * formData.time).toString();
 
   return (
     <div className="heatmap__minidescription body">
       <b>{t("p9")}</b>
-      <p>{totalResponses}</p>
+      <p>{formData ? getNumResponses(formData) : "Loading..."}</p>
       <b>{t("p10")}</b>
-      <p>{date}</p>
+      <p>{formData ? getDate(formData) : "Loading..."}</p>
     </div>
   );
 };
@@ -97,7 +92,6 @@ class HeatMap extends React.Component {
               <p>
                 <b>{t("p1")}</b>
                 <br />
-                <br />
               </p>
             </div>
           </div>
@@ -121,7 +115,7 @@ class HeatMap extends React.Component {
               </p>
             </div>
 
-            <MapDataFooter t={t} formData={this.state.formData || null} />
+            <MapDataFooter t={t} formData={this.state.formData} />
 
             <div className="heatmap__minidescription body">
               <p>
