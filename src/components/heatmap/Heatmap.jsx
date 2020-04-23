@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import Leafletmap from "./Leafletmap";
 import PropTypes from "prop-types";
@@ -27,7 +27,7 @@ MapDataFooter.propTypes = {
 };
 
 const HeatMap = ({ t, data, loadData }) => {
-  loadData();
+  useEffect(() => loadData(), []); // [] to only run once
 
   if (!location) return null;
 
