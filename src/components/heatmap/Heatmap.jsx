@@ -1,24 +1,9 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
-import i18next from "i18next";
 import Leafletmap from "./Leafletmap";
 import PropTypes from "prop-types";
-
-const i18nlang = i18next.language;
-const URLS = {
-  cad: {
-    form:
-      "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
-    confirmed:
-      "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson",
-  },
-  usa: {
-    form:
-      "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json",
-    confirmed:
-      "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
-  },
-};
+import { getMapConfirmedData, getMapFormData } from "../../actions";
+import { connect } from "react-redux";
 
 const MapDataFooter = ({ t, formData }) => {
   const getNumResponses = (formData) =>
@@ -46,9 +31,6 @@ class HeatMap extends React.Component {
     super(props);
 
     this.state = {
-      urls: i18nlang === "enUS" ? URLS.usa : URLS.cad,
-      confirmedCases: null,
-      formData: null,
       width: 0,
       height: 0,
       ratio: 190,
@@ -56,24 +38,13 @@ class HeatMap extends React.Component {
   }
 
   componentDidMount() {
-    this.getFormData();
-    this.getConfirmedCasesData();
+    this.props.loadData();
   }
 
-  getFormData = async () => {
-    const response = await fetch(this.state.urls.form);
-    const formData = await response.json();
-    this.setState({ formData });
-  };
-
-  getConfirmedCasesData = async () => {
-    const response = await fetch(this.state.urls.confirmed);
-    const confirmedCases = await response.json();
-    this.setState({ confirmedCases });
-  };
-
   render() {
-    const { t } = this.props;
+    const t = this.props.t;
+    const formData = this.props.data.form;
+    const confirmedData = this.props.data.confirmed;
 
     if (!location) return null;
 
@@ -94,11 +65,8 @@ class HeatMap extends React.Component {
           </div>
         </div>
         <div className="heatmap__container">
-          {this.state.formData && this.state.confirmedCases && (
-            <Leafletmap
-              formData={this.state.formData}
-              confirmedCases={this.state.confirmedCases}
-            />
+          {formData && confirmedData && (
+            <Leafletmap formData={formData} confirmedCases={confirmedData} />
           )}
         </div>
 
@@ -112,7 +80,7 @@ class HeatMap extends React.Component {
               </p>
             </div>
 
-            <MapDataFooter t={t} formData={this.state.formData} />
+            <MapDataFooter t={t} formData={formData} />
 
             <div className="heatmap__minidescription body">
               <p>
@@ -129,4 +97,16 @@ class HeatMap extends React.Component {
   }
 }
 
-export default withTranslation("Heatmap")(HeatMap);
+const mapStateToProps = (state) => ({ data: state.mapData });
+
+// Passes loadData as a prop to HeatMap where load data calls both data loading functions
+const mapDispatchToProps = (dispatch) => ({
+  loadData: () => {
+    dispatch(getMapFormData());
+    dispatch(getMapConfirmedData());
+  },
+});
+
+const HeatMapConnected = connect(mapStateToProps, mapDispatchToProps)(HeatMap);
+
+export default withTranslation("Heatmap")(HeatMapConnected);
