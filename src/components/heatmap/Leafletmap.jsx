@@ -385,7 +385,7 @@ class Leafletmap extends React.Component {
       } else {
         let XXX;
         const YYY = fsaData.number_reports;
-        const one = YYY;
+        let one = YYY === one;
 
         if (this.state.tab === "vuln") {
           XXX = fsaData.risk;
@@ -416,10 +416,19 @@ class Leafletmap extends React.Component {
       bindPopups = bindPopupOnEachFeatureINT;
       pointToLayer = (feature, latlng) => {
         let radius = MIN_CIRCLE_RADIUS;
-        const cases = feature.properties.Confirmed;
+        let cases = feature.properties.Confirmed;
         let somaliaMultiplier = 1;
-        if (i18nlang === "so") {
+        if (i18nlang === "enUS") {
+          cases = feature.properties.Confirmed;
+        } else {
           somaliaMultiplier = 0.025;
+          if (this.state.tab === "pot") {
+            cases = this.props.formData[feature.properties.NAME].pot;
+          } else if (this.state.tab === "vuln") {
+            cases = this.props.formData[feature.properties.NAME].risk;
+          } else if (this.state.tab === "both") {
+            cases = this.props.formData[feature.properties.NAME].both;
+          }
         }
 
         if (cases > 10000 * somaliaMultiplier) {
