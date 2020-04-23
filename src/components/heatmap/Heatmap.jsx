@@ -61,8 +61,6 @@ class HeatMap extends React.Component {
       height: 0,
       ratio: 190,
     };
-    this.getFormData = this.getFormData.bind(this);
-    this.getConfirmedCasesData = this.getConfirmedCasesData.bind(this);
   }
 
   componentDidMount() {
@@ -70,17 +68,17 @@ class HeatMap extends React.Component {
     this.getConfirmedCasesData();
   }
 
-  async getFormData() {
+  getFormData = async () => {
     const response = await fetch(this.state.formURL);
     const formData = await response.json();
     this.setState({ formData });
-  }
+  };
 
-  async getConfirmedCasesData() {
+  getConfirmedCasesData = async () => {
     const response = await fetch(this.state.confURL);
     const confirmedCases = await response.json();
     this.setState({ confirmedCases });
-  }
+  };
 
   render() {
     const { t } = this.props;
