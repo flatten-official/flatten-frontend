@@ -254,7 +254,7 @@ class Leafletmap extends React.Component {
     const { t } = this.props;
 
     if (!this.props.data.form || !this.props.data.confirmed)
-      return <p>t("loading")</p>;
+      return <p>{t("loading")}</p>;
 
     const title = "title";
     let view;
