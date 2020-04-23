@@ -14,31 +14,39 @@ import { connect } from "react-redux";
 // checks language
 const i18nlang = i18next.language;
 
-const VIEWS = {
-  canada: {
-    bounds: [
-      [38, -150],
-      [87, -45],
-    ],
-    zoom: 4,
-    start: [56.1304, -106.3468],
-  },
-  usa: {
-    bounds: [
-      [15, -180],
-      [77, -60],
-    ],
-    start: [37.0902, -95.7129],
-    zoom: 3,
-  },
-  somalia: {
-    bounds: [
-      [-1.68325, 40.98105],
-      [12.02464, 51.13387],
-    ],
-    start: [2.0469, 45.3182],
-    zoom: 8,
-  },
+const BOTH_TAB = "both";
+const VULN_TAB = "vuln";
+const POT_TAB = "pot";
+const CONFIRMED_TAB = "conf";
+
+const SOMALIA = "so";
+const USA = "enUS";
+const CANADA = "en";
+
+const VIEWS = {};
+VIEWS[CANADA] = {
+  bounds: [
+    [38, -150],
+    [87, -45],
+  ],
+  zoom: 4,
+  start: [56.1304, -106.3468],
+};
+VIEWS[USA] = {
+  bounds: [
+    [15, -180],
+    [77, -60],
+  ],
+  start: [37.0902, -95.7129],
+  zoom: 3,
+};
+VIEWS[SOMALIA] = {
+  bounds: [
+    [-1.68325, 40.98105],
+    [12.02464, 51.13387],
+  ],
+  start: [2.0469, 45.3182],
+  zoom: 8,
 };
 
 // white, yellow, orange, brown, red, black
@@ -57,6 +65,7 @@ const MIN_CIRCLE_RADIUS = 3;
 let currTab = 0;
 
 // this will work for USA once we have data to fetch for usa FORMS
+
 function createStyleFunction(formData, colourScheme, thresholds, dataTag) {
   return (feature) => {
     let opacity = POLYGON_OPACITY; // If no data, is transparent
@@ -84,7 +93,7 @@ function createStyleFunction(formData, colourScheme, thresholds, dataTag) {
         } else
           colour = getColour(numCases / numTotal, colourScheme, thresholds);
       }
-    } else if (dataTag === "conf") {
+    } else if (dataTag === CONFIRMED_TAB) {
       // case if dataTag is the confirmed cases
       const numCases = feature.properties.CaseCount;
 
@@ -129,7 +138,7 @@ function getColour(cases, colourScheme, colorThresholds) {
 }
 
 class Leafletmap extends React.Component {
-  state = { tab: "both" };
+  state = { tab: BOTH_TAB };
 
   updateDimensions() {
     const height = window.innerWidth >= 992 ? window.innerHeight - 200 : 500;
@@ -161,65 +170,58 @@ class Leafletmap extends React.Component {
   };
 
   // default map renderer. it only renders circles if pointTolayer is defined
-  renderMap(
-    formData,
-    confirmedCases,
-    bindPopupOnEachFeature,
-    tab,
-    pointToLayer,
-    styleFuncCircles
-  ) {
-    let data;
+  renderMap(data, bindPopupOnEachFeature, tab, pointToLayer, styleFuncCircles) {
+    let geoJsonData;
     let styleFunc;
 
     if (
-      formData !== null &&
-      (tab === "both" || tab === "pot" || tab === "vuln")
+      data.form !== null &&
+      (tab === BOTH_TAB || tab === POT_TAB || tab === VULN_TAB)
     ) {
       if (i18nlang === "enUS") {
-        data = counties;
+        geoJsonData = counties;
       } else if (i18nlang === "so") {
-        data = monga;
+        geoJsonData = monga;
       } else {
-        data = convertedBoundaries;
+        geoJsonData = convertedBoundaries;
       }
 
-      if (tab === "pot" && i18nlang !== "so") {
+      if (tab === POT_TAB && i18nlang !== "so") {
         styleFunc = createStyleFunction(
-          formData,
+          data.form,
           colourScheme,
           POT_SCHEME_THRESHOLDS,
-          "pot"
+          POT_TAB
         );
-      } else if (tab === "vuln" && i18nlang !== "so") {
+      } else if (tab === VULN_TAB && i18nlang !== "so") {
         styleFunc = createStyleFunction(
-          formData,
+          data.form,
           colourScheme,
           HIGH_RISK_SCHEME_THRESHOLDS,
           "risk"
         );
-      } else if (tab === "both" && i18nlang !== "so") {
+      } else if (tab === BOTH_TAB && i18nlang !== "so") {
         styleFunc = createStyleFunction(
-          formData,
+          data.form,
           colourScheme,
           BOTH_SCHEME_THRESHOLDS,
-          "both"
+          BOTH_TAB
         );
       }
-    } else if (tab === "conf" || i18nlang === "so") {
+    } else if (tab === CONFIRMED_TAB || i18nlang === "so") {
       if (i18nlang !== "so") {
-        data = confirmedCases;
+        geoJsonData = data.confirmed;
         styleFunc = createStyleFunction(
-          formData,
+          data.form,
           colourScheme,
           CONF_SCHEME_THRESHOLDS,
-          "conf"
+          CONFIRMED_TAB
         );
       }
       if (i18nlang === "enUS" || i18nlang === "so") {
         return (
           <GeoJSON
-            data={data}
+            data={geoJsonData}
             style={styleFuncCircles}
             onEachFeature={bindPopupOnEachFeature}
             pointToLayer={pointToLayer}
@@ -233,7 +235,7 @@ class Leafletmap extends React.Component {
 
     return (
       <GeoJSON
-        data={data}
+        data={geoJsonData}
         style={styleFunc}
         onEachFeature={bindPopupOnEachFeature}
         key={tab}
@@ -248,18 +250,9 @@ class Leafletmap extends React.Component {
       return <p>{t("loading")}</p>;
 
     const title = "title";
-    let view;
-
-    switch (i18nlang) {
-      case "enUS":
-        view = VIEWS.usa;
-        break;
-      case "so":
-        view = VIEWS.somalia;
-        break;
-      default:
-        view = VIEWS.canada;
-    }
+    const country = i18nlang === "fr" ? CANADA : i18nlang;
+    console.log(country);
+    const view = VIEWS[country];
 
     const styleOptions = {
       className: "popupCustom",
@@ -304,21 +297,21 @@ class Leafletmap extends React.Component {
             content += "</h3>";
           }
 
-          if (this.state.tab === "vuln") {
+          if (this.state.tab === VULN_TAB) {
             content +=
               "<h3>" +
               regionData.risk +
               " vulnerable individuals" +
               regionData.number_reports +
               " reports in total</h3>";
-          } else if (this.state.tab === "both") {
+          } else if (this.state.tab === BOTH_TAB) {
             content +=
               "<h3>" +
               regionData.both +
               " vulnerable individuals who are also potential cases" +
               regionData.number_reports +
               " reports in total</h3>";
-          } else if (this.state.tab === "pot") {
+          } else if (this.state.tab === POT_TAB) {
             content +=
               "<h3>" +
               regionData.pot +
@@ -328,7 +321,7 @@ class Leafletmap extends React.Component {
           }
         }
       } else {
-        if (this.state.tab === "conf") {
+        if (this.state.tab === CONFIRMED_TAB) {
           if (i18nlang === "enUS") {
             content =
               "<h3>" +
@@ -378,7 +371,7 @@ class Leafletmap extends React.Component {
 
       let content;
 
-      if (this.state.tab === "conf") {
+      if (this.state.tab === CONFIRMED_TAB) {
         content =
           `<h3>${feature.properties.ENGNAME}</h3>` +
           `${feature.properties.CaseCount} ${t("confirmedCases")} <br />` +
@@ -388,15 +381,15 @@ class Leafletmap extends React.Component {
         const YYY = fsaData.number_reports;
         const one = YYY === one;
 
-        if (this.state.tab === "vuln") {
+        if (this.state.tab === VULN_TAB) {
           XXX = fsaData.risk;
           if (one) content = t("vul_case_popup_1");
           else content = t("vul_case_popup");
-        } else if (this.state.tab === "both") {
+        } else if (this.state.tab === BOTH_TAB) {
           XXX = fsaData.both;
           if (one) content = t("pot_vul_popup_1");
           else content = t("pot_vul_popup");
-        } else if (this.state.tab === "pot") {
+        } else if (this.state.tab === POT_TAB) {
           XXX = fsaData.pot;
           if (one) content = t("pot_case_popup_1");
           else content = t("pot_case_popup");
@@ -423,11 +416,11 @@ class Leafletmap extends React.Component {
           cases = feature.properties.Confirmed;
         } else {
           somaliaMultiplier = 0.025;
-          if (this.state.tab === "pot") {
+          if (this.state.tab === POT_TAB) {
             cases = this.props.data.form[feature.properties.NAME].pot;
-          } else if (this.state.tab === "vuln") {
+          } else if (this.state.tab === VULN_TAB) {
             cases = this.props.data.form[feature.properties.NAME].risk;
-          } else if (this.state.tab === "both") {
+          } else if (this.state.tab === BOTH_TAB) {
             cases = this.props.data.form[feature.properties.NAME].both;
           }
         }
@@ -466,17 +459,17 @@ class Leafletmap extends React.Component {
         <div id="tabs" className="TabSelectors btn_group">
           <PrimaryButton
             className="active"
-            onClick={(e) => this.setTab("both", 0)}
+            onClick={(e) => this.setTab(BOTH_TAB, 0)}
           >
             {t("pot_vul_button")}
           </PrimaryButton>
-          <PrimaryButton onClick={(e) => this.setTab("pot", 1)}>
+          <PrimaryButton onClick={(e) => this.setTab(POT_TAB, 1)}>
             {t("pot_button")}
           </PrimaryButton>
-          <PrimaryButton onClick={(e) => this.setTab("vuln", 2)}>
+          <PrimaryButton onClick={(e) => this.setTab(VULN_TAB, 2)}>
             {t("vul_button")}
           </PrimaryButton>
-          <PrimaryButton onClick={(e) => this.setTab("conf", 3)}>
+          <PrimaryButton onClick={(e) => this.setTab(CONFIRMED_TAB, 3)}>
             {t("cul_button")}
           </PrimaryButton>
         </div>
@@ -494,8 +487,7 @@ class Leafletmap extends React.Component {
               minZoom={view.zoom}
             />
             {this.renderMap(
-              this.props.data.form,
-              this.props.data.confirmed,
+              this.props.data,
               bindPopups,
               this.state.tab,
               pointToLayer,
