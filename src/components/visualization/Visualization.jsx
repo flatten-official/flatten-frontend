@@ -3,21 +3,21 @@ import { withTranslation } from "react-i18next";
 import * as d3 from "d3";
 import utils from "./vis_utils.js";
 
-let config = {
+const config = {
   height: window.innerHeight / 4,
   margin: { top: 20, right: 60, bottom: 30, left: 40 },
 };
 
-let palette = {
+const palette = {
   confirmed_cases: "#E33E33",
   deaths: "#000805",
   recovered: "#97B85D",
 };
 
 function genData(raw, province, timeSeriesProperty = "Time Series (Daily)") {
-  let timeSeries = raw[province][timeSeriesProperty];
-  let dates = Object.keys(timeSeries);
-  let provinces = Object.keys(raw);
+  const timeSeries = raw[province][timeSeriesProperty];
+  const dates = Object.keys(timeSeries);
+  const provinces = Object.keys(raw);
   return dates.map((date) => ({
     date: new Date(date),
     total: {
@@ -30,10 +30,10 @@ function genData(raw, province, timeSeriesProperty = "Time Series (Daily)") {
 }
 
 // d3 example
-let drawCasesChart = (t, name, container_selector) => {
-  let width = document.querySelector(container_selector).offsetWidth;
+const drawCasesChart = (t, name, container_selector) => {
+  const width = document.querySelector(container_selector).offsetWidth;
 
-  let svg = d3
+  const svg = d3
     .select(container_selector)
     .append("svg")
     .attr("viewBox", [0, 0, width, config.height])
@@ -41,25 +41,25 @@ let drawCasesChart = (t, name, container_selector) => {
     .attr("height", config.height)
     .call(utils.responsivefy);
 
-  let url =
+  const url =
     "https://storage.googleapis.com/flatten-staging-271921.appspot.com/confirmed_time_series.json";
 
   d3.json(url).then((raw) => {
-    let x = d3
+    const x = d3
       .scaleTime()
       .range([config.margin.left, width - config.margin.right]);
 
-    let x_band = d3
+    const x_band = d3
       .scaleBand()
       .paddingInner(0.1)
       .range([config.margin.left, width - config.margin.right]);
 
-    let y = d3
+    const y = d3
       .scaleLinear()
       .range([config.height - config.margin.bottom, config.margin.top]);
 
-    let xAxis = d3.axisBottom().scale(x).ticks(3);
-    let yAxis = d3.axisRight().scale(y).ticks(4);
+    const xAxis = d3.axisBottom().scale(x).ticks(3);
+    const yAxis = d3.axisRight().scale(y).ticks(4);
     svg
       .append("g")
       .attr("id", `${name}-xaxis`)
@@ -84,10 +84,10 @@ let drawCasesChart = (t, name, container_selector) => {
       };
     }
 
-    let data = genData(raw, "ONTARIO");
+    const data = genData(raw, "ONTARIO");
 
     function genBars() {
-      let bar = svg
+      const bar = svg
         .append("g")
         .selectAll("rect")
         .data(data, (d) => d.date.toDateString())
@@ -116,18 +116,18 @@ let drawCasesChart = (t, name, container_selector) => {
       .attr("y", config.height * 0.25)
       .attr("fill", palette.recovered);
 
-    let barsConfirmed = genBars().attr("fill", palette.confirmed_cases);
+    const barsConfirmed = genBars().attr("fill", palette.confirmed_cases);
 
-    let barsDeaths = genBars().attr("fill", palette.deaths);
+    const barsDeaths = genBars().attr("fill", palette.deaths);
 
-    let barsRecovered = genBars().attr("fill", palette.recovered);
+    const barsRecovered = genBars().attr("fill", palette.recovered);
 
     function update(selectedGroup) {
-      let data = genData(raw, selectedGroup);
+      const data = genData(raw, selectedGroup);
 
-      let t = d3.transition().duration(300).ease(d3.easeLinear);
+      const t = d3.transition().duration(300).ease(d3.easeLinear);
 
-      let dates = data.map((d) => d.date);
+      const dates = data.map((d) => d.date);
       x.domain(d3.extent(dates));
       x_band.domain(dates);
 
@@ -141,7 +141,7 @@ let drawCasesChart = (t, name, container_selector) => {
       y.domain(y_extent);
       svg.selectAll(`#${name}-yaxis`).transition(t).call(yAxis);
 
-      let latest = data[data.length - 1];
+      const latest = data[data.length - 1];
       textConfirmed.text(`${latest.total.confirmed_cases} Confirmed Cases`);
       textDeaths.text(`${latest.total.deaths} Deaths`);
       textRecovered.text(`${latest.total.recovered} People Recovered`);
@@ -173,9 +173,9 @@ let drawCasesChart = (t, name, container_selector) => {
             )
         );
     }
-    let defaultProvince = "ONTARIO";
+    const defaultProvince = "ONTARIO";
 
-    let select = svg.append("select").attr("id", "viz-select");
+    const select = svg.append("select").attr("id", "viz-select");
     // add the options to the button
     d3.select("#viz-select")
       .selectAll("myOptions")
@@ -213,7 +213,7 @@ function Visualization({ t }) {
         </div>
       </div>
       <div id="cases-chart" className="chart" />
-      {/*<div id="cases-chart2" className="chart" />*/}
+      {/* <div id="cases-chart2" className="chart" /> */}
     </div>
   );
 }

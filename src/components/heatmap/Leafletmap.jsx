@@ -385,7 +385,7 @@ class Leafletmap extends React.Component {
       } else {
         let XXX;
         const YYY = fsaData.number_reports;
-        let one = YYY === one;
+        const one = YYY === one;
 
         if (this.state.tab === "vuln") {
           XXX = fsaData.risk;

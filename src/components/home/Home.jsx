@@ -9,7 +9,7 @@ import Info from "../info/Info";
 
 const Home = () => {
   const lang = i18next.language;
-  let somaliToggle = lang === "so" ? false : true;
+  const somaliToggle = lang !== "so";
   return (
     <React.Fragment>
       <HomePage />
