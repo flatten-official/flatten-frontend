@@ -9,14 +9,14 @@ import Info from "../info/Info";
 
 const Home = () => {
   const lang = i18next.language;
-  const somaliToggle = lang !== "so";
+  const cadToggle = lang === "en" || lang === "fr";
   return (
     <React.Fragment>
       <HomePage />
       <Visualization />
       <TrackYourSymptoms />
-      {somaliToggle && <Heatmap />}
-      {somaliToggle && <EsriLink />}
+      <Heatmap />
+      {cadToggle && <EsriLink />}
       <Info />
     </React.Fragment>
   );

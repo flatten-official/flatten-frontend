@@ -22,6 +22,12 @@ const URLS = {
     confirmed:
       "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
   },
+  so: {
+    form:
+      "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json",
+    confirmed:
+      "https://storage.googleapis.com/flatten-staging-271921.appspot.com/somalia_confirmed.json",
+  },
 };
 
 export const readCookie = () => async (dispatch) => {
@@ -54,13 +60,23 @@ export const setDailyCookie = () => async (dispatch) => {
 };
 
 export const getMapFormData = () => async (dispatch) => {
-  const url = (i18next.language === "enUS" ? URLS.usa : URLS.cad).form;
+  const url = (i18next.language === "enUS"
+    ? URLS.usa
+    : i18next.language === "so"
+    ? URLS.so
+    : URLS.cad
+  ).form;
   const data = await (await fetch(url)).json();
   dispatch({ type: GET_FORM_DATA, payload: data });
 };
 
 export const getMapConfirmedData = () => async (dispatch) => {
-  const url = (i18next.language === "enUS" ? URLS.usa : URLS.cad).confirmed;
+  const url = (i18next.language === "enUS"
+    ? URLS.usa
+    : i18next.language === "so"
+    ? URLS.so
+    : URLS.cad
+  ).confirmed;
   const data = await (await fetch(url)).json();
   dispatch({ type: GET_CONFIRMED_DATA, payload: data });
 };

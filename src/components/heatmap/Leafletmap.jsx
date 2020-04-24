@@ -343,9 +343,8 @@ class Leafletmap extends React.Component {
               "<h3>" +
               feature.properties.Combined_Key +
               "</h3>" +
-              "<p>Confirmed Cases: " +
-              feature.properties.Confirmed +
-              "</p>";
+              "Confirmed Cases: " +
+              feature.properties.Confirmed;
           } else {
             content =
               "<h3>" +
