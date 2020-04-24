@@ -1,64 +1,87 @@
-import { MapControl, useLeaflet } from "react-leaflet";
+import { useLeaflet } from "react-leaflet";
 import L from "leaflet";
 import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import i18next from "i18next";
-import { CONFIRMED_TAB, NOT_ENOUGH_GRAY } from "./helper";
-
-const i18nlang = i18next.language;
+import {
+  ColourScheme,
+  CONFIRMED_TAB,
+  NOT_ENOUGH_GRAY,
+  TabData,
+  USA,
+} from "./helper";
+import PropTypes from "prop-types";
+import { renderToString } from "react-dom/server";
 
 const LegendContent = ({
   t,
-  title,
+  titleTag,
   includeNotEnoughData,
   isPercent,
   colourScheme,
 }) => {
-  let legendContent = <h4>{title}</h4>;
-  if (includeNotEnoughData)
-    legendContent +=
-      '<i style="background:' +
-      NOT_ENOUGH_GRAY +
-      '"></i> ' +
-      t("not_enough_data_legend") +
-      "<br>";
+  // Place square
+  // const threshold = i === 0 ? 0 : colourScheme.thresholds[i - 1];
+  const getRow = (colour, threshold, isPercent) => (
+    <>
+      <i style={{ background: colour }} />
+      {isPercent ? (
+        <>
+          > {threshold * 100}%<br />
+        </>
+      ) : (
+        <>
+          > {threshold}
+          <br />
+        </>
+      )}
+    </>
+  );
 
-  // Loop through our density intervals and generate a label with a coloured square for each interval.
-  for (let i = 0; i < colourScheme.colors.length; i++) {
-    // Place square
-    legendContent += <i style={{ background: colourScheme.colors[i] }} />;
-
-    const threshold = i === 0 ? 0 : colourScheme.thresholds[i - 1];
-
-    if (isPercent) legendContent += "> " + threshold * 100 + "%<br>";
-    else legendContent += "> " + threshold + "<br>";
-  }
-  return legendContent;
+  return (
+    <>
+      <h4>{t(titleTag)}</h4>
+      {includeNotEnoughData && <i style={{ background: NOT_ENOUGH_GRAY }} />}
+      {t("not_enough_data_legend")}
+      <br />
+      {colourScheme.colors.map((colour) => {
+        return getRow(colour, 0, isPercent);
+      })}
+    </>
+  );
 };
 
-const Legend = ({ t, tab }) => {
+LegendContent.propTypes = {
+  t: PropTypes.func.isRequired,
+  titleTag: PropTypes.string.isRequired,
+  includeNotEnoughData: PropTypes.bool.isRequired,
+  isPercent: PropTypes.bool.isRequired,
+  colourScheme: PropTypes.instanceOf(ColourScheme).isRequired,
+};
+
+const LegendWithTranslation = withTranslation("LeafletMap")(LegendContent);
+
+const LegendHandler = ({ tab, country }) => {
   const { map } = useLeaflet();
 
   const addLegendToMap = () => {
     // TODO Refactor to React Leaflet
     const legend = L.control({ position: "bottomleft" });
 
-    legend.onAdd = () => {
-      const div = L.DomUtil.create("div", "info legend");
-      div.innerHTML = (
-        <LegendContent
-          t={t}
-          title={tab.legendTitle}
-          includeNotEnoughData={tab !== CONFIRMED_TAB}
-          colourScheme={tab.colourScheme}
-          isPercent={tab !== CONFIRMED_TAB}
-        />
-      );
-      return div;
-    };
+    // eslint-disable-next-line react/display-name
+    const div = L.DomUtil.create("div", "info legend");
+    div.innerHTML = renderToString(
+      <LegendWithTranslation
+        titleTag={tab.legendTitleTag}
+        includeNotEnoughData={tab !== CONFIRMED_TAB}
+        colourScheme={tab.colourScheme}
+        isPercent={tab !== CONFIRMED_TAB}
+      />
+    );
+
+    legend.onAdd = () => div;
 
     map.addControl(legend);
-    if (i18nlang === "enUS" && tab === "conf") {
+    if (country === USA && tab === CONFIRMED_TAB) {
       map.removeControl(legend);
     }
     return function cleanup() {
@@ -71,4 +94,9 @@ const Legend = ({ t, tab }) => {
   return null;
 };
 
-export default withTranslation("Leafletmap")(Legend);
+LegendHandler.propTypes = {
+  tab: PropTypes.instanceOf(TabData).isRequired,
+  country: PropTypes.string.isRequired,
+};
+
+export default LegendHandler;

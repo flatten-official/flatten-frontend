@@ -30,30 +30,34 @@ export class ColourScheme {
   }
 }
 
-class TabData {
-  constructor(colourScheme, dataTag, legendTitle) {
+export class TabData {
+  constructor(colourScheme, dataTag, legendTitleTag) {
     this.colourScheme = colourScheme;
     this.dataTag = dataTag;
-    this.legendTitle = legendTitle;
+    this.legendTitleTag = legendTitleTag;
   }
 }
 
 export const BOTH_TAB = new TabData(
   new ColourScheme(mapColours, [0.01, 0.02, 0.05, 0.1]),
-  "both"
+  "both",
+  "pct_responses"
 );
 
 export const VULN_TAB = new TabData(
   new ColourScheme(mapColours, [0.15, 0.25, 0.35, 0.5]),
-  "risk"
+  "risk",
+  "pct_responses"
 );
 
 export const POT_TAB = new TabData(
   new ColourScheme(mapColours, [0.02, 0.05, 0.1, 0.25]),
-  "pot"
+  "pot",
+  "pct_responses"
 );
 
 export const CONFIRMED_TAB = new TabData(
   new ColourScheme(mapColours, [5, 25, 100, 250]),
-  "conf"
+  "conf",
+  "number_of_cases"
 );

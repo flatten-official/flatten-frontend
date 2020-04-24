@@ -433,7 +433,7 @@ class Leafletmap extends React.Component {
               key={this.state.tab}
             />
             <LocateControl />
-            <Legend tab={this.state.tab} />
+            <Legend tab={this.state.tab} country={country} />
           </Map>
         </div>
       </div>
