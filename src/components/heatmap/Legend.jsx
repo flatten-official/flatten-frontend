@@ -58,7 +58,7 @@ LegendContent.propTypes = {
   colourScheme: PropTypes.instanceOf(ColourScheme).isRequired,
 };
 
-const LegendWithTranslation = withTranslation("LeafletMap")(LegendContent);
+const LegendWithTranslation = withTranslation("Leafletmap")(LegendContent);
 
 const LegendHandler = ({ tab, country }) => {
   const { map } = useLeaflet();
