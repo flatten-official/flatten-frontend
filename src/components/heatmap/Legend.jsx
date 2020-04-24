@@ -19,7 +19,7 @@ const LegendContent = ({
   isPercent,
   colourScheme,
 }) => {
-  const getRow = (colour, threshold, isPercent) => (
+  const renderRow = (colour, threshold, isPercent) => (
     <>
       <i style={{ background: colour }} />
       {isPercent ? (
@@ -34,16 +34,23 @@ const LegendContent = ({
       )}
     </>
   );
+
+  const renderNotEnoughData = () => (
+    <>
+      <i style={{ background: NOT_ENOUGH_GRAY }} />
+      {t("not_enough_data_legend")}
+      <br />
+    </>
+  );
+
   // Place square
   // const threshold = i === 0 ? 0 : colourScheme.thresholds[i - 1];
   return (
     <>
       <h4>{t(titleTag)}</h4>
-      {includeNotEnoughData && <i style={{ background: NOT_ENOUGH_GRAY }} />}
-      {t("not_enough_data_legend")}
-      <br />
+      {includeNotEnoughData && renderNotEnoughData()}
       {colourScheme.colors.map((colour, i) => {
-        return getRow(
+        return renderRow(
           colour,
           i === 0 ? 0 : colourScheme.thresholds[i - 1],
           isPercent
