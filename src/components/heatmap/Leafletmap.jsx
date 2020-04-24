@@ -396,18 +396,22 @@ class Leafletmap extends React.Component {
         const YYY = fsaData.number_reports;
         const one = YYY === one;
 
-        if (this.state.tab === "vuln") {
-          XXX = fsaData.risk;
-          if (one) content = t("vul_case_popup_1");
-          else content = t("vul_case_popup");
-        } else if (this.state.tab === "both") {
-          XXX = fsaData.both;
-          if (one) content = t("pot_vul_popup_1");
-          else content = t("pot_vul_popup");
-        } else if (this.state.tab === "pot") {
-          XXX = fsaData.pot;
-          if (one) content = t("pot_case_popup_1");
-          else content = t("pot_case_popup");
+        if (YYY < 25) {
+          content = t("msg_noentries");
+        } else {
+          if (this.state.tab === "vuln") {
+            XXX = fsaData.risk;
+            if (one) content = t("vul_case_popup_1");
+            else content = t("vul_case_popup");
+          } else if (this.state.tab === "both") {
+            XXX = fsaData.both;
+            if (one) content = t("pot_vul_popup_1");
+            else content = t("pot_vul_popup");
+          } else if (this.state.tab === "pot") {
+            XXX = fsaData.pot;
+            if (one) content = t("pot_case_popup_1");
+            else content = t("pot_case_popup");
+          }
         }
         content = content
           .replace("FSA", fsaID)
