@@ -1,7 +1,7 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 import PrimaryButton from "../common/buttons/PrimaryButton";
-import { Map, TileLayer, GeoJSON } from "react-leaflet";
+import { GeoJSON, Map, TileLayer } from "react-leaflet";
 import convertedBoundaries from "./converted_boundaries.js";
 import counties from "./county_boundaries.js";
 import monga from "./mongadishu_coords.js";
@@ -11,13 +11,15 @@ import L from "leaflet";
 import i18next from "i18next";
 import { connect } from "react-redux";
 
-// checks language
-const i18nlang = i18next.language;
-
 const BOTH_TAB = "both";
 const VULN_TAB = "vuln";
 const POT_TAB = "pot";
 const CONFIRMED_TAB = "conf";
+
+const BOTH_TAG = "both";
+const VULN_TAG = "risk";
+const POT_TAG = "pot";
+const CONFIRMED_TAG = "conf";
 
 const SOMALIA = "so";
 const USA = "enUS";
@@ -29,7 +31,8 @@ VIEWS[CANADA] = {
     [38, -150],
     [87, -45],
   ],
-  zoom: 4,
+  startZoom: 4,
+  minZoom: 4,
   start: [56.1304, -106.3468],
 };
 VIEWS[USA] = {
@@ -39,6 +42,7 @@ VIEWS[USA] = {
   ],
   start: [37.0902, -95.7129],
   zoom: 3,
+  minZoom: 8,
 };
 VIEWS[SOMALIA] = {
   bounds: [
@@ -46,7 +50,8 @@ VIEWS[SOMALIA] = {
     [12.02464, 51.13387],
   ],
   start: [2.0469, 45.3182],
-  zoom: 8,
+  startZoom: 8,
+  minZoom: 8,
 };
 
 // white, yellow, orange, brown, red, black
@@ -57,72 +62,86 @@ const HIGH_RISK_SCHEME_THRESHOLDS = [0.15, 0.25, 0.35, 0.5];
 const BOTH_SCHEME_THRESHOLDS = [0.01, 0.02, 0.05, 0.1];
 const POLYGON_OPACITY = 1;
 const NOT_ENOUGH_GRAY = "#909090";
+const NO_DATA_THRESHOLD = 25;
 // max size circle can be on map
 const MAX_CIRCLE_RAD = 25;
 const MIN_CIRCLE_RADIUS = 3;
+
+// checks language
+const i18nlang = i18next.language;
+const country = i18nlang === "fr" ? CANADA : i18nlang;
 
 // Current button
 let currTab = 0;
 
 // this will work for USA once we have data to fetch for usa FORMS
 
-function createStyleFunction(formData, colourScheme, thresholds, dataTag) {
-  return (feature) => {
-    let opacity = POLYGON_OPACITY; // If no data, is transparent
-    let colour = NOT_ENOUGH_GRAY; // Default color if not enough data
+const createConfirmedStyle = (coulourScheme, thresholds) => (feature) => {
+  // case if dataTag is the confirmed cases
+  const numCases = feature.properties.CaseCount;
 
-    let postCodeData;
-
-    if (i18nlang === "enUS") {
-      postCodeData = formData
-        ? formData.county[feature.properties.COUNTYNS]
-        : null;
-    } else {
-      postCodeData = formData ? formData.fsa[feature.properties.CFSAUID] : null;
-    }
-
-    // only set numbers if it exists in form_data_obj
-    if (postCodeData && dataTag in postCodeData) {
-      const numTotal = postCodeData.number_reports;
-
-      if (numTotal >= 25) {
-        const numCases = postCodeData[dataTag];
-
-        if (numCases === 0) {
-          opacity = 0;
-        } else
-          colour = getColour(numCases / numTotal, colourScheme, thresholds);
-      }
-    } else if (dataTag === CONFIRMED_TAB) {
-      // case if dataTag is the confirmed cases
-      const numCases = feature.properties.CaseCount;
-
-      if (numCases === 0) {
-        opacity = 0;
-      } else {
-        colour = getColour(numCases, colourScheme, thresholds);
-      }
-    }
-
-    return {
-      // define the outlines of the map
-      weight: 0.9,
-      color: "white",
-      // define the color and opacity of each polygon
-      fillColor: colour,
-      fillOpacity: opacity,
-    };
-  };
-}
-// for circles
-function createStyleFunctionUSA() {
   return {
-    weight: 0,
-    color: "red",
-    fillColor: "red",
-    fillOpacity: 0.5,
+    // define the outlines of the map
+    weight: 0.9,
+    color: "white",
+    // define the color and opacity of each polygon
+    fillColor: getColour(numCases, colourScheme, thresholds),
+    fillOpacity: numCases === 0 ? 0 : POLYGON_OPACITY,
   };
-}
+};
+
+const createFormStyle = (formData, colourScheme, thresholds, dataTag) => (
+  feature
+) => {
+  /**
+     Returns a function that given a polygon gives it it's color
+     */
+  // Default to not enough data
+  let opacity = POLYGON_OPACITY;
+  let colour = NOT_ENOUGH_GRAY;
+
+  // Get data for that postal code from the form
+  let postCodeData;
+
+  switch (country) {
+    case USA:
+      postCodeData = formData.county[feature.properties.COUNTYNS];
+      break;
+    case CANADA:
+      postCodeData = formData.fsa[feature.properties.CFSAUID];
+      break;
+  }
+
+  // only set numbers if it exists in form_data_obj
+  if (postCodeData && dataTag in postCodeData) {
+    const numTotal = postCodeData.number_reports;
+
+    if (numTotal >= NO_DATA_THRESHOLD) {
+      const numCases = postCodeData[dataTag];
+
+      if (numCases !== 0) {
+        colour = getColour(numCases / numTotal, colourScheme, thresholds);
+      } else opacity = 0;
+    }
+  }
+
+  return {
+    // define the outlines of the map
+    weight: 0.9,
+    color: "white",
+    // define the color and opacity of each polygon
+    fillColor: colour,
+    fillOpacity: opacity,
+  };
+};
+
+// for USA circles
+const circleStyle = () => ({
+  weight: 0,
+  color: "red",
+  fillColor: "red",
+  fillOpacity: 0.5,
+});
 
 // assigns color based on thresholds
 function getColour(cases, colourScheme, colorThresholds) {
@@ -150,7 +169,6 @@ class Leafletmap extends React.Component {
     window.addEventListener("resize", this.updateDimensions.bind(this));
   }
 
-  // eslint-disable-next-line react/no-deprecated
   componentWillMount() {
     this.updateDimensions();
   }
@@ -160,6 +178,7 @@ class Leafletmap extends React.Component {
   }
 
   setTab = (tabID, index) => {
+    console.log("set tab to: " + tabID);
     document
       .getElementById("tabs")
       .children[currTab].classList.remove("active");
@@ -169,80 +188,51 @@ class Leafletmap extends React.Component {
     this.setState({ tab: tabID });
   };
 
-  // default map renderer. it only renders circles if pointTolayer is defined
-  renderMap(data, bindPopupOnEachFeature, tab, pointToLayer, styleFuncCircles) {
-    let geoJsonData;
-    let styleFunc;
+  getGeoJson = (data, tab) => {
+    if (tab === CONFIRMED_TAB) {
+      return data.confirmed;
+    }
 
-    if (
-      data.form !== null &&
-      (tab === BOTH_TAB || tab === POT_TAB || tab === VULN_TAB)
-    ) {
-      if (i18nlang === "enUS") {
-        geoJsonData = counties;
-      } else if (i18nlang === "so") {
-        geoJsonData = monga;
-      } else {
-        geoJsonData = convertedBoundaries;
-      }
+    switch (country) {
+      case USA:
+        return counties;
+      case CANADA:
+        return convertedBoundaries;
+      case SOMALIA:
+        return monga;
+    }
+  };
 
-      if (tab === POT_TAB && i18nlang !== "so") {
-        styleFunc = createStyleFunction(
+  getStyleFunction = (data, tab) => {
+    switch (tab) {
+      case CONFIRMED_TAB:
+        if (country === USA) return circleStyle;
+        else return createConfirmedStyle(colourScheme, CONF_SCHEME_THRESHOLDS);
+      case POT_TAB:
+        return createFormStyle(
           data.form,
           colourScheme,
           POT_SCHEME_THRESHOLDS,
-          POT_TAB
+          POT_TAG
         );
-      } else if (tab === VULN_TAB && i18nlang !== "so") {
-        styleFunc = createStyleFunction(
+      case VULN_TAB:
+        return createFormStyle(
           data.form,
           colourScheme,
           HIGH_RISK_SCHEME_THRESHOLDS,
-          "risk"
+          VULN_TAG
         );
-      } else if (tab === BOTH_TAB && i18nlang !== "so") {
-        styleFunc = createStyleFunction(
+      case BOTH_TAB:
+        return createFormStyle(
           data.form,
           colourScheme,
           BOTH_SCHEME_THRESHOLDS,
-          BOTH_TAB
+          BOTH_TAG
         );
-      }
-    } else if (tab === CONFIRMED_TAB || i18nlang === "so") {
-      if (i18nlang !== "so") {
-        geoJsonData = data.confirmed;
-        styleFunc = createStyleFunction(
-          data.form,
-          colourScheme,
-          CONF_SCHEME_THRESHOLDS,
-          CONFIRMED_TAB
-        );
-      }
-      if (i18nlang === "enUS" || i18nlang === "so") {
-        return (
-          <GeoJSON
-            data={geoJsonData}
-            style={styleFuncCircles}
-            onEachFeature={bindPopupOnEachFeature}
-            pointToLayer={pointToLayer}
-            key={tab}
-          />
-        );
-      }
-    } else {
-      return null;
     }
+  };
 
-    return (
-      <GeoJSON
-        data={geoJsonData}
-        style={styleFunc}
-        onEachFeature={bindPopupOnEachFeature}
-        key={tab}
-      />
-    );
-  }
-
+  // default map renderer. it only renders circles if pointTolayer is defined
   render() {
     const { t } = this.props;
 
@@ -250,8 +240,6 @@ class Leafletmap extends React.Component {
       return <p>{t("loading")}</p>;
 
     const title = "title";
-    const country = i18nlang === "fr" ? CANADA : i18nlang;
-    console.log(country);
     const view = VIEWS[country];
 
     const styleOptions = {
@@ -351,12 +339,6 @@ class Leafletmap extends React.Component {
       layer.bindPopup(content, styleOptions);
     };
 
-    const locateOptions = {
-      position: "topleft",
-      initialZoomLevel: 12,
-      onActivate: () => {}, // callback before engine starts retrieving locations
-    };
-
     // this function is called with each polygon when the GeoJSON polygons are rendered
     // just creates the popup content and binds a popup to each polygon
     // `feature` is the GeoJSON feature (the FSA polygon)
@@ -406,7 +388,7 @@ class Leafletmap extends React.Component {
     let pointToLayer;
     let bindPopups = bindPopupOnEachFeature;
 
-    if (i18nlang === "enUS" || i18nlang === "so") {
+    if (country === USA || country === SOMALIA) {
       bindPopups = bindPopupOnEachFeatureINT;
       pointToLayer = (feature, latlng) => {
         let radius = MIN_CIRCLE_RADIUS;
@@ -454,7 +436,7 @@ class Leafletmap extends React.Component {
     // the geojson layer when the tab changes. This does the work of
     // unbinding all popups and recreating them with the correct data.
 
-    return location ? (
+    return (
       <div>
         <div id="tabs" className="TabSelectors btn_group">
           <PrimaryButton
@@ -478,27 +460,27 @@ class Leafletmap extends React.Component {
           <Map
             maxBounds={view.bounds}
             center={view.start}
-            zoom={view.zoom}
-            style={{ height: this.state.height, zIndex: 0 }}
+            zoom={view.startZoom}
+            style={{ height: this.state.height, zIndex: 0 }} // TODO Add to CSS instead
           >
             <TileLayer
               url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              minZoom={view.zoom}
+              minZoom={view.minZoom}
             />
-            {this.renderMap(
-              this.props.data,
-              bindPopups,
-              this.state.tab,
-              pointToLayer,
-              createStyleFunctionUSA
-            )}
-            <LocateControl options={locateOptions} />
+            <GeoJSON
+              data={this.getGeoJson(this.props.data, this.state.tab)}
+              style={this.getStyleFunction(this.props.data, this.state.tab)}
+              onEachFeature={bindPopups}
+              pointToLayer={pointToLayer}
+              key={this.state.tab}
+            />
+            <LocateControl />
             <Legend colourScheme={colourScheme} tab={this.state.tab} />
           </Map>
         </div>
       </div>
-    ) : null;
+    );
   }
 }
 

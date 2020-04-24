@@ -29,8 +29,6 @@ MapDataFooter.propTypes = {
 const HeatMap = ({ t, data, loadData }) => {
   useEffect(() => loadData(), []); // [] to only run once
 
-  if (!location) return null;
-
   return (
     <div className="heatmap" id="heatmap">
       <div className="heatmap__header">
