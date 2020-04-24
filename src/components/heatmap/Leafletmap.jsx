@@ -10,20 +10,17 @@ import LocateControl from "./LocateControl";
 import L from "leaflet";
 import i18next from "i18next";
 import { connect } from "react-redux";
-
-const BOTH_TAB = "both";
-const VULN_TAB = "vuln";
-const POT_TAB = "pot";
-const CONFIRMED_TAB = "conf";
-
-const BOTH_TAG = "both";
-const VULN_TAG = "risk";
-const POT_TAG = "pot";
-const CONFIRMED_TAG = "conf";
-
-const SOMALIA = "so";
-const USA = "enUS";
-const CANADA = "en";
+import {
+  BOTH_TAB,
+  CANADA,
+  ColourScheme,
+  CONFIRMED_TAB,
+  NOT_ENOUGH_GRAY,
+  POT_TAB,
+  SOMALIA,
+  USA,
+  VULN_TAB,
+} from "./helper";
 
 const VIEWS = {};
 VIEWS[CANADA] = {
@@ -55,13 +52,8 @@ VIEWS[SOMALIA] = {
 };
 
 // white, yellow, orange, brown, red, black
-const colourScheme = ["#FAE0A6", "#FABD05", "#FF7800", "#EB4236", "#C70505"];
-const CONF_SCHEME_THRESHOLDS = [5, 25, 100, 250];
-const POT_SCHEME_THRESHOLDS = [0.02, 0.05, 0.1, 0.25];
-const HIGH_RISK_SCHEME_THRESHOLDS = [0.15, 0.25, 0.35, 0.5];
-const BOTH_SCHEME_THRESHOLDS = [0.01, 0.02, 0.05, 0.1];
 const POLYGON_OPACITY = 1;
-const NOT_ENOUGH_GRAY = "#909090";
+
 const NO_DATA_THRESHOLD = 25;
 // max size circle can be on map
 const MAX_CIRCLE_RAD = 25;
@@ -76,7 +68,7 @@ let currTab = 0;
 
 // this will work for USA once we have data to fetch for usa FORMS
 
-const createConfirmedStyle = (coulourScheme, thresholds) => (feature) => {
+const createConfirmedStyle = (colourScheme) => (feature) => {
   // case if dataTag is the confirmed cases
   const numCases = feature.properties.CaseCount;
 
@@ -85,14 +77,12 @@ const createConfirmedStyle = (coulourScheme, thresholds) => (feature) => {
     weight: 0.9,
     color: "white",
     // define the color and opacity of each polygon
-    fillColor: getColour(numCases, colourScheme, thresholds),
+    fillColor: colourScheme.getColour(numCases),
     fillOpacity: numCases === 0 ? 0 : POLYGON_OPACITY,
   };
 };
 
-const createFormStyle = (formData, colourScheme, thresholds, dataTag) => (
-  feature
-) => {
+const createFormStyle = (formData, colourScheme, dataTag) => (feature) => {
   /**
      Returns a function that given a polygon gives it it's color
      */
@@ -120,7 +110,7 @@ const createFormStyle = (formData, colourScheme, thresholds, dataTag) => (
       const numCases = postCodeData[dataTag];
 
       if (numCases !== 0) {
-        colour = getColour(numCases / numTotal, colourScheme, thresholds);
+        colour = colourScheme.getColour(numCases / numTotal);
       } else opacity = 0;
     }
   }
@@ -136,25 +126,12 @@ const createFormStyle = (formData, colourScheme, thresholds, dataTag) => (
 };
 
 // for USA circles
-const circleStyle = () => ({
+const createCircleStyle = () => ({
   weight: 0,
   color: "red",
   fillColor: "red",
   fillOpacity: 0.5,
 });
-
-// assigns color based on thresholds
-function getColour(cases, colourScheme, colorThresholds) {
-  if (colorThresholds.length !== colourScheme.length - 1)
-    // Minus one since one more color then threshold
-    console.log("WARNING: list lengths don't match in getColour.");
-
-  for (let i = 0; i < colorThresholds.length; i++) {
-    if (cases < colorThresholds[i]) return colourScheme[i];
-  }
-
-  return colourScheme[colourScheme.length - 1];
-}
 
 class Leafletmap extends React.Component {
   state = { tab: BOTH_TAB };
@@ -204,32 +181,12 @@ class Leafletmap extends React.Component {
   };
 
   getStyleFunction = (data, tab) => {
-    switch (tab) {
-      case CONFIRMED_TAB:
-        if (country === USA) return circleStyle;
-        else return createConfirmedStyle(colourScheme, CONF_SCHEME_THRESHOLDS);
-      case POT_TAB:
-        return createFormStyle(
-          data.form,
-          colourScheme,
-          POT_SCHEME_THRESHOLDS,
-          POT_TAG
-        );
-      case VULN_TAB:
-        return createFormStyle(
-          data.form,
-          colourScheme,
-          HIGH_RISK_SCHEME_THRESHOLDS,
-          VULN_TAG
-        );
-      case BOTH_TAB:
-        return createFormStyle(
-          data.form,
-          colourScheme,
-          BOTH_SCHEME_THRESHOLDS,
-          BOTH_TAG
-        );
+    if (tab === CONFIRMED_TAB) {
+      if (country === USA) return createCircleStyle;
+      else return createConfirmedStyle(tab.colourScheme);
     }
+
+    return createFormStyle(data.form, tab.colourScheme, tab.dataTag);
   };
 
   // default map renderer. it only renders circles if pointTolayer is defined
@@ -476,7 +433,7 @@ class Leafletmap extends React.Component {
               key={this.state.tab}
             />
             <LocateControl />
-            <Legend colourScheme={colourScheme} tab={this.state.tab} />
+            <Legend tab={this.state.tab} />
           </Map>
         </div>
       </div>
