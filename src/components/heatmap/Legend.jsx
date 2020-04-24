@@ -19,8 +19,6 @@ const LegendContent = ({
   isPercent,
   colourScheme,
 }) => {
-  // Place square
-  // const threshold = i === 0 ? 0 : colourScheme.thresholds[i - 1];
   const getRow = (colour, threshold, isPercent) => (
     <>
       <i style={{ background: colour }} />
@@ -36,15 +34,20 @@ const LegendContent = ({
       )}
     </>
   );
-
+  // Place square
+  // const threshold = i === 0 ? 0 : colourScheme.thresholds[i - 1];
   return (
     <>
       <h4>{t(titleTag)}</h4>
       {includeNotEnoughData && <i style={{ background: NOT_ENOUGH_GRAY }} />}
       {t("not_enough_data_legend")}
       <br />
-      {colourScheme.colors.map((colour) => {
-        return getRow(colour, 0, isPercent);
+      {colourScheme.colors.map((colour, i) => {
+        return getRow(
+          colour,
+          i === 0 ? 0 : colourScheme.thresholds[i - 1],
+          isPercent
+        );
       })}
     </>
   );
@@ -67,7 +70,6 @@ const LegendHandler = ({ tab, country }) => {
     // TODO Refactor to React Leaflet
     const legend = L.control({ position: "bottomleft" });
 
-    // eslint-disable-next-line react/display-name
     const div = L.DomUtil.create("div", "info legend");
     div.innerHTML = renderToString(
       <LegendWithTranslation
