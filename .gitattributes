@@ -1,2 +1,2 @@
-* autocrlf=false
-* text=auto
+* core.autocrlf=false
+* core.text=auto
