@@ -15,7 +15,7 @@ const Home = () => {
       <HomePage />
       <Visualization />
       <TrackYourSymptoms />
-      {somaliToggle && <Heatmap />}
+      <Heatmap />
       {somaliToggle && <EsriLink />}
       <Info />
     </React.Fragment>
