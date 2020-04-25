@@ -286,7 +286,11 @@ class Leafletmap extends React.Component {
         regionData = this.props.data.form.county[regionID];
       } else {
         regionID = feature.properties.name;
-        regionData = this.props.data.form.region[regionID];
+        try {
+          regionData = this.props.data.form.region[regionID];
+        } catch {
+          regionData = null;
+        }
         somaliaMultiplier = 25;
       }
 
@@ -299,11 +303,12 @@ class Leafletmap extends React.Component {
 
       if (regionData) {
         if (regionReports < 25 / somaliaMultiplier) {
-          content =
-            "<h3>" +
-            feature.properties.NAME +
-            " County</h3>" +
-            "We don't have enough data for this region";
+          content = "<h3>" + feature.properties.NAME;
+          if (i18nlang === "enUS") {
+            content += " County</h3>We don't have enough data for this region";
+          } else {
+            content += "</h3>We don't have enough data for this region";
+          }
         } else {
           content = "<h3>" + feature.properties.NAME;
 
