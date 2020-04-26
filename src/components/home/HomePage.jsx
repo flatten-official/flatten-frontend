@@ -1,10 +1,11 @@
-import React from "react";
-import { Trans, withTranslation } from "react-i18next";
+import React, { useState, useEffect } from "react";
+import { withTranslation } from "react-i18next";
+import { scroller } from "react-scroll";
 
 import PrimaryButton from "../common/buttons/PrimaryButton";
-import logo from "../../assets/logo-black.png";
-
-import { scroller } from "react-scroll";
+import FlattenLogo from "../common/logo/FlattenLogo";
+import HomepageSplash from "../../assets/homepage.svg";
+import HomepageMobileSplash from "../../assets/homepagemobile.svg";
 
 const scrollToForm = () => {
   scroller.scrollTo("symptoms", {
@@ -15,28 +16,45 @@ const scrollToForm = () => {
   });
 };
 
-const HomePage = ({ t }) => {
+const HomePage = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  const onResize = () => {
+    if (isMobile !== window.innerWidth <= 600) {
+      setIsMobile(window.innerWidth <= 600);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", onResize);
+    onResize();
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
   return (
     <div className="home">
+      {isMobile ? (
+        <HomepageMobileSplash className="home__splash" />
+      ) : (
+        <HomepageSplash className="home__splash" />
+      )}
       <div className="home__content">
-        <img className="home__logo" src={logo} alt="logo" />
-        <div className="body home__description">
-          <Trans t={t} i18nKey="chunk1">
-            Flatten is a not-for-profit that focuses on using the
-            <b>self-reported data of Canadians</b> to enable a tool that helps
-            to slow the spread of COVID-19.
-          </Trans>
-          <br />
-          <br />
-          <Trans t={t} i18nKey="chunk2">
-            To do your part, <b>fill in the form when your symptoms change</b>,
-            <b>share with all of your friends</b>, and then tell them to
-            <b>do the same</b>.
-          </Trans>
+        <div className="home__description">
+          <div className="title">Data saves lives.</div>
+          <div className="body">
+            Add your data to our interactive map to flatten the COVID-19 curve
+            in Canada.
+          </div>
         </div>
-        <PrimaryButton className="home__button body" onClick={scrollToForm}>
-          {t("newUserButton")}
-        </PrimaryButton>
+        <div className="home__footer">
+          <PrimaryButton className="home__button body" onClick={scrollToForm}>
+            Add my data
+          </PrimaryButton>
+          <FlattenLogo />
+        </div>
       </div>
     </div>
   );

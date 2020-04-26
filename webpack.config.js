@@ -85,7 +85,13 @@ module.exports = function (_env, argv) {
         },
         {
           test: /\.svg$/,
+          issuer: /\.(js)x?$/,
           use: ["@svgr/webpack"],
+        },
+        {
+          test: /\.svg$/,
+          issuer: /\.scss$/,
+          use: ["file-loader"],
         },
         {
           test: /\.(eot|otf|ttf|woff|woff2)$/,

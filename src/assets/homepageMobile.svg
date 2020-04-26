@@ -1,0 +1,156 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 200 300 400">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #ecf6ee;
+      }
+
+      .cls-3 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-4 {
+        opacity: 0.61;
+      }
+
+      .cls-5 {
+        clip-path: url(#clip-path-2);
+      }
+
+      .cls-6 {
+        opacity: 0.65;
+      }
+
+      .cls-7 {
+        clip-path: url(#clip-path-5);
+      }
+
+      .cls-8 {
+        fill: #547dbf;
+      }
+
+      .cls-9 {
+        clip-path: url(#clip-path-6);
+      }
+
+      .cls-10 {
+        clip-path: url(#clip-path-7);
+      }
+
+      .cls-11 {
+        fill: url(#radial-gradient);
+      }
+
+      .cls-12 {
+        clip-path: url(#clip-path-8);
+      }
+
+      .cls-13 {
+        clip-path: url(#clip-path-9);
+      }
+
+      .cls-14 {
+        fill: url(#radial-gradient-2);
+      }
+
+      .cls-15 {
+        clip-path: url(#clip-path-10);
+      }
+
+      .cls-16 {
+        clip-path: url(#clip-path-11);
+      }
+
+      .cls-17 {
+        fill: url(#radial-gradient-3);
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect class="cls-1" width="300" height="600"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect class="cls-1" x="-109.03" y="308.51" width="474.06" height="291.11"/>
+    </clipPath>
+    <clipPath id="clip-path-5">
+      <rect class="cls-1" x="-111.87" y="315.62" width="479.75" height="284.31"/>
+    </clipPath>
+    <clipPath id="clip-path-6">
+      <rect class="cls-1" x="-36.13" y="441.65" width="404.01" height="158.28"/>
+    </clipPath>
+    <clipPath id="clip-path-7">
+      <path class="cls-1" d="M365,599.61c-103.13-9.16-104.87-155.75-199.7-155.75S87.93,588.49-33.29,599.61"/>
+    </clipPath>
+    <radialGradient id="radial-gradient" cx="-1323.18" cy="175.8" r="0.32" gradientTransform="matrix(0, 567.76, 567.76, 0, -99746.85, 751668.35)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#33a852"/>
+      <stop offset="0.02" stop-color="#33a852"/>
+      <stop offset="1" stop-color="#547dbf"/>
+    </radialGradient>
+    <clipPath id="clip-path-8">
+      <rect class="cls-1" x="159.41" y="306.29" width="208.46" height="293.64"/>
+    </clipPath>
+    <clipPath id="clip-path-9">
+      <path class="cls-1" d="M365,599.61c-52.5-17.12-53.39-291.1-101.66-291.1S224,578.83,162.26,599.6"/>
+    </clipPath>
+    <radialGradient id="radial-gradient-2" cx="-1324.42" cy="174.46" r="0.32" gradientTransform="matrix(1069.25, 0, 0, -1535.08, 1416306.18, 268230.81)" xlink:href="#radial-gradient"/>
+    <clipPath id="clip-path-10">
+      <rect class="cls-1" x="-99.38" y="578.27" width="454.77" height="21.66"/>
+    </clipPath>
+    <clipPath id="clip-path-11">
+      <path class="cls-1" d="M352.54,599.61c-116.28-1.12-118.24-19.13-225.15-19.13S40.13,598.25-96.54,599.61"/>
+    </clipPath>
+    <radialGradient id="radial-gradient-3" cx="-1324.51" cy="174.81" r="0.32" gradientTransform="matrix(2368.08, 0, 0, -2368.08, 3136460.67, 414550.16)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#33a852"/>
+      <stop offset="0.02" stop-color="#33a852"/>
+      <stop offset="0.02" stop-color="#33a852"/>
+      <stop offset="0.45" stop-color="#34a754"/>
+      <stop offset="0.61" stop-color="#36a55b"/>
+      <stop offset="0.72" stop-color="#39a066"/>
+      <stop offset="0.81" stop-color="#3e9977"/>
+      <stop offset="0.89" stop-color="#45918d"/>
+      <stop offset="0.95" stop-color="#4d86a8"/>
+      <stop offset="1" stop-color="#547dbf"/>
+    </radialGradient>
+  </defs>
+  <title>300x600</title>
+  <rect class="cls-2" width="300" height="600"/>
+  <g class="cls-3">
+    <g id="Artwork_17" data-name="Artwork 17" class="cls-4">
+      <g class="cls-5">
+        <g class="cls-5">
+          <g class="cls-5">
+            <g class="cls-6">
+              <g class="cls-7">
+                <path class="cls-8" d="M365,599.61C242.29,583,240.22,317.83,127.36,317.83S35.24,579.49-109,599.6"/>
+              </g>
+            </g>
+            <g class="cls-6">
+              <g class="cls-9">
+                <g class="cls-10">
+                  <rect class="cls-11" x="-44.95" y="352.41" width="421.64" height="338.65" transform="translate(-245.02 159.95) rotate(-31)"/>
+                </g>
+              </g>
+            </g>
+            <g class="cls-6">
+              <g class="cls-12">
+                <g class="cls-13">
+                  <rect class="cls-14" x="162.26" y="308.51" width="202.77" height="291.11"/>
+                </g>
+              </g>
+            </g>
+            <g class="cls-6">
+              <g class="cls-15">
+                <g class="cls-16">
+                  <rect class="cls-17" x="-96.54" y="580.48" width="449.07" height="19.13"/>
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

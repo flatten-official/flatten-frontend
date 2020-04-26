@@ -1,0 +1,147 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 970 250">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #ecf6ee;
+      }
+
+      .cls-3 {
+        opacity: 0.61;
+      }
+
+      .cls-4 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-5 {
+        opacity: 0.65;
+      }
+
+      .cls-6 {
+        clip-path: url(#clip-path-4);
+      }
+
+      .cls-7 {
+        fill: #547dbf;
+      }
+
+      .cls-8 {
+        clip-path: url(#clip-path-5);
+      }
+
+      .cls-9 {
+        clip-path: url(#clip-path-6);
+      }
+
+      .cls-10 {
+        fill: url(#radial-gradient);
+      }
+
+      .cls-11 {
+        clip-path: url(#clip-path-7);
+      }
+
+      .cls-12 {
+        clip-path: url(#clip-path-8);
+      }
+
+      .cls-13 {
+        fill: url(#radial-gradient-2);
+      }
+
+      .cls-14 {
+        clip-path: url(#clip-path-9);
+      }
+
+      .cls-15 {
+        clip-path: url(#clip-path-10);
+      }
+
+      .cls-16 {
+        fill: url(#radial-gradient-3);
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect class="cls-1" x="533.46" y="14.9" width="383.08" height="235.24"/>
+    </clipPath>
+    <clipPath id="clip-path-4">
+      <rect class="cls-1" x="531.16" y="20.65" width="387.68" height="229.75"/>
+    </clipPath>
+    <clipPath id="clip-path-5">
+      <rect class="cls-1" x="592.36" y="122.49" width="326.48" height="127.91"/>
+    </clipPath>
+    <clipPath id="clip-path-6">
+      <path class="cls-1" d="M916.54,250.14c-83.34-7.4-84.74-125.86-161.37-125.86S692.62,241.16,594.66,250.14"/>
+    </clipPath>
+    <radialGradient id="radial-gradient" cx="0.95" cy="-0.13" r="0.26" gradientTransform="matrix(0, 567.76, 567.76, 0, 748.28, -427.52)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#33a852"/>
+      <stop offset="0.02" stop-color="#33a852"/>
+      <stop offset="1" stop-color="#547dbf"/>
+    </radialGradient>
+    <clipPath id="clip-path-7">
+      <rect class="cls-1" x="750.38" y="13.11" width="168.46" height="237.29"/>
+    </clipPath>
+    <clipPath id="clip-path-8">
+      <path class="cls-1" d="M916.54,250.14C874.11,236.31,873.4,14.9,834.39,14.9s-31.84,218.45-81.71,235.24"/>
+    </clipPath>
+    <radialGradient id="radial-gradient-2" cx="-0.11" cy="-0.45" r="0.26" gradientTransform="matrix(1069.25, 0, 0, -1535.08, 877.68, -583.35)" xlink:href="#radial-gradient"/>
+    <clipPath id="clip-path-9">
+      <rect class="cls-1" x="541.25" y="232.89" width="367.49" height="17.51"/>
+    </clipPath>
+    <clipPath id="clip-path-10">
+      <path class="cls-1" d="M906.44,250.14c-94-.9-95.54-15.46-181.93-15.46S654,249,543.55,250.14"/>
+    </clipPath>
+    <radialGradient id="radial-gradient-3" cx="0.2" cy="-0.12" r="0.26" gradientTransform="matrix(2368.08, 0, 0, -2368.08, 83.45, -38.34)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#33a852"/>
+      <stop offset="0.02" stop-color="#33a852"/>
+      <stop offset="0.02" stop-color="#33a852"/>
+      <stop offset="0.45" stop-color="#34a754"/>
+      <stop offset="0.61" stop-color="#36a55b"/>
+      <stop offset="0.72" stop-color="#39a066"/>
+      <stop offset="0.81" stop-color="#3e9977"/>
+      <stop offset="0.89" stop-color="#45918d"/>
+      <stop offset="0.95" stop-color="#4d86a8"/>
+      <stop offset="1" stop-color="#547dbf"/>
+    </radialGradient>
+  </defs>
+  <title>970x250</title>
+  <rect class="cls-2" width="970" height="250"/>
+  <g id="Artwork_17" data-name="Artwork 17" class="cls-3">
+    <g class="cls-4">
+      <g class="cls-4">
+        <g class="cls-4">
+          <g class="cls-5">
+            <g class="cls-6">
+              <path class="cls-7" d="M916.54,250.14c-99.19-13.39-100.86-227.7-192.06-227.7s-74.44,211.45-191,227.7"/>
+            </g>
+          </g>
+          <g class="cls-5">
+            <g class="cls-8">
+              <g class="cls-9">
+                <rect class="cls-10" x="585.24" y="50.38" width="340.73" height="273.66" transform="matrix(0.86, -0.52, 0.52, 0.86, 11.5, 415.9)"/>
+              </g>
+            </g>
+          </g>
+          <g class="cls-5">
+            <g class="cls-11">
+              <g class="cls-12">
+                <rect class="cls-13" x="752.68" y="14.9" width="163.86" height="235.24"/>
+              </g>
+            </g>
+          </g>
+          <g class="cls-5">
+            <g class="cls-14">
+              <g class="cls-15">
+                <rect class="cls-16" x="543.55" y="234.68" width="362.89" height="15.46"/>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
