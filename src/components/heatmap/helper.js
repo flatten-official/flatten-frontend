@@ -11,3 +11,8 @@ export function getColour(colourScheme, count) {
 
   return colourScheme.colours[colourScheme.colours.length - 1];
 }
+
+export const getCountryTabSpecifics = (tab, country) =>
+  country.tabs[tab.countryTabTag];
+
+export const getData = (tab, data) => data[tab.dataName];

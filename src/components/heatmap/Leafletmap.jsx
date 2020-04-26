@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import LocateControl from "./LocateControl";
 import { getColour } from "./helper";
 import Legend from "./Legend";
-// import L from "leaflet";
+import L from "leaflet";
 
 import {
   CONFIRMED_CIRCLE_STYLE,
@@ -14,7 +14,7 @@ import {
   POLYGON_OPACITY,
 } from "./mapConstants";
 
-const Leafletmap = ({ t, data, country, tab }) => {
+const Leafletmap = ({ t, data, country, tab, tabSpecifics }) => {
   const createConfirmedStyle = (colourScheme) => (feature) => {
     // case if dataTag is the confirmed cases
     const numCases = feature.properties[country.confirmedTag];
@@ -44,8 +44,7 @@ const Leafletmap = ({ t, data, country, tab }) => {
     let opacity, colour;
 
     // Get data for that postal code from the form
-    const regionData =
-      data.form[regionName][feature.properties[geoJsonRegionName]];
+    const regionData = data[regionName][feature.properties[geoJsonRegionName]];
 
     // only set numbers if it exists in form_data_obj
     if (regionData && dataTag in regionData) {
@@ -70,14 +69,14 @@ const Leafletmap = ({ t, data, country, tab }) => {
   };
 
   const getGeoJson = () => {
-    if (tab.isConfirmed) return data.confirmed;
+    if (tab.dataIsGeoJson) return data;
 
     return country.geoJson;
   };
 
   const getStyleFunction = () => {
-    if (tab.isConfirmed) {
-      if (country.useCirclesForConfirmed) return (_) => CONFIRMED_CIRCLE_STYLE;
+    if (tab.dataIsGeoJson) {
+      if (tabSpecifics.points) return (_) => CONFIRMED_CIRCLE_STYLE;
       else return createConfirmedStyle(tab.colourScheme);
     }
 
@@ -87,7 +86,7 @@ const Leafletmap = ({ t, data, country, tab }) => {
   // we wait until the formData is not null before rendering the GeoJSON.
   // otherwise it will try to create a popup for every FSA but the data won't
   // be there yet.
-  if (!data.form || !data.confirmed) return <h3>{t("loading")}</h3>;
+  if (!data) return <h3>{t("loading")}</h3>;
 
   // const styleOptions = {
   //   className: "popupCustom",
@@ -239,47 +238,49 @@ const Leafletmap = ({ t, data, country, tab }) => {
   //   layer.bindPopup(content, styleOptions);
   // };
   //
-  // let pointToLayer;
   // let bindPopups = bindPopupOnEachFeature;
-  //
-  // if (country === USA || country === SOMALIA) {
-  //   bindPopups = bindPopupOnEachFeatureINT;
-  //   pointToLayer = (feature, latlng) => {
-  //     let radius = MIN_CIRCLE_RADIUS;
-  //     let cases = feature.properties.Confirmed;
-  //     let somaliaMultiplier = 1;
-  //     if (country === USA) {
-  //       cases = feature.properties.Confirmed;
-  //     } else {
-  //       somaliaMultiplier = 0.025;
-  //       if (this.state.activeTab === POT_TAB) {
-  //         cases = data.form[feature.properties.NAME].pot;
-  //       } else if (this.state.activeTab === VULN_TAB) {
-  //         cases = data.form[feature.properties.NAME].risk;
-  //       } else if (this.state.activeTab === BOTH_TAB) {
-  //         cases = data.form[feature.properties.NAME].both;
-  //       }
-  //     }
-  //
-  //     if (cases > 10000 * somaliaMultiplier) {
-  //       radius = MAX_CIRCLE_RAD;
-  //     } else if (cases > 5000 * somaliaMultiplier) {
-  //       radius = MAX_CIRCLE_RAD * (4 / 5);
-  //     } else if (cases > 2500 * somaliaMultiplier) {
-  //       radius = MAX_CIRCLE_RAD * (3 / 5);
-  //     } else if (cases > 1000 * somaliaMultiplier) {
-  //       radius = MAX_CIRCLE_RAD / 2;
-  //     } else if (cases > 500 * somaliaMultiplier) {
-  //       radius = MAX_CIRCLE_RAD * (2 / 5);
-  //     } else if (cases > 100 * somaliaMultiplier) {
-  //       radius = MAX_CIRCLE_RAD / 5;
-  //     }
-  //
-  //     return L.circleMarker(latlng, {
-  //       radius: radius,
-  //     });
-  //   };
-  // }
+
+  const getPointToLayer = () => {
+    if (!tabSpecifics.points) return undefined;
+
+    return (feature, latLng) => {
+      // TODO Implement radius logic
+      //
+      //   const cases = feature.properties[country.confirmedTag];
+      //   let radius = MIN_CIRCLE_RADIUS;
+      //   let somaliaMultiplier = 1;
+      //   if (country === USA) {
+      //     cases = feature.properties.Confirmed;
+      //   } else {
+      //     somaliaMultiplier = 0.025;
+      //     if (this.state.activeTab === POT_TAB) {
+      //       cases = data.form[feature.properties.NAME].pot;
+      //     } else if (this.state.activeTab === VULN_TAB) {
+      //       cases = data.form[feature.properties.NAME].risk;
+      //     } else if (this.state.activeTab === BOTH_TAB) {
+      //       cases = data.form[feature.properties.NAME].both;
+      //     }
+      //   }
+      //
+      //   if (cases > 10000 * somaliaMultiplier) {
+      //     radius = MAX_CIRCLE_RAD;
+      //   } else if (cases > 5000 * somaliaMultiplier) {
+      //     radius = MAX_CIRCLE_RAD * (4 / 5);
+      //   } else if (cases > 2500 * somaliaMultiplier) {
+      //     radius = MAX_CIRCLE_RAD * (3 / 5);
+      //   } else if (cases > 1000 * somaliaMultiplier) {
+      //     radius = MAX_CIRCLE_RAD / 2;
+      //   } else if (cases > 500 * somaliaMultiplier) {
+      //     radius = MAX_CIRCLE_RAD * (2 / 5);
+      //   } else if (cases > 100 * somaliaMultiplier) {
+      //     radius = MAX_CIRCLE_RAD / 5;
+      //   }
+      //
+      return L.circleMarker(latLng, {
+        radius: 2,
+      });
+    };
+  };
 
   return (
     <Map
@@ -300,7 +301,7 @@ const Leafletmap = ({ t, data, country, tab }) => {
         data={getGeoJson()}
         style={getStyleFunction()}
         // onEachFeature={bindPopups}
-        // pointToLayer={pointToLayer}
+        getPointToLayer={getPointToLayer()}
         key={tab.tabName}
       />
       <LocateControl />
@@ -314,6 +315,7 @@ Leafletmap.propTypes = {
   country: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   tab: PropTypes.object.isRequired,
+  tabSpecifics: PropTypes.object.isRequired,
 };
 
 export default withTranslation("Leafletmap")(Leafletmap);

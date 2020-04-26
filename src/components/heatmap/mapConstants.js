@@ -26,7 +26,9 @@ export const TABS = [
       isPercent: true,
     },
     tabName: "pot_vul_button",
-    isConfirmed: false,
+    dataIsGeoJson: false,
+    dataName: "form",
+    countryTabTag: "both",
   },
   {
     colourScheme: {
@@ -40,7 +42,9 @@ export const TABS = [
       isPercent: true,
     },
     tabName: "vul_button",
-    isConfirmed: false,
+    dataIsGeoJson: false,
+    dataName: "form",
+    countryTabTag: "vuln",
   },
   {
     colourScheme: {
@@ -54,7 +58,9 @@ export const TABS = [
       isPercent: true,
     },
     tabName: "pot_button",
-    isConfirmed: false,
+    dataIsGeoJson: false,
+    dataName: "form",
+    countryTabTag: "pot",
   },
   {
     colourScheme: {
@@ -67,7 +73,9 @@ export const TABS = [
       isPercent: false,
     },
     tabName: "cul_button",
-    isConfirmed: true,
+    dataIsGeoJson: true,
+    dataName: "confirmed",
+    countryTabTag: "confirmed",
   },
 ];
 
@@ -91,8 +99,21 @@ const COUNTRIES = {
     regionName: "fsa",
     geoJson: convertedBoundaries,
     geoJsonRegionName: "CFSAUID",
-    useCirclesForConfirmed: false,
     confirmedTag: "CaseCount",
+    tabs: {
+      confirmed: {
+        points: false,
+      },
+      pot: {
+        points: false,
+      },
+      vuln: {
+        points: false,
+      },
+      both: {
+        points: false,
+      },
+    },
   },
   usa: {
     view: {
@@ -113,8 +134,22 @@ const COUNTRIES = {
     regionName: "county",
     geoJsonRegionName: "COUNTYNS",
     geoJson: counties,
-    useCirclesForConfirmed: true,
+    confirmedThresholds: [],
     confirmedTag: "Confirmed",
+    tabs: {
+      confirmed: {
+        points: true,
+      },
+      pot: {
+        points: false,
+      },
+      vuln: {
+        points: false,
+      },
+      both: {
+        points: false,
+      },
+    },
   },
   somalia: {
     view: {
@@ -135,8 +170,21 @@ const COUNTRIES = {
     geoJson: monga,
     regionName: "region",
     geoJsonRegionName: "name",
-    useCirclesForConfirmed: true,
     confirmedTag: "CONFIRMED",
+    tabs: {
+      confirmed: {
+        points: true,
+      },
+      pot: {
+        points: true,
+      },
+      vuln: {
+        points: true,
+      },
+      both: {
+        points: true,
+      },
+    },
   },
 };
 
