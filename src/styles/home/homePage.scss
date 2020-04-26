@@ -1,4 +1,5 @@
 .home {
+  position: relative;
   margin-top: 75px;
   background: linear-gradient(
       rgba(255, 255, 255, 0.5),
@@ -13,7 +14,9 @@
 
 .home__content {
   position: absolute;
-  padding-top: 10px;
+  top: 0px;
+  bottom: 0px;
+  padding-top: 30px;
   padding-left: 5%;
   padding-right: 45%;
 }
@@ -45,7 +48,6 @@
   }
 
   .home__content {
-    padding-top: 10px;
     padding-right: 0px;
   }
 }
