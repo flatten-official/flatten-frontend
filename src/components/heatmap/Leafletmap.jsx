@@ -19,24 +19,8 @@ import {
 import { getColour } from "./helper";
 // import L from "leaflet";
 
-// this will work for USA once we have data to fetch for usa FORMS
-
 class Leafletmap extends Component {
   state = { activeTab: BOTH_TAB };
-
-  // updateDimensions() {
-  //   const height = window.innerWidth >= 992 ? window.innerHeight - 200 : 500;
-  //   this.setState({ height: height });
-  // }
-
-  // componentDidMount() {
-  //   this.updateDimensions();
-  //   window.addEventListener("resize", this.updateDimensions.bind(this));
-  // }
-  //
-  // componentWillUnmount() {
-  //   window.removeEventListener("resize", this.updateDimensions.bind(this));
-  // }
 
   createConfirmedStyle = (colourScheme) => (feature) => {
     // case if dataTag is the confirmed cases

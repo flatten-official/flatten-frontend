@@ -9,19 +9,16 @@ import { CONF_TAB, NOT_ENOUGH_GRAY } from "./mapConstants";
 const LegendContent = ({ t, tab }) => {
   const { colourScheme, legend } = tab;
 
-  const renderRow = (colour, threshold) => (
+  const percentRowText = (threshold) => (
     <>
-      <i style={{ background: colour }} />
-      {legend.isPercent ? (
-        <>
-          > {threshold * 100}%<br />
-        </>
-      ) : (
-        <>
-          > {threshold}
-          <br />
-        </>
-      )}
+      &gt; {threshold * 100}%<br />
+    </>
+  );
+
+  const notPercentRowText = (threshold) => (
+    <>
+      &gt; {threshold}
+      <br />
     </>
   );
 
@@ -38,7 +35,15 @@ const LegendContent = ({ t, tab }) => {
       <h4>{t(legend.legendTitle)}</h4>
       {tab.notEnoughDataThreshold && renderNotEnoughData()}
       {colourScheme.colours.map((colour, i) => {
-        return renderRow(colour, i === 0 ? 0 : colourScheme.thresholds[i - 1]);
+        const threshold = i === 0 ? 0 : colourScheme.thresholds[i - 1];
+        return (
+          <>
+            <i style={{ background: colour }} />
+            {legend.isPercent
+              ? percentRowText(threshold)
+              : notPercentRowText(threshold)}
+          </>
+        );
       })}
     </>
   );
