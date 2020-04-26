@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 import PrimaryButton from "../common/buttons/PrimaryButton";
-import { Map, TileLayer, GeoJSON } from "react-leaflet";
+import { GeoJSON, Map, TileLayer } from "react-leaflet";
 import PropTypes from "prop-types";
 import Legend from "./Legend";
 import LocateControl from "./LocateControl";
@@ -13,9 +13,7 @@ import {
   NO_DATA_THRESHOLD,
   NOT_ENOUGH_GRAY,
   POLYGON_OPACITY,
-  POT_TAB,
   TABS,
-  VULN_TAB,
 } from "./mapConstants";
 
 import { getColour } from "./helper";
@@ -24,8 +22,7 @@ import { getColour } from "./helper";
 // this will work for USA once we have data to fetch for usa FORMS
 
 class Leafletmap extends Component {
-  tabIndex = 0;
-  state = { tab: BOTH_TAB };
+  state = { activeTab: BOTH_TAB };
 
   // updateDimensions() {
   //   const height = window.innerWidth >= 992 ? window.innerHeight - 200 : 500;
@@ -40,16 +37,6 @@ class Leafletmap extends Component {
   // componentWillUnmount() {
   //   window.removeEventListener("resize", this.updateDimensions.bind(this));
   // }
-
-  setTab = (tabID, index) => {
-    document
-      .getElementById("tabs")
-      .children[this.tabIndex].classList.remove("active");
-    document.getElementById("tabs").children[index].classList.add("active");
-    this.tabIndex = index;
-
-    this.setState({ tab: tabID });
-  };
 
   createConfirmedStyle = (colourScheme) => (feature) => {
     // case if dataTag is the confirmed cases
@@ -107,7 +94,7 @@ class Leafletmap extends Component {
   };
 
   getGeoJson = () => {
-    if (this.state.tab === CONF_TAB) {
+    if (this.state.activeTab === CONF_TAB) {
       return this.props.data.confirmed;
     }
 
@@ -115,7 +102,7 @@ class Leafletmap extends Component {
   };
 
   getStyleFunction = () => {
-    const tab = this.state.tab;
+    const tab = this.state.activeTab;
     if (tab === CONF_TAB) {
       if (this.props.country.useCirclesForConfirmed)
         return (_) => CONFIRMED_CIRCLE_STYLE;
@@ -123,6 +110,26 @@ class Leafletmap extends Component {
     }
 
     return this.createFormStyle(tab);
+  };
+
+  renderTabs = () => {
+    const { t } = this.props;
+
+    const buttonList = Object.keys(TABS).map((tab, index) => (
+      <PrimaryButton
+        key={tab}
+        className={tab === this.state.activeTab ? "active" : undefined}
+        onClick={(e) => this.setState({ activeTab: tab })}
+      >
+        {t(TABS[tab].tabName)}
+      </PrimaryButton>
+    ));
+
+    return (
+      <div id="tabs" className="TabSelectors btn_group">
+        {buttonList}
+      </div>
+    );
   };
 
   // default map renderer. it only renders circles if pointTolayer is defined
@@ -181,21 +188,21 @@ class Leafletmap extends Component {
     //         content += "</h3>";
     //       }
     //
-    //       if (this.state.tab === VULN_TAB) {
+    //       if (this.state.activeTab === VULN_TAB) {
     //         content +=
     //           "<h3>" +
     //           regionData.risk +
     //           " vulnerable individuals" +
     //           regionData.number_reports +
     //           " reports in total</h3>";
-    //       } else if (this.state.tab === BOTH_TAB) {
+    //       } else if (this.state.activeTab === BOTH_TAB) {
     //         content +=
     //           "<h3>" +
     //           regionData.both +
     //           " vulnerable individuals who are also potential cases" +
     //           regionData.number_reports +
     //           " reports in total</h3>";
-    //       } else if (this.state.tab === POT_TAB) {
+    //       } else if (this.state.activeTab === POT_TAB) {
     //         content +=
     //           "<h3>" +
     //           regionData.pot +
@@ -205,7 +212,7 @@ class Leafletmap extends Component {
     //       }
     //     }
     //   } else {
-    //     if (this.state.tab === CONF_TAB) {
+    //     if (this.state.activeTab === CONF_TAB) {
     //       if (country === USA) {
     //         content =
     //           "<h3>" +
@@ -248,7 +255,7 @@ class Leafletmap extends Component {
     //
     //   let content;
     //
-    //   if (this.state.tab === CONF_TAB) {
+    //   if (this.state.activeTab === CONF_TAB) {
     //     content =
     //       `<h3>${feature.properties.ENGNAME}</h3>` +
     //       `${feature.properties.CaseCount} ${t("confirmedCases")} <br />` +
@@ -261,15 +268,15 @@ class Leafletmap extends Component {
     //     if (YYY < 25) {
     //       content = t("msg_noentries");
     //     } else {
-    //       if (this.state.tab === VULN_TAB) {
+    //       if (this.state.activeTab === VULN_TAB) {
     //         XXX = fsaData.risk;
     //         if (one) content = t("vul_case_popup_1");
     //         else content = t("vul_case_popup");
-    //       } else if (this.state.tab === BOTH_TAB) {
+    //       } else if (this.state.activeTab === BOTH_TAB) {
     //         XXX = fsaData.both;
     //         if (one) content = t("pot_vul_popup_1");
     //         else content = t("pot_vul_popup");
-    //       } else if (this.state.tab === POT_TAB) {
+    //       } else if (this.state.activeTab === POT_TAB) {
     //         XXX = fsaData.pot;
     //         if (one) content = t("pot_case_popup_1");
     //         else content = t("pot_case_popup");
@@ -297,11 +304,11 @@ class Leafletmap extends Component {
     //       cases = feature.properties.Confirmed;
     //     } else {
     //       somaliaMultiplier = 0.025;
-    //       if (this.state.tab === POT_TAB) {
+    //       if (this.state.activeTab === POT_TAB) {
     //         cases = data.form[feature.properties.NAME].pot;
-    //       } else if (this.state.tab === VULN_TAB) {
+    //       } else if (this.state.activeTab === VULN_TAB) {
     //         cases = data.form[feature.properties.NAME].risk;
-    //       } else if (this.state.tab === BOTH_TAB) {
+    //       } else if (this.state.activeTab === BOTH_TAB) {
     //         cases = data.form[feature.properties.NAME].both;
     //       }
     //     }
@@ -326,51 +333,9 @@ class Leafletmap extends Component {
     //   };
     // }
 
-    // return (
-    //   <>
-    //     <div id="tabs" className="TabSelectors btn_group">
-    //       <PrimaryButton
-    //         className="active"
-    //         onClick={(e) => this.setTab(BOTH_TAB, 0)}
-    //       >
-    //         {t("pot_vul_button")}
-    //       </PrimaryButton>
-    //     </div>
-    //     <div className="mapTitle">Spacer</div>
-    //     <div>
-    //       <Map
-    //         id="leaflet-map"
-    //         center={country.view.start}
-    //         zoom={country.view.startZoom}
-    //       >
-    //         <TileLayer
-    //           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    //           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-    //         />
-    //       </Map>
-    //     </div>
-    //   </>
-    // );
-
     return (
       <>
-        <div id="tabs" className="TabSelectors btn_group">
-          <PrimaryButton
-            className="active"
-            onClick={(e) => this.setTab(BOTH_TAB, 0)}
-          >
-            {t("pot_vul_button")}
-          </PrimaryButton>
-          <PrimaryButton onClick={(e) => this.setTab(POT_TAB, 1)}>
-            {t("pot_button")}
-          </PrimaryButton>
-          <PrimaryButton onClick={(e) => this.setTab(VULN_TAB, 2)}>
-            {t("vul_button")}
-          </PrimaryButton>
-          <PrimaryButton onClick={(e) => this.setTab(CONF_TAB, 3)}>
-            {t("cul_button")}
-          </PrimaryButton>
-        </div>
+        {this.renderTabs()}
         <div>
           <Map
             id="leaflet-map"
@@ -385,16 +350,16 @@ class Leafletmap extends Component {
             />
             <GeoJSON
               // the key prop on the GeoJSON component ensures React will re-render
-              // the geojson layer when the tab changes. This does the work of
+              // the geojson layer when the activeTab changes. This does the work of
               // unbinding all popups and recreating them with the correct data.
               data={this.getGeoJson()}
               style={this.getStyleFunction()}
               // onEachFeature={bindPopups}
               // pointToLayer={pointToLayer}
-              key={this.state.tab}
+              key={this.state.activeTab}
             />
             <LocateControl />
-            <Legend tab={TABS[this.state.tab]} country={country} />
+            <Legend tab={TABS[this.state.activeTab]} country={country} />
           </Map>
         </div>
       </>

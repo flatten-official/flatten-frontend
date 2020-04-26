@@ -31,6 +31,7 @@ TABS[BOTH_TAB] = {
     legendTitle: "pct_responses",
     isPercent: true,
   },
+  tabName: "pot_vul_button",
 };
 
 TABS[VULN_TAB] = {
@@ -44,6 +45,7 @@ TABS[VULN_TAB] = {
     legendTitle: "pct_responses",
     isPercent: true,
   },
+  tabName: "vul_button",
 };
 
 TABS[POT_TAB] = {
@@ -52,11 +54,12 @@ TABS[POT_TAB] = {
     thresholds: [0.02, 0.05, 0.1, 0.25],
   },
   dataTag: "pot",
-  notEnoughDataThreshold: -1, // TODO Set to real valu
+  notEnoughDataThreshold: -1, // TODO Set to real value
   legend: {
     legendTitle: "pct_responses",
     isPercent: true,
   },
+  tabName: "pot_button",
 };
 
 TABS[CONF_TAB] = {
@@ -69,6 +72,7 @@ TABS[CONF_TAB] = {
     legendTitle: "number_of_cases",
     isPercent: false,
   },
+  tabName: "cul_button",
 };
 
 const COUNTRIES = {
