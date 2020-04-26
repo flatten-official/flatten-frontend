@@ -89,8 +89,8 @@ const Navbar = ({ t, getGeolocation }) => {
         <div className="nav__logo">
           <div className="nav__logo-fixed nav__title">FLATTEN</div>
           <div className="nav__logo-animation nav__title">
-            {symptomsLink}
             {heatmapLink}
+            {symptomsLink}
             {infoLink}
             .CA
           </div>
@@ -126,8 +126,8 @@ const Navbar = ({ t, getGeolocation }) => {
         <div className="nav__logo">
           <div className="nav__logo-fixed nav__title">FLATTEN</div>
           <div className="nav__logo-animation nav__title">
-            {symptomsLink}
             {heatmapLink}
+            {symptomsLink}
             {infoLink}
             .CA
           </div>
