@@ -1,51 +1,53 @@
 .home {
-  height: 100%;
-  min-height: 600px;
-  width: 100%;
-  min-width: 300px;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("../assets/background.png");
-  // PATH NEEDS TO BE RELATIVE TO import.scss (weird, but easiest workaround for now)
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  position: relative;
+  margin-top: 75px;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url(../assets/homepage.svg);
+}
+
+.home__splash {
+  visibility: hidden;
 }
 
 .home__content {
-  height: auto;
-  padding: 0% 20%;
-}
-
-.home__logo {
-  width: 60%;
-  filter: invert(100%);
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  padding-top: 30px;
+  padding-left: 5%;
+  padding-right: 45%;
 }
 
 .home__description {
-  margin-bottom: 32px;
-  color: white;
+  padding-bottom: 20px;
+}
+
+.home__footer {
+  display: flex;
+  align-items: center;
 }
 
 .home__button {
-  width: 50%;
-  height: 12%;
-  min-width: 200px;
-  min-height: 30px;
-  margin: 10px 0px;
+  height: 10vw;
+  width: 15vw;
+  min-width: 150px;
+  max-height: 60px;
+  margin-right: 40px;
 }
 
-@media only screen and (max-width: 1000px) {
-  .home__content {
-    padding: 0% 10%;
+@media only screen and (max-width: 600px) {
+  .home {
+    background: linear-gradient(
+        rgba(255, 255, 255, 0.5),
+        rgba(255, 255, 255, 0.5)
+      ),
+      url(../assets/homepageMobile.svg);
   }
-}
 
-@media only screen and (max-width: 400px) {
-  .home__logo {
-    width: 100%;
+  .home__content {
+    padding-right: 0px;
   }
 }
