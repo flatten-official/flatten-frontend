@@ -13,9 +13,9 @@ const Home = () => {
   return (
     <React.Fragment>
       <HomePage />
-      <Visualization />
+      {/* <Visualization /> */}
       <TrackYourSymptoms />
-      <Heatmap />
+      {somaliToggle && <Heatmap />}
       {somaliToggle && <EsriLink />}
       <Info />
     </React.Fragment>
