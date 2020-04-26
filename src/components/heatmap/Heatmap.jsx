@@ -31,10 +31,10 @@ MapDataFooter.propTypes = {
 const HeatMap = ({ t, data, country, loadData }) => {
   useEffect(() => loadData(), []); // [] to only run once
 
-  const [activeTab, setTab] = useState(TABS.both);
+  const [activeTab, setTab] = useState(TABS[0]);
 
   const renderTabs = () => {
-    const buttonList = Object.values(TABS).map((tab, index) => (
+    const buttonList = TABS.map((tab, index) => (
       <PrimaryButton
         key={tab.tabName}
         className={tab === activeTab ? "active" : undefined}

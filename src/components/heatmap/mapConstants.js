@@ -13,8 +13,8 @@ export const NO_DATA_THRESHOLD = 25;
 export const MAX_CIRCLE_RAD = 25; // TODO WTF
 export const MIN_CIRCLE_RADIUS = 3;
 
-export const TABS = {
-  both: {
+export const TABS = [
+  {
     colourScheme: {
       colours: MAP_COLOURS,
       thresholds: [0.01, 0.02, 0.05, 0.1],
@@ -28,7 +28,7 @@ export const TABS = {
     tabName: "pot_vul_button",
     isConfirmed: false,
   },
-  vuln: {
+  {
     colourScheme: {
       colours: MAP_COLOURS,
       thresholds: [0.15, 0.25, 0.35, 0.5],
@@ -42,7 +42,7 @@ export const TABS = {
     tabName: "vul_button",
     isConfirmed: false,
   },
-  pot: {
+  {
     colourScheme: {
       colours: MAP_COLOURS,
       thresholds: [0.02, 0.05, 0.1, 0.25],
@@ -56,7 +56,7 @@ export const TABS = {
     tabName: "pot_button",
     isConfirmed: false,
   },
-  confirmed: {
+  {
     colourScheme: {
       colours: MAP_COLOURS,
       thresholds: [5, 25, 100, 250],
@@ -69,7 +69,7 @@ export const TABS = {
     tabName: "cul_button",
     isConfirmed: true,
   },
-};
+];
 
 const COUNTRIES = {
   canada: {
