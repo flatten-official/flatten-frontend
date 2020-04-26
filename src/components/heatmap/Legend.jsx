@@ -2,27 +2,17 @@ import { useLeaflet } from "react-leaflet";
 import L from "leaflet";
 import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import {
-  ColourScheme,
-  CONFIRMED_TAB,
-  NOT_ENOUGH_GRAY,
-  TabData,
-  USA,
-} from "./helper";
 import PropTypes from "prop-types";
 import { renderToString } from "react-dom/server";
+import { CONF_TAB, NOT_ENOUGH_GRAY } from "./mapConstants";
 
-const LegendContent = ({
-  t,
-  titleTag,
-  includeNotEnoughData,
-  isPercent,
-  colourScheme,
-}) => {
-  const renderRow = (colour, threshold, isPercent) => (
+const LegendContent = ({ t, tab }) => {
+  const { colourScheme, legend } = tab;
+
+  const renderRow = (colour, threshold) => (
     <>
       <i style={{ background: colour }} />
-      {isPercent ? (
+      {legend.isPercent ? (
         <>
           > {threshold * 100}%<br />
         </>
@@ -43,18 +33,12 @@ const LegendContent = ({
     </>
   );
 
-  // Place square
-  // const threshold = i === 0 ? 0 : colourScheme.thresholds[i - 1];
   return (
     <>
-      <h4>{t(titleTag)}</h4>
-      {includeNotEnoughData && renderNotEnoughData()}
-      {colourScheme.colors.map((colour, i) => {
-        return renderRow(
-          colour,
-          i === 0 ? 0 : colourScheme.thresholds[i - 1],
-          isPercent
-        );
+      <h4>{t(legend.legendTitle)}</h4>
+      {tab.notEnoughDataThreshold && renderNotEnoughData()}
+      {colourScheme.colours.map((colour, i) => {
+        return renderRow(colour, i === 0 ? 0 : colourScheme.thresholds[i - 1]);
       })}
     </>
   );
@@ -62,10 +46,7 @@ const LegendContent = ({
 
 LegendContent.propTypes = {
   t: PropTypes.func.isRequired,
-  titleTag: PropTypes.string.isRequired,
-  includeNotEnoughData: PropTypes.bool.isRequired,
-  isPercent: PropTypes.bool.isRequired,
-  colourScheme: PropTypes.instanceOf(ColourScheme).isRequired,
+  tab: PropTypes.object.isRequired,
 };
 
 const LegendWithTranslation = withTranslation("Leafletmap")(LegendContent);
@@ -78,19 +59,12 @@ const LegendHandler = ({ tab, country }) => {
     const legend = L.control({ position: "bottomleft" });
 
     const div = L.DomUtil.create("div", "info legend");
-    div.innerHTML = renderToString(
-      <LegendWithTranslation
-        titleTag={tab.legendTitleTag}
-        includeNotEnoughData={tab !== CONFIRMED_TAB}
-        colourScheme={tab.colourScheme}
-        isPercent={tab !== CONFIRMED_TAB}
-      />
-    );
+    div.innerHTML = renderToString(<LegendWithTranslation tab={tab} />);
 
     legend.onAdd = () => div;
 
     map.addControl(legend);
-    if (country === USA && tab === CONFIRMED_TAB) {
+    if (country.useCirclesForConfirmed && tab === CONF_TAB) {
       map.removeControl(legend);
     }
     return function cleanup() {
@@ -104,8 +78,8 @@ const LegendHandler = ({ tab, country }) => {
 };
 
 LegendHandler.propTypes = {
-  tab: PropTypes.instanceOf(TabData).isRequired,
-  country: PropTypes.string.isRequired,
+  tab: PropTypes.object.isRequired,
+  country: PropTypes.object.isRequired,
 };
 
 export default LegendHandler;

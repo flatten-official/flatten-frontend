@@ -31,3 +31,8 @@
 .leaflet-control-locate a {
   background-color: transparent;
 }
+
+#leaflet-map {
+  height: 800px;
+  //z-index: 0;
+}

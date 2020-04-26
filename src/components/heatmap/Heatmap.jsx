@@ -4,6 +4,7 @@ import Leafletmap from "./Leafletmap";
 import PropTypes from "prop-types";
 import { getMapConfirmedData, getMapFormData } from "../../actions";
 import { connect } from "react-redux";
+import { getCountry } from "./mapConstants";
 
 const MapDataFooter = ({ t, formData }) => {
   const getNumResponses = (formData) =>
@@ -22,11 +23,11 @@ const MapDataFooter = ({ t, formData }) => {
 };
 
 MapDataFooter.propTypes = {
-  t: PropTypes.any.isRequired,
+  t: PropTypes.func.isRequired,
   formData: PropTypes.object,
 };
 
-const HeatMap = ({ t, data, loadData }) => {
+const HeatMap = ({ t, data, country, loadData }) => {
   useEffect(() => loadData(), []); // [] to only run once
 
   return (
@@ -46,7 +47,7 @@ const HeatMap = ({ t, data, loadData }) => {
         </div>
       </div>
       <div className="heatmap__container">
-        <Leafletmap data={data} />
+        <Leafletmap data={data} country={country} />
       </div>
 
       <div className="heatmap__header">
@@ -78,13 +79,17 @@ const HeatMap = ({ t, data, loadData }) => {
 const mapStateToProps = (state) => ({ data: state.mapData });
 
 // Passes loadData as a prop to HeatMap where load data calls both data loading functions
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   loadData: () => {
-    dispatch(getMapFormData());
-    dispatch(getMapConfirmedData());
+    dispatch(getMapFormData(ownProps.country));
+    dispatch(getMapConfirmedData(ownProps.country));
   },
 });
 
 const HeatMapConnected = connect(mapStateToProps, mapDispatchToProps)(HeatMap);
 
-export default withTranslation("Heatmap")(HeatMapConnected);
+const HeatMapWithCountry = ({ t }) => {
+  return <HeatMapConnected country={getCountry()} t={t} />;
+};
+
+export default withTranslation("Heatmap")(HeatMapWithCountry);
