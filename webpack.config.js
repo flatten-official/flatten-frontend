@@ -91,7 +91,12 @@ module.exports = function (_env, argv) {
         {
           test: /\.svg$/,
           issuer: /\.scss$/,
-          use: ["file-loader"],
+          use: {
+            loader: "file-loader",
+            options: {
+              outputPath: "svgs",
+            },
+          },
         },
         {
           test: /\.(eot|otf|ttf|woff|woff2)$/,

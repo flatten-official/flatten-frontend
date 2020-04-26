@@ -18,6 +18,10 @@ handlers:
     secure: always
     static_files: dist/static/media/\1
     upload: dist/static/media/(.*)
+  - url: /svgs/(.*)
+    secure: always
+    static_files: dist/svgs/\1
+    upload: dist/svgs/(.*)
   - url: /favicon.ico
     secure: always
     static_files: dist/favicon.ico
