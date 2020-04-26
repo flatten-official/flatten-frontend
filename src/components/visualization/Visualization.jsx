@@ -3,46 +3,19 @@ import { withTranslation } from "react-i18next";
 import * as d3 from "d3";
 import utils from "./vis_utils.js";
 
-const config = {
-  height: window.innerHeight / 4,
-  margin: { top: 20, right: 60, bottom: 30, left: 40 },
+let palette = {
+  confirmed_cases: "#EB3246",
+  deaths: "#000000",
+  recovered: "#4285F4",
 };
 
-const palette = {
-  confirmed_cases: "#E33E33",
-  deaths: "#000805",
-  recovered: "#97B85D",
-};
+let drawCasesChart = (t, name, container_selector, config) => {
+  let width = document.querySelector(container_selector).offsetWidth;
 
-function genData(raw, province, timeSeriesProperty = "Time Series (Daily)") {
-  const timeSeries = raw[province][timeSeriesProperty];
-  const dates = Object.keys(timeSeries);
-  const provinces = Object.keys(raw);
-  return dates.map((date) => ({
-    date: new Date(date),
-    total: {
-      deaths: timeSeries[date]["Total Deaths"],
-      tested: timeSeries[date]["Total Tested"],
-      confirmed_cases: timeSeries[date]["Total Cases"],
-      recovered: timeSeries[date]["Total Recovered"],
-    },
-  }));
-}
+  let svg = utils.getSvg(container_selector, [width, config.height]);
 
-// d3 example
-const drawCasesChart = (t, name, container_selector) => {
-  const width = document.querySelector(container_selector).offsetWidth;
-
-  const svg = d3
-    .select(container_selector)
-    .append("svg")
-    .attr("viewBox", [0, 0, width, config.height])
-    .attr("width", width)
-    .attr("height", config.height)
-    .call(utils.responsivefy);
-
-  const url =
-    "https://storage.googleapis.com/flatten-staging-271921.appspot.com/confirmed_time_series.json";
+  let url =
+    "https://storage.googleapis.com/flatten-271620.appspot.com/confirmed_time_series.json";
 
   d3.json(url).then((raw) => {
     const x = d3
@@ -84,7 +57,7 @@ const drawCasesChart = (t, name, container_selector) => {
       };
     }
 
-    const data = genData(raw, "ONTARIO");
+    let data = utils.genConfirmedData(raw, "ONTARIO");
 
     function genBars() {
       const bar = svg
@@ -123,12 +96,18 @@ const drawCasesChart = (t, name, container_selector) => {
     const barsRecovered = genBars().attr("fill", palette.recovered);
 
     function update(selectedGroup) {
-      const data = genData(raw, selectedGroup);
+      let data = utils.genConfirmedData(raw, selectedGroup);
 
       const t = d3.transition().duration(300).ease(d3.easeLinear);
 
-      const dates = data.map((d) => d.date);
-      x.domain(d3.extent(dates));
+      let dates = data.map((d) => d.date);
+      let latestDate = d3.max(dates);
+      let earliestDate = latestDate - 1000 * 60 * 60 * 24 * 30 * 2; // 2 months
+
+      data = data.filter((d) => d.date > earliestDate);
+      dates = dates.filter((d) => d > earliestDate);
+
+      x.domain([earliestDate, latestDate]);
       x_band.domain(dates);
 
       svg.selectAll(`#${name}-xaxis`).transition(t).call(xAxis);
@@ -141,10 +120,10 @@ const drawCasesChart = (t, name, container_selector) => {
       y.domain(y_extent);
       svg.selectAll(`#${name}-yaxis`).transition(t).call(yAxis);
 
-      const latest = data[data.length - 1];
-      textConfirmed.text(`${latest.total.confirmed_cases} Confirmed Cases`);
+      let latest = data[data.length - 1];
+      textConfirmed.text(`${latest.total.confirmed_cases} Cases`);
       textDeaths.text(`${latest.total.deaths} Deaths`);
-      textRecovered.text(`${latest.total.recovered} People Recovered`);
+      textRecovered.text(`${latest.total.recovered} Recovered`);
 
       barsConfirmed
         .data(data, (d) => d.date.toDateString())
@@ -200,8 +179,10 @@ const drawCasesChart = (t, name, container_selector) => {
 
 function Visualization({ t }) {
   useEffect(() => {
-    drawCasesChart(t, "confirmed-cases-chart", "#cases-chart");
-    // drawCasesChart(t, "other-cases-chart", "#cases-chart2");
+    drawCasesChart(t, "confirmed-cases-chart", "#cases-chart", {
+      height: window.innerHeight / 4,
+      margin: { top: 20, right: 60, bottom: 30, left: 40 },
+    });
   }, []);
   return (
     <div className="visualization">

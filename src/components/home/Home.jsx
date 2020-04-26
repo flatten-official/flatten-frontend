@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <React.Fragment>
       <HomePage />
-      <Visualization />
+      {/* <Visualization /> */}
       <TrackYourSymptoms />
       <Heatmap />
       {cadToggle && <EsriLink />}
