@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
-import PrimaryButton from "../common/buttons/PrimaryButton";
 import { GeoJSON, Map, TileLayer } from "react-leaflet";
 import PropTypes from "prop-types";
 import LocateControl from "./LocateControl";
@@ -9,13 +8,10 @@ import Legend from "./Legend";
 // import L from "leaflet";
 
 import {
-  BOTH_TAB,
-  CONF_TAB,
   CONFIRMED_CIRCLE_STYLE,
   NO_DATA_THRESHOLD,
   NOT_ENOUGH_GRAY,
   POLYGON_OPACITY,
-  TABS,
 } from "./mapConstants";
 
 class Leafletmap extends Component {
@@ -328,6 +324,7 @@ Leafletmap.propTypes = {
   data: PropTypes.object,
   country: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
+  tab: PropTypes.object.isRequired,
 };
 
 export default withTranslation("Leafletmap")(Leafletmap);

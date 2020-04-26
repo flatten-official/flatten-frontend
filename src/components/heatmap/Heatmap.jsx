@@ -4,7 +4,7 @@ import Leafletmap from "./Leafletmap";
 import PropTypes from "prop-types";
 import { getMapConfirmedData, getMapFormData } from "../../actions";
 import { connect } from "react-redux";
-import { BOTH_TAB, getCountry, TABS } from "./mapConstants";
+import { getCountry, TABS } from "./mapConstants";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 
 const MapDataFooter = ({ t, formData }) => {
