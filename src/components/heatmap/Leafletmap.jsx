@@ -301,7 +301,7 @@ const Leafletmap = ({ t, data, country, tab, tabSpecifics }) => {
         data={getGeoJson()}
         style={getStyleFunction()}
         // onEachFeature={bindPopups}
-        getPointToLayer={getPointToLayer()}
+        pointToLayer={getPointToLayer()}
         key={tab.tabName}
       />
       <LocateControl />
