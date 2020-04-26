@@ -5,7 +5,7 @@ import { scroller } from "react-scroll";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 import FlattenLogo from "../common/logo/FlattenLogo";
 import HomepageSplash from "../../assets/homepage.svg";
-import HomepageMobileSplash from "../../assets/homepagemobile.svg";
+import HomepageMobileSplash from "../../assets/homepageMobile.svg";
 
 const scrollToForm = () => {
   scroller.scrollTo("symptoms", {
