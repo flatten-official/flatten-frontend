@@ -28,4 +28,46 @@ const responsivefy = (svg) => {
   }
 };
 
-export default { responsivefy };
+/* Parse out the confirmed data to a format that is convenient to work with in D3.
+ *  raw is the JS object that is stored on the bucket. */
+function genConfirmedData(
+  raw,
+  province,
+  timeSeriesProperty = "Time Series (Daily)"
+) {
+  let timeSeries = raw[province][timeSeriesProperty];
+  let dates = Object.keys(timeSeries);
+  let provinces = Object.keys(raw);
+  return dates.map((date) => ({
+    date: new Date(date),
+    total: {
+      deaths: timeSeries[date]["Total Deaths"],
+      tested: timeSeries[date]["Total Tested"],
+      confirmed_cases: timeSeries[date]["Total Cases"],
+      recovered: timeSeries[date]["Total Recovered"],
+    },
+  }));
+}
+
+/* Fetch one or multiple "csv" or "json" files depending on the type specified */
+async function fetchData(urls, type) {
+  let ret = {};
+  let name, url;
+  for ([name, url] of Object.entries(urls)) {
+    ret[name] = await d3[type](url);
+  }
+  return ret;
+}
+
+function getSvg(container_selector, [width, height]) {
+  let svg = d3
+    .select(container_selector)
+    .append("svg")
+    .attr("viewBox", [0, 0, width, height])
+    .attr("width", width)
+    .attr("height", height)
+    .call(responsivefy);
+  return svg;
+}
+
+export default { genConfirmedData, fetchData, getSvg };
