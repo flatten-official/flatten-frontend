@@ -6,3 +6,5 @@ dispatch:
     service: default
   - url: "flatten.org/*"
     service: default
+  - url: "m.flatten.ca/*"
+    service: variant
