@@ -1,22 +1,19 @@
 body {
-  margin: 0px;
-}
-
-.info {
-  padding: 6px 8px;
-  font-family: "DM Sans", sans-serif;
-  font-size: calc(12px + 0.3vw);
-}
-
-.info h4 {
-  margin: 0 0 5px;
-  color: #777;
+  margin: 0;
 }
 
 .legend {
   text-align: left;
   line-height: 18px;
   color: #555;
+  padding: 6px 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: calc(12px + 0.3vw);
+}
+
+.legend h4 {
+  margin: 0 0 5px;
+  color: #777;
 }
 
 .legend i {

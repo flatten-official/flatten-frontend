@@ -3,8 +3,10 @@ import { withTranslation } from "react-i18next";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 import { GeoJSON, Map, TileLayer } from "react-leaflet";
 import PropTypes from "prop-types";
-import Legend from "./Legend";
 import LocateControl from "./LocateControl";
+import { getColour } from "./helper";
+import Legend from "./Legend";
+// import L from "leaflet";
 
 import {
   BOTH_TAB,
@@ -15,9 +17,6 @@ import {
   POLYGON_OPACITY,
   TABS,
 } from "./mapConstants";
-
-import { getColour } from "./helper";
-// import L from "leaflet";
 
 class Leafletmap extends Component {
   state = { activeTab: BOTH_TAB };
@@ -42,11 +41,11 @@ class Leafletmap extends Component {
     };
   };
 
-  createFormStyle = (tab) => (feature) => {
+  createFormStyle = () => (feature) => {
     /**
      Returns a function that given a polygon gives it it's color
      */
-    const { dataTag, colourScheme } = TABS[tab];
+    const { dataTag, colourScheme } = TABS[this.state.activeTab];
     const { regionName, geoJsonRegionName } = this.props.country;
     let opacity, colour;
 
@@ -86,14 +85,14 @@ class Leafletmap extends Component {
   };
 
   getStyleFunction = () => {
-    const tab = this.state.activeTab;
-    if (tab === CONF_TAB) {
+    const { activeTab } = this.state;
+    if (activeTab === CONF_TAB) {
       if (this.props.country.useCirclesForConfirmed)
         return (_) => CONFIRMED_CIRCLE_STYLE;
-      else return this.createConfirmedStyle(TABS[tab].colourScheme);
+      else return this.createConfirmedStyle(TABS[activeTab].colourScheme);
     }
 
-    return this.createFormStyle(tab);
+    return this.createFormStyle();
   };
 
   renderTabs = () => {
@@ -343,7 +342,7 @@ class Leafletmap extends Component {
               key={this.state.activeTab}
             />
             <LocateControl />
-            <Legend tab={TABS[this.state.activeTab]} country={country} />
+            <Legend tab={TABS[this.state.activeTab]} />
           </Map>
         </div>
       </>
