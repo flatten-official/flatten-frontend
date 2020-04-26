@@ -101,8 +101,8 @@ const COUNTRIES = {
         [77, -60],
       ],
       start: [37.0902, -95.7129],
-      zoom: 3,
-      minZoom: 8,
+      startZoom: 3,
+      minZoom: 3,
     },
     urls: {
       form:

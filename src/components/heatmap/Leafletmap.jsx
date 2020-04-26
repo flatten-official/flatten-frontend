@@ -42,7 +42,6 @@ class Leafletmap extends Component {
   // }
 
   setTab = (tabID, index) => {
-    console.log("set tab to: " + tabID);
     document
       .getElementById("tabs")
       .children[this.tabIndex].classList.remove("active");
@@ -119,7 +118,7 @@ class Leafletmap extends Component {
     const tab = this.state.tab;
     if (tab === CONF_TAB) {
       if (this.props.country.useCirclesForConfirmed)
-        return () => CONFIRMED_CIRCLE_STYLE;
+        return (_) => CONFIRMED_CIRCLE_STYLE;
       else return this.createConfirmedStyle(TABS[tab].colourScheme);
     }
 
