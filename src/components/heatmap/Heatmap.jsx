@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import Leafletmap from "./Leafletmap";
 import PropTypes from "prop-types";
 import { getMapConfirmedData, getMapFormData } from "../../actions";
 import { connect } from "react-redux";
-import { getCountry } from "./mapConstants";
+import { BOTH_TAB, getCountry, TABS } from "./mapConstants";
+import PrimaryButton from "../common/buttons/PrimaryButton";
 
 const MapDataFooter = ({ t, formData }) => {
   const getNumResponses = (formData) =>
@@ -30,6 +31,26 @@ MapDataFooter.propTypes = {
 const HeatMap = ({ t, data, country, loadData }) => {
   useEffect(() => loadData(), []); // [] to only run once
 
+  const [activeTab, setTab] = useState(TABS.both);
+
+  const renderTabs = () => {
+    const buttonList = Object.values(TABS).map((tab, index) => (
+      <PrimaryButton
+        key={tab.tabName}
+        className={tab === activeTab ? "active" : undefined}
+        onClick={(e) => setTab(tab)}
+      >
+        {t(tab.tabName)}
+      </PrimaryButton>
+    ));
+
+    return (
+      <div id="tabs" className="TabSelectors btn_group">
+        {buttonList}
+      </div>
+    );
+  };
+
   return (
     <div className="heatmap" id="heatmap">
       <div className="heatmap__header">
@@ -47,7 +68,8 @@ const HeatMap = ({ t, data, country, loadData }) => {
         </div>
       </div>
       <div className="heatmap__container">
-        <Leafletmap data={data} country={country} />
+        {renderTabs()}
+        <Leafletmap data={data} country={country} tab={activeTab} />
       </div>
 
       <div className="heatmap__header">
@@ -86,10 +108,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-const HeatMapConnected = connect(mapStateToProps, mapDispatchToProps)(HeatMap);
+// Add translation and Redux state
+const HeatMapConnected = withTranslation("Heatmap")(
+  connect(mapStateToProps, mapDispatchToProps)(HeatMap)
+);
 
-const HeatMapWithCountry = ({ t }) => {
-  return <HeatMapConnected country={getCountry()} t={t} />;
-};
+// Add country
+const HeatMapWithCountry = () => <HeatMapConnected country={getCountry()} />;
 
-export default withTranslation("Heatmap")(HeatMapWithCountry);
+export default HeatMapWithCountry;

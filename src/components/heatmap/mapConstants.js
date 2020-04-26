@@ -13,66 +13,62 @@ export const NO_DATA_THRESHOLD = 25;
 export const MAX_CIRCLE_RAD = 25; // TODO WTF
 export const MIN_CIRCLE_RADIUS = 3;
 
-export const BOTH_TAB = "both";
-export const VULN_TAB = "vuln";
-export const POT_TAB = "pot";
-export const CONF_TAB = "confirmed";
-
-export const TABS = {};
-
-TABS[BOTH_TAB] = {
-  colourScheme: {
-    colours: MAP_COLOURS,
-    thresholds: [0.01, 0.02, 0.05, 0.1],
+export const TABS = {
+  both: {
+    colourScheme: {
+      colours: MAP_COLOURS,
+      thresholds: [0.01, 0.02, 0.05, 0.1],
+    },
+    dataTag: "both",
+    notEnoughDataThreshold: -1, // TODO Set to real value
+    legend: {
+      legendTitle: "pct_responses",
+      isPercent: true,
+    },
+    tabName: "pot_vul_button",
+    isConfirmed: false,
   },
-  dataTag: "both",
-  notEnoughDataThreshold: -1, // TODO Set to real value
-  legend: {
-    legendTitle: "pct_responses",
-    isPercent: true,
+  vuln: {
+    colourScheme: {
+      colours: MAP_COLOURS,
+      thresholds: [0.15, 0.25, 0.35, 0.5],
+    },
+    dataTag: "risk",
+    notEnoughDataThreshold: -1, // TODO Set to real value
+    legend: {
+      legendTitle: "pct_responses",
+      isPercent: true,
+    },
+    tabName: "vul_button",
+    isConfirmed: false,
   },
-  tabName: "pot_vul_button",
-};
-
-TABS[VULN_TAB] = {
-  colourScheme: {
-    colours: MAP_COLOURS,
-    thresholds: [0.15, 0.25, 0.35, 0.5],
+  pot: {
+    colourScheme: {
+      colours: MAP_COLOURS,
+      thresholds: [0.02, 0.05, 0.1, 0.25],
+    },
+    dataTag: "pot",
+    notEnoughDataThreshold: -1, // TODO Set to real value
+    legend: {
+      legendTitle: "pct_responses",
+      isPercent: true,
+    },
+    tabName: "pot_button",
+    isConfirmed: false,
   },
-  dataTag: "risk",
-  notEnoughDataThreshold: -1, // TODO Set to real value
-  legend: {
-    legendTitle: "pct_responses",
-    isPercent: true,
+  confirmed: {
+    colourScheme: {
+      colours: MAP_COLOURS,
+      thresholds: [5, 25, 100, 250],
+    },
+    dataTag: "conf",
+    legend: {
+      legendTitle: "number_of_cases",
+      isPercent: false,
+    },
+    tabName: "cul_button",
+    isConfirmed: true,
   },
-  tabName: "vul_button",
-};
-
-TABS[POT_TAB] = {
-  colourScheme: {
-    colours: MAP_COLOURS,
-    thresholds: [0.02, 0.05, 0.1, 0.25],
-  },
-  dataTag: "pot",
-  notEnoughDataThreshold: -1, // TODO Set to real value
-  legend: {
-    legendTitle: "pct_responses",
-    isPercent: true,
-  },
-  tabName: "pot_button",
-};
-
-TABS[CONF_TAB] = {
-  colourScheme: {
-    colours: MAP_COLOURS,
-    thresholds: [5, 25, 100, 250],
-  },
-  dataTag: "conf",
-  legend: {
-    legendTitle: "number_of_cases",
-    isPercent: false,
-  },
-  tabName: "cul_button",
 };
 
 const COUNTRIES = {

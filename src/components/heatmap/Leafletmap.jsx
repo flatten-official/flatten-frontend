@@ -19,8 +19,6 @@ import {
 } from "./mapConstants";
 
 class Leafletmap extends Component {
-  state = { activeTab: BOTH_TAB };
-
   createConfirmedStyle = (colourScheme) => (feature) => {
     // case if dataTag is the confirmed cases
     const numCases = feature.properties[this.props.country.confirmedTag];
@@ -45,7 +43,7 @@ class Leafletmap extends Component {
     /**
      Returns a function that given a polygon gives it it's color
      */
-    const { dataTag, colourScheme } = TABS[this.state.activeTab];
+    const { dataTag, colourScheme } = this.props.tab;
     const { regionName, geoJsonRegionName } = this.props.country;
     let opacity, colour;
 
@@ -77,7 +75,7 @@ class Leafletmap extends Component {
   };
 
   getGeoJson = () => {
-    if (this.state.activeTab === CONF_TAB) {
+    if (this.props.tab.isConfirmed) {
       return this.props.data.confirmed;
     }
 
@@ -85,34 +83,13 @@ class Leafletmap extends Component {
   };
 
   getStyleFunction = () => {
-    const { activeTab } = this.state;
-    if (activeTab === CONF_TAB) {
+    if (this.props.tab.isConfirmed) {
       if (this.props.country.useCirclesForConfirmed)
         return (_) => CONFIRMED_CIRCLE_STYLE;
-      else return this.createConfirmedStyle(TABS[activeTab].colourScheme);
+      else return this.createConfirmedStyle(this.props.tab.colourScheme);
     }
 
     return this.createFormStyle();
-  };
-
-  renderTabs = () => {
-    const { t } = this.props;
-
-    const buttonList = Object.keys(TABS).map((tab, index) => (
-      <PrimaryButton
-        key={tab}
-        className={tab === this.state.activeTab ? "active" : undefined}
-        onClick={(e) => this.setState({ activeTab: tab })}
-      >
-        {t(TABS[tab].tabName)}
-      </PrimaryButton>
-    ));
-
-    return (
-      <div id="tabs" className="TabSelectors btn_group">
-        {buttonList}
-      </div>
-    );
   };
 
   // default map renderer. it only renders circles if pointTolayer is defined
@@ -317,35 +294,32 @@ class Leafletmap extends Component {
     // }
 
     return (
-      <>
-        {this.renderTabs()}
-        <div>
-          <Map
-            id="leaflet-map"
-            maxBounds={country.view.bounds}
-            center={country.view.start}
-            zoom={country.view.startZoom}
-            minZoom={country.view.minZoom}
-          >
-            <TileLayer
-              url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            />
-            <GeoJSON
-              // the key prop on the GeoJSON component ensures React will re-render
-              // the geojson layer when the activeTab changes. This does the work of
-              // unbinding all popups and recreating them with the correct data.
-              data={this.getGeoJson()}
-              style={this.getStyleFunction()}
-              // onEachFeature={bindPopups}
-              // pointToLayer={pointToLayer}
-              key={this.state.activeTab}
-            />
-            <LocateControl />
-            <Legend tab={TABS[this.state.activeTab]} />
-          </Map>
-        </div>
-      </>
+      <div>
+        <Map
+          id="leaflet-map"
+          maxBounds={country.view.bounds}
+          center={country.view.start}
+          zoom={country.view.startZoom}
+          minZoom={country.view.minZoom}
+        >
+          <TileLayer
+            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          />
+          <GeoJSON
+            // the key prop on the GeoJSON component ensures React will re-render
+            // the geojson layer when the activeTab changes. This does the work of
+            // unbinding all popups and recreating them with the correct data.
+            data={this.getGeoJson()}
+            style={this.getStyleFunction()}
+            // onEachFeature={bindPopups}
+            // pointToLayer={pointToLayer}
+            key={this.props.tab.tabName}
+          />
+          <LocateControl />
+          <Legend tab={this.props.tab} />
+        </Map>
+      </div>
     );
   }
 }
