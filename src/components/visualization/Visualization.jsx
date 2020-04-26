@@ -15,7 +15,7 @@ let drawCasesChart = (t, name, container_selector, config) => {
   let svg = utils.getSvg(container_selector, [width, config.height]);
 
   let url =
-    "https://storage.googleapis.com/flatten-staging-271921.appspot.com/confirmed_time_series.json";
+    "https://storage.googleapis.com/flatten-271620.appspot.com/confirmed_time_series.json";
 
   d3.json(url).then((raw) => {
     let x = d3
