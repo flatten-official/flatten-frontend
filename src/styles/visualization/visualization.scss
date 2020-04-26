@@ -1,0 +1,50 @@
+.visualization {
+  margin: 30px;
+  text-align: center;
+  font-family: "DM Sans", sans-serif;
+  font-size: 1.5vw;
+}
+
+select {
+  font-family: "DM Sans", sans-serif;
+  font-size: 1.1vw;
+}
+
+.visualization {
+  padding-top: 0%;
+  padding-right: 20%;
+  padding-bottom: 0%;
+  padding-left: 20%;
+}
+
+@media only screen and (max-width: 1000px) and (min-width: 700px) {
+  .visualization {
+    padding-top: 0%;
+    padding-right: 10%;
+    padding-bottom: 0%;
+    padding-left: 10%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .visualization {
+    padding-top: 0%;
+    padding-right: 3%;
+    padding-bottom: 0%;
+    padding-left: 3%;
+    font-size: 3.5vw;
+  }
+
+  select {
+    font-size: 3vw;
+  }
+}
+
+.confirmed-cases-chart-text {
+}
+
+@media only screen and (max-width: 768px) {
+  .confirmed-cases-chart-text {
+    font-size: 10px;
+  }
+}

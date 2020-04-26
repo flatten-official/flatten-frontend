@@ -2,3 +2,32 @@
   text-align: left;
   font-size: 1.17em;
 }
+
+.popupCustom .leaflet-popup-tip,
+.popupCustom .leaflet-popup-content-wrapper {
+  font-family: "DM Sans", sans-serif;
+  background: $background-grey;
+  color: $black-main;
+}
+
+.mapTitle {
+  color: transparent;
+}
+
+.leaflet-control-container
+  .leaflet-top
+  .leaflet-control-zoom
+  a.leaflet-control-zoom-in {
+  background-color: transparent;
+}
+
+.leaflet-control-container
+  .leaflet-top
+  .leaflet-control-zoom
+  a.leaflet-control-zoom-out {
+  background-color: transparent;
+}
+
+.leaflet-control-locate a {
+  background-color: transparent;
+}

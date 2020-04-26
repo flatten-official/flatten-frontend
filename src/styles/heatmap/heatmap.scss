@@ -1,26 +1,39 @@
 .heatmap {
   text-align: center;
+  background-color: $background-grey;
 }
 
 .heatmap__header {
-  padding: 5% 20% 0% 20%;
+  padding: 1rem 10px 1rem 40px;
 }
 
 .heatmap__description {
-  text-align: center;
-  padding: 1rem 0px;
+  text-align: left;
+  width: 100%;
+  margin-right: 60px;
+}
+
+.heatmap__minidescription {
+  text-align: left;
+  width: 100%;
+  margin-right: 60px;
+  font-size: 14px;
+  color: $darkgrey-text;
 }
 
 .heatmap__title {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
+  width: 100%;
 }
 
-.heatmap__map-icon {
-  height: 3rem;
-  width: 3rem;
-  margin-left: 14px;
+.heatmap__headercontainer {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 85%;
+  margin: 0 auto;
+  align-content: center;
 }
 
 .heatmap__container {
@@ -47,7 +60,20 @@
     font-size: medium;
     margin-right: 6%;
     min-height: 40px;
-    border-radius: 0px 0px 8px 8px;
+    border: solid 0px;
+    background-color: $background-grey;
+    color: $darkgrey-text;
+  }
+  button:hover {
+    background-color: $background-grey;
+    color: $accent;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  button:focus {
+    outline: none;
+    color: $black-main;
   }
   button:last-child {
     margin-right: 0%;
@@ -56,7 +82,7 @@
 
 .active {
   background-color: $white-main;
-  color: $navy-blue;
+  color: $black-main;
   cursor: pointer;
 }
 
@@ -68,6 +94,17 @@
   .heatmap__header {
     padding: 10% 10% 0% 10%;
   }
+  .heatmap__headercontainer {
+    display: block;
+    flex-wrap: nowrap;
+    width: 95%;
+    margin: 0 auto;
+    align-content: center;
+  }
+  button {
+    width: 25%;
+    height: 80px;
+  }
 }
 
 @media screen and (max-width: 800px) {
@@ -75,12 +112,15 @@
     // margin: 0;
     grid-template-columns: 100%;
   }
+
   .btn_group {
     button {
-      font-size: 2.5vw;
+      font-size: 2vw;
       margin-right: 0%;
       width: 25%;
-      min-height: 80px;
+      min-height: 0px;
+      position: left;
+      height: 40px;
     }
   }
 }
