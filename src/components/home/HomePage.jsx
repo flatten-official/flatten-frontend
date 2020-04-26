@@ -36,11 +36,6 @@ const HomePage = () => {
 
   return (
     <div className="home">
-      {isMobile ? (
-        <HomepageMobileSplash className="home__splash" />
-      ) : (
-        <HomepageSplash className="home__splash" />
-      )}
       <div className="home__content">
         <div className="home__description">
           <div className="title">Data saves lives.</div>
@@ -56,6 +51,11 @@ const HomePage = () => {
           <FlattenLogo />
         </div>
       </div>
+      {isMobile ? (
+        <HomepageMobileSplash className="home__splash" />
+      ) : (
+        <HomepageSplash className="home__splash" />
+      )}
     </div>
   );
 };

@@ -1,20 +1,21 @@
 .home {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
   margin-top: 75px;
-  background: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url(../assets/homepage.svg);
 }
 
 .home__splash {
-  z-index: -1;
+  visibility: hidden;
 }
 
 .home__content {
   position: absolute;
+  padding-top: 10px;
   padding-left: 5%;
-  padding-right: 50%;
+  padding-right: 45%;
 }
 
 .home__description {
@@ -36,13 +37,15 @@
 
 @media only screen and (max-width: 600px) {
   .home {
-    justify-content: left;
+    background: linear-gradient(
+        rgba(255, 255, 255, 0.5),
+        rgba(255, 255, 255, 0.5)
+      ),
+      url(../assets/homepageMobile.svg);
   }
 
   .home__content {
-    top: 0px;
-    bottom: 0px;
-    height: 100%;
-    padding-top: 85px;
+    padding-top: 10px;
+    padding-right: 0px;
   }
 }
