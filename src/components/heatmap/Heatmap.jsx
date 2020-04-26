@@ -98,6 +98,13 @@ const HeatMap = ({ t, data, country, loadData }) => {
   );
 };
 
+HeatMap.propTypes = {
+  t: PropTypes.func.isRequired,
+  country: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+  loadData: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => ({ data: state.mapData });
 
 // Passes loadData as a prop to HeatMap where load data calls both data loading functions
