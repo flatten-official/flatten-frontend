@@ -29,6 +29,18 @@ import FrLeafletmap from "./translations/fr/Leafletmap.json";
 import FrInfo from "./translations/fr/Info.json";
 import FrForm from "./translations/fr/Form.json";
 import FrFormSubmissionPopup from "./translations/fr/FormSubmissionPopup.json";
+
+import SoHomePage from "./translations/so/HomePage.json";
+import SoSuppporters from "./translations/so/Supporters.json";
+import SoNavbar from "./translations/so/Navbar.json";
+import SoHeatmap from "./translations/so/Heatmap.json";
+import SoAboutUs from "./translations/so/AboutUs.json";
+import SoEsriGsiMap from "./translations/so/EsriGsiMap.json";
+import SoFooter from "./translations/so/Footer.json";
+import SoLeafletmap from "./translations/so/Leafletmap.json";
+import SoInfo from "./translations/so/Info.json";
+import SoForm from "./translations/so/Form.json";
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -75,6 +87,18 @@ i18n
         Info: FrInfo,
         Form: FrForm,
         FormSubmissionPopup: FrFormSubmissionPopup,
+      },
+      so: {
+        HomePage: SoHomePage,
+        Supporters: SoSuppporters,
+        Navbar: SoNavbar,
+        Heatmap: SoHeatmap,
+        AboutUs: SoAboutUs,
+        EsriGsiMap: SoEsriGsiMap,
+        Footer: SoFooter,
+        Leafletmap: SoLeafletmap,
+        Info: SoInfo,
+        Form: SoForm,
       },
     },
   });
