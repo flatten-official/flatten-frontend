@@ -1,6 +1,5 @@
 {
-  "chunk1": "Flatten is a not-for-profit that focuses on using the <1>self-reported data of individuals</1> to enable a tool that helps to slow the spread of COVID-19.",
-  "chunk2": "To do your part, <1>fill in the form when your symptoms change</1>, <1>share with all of your friends</1>, and then tell them to <1>do the same</1>.",
-  "returningUserButton": "Returning User",
-  "newUserButton": "View our Form"
+  "title": "Data saves lives.",
+  "body": "Add your data to our interactive map to flatten the COVID-19 curve in the US.",
+  "button": "Add my data"
 }

@@ -16,7 +16,7 @@ const scrollToForm = () => {
   });
 };
 
-const HomePage = () => {
+const HomePage = ({ t }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   const onResize = () => {
@@ -43,15 +43,12 @@ const HomePage = () => {
       )}
       <div className="home__content">
         <div className="home__description">
-          <div className="title">Data saves lives.</div>
-          <div className="body">
-            Add your data to our interactive map to flatten the COVID-19 curve
-            in Canada.
-          </div>
+          <div className="title">{t("title")}</div>
+          <div className="body">{t("body")}</div>
         </div>
         <div className="home__footer">
           <PrimaryButton className="home__button body" onClick={scrollToForm}>
-            Add my data
+            {t("button")}
           </PrimaryButton>
           <FlattenLogo />
         </div>
