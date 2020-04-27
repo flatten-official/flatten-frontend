@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import i18next from "i18next";
-const PrivacyPolicy = () => {
+import { withTranslation } from "react-i18next";
+const PrivacyPolicy = ({ t }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -13,11 +14,11 @@ const PrivacyPolicy = () => {
 
   return (
     <div className="legal__body">
-      <div className="title legal__title">Privacy Policy</div>
+      <div className="title legal__title">{t("PP")}</div>
       <iframe src={src} className="pdf">
-        <p>Your browser does not support iframes.</p>
+        <p>{t("error")}</p>
       </iframe>
     </div>
   );
 };
-export default PrivacyPolicy;
+export default withTranslation("Legal")(PrivacyPolicy);
