@@ -5,8 +5,6 @@ import { NOT_ENOUGH_GRAY } from "./mapConstants";
 import Control from "react-leaflet-control";
 
 const LegendContent = ({ t, tab }) => {
-  const { colourScheme, legend } = tab;
-
   const percentRowText = (threshold) => (
     <>
       &gt; {threshold * 100}%<br />
@@ -31,14 +29,14 @@ const LegendContent = ({ t, tab }) => {
   return (
     <Control position="bottomleft">
       <div className="info legend">
-        <h4>{t(legend.legendTitle)}</h4>
-        {tab.notEnoughDataThreshold && renderNotEnoughData()}
-        {colourScheme.colours.map((colour, i) => {
-          const threshold = i === 0 ? 0 : colourScheme.thresholds[i - 1];
+        <h4>{t(tab.ui.legendTitle)}</h4>
+        {tab.data.notEnoughDataThreshold && renderNotEnoughData()}
+        {tab.ui.colourScheme.colours.map((colour, i) => {
+          const threshold = i === 0 ? 0 : tab.ui.colourScheme.thresholds[i - 1];
           return (
             <div key={threshold}>
               <i style={{ background: colour }} />
-              {legend.isPercent
+              {tab.data.isPercent
                 ? percentRowText(threshold)
                 : notPercentRowText(threshold)}
             </div>

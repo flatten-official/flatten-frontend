@@ -13,9 +13,9 @@ import {
   POLYGON_OPACITY,
 } from "./mapConstants";
 
-const Leafletmap = ({ t, data, country, tab, tabSpecifics }) => {
+const LeafletMap = ({ t, data, country, tab, tabSpecifics }) => {
   const createConfirmedStyle = (colourScheme) => (feature) => {
-    // case if dataTag is the confirmed cases
+    // case if fieldName is the confirmed cases
     const numCases = feature.properties[country.confirmedTag];
     let colour, opacity;
 
@@ -38,7 +38,6 @@ const Leafletmap = ({ t, data, country, tab, tabSpecifics }) => {
     /**
      Returns a function that given a polygon gives it it's color
      */
-    const { dataTag, colourScheme } = tab;
     const { regionName, geoJsonRegionName } = country;
     let opacity, colour;
 
@@ -46,12 +45,12 @@ const Leafletmap = ({ t, data, country, tab, tabSpecifics }) => {
     const regionData = data[regionName][feature.properties[geoJsonRegionName]];
 
     // only set numbers if it exists in form_data_obj
-    if (regionData && dataTag in regionData) {
+    if (regionData && tab.data.fieldName in regionData) {
       const numTotal = regionData.number_reports;
 
-      if (numTotal >= tab.notEnoughDataThreshold) {
-        const numCases = regionData[dataTag];
-        colour = getColour(colourScheme, numCases / numTotal);
+      if (numTotal >= tab.data.notEnoughDataThreshold) {
+        const numCases = regionData[tab.data.fieldName];
+        colour = getColour(tab.ui.colourScheme, numCases / numTotal);
 
         if (numCases === 0) opacity = 0;
       }
@@ -68,15 +67,15 @@ const Leafletmap = ({ t, data, country, tab, tabSpecifics }) => {
   };
 
   const getGeoJson = () => {
-    if (tab.dataInGeoJson) return data;
+    if (tab.data.isGeoJson) return data;
 
     return country.geoJson;
   };
 
   const getStyleFunction = () => {
-    if (tab.dataInGeoJson) {
+    if (tab.data.isGeoJson) {
       if (tabSpecifics.points) return (_) => CONFIRMED_CIRCLE_STYLE;
-      else return createConfirmedStyle(tab.colourScheme);
+      else return createConfirmedStyle(tab.ui.colourScheme);
     }
 
     return createFormStyle();
@@ -244,10 +243,12 @@ const Leafletmap = ({ t, data, country, tab, tabSpecifics }) => {
 
     return (feature, latLng) => {
       let cases;
-      if (tab.dataInGeoJson) cases = feature.properties[country.confirmedTag];
+      if (tab.data.isGeoJson) cases = feature.properties[country.confirmedTag];
       else
         cases =
-          data[feature.properties[country.geoJsonRegionName]][tab.dataTag];
+          data[feature.properties[country.geoJsonRegionName]][
+            tab.data.fieldName
+          ];
 
       return L.circleMarker(latLng, {
         radius: getCircleSize(
@@ -279,7 +280,7 @@ const Leafletmap = ({ t, data, country, tab, tabSpecifics }) => {
         style={getStyleFunction()}
         // onEachFeature={bindPopups}
         pointToLayer={getPointToLayer()}
-        key={tab.tabName}
+        key={tab.ui.uniqueKey}
       />
       <LocateControl />
       <Legend tab={tab} />
@@ -287,7 +288,7 @@ const Leafletmap = ({ t, data, country, tab, tabSpecifics }) => {
   );
 };
 
-Leafletmap.propTypes = {
+LeafletMap.propTypes = {
   data: PropTypes.object,
   country: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
@@ -295,4 +296,4 @@ Leafletmap.propTypes = {
   tabSpecifics: PropTypes.object.isRequired,
 };
 
-export default withTranslation("Leafletmap")(Leafletmap);
+export default withTranslation("Leafletmap")(LeafletMap);

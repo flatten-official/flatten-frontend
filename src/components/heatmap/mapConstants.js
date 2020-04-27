@@ -10,67 +10,80 @@ export const POLYGON_OPACITY = 1;
 
 export const TABS = [
   {
-    colourScheme: {
-      colours: MAP_COLOURS,
-      thresholds: [0.01, 0.02, 0.05, 0.1],
-    },
-    dataTag: "both",
-    notEnoughDataThreshold: 25,
-    legend: {
+    keyForCountries: "both",
+    ui: {
+      uniqueKey: 0,
       legendTitle: "pct_responses",
+      tabName: "pot_vul_button",
+      colourScheme: {
+        colours: MAP_COLOURS,
+        thresholds: [0.01, 0.02, 0.05, 0.1],
+      },
+    },
+    data: {
+      notEnoughDataThreshold: 25,
+      fieldName: "both",
+      isGeoJson: false,
+      objectName: "form",
       isPercent: true,
     },
-    tabName: "pot_vul_button",
-    dataInGeoJson: false,
-    dataName: "form",
-    countryTabTag: "both",
   },
   {
-    colourScheme: {
-      colours: MAP_COLOURS,
-      thresholds: [0.15, 0.25, 0.35, 0.5],
-    },
-    dataTag: "risk",
-    notEnoughDataThreshold: 25,
-    legend: {
+    keyForCountries: "vuln",
+    ui: {
+      uniqueKey: 1,
       legendTitle: "pct_responses",
+      tabName: "vul_button",
+      colourScheme: {
+        colours: MAP_COLOURS,
+        thresholds: [0.15, 0.25, 0.35, 0.5],
+      },
+    },
+    data: {
+      fieldName: "risk",
+      notEnoughDataThreshold: 25,
+      isGeoJson: false,
+      objectName: "form",
       isPercent: true,
     },
-    tabName: "vul_button",
-    dataInGeoJson: false,
-    dataName: "form",
-    countryTabTag: "vuln",
   },
   {
-    colourScheme: {
-      colours: MAP_COLOURS,
-      thresholds: [0.02, 0.05, 0.1, 0.25],
-    },
-    dataTag: "pot",
-    notEnoughDataThreshold: 25,
-    legend: {
+    keyForCountries: "pot",
+    ui: {
+      uniqueKey: 2,
       legendTitle: "pct_responses",
-      isPercent: true,
+      tabName: "pot_button",
+      colourScheme: {
+        colours: MAP_COLOURS,
+        thresholds: [0.02, 0.05, 0.1, 0.25],
+      },
     },
-    tabName: "pot_button",
-    dataInGeoJson: false,
-    dataName: "form",
-    countryTabTag: "pot",
+    data: {
+      isGeoJson: false,
+      isPercent: true,
+      objectName: "form",
+      fieldName: "pot",
+      notEnoughDataThreshold: 25,
+    },
   },
   {
-    colourScheme: {
-      colours: MAP_COLOURS,
-      thresholds: [5, 25, 100, 250],
-    },
-    dataTag: "conf",
-    legend: {
+    keyForCountries: "confirmed",
+    ui: {
+      uniqueKey: 3,
       legendTitle: "number_of_cases",
-      isPercent: false,
+      tabName: "cul_button",
+      colourScheme: {
+        colours: MAP_COLOURS,
+        thresholds: [5, 25, 100, 250],
+      },
     },
-    tabName: "cul_button",
-    dataInGeoJson: true,
-    dataName: "confirmed",
-    countryTabTag: "confirmed",
+    data: {
+      isGeoJson: true,
+      isPercent: false,
+      objectName: "confirmed",
+      fieldName: "conf",
+      notEnoughDataThreshold: null,
+    },
   },
 ];
 

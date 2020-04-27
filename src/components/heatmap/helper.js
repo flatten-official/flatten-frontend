@@ -21,6 +21,6 @@ export function getCircleSize(circleSizes, thresholds, count) {
 }
 
 export const getCountryTabSpecifics = (tab, country) =>
-  country.tabs[tab.countryTabTag];
+  country.tabs[tab.keyForCountries];
 
-export const getData = (tab, data) => data[tab.dataName];
+export const getData = (tab, data) => data[tab.data.objectName];

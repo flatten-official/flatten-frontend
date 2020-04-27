@@ -37,11 +37,11 @@ const HeatMap = ({ t, data, country, loadData }) => {
   const renderTabs = () => {
     const buttonList = TABS.map((tab, index) => (
       <PrimaryButton
-        key={tab.tabName}
+        key={tab.ui.uniqueKey}
         className={tab === activeTab ? "active" : undefined}
         onClick={(e) => setTab(tab)}
       >
-        {t(tab.tabName)}
+        {t(tab.ui.tabName)}
       </PrimaryButton>
     ));
 
