@@ -283,6 +283,8 @@ export function getCountry() {
     case "fr":
     case "en":
       return COUNTRIES.canada;
+    default:
+      console.log("Unknown country: " + i18next.language);
   }
 }
 
