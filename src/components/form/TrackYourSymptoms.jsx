@@ -6,8 +6,6 @@ import SubmitModal from "./SubmitModal";
 
 import { setDailyCookie } from "../../actions/index";
 
-import SyringeIcon from "../../assets/syringe.svg";
-
 const TrackYourSymptoms = ({ t, dispatch, daily }) => {
   const [showModal, setShowModal] = useState(false);
 
@@ -45,7 +43,6 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
       <div className="symptoms__header">
         <div className="symptoms__title">
           <div className="title">{t("header")}</div>
-          <SyringeIcon className="symptoms__syringe-icon" />
         </div>
         <p className="symptoms__description body">{t("description")}</p>
         <p className="symptoms__description body">

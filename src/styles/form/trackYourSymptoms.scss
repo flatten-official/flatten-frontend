@@ -15,18 +15,12 @@
 
 .symptoms__title {
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.symptoms__syringe-icon {
-  height: 3rem;
-  width: 3rem;
-  margin-left: 14px;
-  transform: rotate(180deg);
+  justify-content: left;
+  align-items: left;
 }
 
 .symptoms__description {
+  text-align: left;
   padding: 1rem 0px;
 }
 
