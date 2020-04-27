@@ -278,10 +278,11 @@ export function getCountry() {
   switch (i18next.language) {
     case "so":
       return COUNTRIES.somalia;
-    case "en-US":
+    case "enUS":
       return COUNTRIES.usa;
     case "fr":
     case "en":
+    case "en-US": // TODO Defaults to enUS when language is unknown. Should fix this in i18n
       return COUNTRIES.canada;
     default:
       console.log("Unknown country: " + i18next.language);

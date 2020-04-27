@@ -39,7 +39,7 @@ export const getConfirmedPopupContent = (t, count, _) => {
 export const getFormPopupContent = (t, count, total, popupTxt) => {
   if (!total) return null;
 
-  if (total === 1) popupTxt += "_1";
+  if (total === 1) popupTxt += "_1"; // TODO Use plurals
 
-  return t(popupTxt).replace("XXX", count).replace("YYY", total);
+  return t(popupTxt).replace("XXX", count).replace("YYY", total); // TODO use https://www.i18next.com/translation-function/interpolation
 };
