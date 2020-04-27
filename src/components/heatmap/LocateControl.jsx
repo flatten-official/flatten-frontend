@@ -1,24 +1,17 @@
-import { Component } from "react";
+import { useEffect } from "react";
 import { withLeaflet } from "react-leaflet";
 import Locate from "leaflet.locatecontrol";
 
-class LocateControl extends Component {
-  componentDidMount() {
-    const { options, startDirectly } = this.props;
-    const { map } = this.props.leaflet;
+const LocateControl = ({ leaflet }) => {
+  useEffect(() => {
+    new Locate({
+      position: "topleft",
+      initialZoomLevel: 12,
+      showPopup: false,
+    }).addTo(leaflet.map);
+  }, []);
 
-    const lc = new Locate(options);
-    lc.addTo(map);
-
-    if (startDirectly) {
-      // request location update and set location
-      lc.start();
-    }
-  }
-
-  render() {
-    return null;
-  }
-}
+  return null;
+};
 
 export default withLeaflet(LocateControl);

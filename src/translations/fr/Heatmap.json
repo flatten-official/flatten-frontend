@@ -11,5 +11,9 @@
   "p9": "Réponses totales",
   "p10": "Dernière mise à jour",
   "maplink": "https://flatten-271620.web.app/?lang=en",
-  "error": "Désolé, la carte thermique n'a pas été chargée."
+  "error": "Désolé, la carte thermique n'a pas été chargée.",
+  "pot_button": "Cas potentiels",
+  "vul_button": "Individus vulnérables",
+  "cul_button": "Cas confirmés cumulés",
+  "pot_vul_button": "Individus vulnérables symptomatiques"
 }
