@@ -138,7 +138,6 @@ const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
     return (feature, latLng) => {
       const regionalData = getRegionalData(feature);
       if (!regionalData) return null;
-
       const count = getCount(regionalData);
 
       if (!count) return null;

@@ -180,7 +180,7 @@ const COUNTRIES = {
           "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
         fields: {
           getEnglishName: (prop) => prop.Combined_Key,
-          getConfirmed: (prop) => prop.CaseCount,
+          getConfirmed: (prop) => prop.Confirmed,
           getLastUpdated: (prop) => prop.Last_Update,
         },
         ui: {
