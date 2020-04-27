@@ -6,12 +6,7 @@ import i18next from "i18next";
 const MAP_COLOURS = ["#FAE0A6", "#FABD05", "#FF7800", "#EB4236", "#C70505"];
 
 export const NOT_ENOUGH_GRAY = "#909090";
-
 export const POLYGON_OPACITY = 1;
-export const NO_DATA_THRESHOLD = 25;
-// max size circle can be on map
-export const MAX_CIRCLE_RAD = 25; // TODO WTF
-export const MIN_CIRCLE_RADIUS = 3;
 
 export const TABS = [
   {
@@ -20,13 +15,15 @@ export const TABS = [
       thresholds: [0.01, 0.02, 0.05, 0.1],
     },
     dataTag: "both",
-    notEnoughDataThreshold: -1, // TODO Set to real value
+    notEnoughDataThreshold: 25,
     legend: {
       legendTitle: "pct_responses",
       isPercent: true,
     },
     tabName: "pot_vul_button",
-    isConfirmed: false,
+    dataInGeoJson: false,
+    dataName: "form",
+    countryTabTag: "both",
   },
   {
     colourScheme: {
@@ -34,13 +31,15 @@ export const TABS = [
       thresholds: [0.15, 0.25, 0.35, 0.5],
     },
     dataTag: "risk",
-    notEnoughDataThreshold: -1, // TODO Set to real value
+    notEnoughDataThreshold: 25,
     legend: {
       legendTitle: "pct_responses",
       isPercent: true,
     },
     tabName: "vul_button",
-    isConfirmed: false,
+    dataInGeoJson: false,
+    dataName: "form",
+    countryTabTag: "vuln",
   },
   {
     colourScheme: {
@@ -48,13 +47,15 @@ export const TABS = [
       thresholds: [0.02, 0.05, 0.1, 0.25],
     },
     dataTag: "pot",
-    notEnoughDataThreshold: -1, // TODO Set to real value
+    notEnoughDataThreshold: 25,
     legend: {
       legendTitle: "pct_responses",
       isPercent: true,
     },
     tabName: "pot_button",
-    isConfirmed: false,
+    dataInGeoJson: false,
+    dataName: "form",
+    countryTabTag: "pot",
   },
   {
     colourScheme: {
@@ -67,7 +68,9 @@ export const TABS = [
       isPercent: false,
     },
     tabName: "cul_button",
-    isConfirmed: true,
+    dataInGeoJson: true,
+    dataName: "confirmed",
+    countryTabTag: "confirmed",
   },
 ];
 
@@ -91,10 +94,23 @@ const COUNTRIES = {
     regionName: "fsa",
     geoJson: convertedBoundaries,
     geoJsonRegionName: "CFSAUID",
-    useCirclesForConfirmed: false,
     confirmedTag: "CaseCount",
     confirmedName: "ENGNAME",
     suffix: "",
+    tabs: {
+      confirmed: {
+        points: false,
+      },
+      pot: {
+        points: false,
+      },
+      vuln: {
+        points: false,
+      },
+      both: {
+        points: false,
+      },
+    },
   },
   usa: {
     view: {
@@ -115,10 +131,26 @@ const COUNTRIES = {
     regionName: "county",
     geoJsonRegionName: "NAME",
     geoJson: counties,
-    useCirclesForConfirmed: true,
+    confirmedThresholds: [],
     confirmedTag: "Confirmed",
     confirmedName: "Combined_Key",
     suffix: "County",
+    tabs: {
+      confirmed: {
+        points: true,
+        circleSizes: [3, 5, 10, 15, 20, 25],
+        thresholds: [100, 500, 1000, 5000, 10000],
+      },
+      pot: {
+        points: false,
+      },
+      vuln: {
+        points: false,
+      },
+      both: {
+        points: false,
+      },
+    },
   },
   somalia: {
     view: {
@@ -143,6 +175,28 @@ const COUNTRIES = {
     confirmedTag: "CONFIRMED",
     confirmedName: "COUNTRY",
     suffix: "",
+    tabs: {
+      confirmed: {
+        points: true,
+        circleSizes: [3, 5, 10, 15, 20, 25],
+        thresholds: [3, 12, 25, 125, 250],
+      },
+      pot: {
+        points: true,
+        circleSizes: [3, 5, 10, 15, 20, 25, 30],
+        thresholds: [3, 12, 25, 125, 250],
+      },
+      vuln: {
+        points: true,
+        circleSizes: [3, 5, 10, 15, 20, 25, 30],
+        thresholds: [3, 12, 25, 125, 250],
+      },
+      both: {
+        points: true,
+        circleSizes: [3, 5, 10, 15, 20, 25],
+        thresholds: [3, 12, 25, 125, 250],
+      },
+    },
   },
 };
 

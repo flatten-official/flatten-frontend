@@ -3,18 +3,17 @@ import { withTranslation } from "react-i18next";
 import { GeoJSON, Map, TileLayer } from "react-leaflet";
 import PropTypes from "prop-types";
 import LocateControl from "./LocateControl";
-import { getColour } from "./helper";
+import { getCircleSize, getColour } from "./helper";
 import Legend from "./Legend";
-// import L from "leaflet";
+import L from "leaflet";
 
 import {
   CONFIRMED_CIRCLE_STYLE,
-  NO_DATA_THRESHOLD,
   NOT_ENOUGH_GRAY,
   POLYGON_OPACITY,
 } from "./mapConstants";
 
-const Leafletmap = ({ t, data, country, tab }) => {
+const Leafletmap = ({ t, data, country, tab, tabSpecifics }) => {
   const createConfirmedStyle = (colourScheme) => (feature) => {
     // case if dataTag is the confirmed cases
     const numCases = feature.properties[country.confirmedTag];
@@ -44,14 +43,13 @@ const Leafletmap = ({ t, data, country, tab }) => {
     let opacity, colour;
 
     // Get data for that postal code from the form
-    const regionData =
-      data.form[regionName][feature.properties[geoJsonRegionName]];
+    const regionData = data[regionName][feature.properties[geoJsonRegionName]];
 
     // only set numbers if it exists in form_data_obj
     if (regionData && dataTag in regionData) {
       const numTotal = regionData.number_reports;
 
-      if (numTotal >= NO_DATA_THRESHOLD) {
+      if (numTotal >= tab.notEnoughDataThreshold) {
         const numCases = regionData[dataTag];
         colour = getColour(colourScheme, numCases / numTotal);
 
@@ -70,15 +68,14 @@ const Leafletmap = ({ t, data, country, tab }) => {
   };
 
   const getGeoJson = () => {
-    console.log(country);
-    if (tab.isConfirmed) return data.confirmed;
+    if (tab.dataInGeoJson) return data;
 
     return country.geoJson;
   };
 
   const getStyleFunction = () => {
-    if (tab.isConfirmed) {
-      if (country.useCirclesForConfirmed) return (_) => CONFIRMED_CIRCLE_STYLE;
+    if (tab.dataInGeoJson) {
+      if (tabSpecifics.points) return (_) => CONFIRMED_CIRCLE_STYLE;
       else return createConfirmedStyle(tab.colourScheme);
     }
 
@@ -88,7 +85,7 @@ const Leafletmap = ({ t, data, country, tab }) => {
   // we wait until the formData is not null before rendering the GeoJSON.
   // otherwise it will try to create a popup for every FSA but the data won't
   // be there yet.
-  if (!data.form || !data.confirmed) return <h3>{t("loading")}</h3>;
+  if (!data) return <h3>{t("loading")}</h3>;
 
   // this function is called with each polygon when the GeoJSON polygons are rendered
   // just creates the popup content and binds a popup to each polygon
@@ -98,13 +95,6 @@ const Leafletmap = ({ t, data, country, tab }) => {
     const popupStyle = {
       className: "popupCustom",
     };
-    const regionID = feature.properties[country.geoJsonRegionName];
-    let regionData = data.form[country.regionName][regionID];
-    if (!regionData) {
-      console.log("no data for region ID", regionID);
-      regionData = {}; // instead of an error, it will say 'undefined' in the popup
-    }
-
     let content;
 
     if (tab.dataTag === "conf") {
@@ -113,8 +103,18 @@ const Leafletmap = ({ t, data, country, tab }) => {
         `${feature.properties[country.confirmedTag]} ${t(
           "confirmedCases"
         )} <br />`;
-      // `${t("last_updated")}: ${feature.properties.Last_Updated}`;
+
+      if ("Last_Updated" in feature.properties) {
+        content += `${t("last_updated")}: ${feature.properties.Last_Updated}`;
+      }
     } else {
+      const regionID = feature.properties[country.geoJsonRegionName];
+      let regionData = data[country.regionName][regionID];
+      if (!regionData) {
+        console.log("no data for region ID", regionID);
+        regionData = {}; // instead of an error, it will say 'undefined' in the popup
+      }
+
       let XXX;
       const YYY = regionData.number_reports;
 
@@ -147,47 +147,26 @@ const Leafletmap = ({ t, data, country, tab }) => {
     layer.bindPopup(content, popupStyle);
   };
 
-  // let pointToLayer;
-  // let bindPopups = bindPopupOnEachFeature;
+  const getPointToLayer = () => {
+    if (!tabSpecifics.points) return undefined;
 
-  // if (country === USA || country === SOMALIA) {
-  //   bindPopups = bindPopupOnEachFeatureINT;
-  //   pointToLayer = (feature, latlng) => {
-  //     let radius = MIN_CIRCLE_RADIUS;
-  //     let cases = feature.properties.Confirmed;
-  //     let somaliaMultiplier = 1;
-  //     if (country === USA) {
-  //       cases = feature.properties.Confirmed;
-  //     } else {
-  //       somaliaMultiplier = 0.025;
-  //       if (this.state.activeTab === POT_TAB) {
-  //         cases = data.form[feature.properties.NAME].pot;
-  //       } else if (this.state.activeTab === VULN_TAB) {
-  //         cases = data.form[feature.properties.NAME].risk;
-  //       } else if (this.state.activeTab === BOTH_TAB) {
-  //         cases = data.form[feature.properties.NAME].both;
-  //       }
-  //     }
+    return (feature, latLng) => {
+      let cases;
+      if (tab.dataInGeoJson) cases = feature.properties[country.confirmedTag];
+      else
+        cases =
+          data[feature.properties[country.geoJsonRegionName]][tab.dataTag];
 
-  //     if (cases > 10000 * somaliaMultiplier) {
-  //       radius = MAX_CIRCLE_RAD;
-  //     } else if (cases > 5000 * somaliaMultiplier) {
-  //       radius = MAX_CIRCLE_RAD * (4 / 5);
-  //     } else if (cases > 2500 * somaliaMultiplier) {
-  //       radius = MAX_CIRCLE_RAD * (3 / 5);
-  //     } else if (cases > 1000 * somaliaMultiplier) {
-  //       radius = MAX_CIRCLE_RAD / 2;
-  //     } else if (cases > 500 * somaliaMultiplier) {
-  //       radius = MAX_CIRCLE_RAD * (2 / 5);
-  //     } else if (cases > 100 * somaliaMultiplier) {
-  //       radius = MAX_CIRCLE_RAD / 5;
-  //     }
+      return L.circleMarker(latLng, {
+        radius: getCircleSize(
+          tabSpecifics.circleSizes,
+          tabSpecifics.thresholds,
+          cases
+        ),
+      });
+    };
+  };
 
-  //     return L.circleMarker(latlng, {
-  //       radius: radius,
-  //     });
-  //   };
-  // }
   return (
     <Map
       id="leaflet-map"
@@ -207,8 +186,8 @@ const Leafletmap = ({ t, data, country, tab }) => {
         data={getGeoJson()}
         style={getStyleFunction()}
         onEachFeature={bindPopupOnEachFeature}
-        // pointToLayer={pointToLayer}
-        key={tab.dataTag}
+        pointToLayer={getPointToLayer()}
+        key={tab.tabName}
       />
       <LocateControl />
       <Legend tab={tab} />
@@ -221,6 +200,7 @@ Leafletmap.propTypes = {
   country: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   tab: PropTypes.object.isRequired,
+  tabSpecifics: PropTypes.object.isRequired,
 };
 
 export default withTranslation("Leafletmap")(Leafletmap);

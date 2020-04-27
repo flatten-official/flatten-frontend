@@ -7,6 +7,7 @@ import { getMapConfirmedData, getMapFormData } from "../../actions";
 import { connect } from "react-redux";
 import { getCountry, TABS } from "./mapConstants";
 import PrimaryButton from "../common/buttons/PrimaryButton";
+import { getCountryTabSpecifics, getData } from "./helper";
 
 const MapDataFooter = ({ t, formData }) => {
   const getNumResponses = (formData) =>
@@ -72,7 +73,12 @@ const HeatMap = ({ t, data, country, loadData }) => {
       </div>
       <div className="heatmap__container">
         {renderTabs()}
-        <Leafletmap data={data} country={country} tab={activeTab} />
+        <Leafletmap
+          data={getData(activeTab, data)}
+          country={country}
+          tab={activeTab}
+          tabSpecifics={getCountryTabSpecifics(activeTab, country)}
+        />
       </div>
 
       <div className="heatmap__header">
