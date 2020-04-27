@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
+import i18next from "i18next";
 import Leafletmap from "./Leafletmap";
 import PropTypes from "prop-types";
 import { getMapConfirmedData, getMapFormData } from "../../actions";
@@ -51,6 +52,8 @@ const HeatMap = ({ t, data, country, loadData }) => {
     );
   };
 
+  const somaliToggle = i18next.language === "so" ? false : true;
+
   return (
     <div className="heatmap" id="heatmap">
       <div className="heatmap__header">
@@ -82,7 +85,7 @@ const HeatMap = ({ t, data, country, loadData }) => {
             </p>
           </div>
 
-          <MapDataFooter t={t} formData={data.form} />
+          {somaliToggle && <MapDataFooter t={t} formData={data.form} />}
 
           <div className="heatmap__minidescription body">
             <p>
