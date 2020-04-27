@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { scroller } from "react-scroll";
+import { withTranslation } from "react-i18next";
+
 import Modal from "../common/modal/Modal";
 import GiftIcon from "../../assets/gift.svg";
 import FacebookButton from "../common/buttons/FacebookButton";
 import TwitterButton from "../common/buttons/TwitterButton";
 
-const SubmitModal = ({ onClose }) => {
+const SubmitModal = ({ onClose, t }) => {
   useEffect(
     () => () => {
       scroller.scrollTo("heatmap", {
@@ -20,9 +22,9 @@ const SubmitModal = ({ onClose }) => {
   return (
     <Modal className="submit-modal" onClose={onClose}>
       <div className="submit-modal__content body">
-        <b>Thank you for submitting our form!</b>
+        <b>{t("thanks")}</b>
         <br />
-        Exit to go to the heatmap.
+        {t("heatmap-prompt")}
       </div>
       <GiftIcon className="submit-modal__gift-icon" />
       <div className="submit-modal__share">
@@ -33,4 +35,4 @@ const SubmitModal = ({ onClose }) => {
   );
 };
 
-export default SubmitModal;
+export default withTranslation("FormModal")(SubmitModal);

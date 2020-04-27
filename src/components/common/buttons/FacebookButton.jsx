@@ -1,10 +1,11 @@
 import React from "react";
 import { FacebookShareButton, FacebookIcon } from "react-share";
+import { withTranslation } from "react-i18next";
 
-const FacebookButton = () => {
+const FacebookButton = ({ t }) => {
   return (
     <div className="share-button">
-      <div className="body">Share</div>
+      <div className="body">{t("facebook-caption")}</div>
       <FacebookShareButton url="https://flatten.ca">
         <FacebookIcon size="8vh" borderRadius="8px" />
       </FacebookShareButton>
@@ -12,4 +13,4 @@ const FacebookButton = () => {
   );
 };
 
-export default FacebookButton;
+export default withTranslation("FormModal")(FacebookButton);
