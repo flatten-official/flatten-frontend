@@ -139,6 +139,7 @@ const COUNTRIES = {
     tabs: {
       confirmed: {
         points: true,
+        sizes: { 10000: 25, 5000: 20, 1000: 15, 500: 10, 100: 5 },
       },
       pot: {
         points: false,
@@ -174,15 +175,19 @@ const COUNTRIES = {
     tabs: {
       confirmed: {
         points: true,
+        sizes: { 250: 25, 125: 20, 25: 15, 12: 10, 3: 5 },
       },
       pot: {
         points: true,
+        sizes: { 250: 25, 125: 20, 25: 15, 12: 10, 3: 5 },
       },
       vuln: {
         points: true,
+        sizes: { 250: 25, 125: 20, 25: 15, 12: 10, 3: 5 },
       },
       both: {
         points: true,
+        sizes: { 250: 25, 125: 20, 25: 15, 12: 10, 3: 5 },
       },
     },
   },

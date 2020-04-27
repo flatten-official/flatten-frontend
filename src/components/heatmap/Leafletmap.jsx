@@ -246,7 +246,7 @@ const Leafletmap = ({ t, data, country, tab, tabSpecifics }) => {
     return (feature, latLng) => {
       // TODO Implement radius logic
       //
-      //   const cases = feature.properties[country.confirmedTag];
+      const cases = feature.properties[country.confirmedTag];
       //   let radius = MIN_CIRCLE_RADIUS;
       //   let somaliaMultiplier = 1;
       //   if (country === USA) {
