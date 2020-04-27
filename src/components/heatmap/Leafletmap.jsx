@@ -43,29 +43,36 @@ const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
    Returns a function that given a polygon gives it it's color
    */
   const createPolygonStyle = () => (feature) => {
-    const isPercent = tab.data.isPercent;
-    const minCount = tab.data.notEnoughDataThreshold;
-
-    // Get data for that postal code from the form
     const regionalData = getRegionalData(feature);
-    if (!regionalData) return NOT_ENOUGH_DATA_POLYGON_STYLE;
+    let numCases;
 
-    let totalCount;
-    if (minCount || isPercent) {
-      // If one or the other we need the total count
+    if (dataInfo.type === DATA_TYPE.OVERLAY) {
+      const isPercent = tab.data.isPercent;
+      const minCount = country.data.form.notEnoughDataThreshold;
 
-      totalCount = dataInfo.fields.getRegionalTotal(regionalData);
+      // Get data for that postal code from the form
+      if (!regionalData) return NOT_ENOUGH_DATA_POLYGON_STYLE;
 
-      if (!totalCount) return NOT_ENOUGH_DATA_POLYGON_STYLE;
+      let totalCount;
+      if (minCount || isPercent) {
+        // If one or the other we need the total count
+
+        totalCount = dataInfo.fields.getRegionalTotal(regionalData);
+
+        if (!totalCount) return NOT_ENOUGH_DATA_POLYGON_STYLE;
+      }
+
+      if (minCount && totalCount < minCount)
+        return NOT_ENOUGH_DATA_POLYGON_STYLE;
+
+      numCases = getCount(regionalData);
+
+      if (isPercent) numCases /= totalCount;
+    } else {
+      numCases = getCount(regionalData);
     }
 
-    if (minCount && totalCount < minCount) return NOT_ENOUGH_DATA_POLYGON_STYLE;
-
-    let numCases = getCount(regionalData);
-
     if (!numCases || numCases <= 0) return BLANK_POLYGON_STYLE;
-
-    if (isPercent) numCases /= totalCount;
 
     return {
       // define the outlines of the map
@@ -94,8 +101,13 @@ const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
       let regionName = getRegionName(feature);
       const regionData = getRegionalData(feature, regionName);
 
+      if (country.suffix) regionName += " " + country.suffix;
+
+      let content = `<h3>${regionName}</h3>`;
+
       if (!regionData) {
-        layer.bindPopup(t("msg_noentries"), POPUP_OPTIONS);
+        content += t("msg_noentries");
+        layer.bindPopup(content, POPUP_OPTIONS);
         return;
       }
 
@@ -103,23 +115,15 @@ const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
       let total;
       if ("getRegionalTotal" in dataInfo.fields)
         total = dataInfo.fields.getRegionalTotal(regionData);
-      const minThreshold = tab.data.notEnoughDataThreshold;
+      const minThreshold = country.data.form.notEnoughDataThreshold;
 
       if (minThreshold && total < minThreshold) {
-        layer.bindPopup(t("msg_noentries"), POPUP_OPTIONS);
+        content += t("msg_noentries");
+        layer.bindPopup(content, POPUP_OPTIONS);
         return;
       }
-
-      if (country.suffix) regionName += " " + country.suffix;
-
-      let content = `<h3>${regionName}</h3>`;
 
       content += tab.ui.getPopupContent(t, count, total);
-
-      if (!content) {
-        layer.bindPopup(t("msg_noentries"), POPUP_OPTIONS);
-        return;
-      }
 
       const lastUpdated = dataInfo.fields.getLastUpdated(regionData);
       if (lastUpdated) content += `${t("last_updated")}: ${lastUpdated}`;

@@ -42,7 +42,6 @@ export const TABS = {
     data: {
       source: "form",
       field: "getBoth",
-      notEnoughDataThreshold: 25,
       isPercent: true,
     },
   },
@@ -61,7 +60,6 @@ export const TABS = {
     data: {
       source: "form",
       field: "getVulnerable",
-      notEnoughDataThreshold: 25,
       isPercent: true,
     },
   },
@@ -81,7 +79,6 @@ export const TABS = {
       source: "form",
       field: "getPotential",
       isPercent: true,
-      notEnoughDataThreshold: 25,
     },
   },
   confirmed: {
@@ -155,6 +152,7 @@ const COUNTRIES = {
           getRegionalTotal: (region) => region.number_reports,
           getLastUpdated: (region) => null, // TODO Add feature
         },
+        notEnoughDataThreshold: 25,
       },
     },
   },
@@ -212,6 +210,7 @@ const COUNTRIES = {
           getRegionalTotal: (region) => region.number_reports,
           getLastUpdated: (region) => null, // TODO Add feature
         },
+        notEnoughDataThreshold: 25,
       },
     },
   },
@@ -271,6 +270,7 @@ const COUNTRIES = {
           circleSizes: [3, 5, 10, 15, 20, 25, 30],
           thresholds: [3, 12, 25, 125, 250],
         },
+        notEnoughDataThreshold: 1,
       },
     },
   },
