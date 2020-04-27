@@ -1,6 +1,7 @@
 import React from "react";
 import i18next from "i18next";
 import HomePage from "./HomePage";
+import ShareLinks from "../share-links/ShareLinks";
 import Visualization from "../visualization/Visualization";
 import Heatmap from "../heatmap/Heatmap";
 import TrackYourSymptoms from "../form/TrackYourSymptoms";
@@ -18,6 +19,7 @@ const Home = () => {
       {somaliToggle && <Heatmap />}
       {somaliToggle && <EsriLink />}
       <Info />
+      <ShareLinks />
     </React.Fragment>
   );
 };
