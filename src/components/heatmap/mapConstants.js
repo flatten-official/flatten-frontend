@@ -105,7 +105,7 @@ const COUNTRIES = {
       ],
       startZoom: 4,
       minZoom: 4,
-      start: [56.1304, -106.3468],
+      start: [56.13, -106.347],
     },
     ui: {
       showDataFooter: true,
@@ -154,7 +154,7 @@ const COUNTRIES = {
         [15, -180],
         [77, -60],
       ],
-      start: [37.0902, -95.7129],
+      start: [37.1, -95.713],
       startZoom: 3,
       minZoom: 3,
     },
@@ -208,10 +208,10 @@ const COUNTRIES = {
     activeTabs: [TABS.vulnerable, TABS.potential, TABS.confirmed],
     view: {
       bounds: [
-        [-1.68325, 40.98105],
-        [12.02464, 51.13387],
+        [1.948, 45.206],
+        [2.177, 45.42],
       ],
-      start: [2.0469, 45.3182],
+      start: [2.045, 45.333],
       startZoom: 13,
       minZoom: 13,
     },
