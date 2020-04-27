@@ -52,7 +52,7 @@ const LeafletMap = ({ t, data, country, tab, tabSpecifics }) => {
         const numCases = regionData[tab.data.fieldName];
         colour = getColour(tab.ui.colourScheme, numCases / numTotal);
 
-        if (numCases === 0) opacity = 0;
+        opacity = numCases === 0 ? 0 : POLYGON_OPACITY;
       }
     }
 
@@ -62,7 +62,7 @@ const LeafletMap = ({ t, data, country, tab, tabSpecifics }) => {
       color: "white",
       // define the color and opacity of each polygon
       fillColor: colour || NOT_ENOUGH_GRAY,
-      fillOpacity: opacity || POLYGON_OPACITY,
+      fillOpacity: opacity,
     };
   };
 
@@ -86,157 +86,65 @@ const LeafletMap = ({ t, data, country, tab, tabSpecifics }) => {
   // be there yet.
   if (!data) return <h3>{t("loading")}</h3>;
 
-  // const styleOptions = {
-  //   className: "popupCustom",
-  // };
-  // // needs more info for potential cases by county
-  // const bindPopupOnEachFeatureINT = (feature, layer) => {
-  //   let content;
-  //   let regionID = "";
-  //   let regionData;
-  //   let somaliaMultiplier = 1;
-  //
-  //   if (country === USA) {
-  //     regionID = feature.properties.COUNTYNS;
-  //     regionData = this.props.data.form.county[regionID];
-  //   } else {
-  //     regionID = feature.properties.name;
-  //     try {
-  //       regionData = this.props.data.form.region[regionID];
-  //     } catch {
-  //       regionData = null;
-  //     }
-  //     somaliaMultiplier = 25;
-  //   }
-  //
-  //   let regionReports;
-  //   try {
-  //     regionReports = regionData.number_reports;
-  //   } catch {
-  //     regionReports = 0;
-  //   }
-  //
-  //   if (regionData) {
-  //     if (regionReports < 25 / somaliaMultiplier) {
-  //       content = "<h3>" + feature.properties.NAME;
-  //       if (country === USA) {
-  //         content += " County</h3>We don't have enough data for this region";
-  //       } else {
-  //         content += "</h3>We don't have enough data for this region";
-  //       }
-  //     } else {
-  //       content = "<h3>" + feature.properties.NAME;
-  //
-  //       if (country === USA) {
-  //         content += " County</h3>";
-  //       } else {
-  //         content += "</h3>";
-  //       }
-  //
-  //       if (this.state.activeTab === VULN_TAB) {
-  //         content +=
-  //           "<h3>" +
-  //           regionData.risk +
-  //           " vulnerable individuals" +
-  //           regionData.number_reports +
-  //           " reports in total</h3>";
-  //       } else if (this.state.activeTab === BOTH_TAB) {
-  //         content +=
-  //           "<h3>" +
-  //           regionData.both +
-  //           " vulnerable individuals who are also potential cases" +
-  //           regionData.number_reports +
-  //           " reports in total</h3>";
-  //       } else if (this.state.activeTab === POT_TAB) {
-  //         content +=
-  //           "<h3>" +
-  //           regionData.pot +
-  //           " potential cases" +
-  //           regionData.number_reports +
-  //           " reports in total</h3>";
-  //       }
-  //     }
-  //   } else {
-  //     if (this.state.activeTab === CONF_TAB) {
-  //       if (country === USA) {
-  //         content =
-  //           "<h3>" +
-  //           feature.properties.Combined_Key +
-  //           "</h3>" +
-  //           "Confirmed Cases: " +
-  //           feature.properties.Confirmed;
-  //       } else {
-  //         content =
-  //           "<h3>" +
-  //           feature.properties.COUNTRY +
-  //           "</h3>" +
-  //           "<p>Confirmed Cases: " +
-  //           feature.properties.CONFIRMED +
-  //           "</p>";
-  //       }
-  //     } else {
-  //       content =
-  //         "<h3>" +
-  //         feature.properties.NAME +
-  //         " County</h3>" +
-  //         "We don't have enough data for this region";
-  //     }
-  //   }
-  //
-  //   layer.bindPopup(content, styleOptions);
-  // };
-  //
-  // // this function is called with each polygon when the GeoJSON polygons are rendered
-  // // just creates the popup content and binds a popup to each polygon
-  // // `feature` is the GeoJSON feature (the FSA polygon)
-  // // use the FSA polygon FSA ID to get the FSA data from `formData`
-  // const bindPopupOnEachFeature = (feature, layer) => {
-  //   const fsaID = feature.properties.CFSAUID;
-  //   let fsaData = data.form.fsa[fsaID];
-  //   if (!fsaData) {
-  //     console.log("no data for fsa ID", fsaID);
-  //     fsaData = {}; // instead of an error, it will say 'undefined' in the popup
-  //   }
-  //
-  //   let content;
-  //
-  //   if (this.state.activeTab === CONF_TAB) {
-  //     content =
-  //       `<h3>${feature.properties.ENGNAME}</h3>` +
-  //       `${feature.properties.CaseCount} ${t("confirmedCases")} <br />` +
-  //       `${t("last_updated")}: ${feature.properties.Last_Updated}`;
-  //   } else {
-  //     let XXX;
-  //     const YYY = fsaData.number_reports;
-  //     const one = YYY === one;
-  //
-  //     if (YYY < 25) {
-  //       content = t("msg_noentries");
-  //     } else {
-  //       if (this.state.activeTab === VULN_TAB) {
-  //         XXX = fsaData.risk;
-  //         if (one) content = t("vul_case_popup_1");
-  //         else content = t("vul_case_popup");
-  //       } else if (this.state.activeTab === BOTH_TAB) {
-  //         XXX = fsaData.both;
-  //         if (one) content = t("pot_vul_popup_1");
-  //         else content = t("pot_vul_popup");
-  //       } else if (this.state.activeTab === POT_TAB) {
-  //         XXX = fsaData.pot;
-  //         if (one) content = t("pot_case_popup_1");
-  //         else content = t("pot_case_popup");
-  //       }
-  //     }
-  //     content = content
-  //       .replace("FSA", fsaID)
-  //       .replace("XXX", XXX)
-  //       .replace("YYY", YYY);
-  //   }
-  //
-  //   layer.bindPopup(content, styleOptions);
-  // };
-  //
-  // let bindPopups = bindPopupOnEachFeature;
+  // this function is called with each polygon when the GeoJSON polygons are rendered
+  // just creates the popup content and binds a popup to each polygon
+  // `feature` is the GeoJSON feature (the FSA polygon)
+  // use the FSA polygon FSA ID to get the FSA data from `formData`
+  const bindPopupOnEachFeature = (feature, layer) => {
+    const popupStyle = {
+      className: "popupCustom",
+    };
+    let content;
+
+    if (tab.dataTag === "conf") {
+      content =
+        `<h3>${feature.properties[country.confirmedName]}</h3>` +
+        `${feature.properties[country.confirmedTag]} ${t(
+          "confirmedCases"
+        )} <br />`;
+
+      if ("Last_Updated" in feature.properties) {
+        content += `${t("last_updated")}: ${feature.properties.Last_Updated}`;
+      }
+    } else {
+      const regionID = feature.properties[country.geoJsonRegionName];
+      let regionData = data[country.regionName][regionID];
+      if (!regionData) {
+        console.log("no data for region ID", regionID);
+        regionData = {}; // instead of an error, it will say 'undefined' in the popup
+      }
+
+      let XXX;
+      const YYY = regionData.number_reports;
+
+      // eslint-disable-next-line no-use-before-define
+      const one = YYY === one;
+
+      if (YYY === undefined || YYY < 25) {
+        content = t("msg_noentries");
+      } else {
+        if (tab.dataTag === "risk") {
+          XXX = regionData.risk;
+          if (one) content = t("vul_case_popup_1");
+          else content = t("vul_case_popup");
+        } else if (tab.dataTag === "both") {
+          XXX = regionData.both;
+          if (one) content = t("pot_vul_popup_1");
+          else content = t("pot_vul_popup");
+        } else if (tab.dataTag === "pot") {
+          XXX = regionData.pot;
+          if (one) content = t("pot_case_popup_1");
+          else content = t("pot_case_popup");
+        }
+      }
+      content = content
+        .replace("FSA", regionID + " " + country.suffix)
+        .replace("XXX", XXX)
+        .replace("YYY", YYY);
+    }
+
+    layer.bindPopup(content, popupStyle);
+  };
 
   const getPointToLayer = () => {
     if (!tabSpecifics.points) return undefined;
@@ -278,7 +186,7 @@ const LeafletMap = ({ t, data, country, tab, tabSpecifics }) => {
         // unbinding all popups and recreating them with the correct data.
         data={getGeoJson()}
         style={getStyleFunction()}
-        // onEachFeature={bindPopups}
+        onEachFeature={bindPopupOnEachFeature}
         pointToLayer={getPointToLayer()}
         key={tab.ui.uniqueKey}
       />

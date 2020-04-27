@@ -108,6 +108,8 @@ const COUNTRIES = {
     geoJson: convertedBoundaries,
     geoJsonRegionName: "CFSAUID",
     confirmedTag: "CaseCount",
+    confirmedName: "ENGNAME",
+    suffix: "",
     tabs: {
       confirmed: {
         points: false,
@@ -140,10 +142,12 @@ const COUNTRIES = {
         "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
     },
     regionName: "county",
-    geoJsonRegionName: "COUNTYNS",
+    geoJsonRegionName: "NAME",
     geoJson: counties,
     confirmedThresholds: [],
     confirmedTag: "Confirmed",
+    confirmedName: "Combined_Key",
+    suffix: "County",
     tabs: {
       confirmed: {
         points: true,
@@ -173,14 +177,17 @@ const COUNTRIES = {
     },
     urls: {
       form:
-        "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json", // TODO Change to somalia
+        "https://storage.googleapis.com/flatten-staging-271921.appspot.com/somalia_data.json", // TODO Change to somalia
       confirmed:
         "https://storage.googleapis.com/flatten-staging-271921.appspot.com/somalia_confirmed.json",
     },
     geoJson: monga,
     regionName: "region",
-    geoJsonRegionName: "name",
+    geoJsonRegionName: "NAME",
+    useCirclesForConfirmed: true,
     confirmedTag: "CONFIRMED",
+    confirmedName: "COUNTRY",
+    suffix: "",
     tabs: {
       confirmed: {
         points: true,
