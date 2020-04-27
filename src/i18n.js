@@ -16,6 +16,7 @@ import EnFooter from "./translations/en/Footer.json";
 import EnLeafletmap from "./translations/en/Leafletmap.json";
 import EnInfo from "./translations/en/Info.json";
 import EnForm from "./translations/en/Form.json";
+import EnFormSubmissionPopup from "./translations/en/FormSubmissionPopup.json";
 
 import FrHomePage from "./translations/fr/HomePage.json";
 import FrSuppporters from "./translations/fr/Supporters.json";
@@ -27,6 +28,7 @@ import FrFooter from "./translations/fr/Footer.json";
 import FrLeafletmap from "./translations/fr/Leafletmap.json";
 import FrInfo from "./translations/fr/Info.json";
 import FrForm from "./translations/fr/Form.json";
+import FrFormSubmissionPopup from "./translations/fr/FormSubmissionPopup.json";
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -47,6 +49,7 @@ i18n
         Leafletmap: EnLeafletmap,
         Info: EnInfo,
         Form: EnForm,
+        FormSubmissionPopup: EnFormSubmissionPopup,
       },
       enUS: {
         HomePage: EnHomePageUS,
@@ -58,6 +61,7 @@ i18n
         Footer: EnFooter,
         Info: EnInfo,
         Form: EnFormUS,
+        FormSubmissionPopup: EnFormSubmissionPopup,
       },
       fr: {
         HomePage: FrHomePage,
@@ -70,6 +74,7 @@ i18n
         Leafletmap: FrLeafletmap,
         Info: FrInfo,
         Form: FrForm,
+        FormSubmissionPopup: FrFormSubmissionPopup,
       },
     },
   });
