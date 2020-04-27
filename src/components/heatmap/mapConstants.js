@@ -21,11 +21,6 @@ export const DATA_TYPE = {
   STANDALONE: 1,
 };
 
-export const FILE_TYPE = {
-  JSON: 0,
-  GEOJSON: 1,
-};
-
 export const TABS = {
   both: {
     ui: {
@@ -96,7 +91,6 @@ export const TABS = {
       source: "confirmed",
       field: "getConfirmed",
       isPercent: false,
-      notEnoughDataThreshold: null,
     },
   },
 };
@@ -120,7 +114,6 @@ const COUNTRIES = {
       confirmed: {
         type: DATA_TYPE.STANDALONE,
         shapeType: SHAPE_TYPE.POLYGONS,
-        fileType: FILE_TYPE.GEOJSON,
         url:
           "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson",
         fields: {
@@ -135,7 +128,6 @@ const COUNTRIES = {
           "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
         type: DATA_TYPE.OVERLAY,
         shapeType: SHAPE_TYPE.POLYGONS,
-        fileType: FILE_TYPE.JSON,
         baseLayer: {
           geoJson: canadaGeoJsonBase,
           fields: {
@@ -150,7 +142,6 @@ const COUNTRIES = {
           getVulnerable: (region) => region.risk,
           getBoth: (region) => region.both,
           getRegionalTotal: (region) => region.number_reports,
-          getLastUpdated: (region) => null, // TODO Add feature
         },
         notEnoughDataThreshold: 25,
       },
@@ -170,12 +161,10 @@ const COUNTRIES = {
     ui: {
       showDataFooter: true,
     },
-    suffix: "County",
     data: {
       confirmed: {
         type: DATA_TYPE.STANDALONE,
         shapeType: SHAPE_TYPE.CIRCLES,
-        fileType: FILE_TYPE.GEOJSON,
         url:
           "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
         fields: {
@@ -193,12 +182,14 @@ const COUNTRIES = {
           "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json",
         type: DATA_TYPE.OVERLAY,
         shapeType: SHAPE_TYPE.POLYGONS,
-        fileType: FILE_TYPE.JSON,
         baseLayer: {
           geoJson: usaGeoJsonBase,
           fields: {
             getRegionName: (prop) => prop.NAME,
           },
+        },
+        ui: {
+          nameSuffix: " County",
         },
         fields: {
           getTimestamp: (obj) => obj.time,
@@ -208,7 +199,6 @@ const COUNTRIES = {
           getVulnerable: (region) => region.risk,
           getBoth: (region) => region.both,
           getRegionalTotal: (region) => region.number_reports,
-          getLastUpdated: (region) => null, // TODO Add feature
         },
         notEnoughDataThreshold: 25,
       },
@@ -233,15 +223,13 @@ const COUNTRIES = {
         url:
           "https://storage.googleapis.com/flatten-staging-271921.appspot.com/somalia_confirmed.json",
         shapeType: SHAPE_TYPE.CIRCLES,
-        fileType: FILE_TYPE.GEOJSON,
         type: DATA_TYPE.STANDALONE,
         fields: {
           getConfirmed: (prop) => prop.CONFIRMED,
           getEnglishName: (prop) => prop.COUNTRY,
-          getLastUpdated: (_) => null,
         },
         ui: {
-          circleSizes: [3, 5, 10, 15, 20, 25],
+          circleSizes: [10, 12, 15, 17, 20, 25],
           thresholds: [3, 12, 25, 125, 250],
         },
       },
@@ -249,7 +237,6 @@ const COUNTRIES = {
         url:
           "https://storage.googleapis.com/flatten-staging-271921.appspot.com/somalia_data.json",
         shapeType: SHAPE_TYPE.CIRCLES,
-        fileType: FILE_TYPE.JSON,
         type: DATA_TYPE.OVERLAY,
         baseLayer: {
           geoJson: somaliaGeoJsonBase,
@@ -264,10 +251,9 @@ const COUNTRIES = {
           getBoth: (region) => null, // TODO implement
           getRegionalTotal: (region) => region.number_reports,
           getTotal: (obj) => null, // TODO implement,
-          getLastUpdated: (region) => null, // TODO Add feature
         },
         ui: {
-          circleSizes: [3, 5, 10, 15, 20, 25, 30],
+          circleSizes: [10, 12, 15, 17, 20, 25],
           thresholds: [3, 12, 25, 125, 250],
         },
         notEnoughDataThreshold: 1,

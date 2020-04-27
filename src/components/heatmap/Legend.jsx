@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { NOT_ENOUGH_GRAY } from "./mapConstants";
 import Control from "react-leaflet-control";
 
-const LegendContent = ({ t, tab }) => {
+const LegendContent = ({ t, tab, dataInfo }) => {
   const percentRowText = (threshold) => (
     <>
       &gt; {threshold * 100}%<br />
@@ -30,7 +30,7 @@ const LegendContent = ({ t, tab }) => {
     <Control position="bottomleft">
       <div className="info legend">
         <h4>{t(tab.ui.legendTitle)}</h4>
-        {tab.data.notEnoughDataThreshold && renderNotEnoughData()}
+        {dataInfo.notEnoughDataThreshold && renderNotEnoughData()}
         {tab.ui.colourScheme.colours.map((colour, i) => {
           const threshold = i === 0 ? 0 : tab.ui.colourScheme.thresholds[i - 1];
           return (
@@ -50,6 +50,7 @@ const LegendContent = ({ t, tab }) => {
 LegendContent.propTypes = {
   t: PropTypes.func.isRequired,
   tab: PropTypes.object.isRequired,
+  dataInfo: PropTypes.object.isRequired,
 };
 
 export default withTranslation("Leafletmap")(LegendContent);

@@ -48,7 +48,7 @@ const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
 
     if (dataInfo.type === DATA_TYPE.OVERLAY) {
       const isPercent = tab.data.isPercent;
-      const minCount = country.data.form.notEnoughDataThreshold;
+      const minCount = dataInfo.notEnoughDataThreshold;
 
       // Get data for that postal code from the form
       if (!regionalData) return NOT_ENOUGH_DATA_POLYGON_STYLE;
@@ -96,44 +96,48 @@ const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
   // just creates the popup content and binds a popup to each polygon
   // `feature` is the GeoJSON feature (the FSA polygon)
   // use the FSA polygon FSA ID to get the FSA data from `formData`
-  const getPopupBinder = () => {
-    return (feature, layer) => {
-      let regionName = getRegionName(feature);
-      const regionData = getRegionalData(feature, regionName);
+  const getPopupBinder = () => (feature, layer) => {
+    let regionName = getRegionName(feature);
+    const regionData = getRegionalData(feature, regionName);
 
-      if (country.suffix) regionName += " " + country.suffix;
+    if (dataInfo.ui && dataInfo.ui.nameSuffix)
+      regionName += dataInfo.ui.nameSuffix;
 
-      let content = `<h3>${regionName}</h3>`;
+    let content = `<h3>${regionName}</h3>`; // Use back ticks to escape sequence
 
-      if (!regionData) {
-        content += t("msg_noentries");
-        layer.bindPopup(content, POPUP_OPTIONS);
-        return;
-      }
+    if (!regionData) {
+      content += t("msg_noentries");
+      layer.bindPopup(content, POPUP_OPTIONS);
+      return;
+    }
 
-      const count = getCount(regionData);
-      let total;
-      if ("getRegionalTotal" in dataInfo.fields)
-        total = dataInfo.fields.getRegionalTotal(regionData);
-      const minThreshold = country.data.form.notEnoughDataThreshold;
+    const count = getCount(regionData);
 
-      if (minThreshold && total < minThreshold) {
-        content += t("msg_noentries");
-        layer.bindPopup(content, POPUP_OPTIONS);
-        return;
-      }
+    let total;
 
-      content += tab.ui.getPopupContent(t, count, total);
+    if (dataInfo.fields.getRegionalTotal)
+      total = dataInfo.fields.getRegionalTotal(regionData);
 
+    const minThreshold = dataInfo.notEnoughDataThreshold;
+
+    if (minThreshold && total < minThreshold) {
+      content += t("msg_noentries");
+      layer.bindPopup(content, POPUP_OPTIONS);
+      return;
+    }
+
+    content += tab.ui.getPopupContent(t, count, total);
+
+    if (dataInfo.fields.getLastUpdated) {
       const lastUpdated = dataInfo.fields.getLastUpdated(regionData);
       if (lastUpdated) content += `${t("last_updated")}: ${lastUpdated}`;
+    }
 
-      layer.bindPopup(content, POPUP_OPTIONS);
-    };
+    layer.bindPopup(content, POPUP_OPTIONS);
   };
 
   const getPointToLayer = () => {
-    if (dataInfo.shapeType !== SHAPE_TYPE.CIRCLES) return undefined;
+    if (dataInfo.shapeType !== SHAPE_TYPE.CIRCLES) return undefined; // Only point to layer for circle type
 
     return (feature, latLng) => {
       const regionalData = getRegionalData(feature);
@@ -179,7 +183,9 @@ const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
         key={tab.ui.uniqueKey}
       />
       <LocateControl />
-      <Legend tab={tab} />
+      {dataInfo.shapeType === SHAPE_TYPE.POLYGONS && (
+        <Legend tab={tab} dataInfo={dataInfo} />
+      )}
     </Map>
   );
 };
