@@ -278,7 +278,7 @@ export function getCountry() {
   switch (i18next.language) {
     case "so":
       return COUNTRIES.somalia;
-    case "enUS":
+    case "en-US":
       return COUNTRIES.usa;
     case "fr":
     case "en":
