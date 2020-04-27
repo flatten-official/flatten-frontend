@@ -6,12 +6,7 @@ import i18next from "i18next";
 const MAP_COLOURS = ["#FAE0A6", "#FABD05", "#FF7800", "#EB4236", "#C70505"];
 
 export const NOT_ENOUGH_GRAY = "#909090";
-
 export const POLYGON_OPACITY = 1;
-export const NO_DATA_THRESHOLD = 25;
-// max size circle can be on map
-export const MAX_CIRCLE_RAD = 25; // TODO WTF
-export const MIN_CIRCLE_RADIUS = 3;
 
 export const TABS = [
   {
@@ -20,13 +15,13 @@ export const TABS = [
       thresholds: [0.01, 0.02, 0.05, 0.1],
     },
     dataTag: "both",
-    notEnoughDataThreshold: -1, // TODO Set to real value
+    notEnoughDataThreshold: 25,
     legend: {
       legendTitle: "pct_responses",
       isPercent: true,
     },
     tabName: "pot_vul_button",
-    dataIsGeoJson: false,
+    dataInGeoJson: false,
     dataName: "form",
     countryTabTag: "both",
   },
@@ -36,13 +31,13 @@ export const TABS = [
       thresholds: [0.15, 0.25, 0.35, 0.5],
     },
     dataTag: "risk",
-    notEnoughDataThreshold: -1, // TODO Set to real value
+    notEnoughDataThreshold: 25,
     legend: {
       legendTitle: "pct_responses",
       isPercent: true,
     },
     tabName: "vul_button",
-    dataIsGeoJson: false,
+    dataInGeoJson: false,
     dataName: "form",
     countryTabTag: "vuln",
   },
@@ -52,13 +47,13 @@ export const TABS = [
       thresholds: [0.02, 0.05, 0.1, 0.25],
     },
     dataTag: "pot",
-    notEnoughDataThreshold: -1, // TODO Set to real value
+    notEnoughDataThreshold: 25,
     legend: {
       legendTitle: "pct_responses",
       isPercent: true,
     },
     tabName: "pot_button",
-    dataIsGeoJson: false,
+    dataInGeoJson: false,
     dataName: "form",
     countryTabTag: "pot",
   },
@@ -73,7 +68,7 @@ export const TABS = [
       isPercent: false,
     },
     tabName: "cul_button",
-    dataIsGeoJson: true,
+    dataInGeoJson: true,
     dataName: "confirmed",
     countryTabTag: "confirmed",
   },
@@ -139,7 +134,8 @@ const COUNTRIES = {
     tabs: {
       confirmed: {
         points: true,
-        sizes: { 10000: 25, 5000: 20, 1000: 15, 500: 10, 100: 5 },
+        circleSizes: [3, 5, 10, 15, 20, 25],
+        thresholds: [100, 500, 1000, 5000, 10000],
       },
       pot: {
         points: false,
@@ -175,19 +171,23 @@ const COUNTRIES = {
     tabs: {
       confirmed: {
         points: true,
-        sizes: { 250: 25, 125: 20, 25: 15, 12: 10, 3: 5 },
+        circleSizes: [3, 5, 10, 15, 20, 25],
+        thresholds: [3, 12, 25, 125, 250],
       },
       pot: {
         points: true,
-        sizes: { 250: 25, 125: 20, 25: 15, 12: 10, 3: 5 },
+        circleSizes: [3, 5, 10, 15, 20, 25, 30],
+        thresholds: [3, 12, 25, 125, 250],
       },
       vuln: {
         points: true,
-        sizes: { 250: 25, 125: 20, 25: 15, 12: 10, 3: 5 },
+        circleSizes: [3, 5, 10, 15, 20, 25, 30],
+        thresholds: [3, 12, 25, 125, 250],
       },
       both: {
         points: true,
-        sizes: { 250: 25, 125: 20, 25: 15, 12: 10, 3: 5 },
+        circleSizes: [3, 5, 10, 15, 20, 25],
+        thresholds: [3, 12, 25, 125, 250],
       },
     },
   },

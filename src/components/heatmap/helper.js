@@ -12,6 +12,14 @@ export function getColour(colourScheme, count) {
   return colourScheme.colours[colourScheme.colours.length - 1];
 }
 
+export function getCircleSize(circleSizes, thresholds, count) {
+  for (let i = 0; i < thresholds.length; i++) {
+    if (count < thresholds[i]) return circleSizes[i];
+  }
+
+  return circleSizes[circleSizes.length - 1];
+}
+
 export const getCountryTabSpecifics = (tab, country) =>
   country.tabs[tab.countryTabTag];
 

@@ -3,13 +3,12 @@ import { withTranslation } from "react-i18next";
 import { GeoJSON, Map, TileLayer } from "react-leaflet";
 import PropTypes from "prop-types";
 import LocateControl from "./LocateControl";
-import { getColour } from "./helper";
+import { getCircleSize, getColour } from "./helper";
 import Legend from "./Legend";
 import L from "leaflet";
 
 import {
   CONFIRMED_CIRCLE_STYLE,
-  NO_DATA_THRESHOLD,
   NOT_ENOUGH_GRAY,
   POLYGON_OPACITY,
 } from "./mapConstants";
@@ -50,7 +49,7 @@ const Leafletmap = ({ t, data, country, tab, tabSpecifics }) => {
     if (regionData && dataTag in regionData) {
       const numTotal = regionData.number_reports;
 
-      if (numTotal >= NO_DATA_THRESHOLD) {
+      if (numTotal >= tab.notEnoughDataThreshold) {
         const numCases = regionData[dataTag];
         colour = getColour(colourScheme, numCases / numTotal);
 
@@ -69,13 +68,13 @@ const Leafletmap = ({ t, data, country, tab, tabSpecifics }) => {
   };
 
   const getGeoJson = () => {
-    if (tab.dataIsGeoJson) return data;
+    if (tab.dataInGeoJson) return data;
 
     return country.geoJson;
   };
 
   const getStyleFunction = () => {
-    if (tab.dataIsGeoJson) {
+    if (tab.dataInGeoJson) {
       if (tabSpecifics.points) return (_) => CONFIRMED_CIRCLE_STYLE;
       else return createConfirmedStyle(tab.colourScheme);
     }
@@ -244,40 +243,18 @@ const Leafletmap = ({ t, data, country, tab, tabSpecifics }) => {
     if (!tabSpecifics.points) return undefined;
 
     return (feature, latLng) => {
-      // TODO Implement radius logic
-      //
-      const cases = feature.properties[country.confirmedTag];
-      //   let radius = MIN_CIRCLE_RADIUS;
-      //   let somaliaMultiplier = 1;
-      //   if (country === USA) {
-      //     cases = feature.properties.Confirmed;
-      //   } else {
-      //     somaliaMultiplier = 0.025;
-      //     if (this.state.activeTab === POT_TAB) {
-      //       cases = data.form[feature.properties.NAME].pot;
-      //     } else if (this.state.activeTab === VULN_TAB) {
-      //       cases = data.form[feature.properties.NAME].risk;
-      //     } else if (this.state.activeTab === BOTH_TAB) {
-      //       cases = data.form[feature.properties.NAME].both;
-      //     }
-      //   }
-      //
-      //   if (cases > 10000 * somaliaMultiplier) {
-      //     radius = MAX_CIRCLE_RAD;
-      //   } else if (cases > 5000 * somaliaMultiplier) {
-      //     radius = MAX_CIRCLE_RAD * (4 / 5);
-      //   } else if (cases > 2500 * somaliaMultiplier) {
-      //     radius = MAX_CIRCLE_RAD * (3 / 5);
-      //   } else if (cases > 1000 * somaliaMultiplier) {
-      //     radius = MAX_CIRCLE_RAD / 2;
-      //   } else if (cases > 500 * somaliaMultiplier) {
-      //     radius = MAX_CIRCLE_RAD * (2 / 5);
-      //   } else if (cases > 100 * somaliaMultiplier) {
-      //     radius = MAX_CIRCLE_RAD / 5;
-      //   }
-      //
+      let cases;
+      if (tab.dataInGeoJson) cases = feature.properties[country.confirmedTag];
+      else
+        cases =
+          data[feature.properties[country.geoJsonRegionName]][tab.dataTag];
+
       return L.circleMarker(latLng, {
-        radius: 2,
+        radius: getCircleSize(
+          tabSpecifics.circleSizes,
+          tabSpecifics.thresholds,
+          cases
+        ),
       });
     };
   };
