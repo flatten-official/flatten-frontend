@@ -197,7 +197,7 @@ const COUNTRIES = {
         baseLayer: {
           geoJson: usaGeoJsonBase,
           fields: {
-            getRegionName: (prop) => prop.CFSAUID,
+            getRegionName: (prop) => prop.NAME,
           },
         },
         fields: {

@@ -23,7 +23,7 @@ const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
   const getRegionName = (feature) => {
     if (dataInfo.type === DATA_TYPE.OVERLAY)
       return dataInfo.baseLayer.fields.getRegionName(feature.properties);
-    else dataInfo.fields[nameGetter](feature);
+    else return dataInfo.fields[nameGetter](feature.properties);
   };
 
   const getRegionalData = (feature, regionName = null) => {
