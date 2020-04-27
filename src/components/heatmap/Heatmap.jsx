@@ -1,48 +1,58 @@
 import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
-import i18next from "i18next";
 import Leafletmap from "./Leafletmap";
 import PropTypes from "prop-types";
 import { getMapConfirmedData, getMapFormData } from "../../actions";
 import { connect } from "react-redux";
-import { getCountry, TABS } from "./mapConstants";
+import { getCountry } from "./mapConstants";
 import PrimaryButton from "../common/buttons/PrimaryButton";
-import { getCountryTabSpecifics, getData } from "./helper";
+import { formatTimestamp, getData, getDataInfo } from "./helper";
 
-const MapDataFooter = ({ t, formData }) => {
-  const getNumResponses = (formData) =>
-    formData.total_responses.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Adds commas to number
+const MapDataFooter = ({ t, data, fields }) => {
+  let numResponses;
+  let date;
 
-  const getDate = (formData) => new Date(1000 * formData.time).toString();
+  if (data) {
+    const total = fields.getTotal(data);
+    if (total) {
+      numResponses = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Adds commas to number
+    }
+
+    const timestamp = fields.getTimestamp(data);
+    if (timestamp) {
+      date = formatTimestamp(timestamp);
+    }
+  }
 
   return (
     <div className="heatmap__minidescription body">
       <b>{t("p9")}</b>
-      <p>{formData ? getNumResponses(formData) : "Loading..."}</p>
+      <p>{numResponses || "Loading..."}</p>
       <b>{t("p10")}</b>
-      <p>{formData ? getDate(formData) : "Loading..."}</p>
+      <p>{date || "Loading..."}</p>
     </div>
   );
 };
 
 MapDataFooter.propTypes = {
   t: PropTypes.func.isRequired,
-  formData: PropTypes.object,
+  data: PropTypes.object,
+  fields: PropTypes.object.isRequired,
 };
 
 const HeatMap = ({ t, data, country, loadData }) => {
   useEffect(() => loadData(), []); // [] to only run once
 
-  const [activeTab, setTab] = useState(TABS[0]);
+  const [activeTab, setTab] = useState(country.activeTabs[0]);
 
   const renderTabs = () => {
-    const buttonList = TABS.map((tab, index) => (
+    const buttonList = country.activeTabs.map((tab, index) => (
       <PrimaryButton
         key={tab.ui.uniqueKey}
         className={tab === activeTab ? "active" : undefined}
         onClick={(e) => setTab(tab)}
       >
-        {t(tab.ui.tabName)}
+        {t(tab.ui.btnContent)}
       </PrimaryButton>
     ));
 
@@ -52,8 +62,6 @@ const HeatMap = ({ t, data, country, loadData }) => {
       </div>
     );
   };
-
-  const somaliToggle = i18next.language === "so" ? false : true;
 
   return (
     <div className="heatmap" id="heatmap">
@@ -75,9 +83,9 @@ const HeatMap = ({ t, data, country, loadData }) => {
         {renderTabs()}
         <Leafletmap
           data={getData(activeTab, data)}
+          dataInfo={getDataInfo(activeTab, country)}
           country={country}
           tab={activeTab}
-          tabSpecifics={getCountryTabSpecifics(activeTab, country)}
         />
       </div>
 
@@ -91,7 +99,13 @@ const HeatMap = ({ t, data, country, loadData }) => {
             </p>
           </div>
 
-          {somaliToggle && <MapDataFooter t={t} formData={data.form} />}
+          {country.ui.showDataFooter && (
+            <MapDataFooter
+              t={t}
+              data={data.form}
+              fields={country.data.form.fields}
+            />
+          )}
 
           <div className="heatmap__minidescription body">
             <p>
@@ -119,8 +133,8 @@ const mapStateToProps = (state) => ({ data: state.mapData });
 // Passes loadData as a prop to HeatMap where load data calls both data loading functions
 const mapDispatchToProps = (dispatch, ownProps) => ({
   loadData: () => {
-    dispatch(getMapFormData(ownProps.country));
-    dispatch(getMapConfirmedData(ownProps.country));
+    dispatch(getMapFormData(ownProps.country.data));
+    dispatch(getMapConfirmedData(ownProps.country.data));
   },
 });
 

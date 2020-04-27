@@ -40,13 +40,13 @@ export const setDailyCookie = () => async (dispatch) => {
 };
 
 export const getMapFormData = (country) => async (dispatch) => {
-  const url = country.urls.form;
+  const url = country.form.url;
   const data = await (await fetch(url)).json();
   dispatch({ type: GET_FORM_DATA, payload: data });
 };
 
 export const getMapConfirmedData = (country) => async (dispatch) => {
-  const url = country.urls.confirmed;
+  const url = country.confirmed.url;
   const data = await (await fetch(url)).json();
   dispatch({ type: GET_CONFIRMED_DATA, payload: data });
 };

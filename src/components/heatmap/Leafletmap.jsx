@@ -3,170 +3,156 @@ import { withTranslation } from "react-i18next";
 import { GeoJSON, Map, TileLayer } from "react-leaflet";
 import PropTypes from "prop-types";
 import LocateControl from "./LocateControl";
-import { getCircleSize, getColour } from "./helper";
+import { getCircleSize, getColour, getNameGetter } from "./helper";
 import Legend from "./Legend";
 import L from "leaflet";
 
 import {
+  BLANK_POLYGON_STYLE,
   CONFIRMED_CIRCLE_STYLE,
-  NOT_ENOUGH_GRAY,
+  DATA_TYPE,
+  NOT_ENOUGH_DATA_POLYGON_STYLE,
   POLYGON_OPACITY,
+  POPUP_OPTIONS,
+  SHAPE_TYPE,
 } from "./mapConstants";
 
-const LeafletMap = ({ t, data, country, tab, tabSpecifics }) => {
-  const createConfirmedStyle = (colourScheme) => (feature) => {
-    // case if fieldName is the confirmed cases
-    const numCases = feature.properties[country.confirmedTag];
-    let colour, opacity;
+const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
+  const nameGetter = getNameGetter();
 
-    if (numCases && numCases > 0) {
-      colour = getColour(colourScheme, numCases);
-      opacity = POLYGON_OPACITY;
-    }
-
-    return {
-      // define the outlines of the map
-      weight: 0.9,
-      color: "white",
-      // define the color and opacity of each polygon
-      fillColor: colour || null,
-      fillOpacity: opacity || 0,
-    };
+  const getRegionName = (feature) => {
+    if (dataInfo.type === DATA_TYPE.OVERLAY)
+      return dataInfo.baseLayer.fields.getRegionName(feature.properties);
+    else dataInfo.fields[nameGetter](feature);
   };
 
-  const createFormStyle = () => (feature) => {
-    /**
-     Returns a function that given a polygon gives it it's color
-     */
-    const { regionName, geoJsonRegionName } = country;
-    let opacity, colour;
+  const getRegionalData = (feature, regionName = null) => {
+    if (dataInfo.type === DATA_TYPE.OVERLAY) {
+      // If it's an overlay we need to get the region name first and then use that to find the region in our data
+      if (!regionName) regionName = getRegionName(feature);
+      return dataInfo.fields.getRegions(data)[regionName];
+    } else {
+      return feature.properties;
+    }
+  };
+
+  const getCount = (regionalData) =>
+    dataInfo.fields[tab.data.field](regionalData);
+
+  /**
+   Returns a function that given a polygon gives it it's color
+   */
+  const createPolygonStyle = () => (feature) => {
+    const isPercent = tab.data.isPercent;
+    const minCount = tab.data.notEnoughDataThreshold;
 
     // Get data for that postal code from the form
-    const regionData = data[regionName][feature.properties[geoJsonRegionName]];
+    const regionalData = getRegionalData(feature);
+    if (!regionalData) return NOT_ENOUGH_DATA_POLYGON_STYLE;
 
-    // only set numbers if it exists in form_data_obj
-    if (regionData && tab.data.fieldName in regionData) {
-      const numTotal = regionData.number_reports;
+    let totalCount;
+    if (minCount || isPercent) {
+      // If one or the other we need the total count
 
-      if (numTotal >= tab.data.notEnoughDataThreshold) {
-        const numCases = regionData[tab.data.fieldName];
-        colour = getColour(tab.ui.colourScheme, numCases / numTotal);
+      totalCount = dataInfo.fields.getRegionalTotal(regionalData);
 
-        opacity = numCases === 0 ? 0 : POLYGON_OPACITY;
-      }
+      if (!totalCount) return NOT_ENOUGH_DATA_POLYGON_STYLE;
     }
+
+    if (minCount && totalCount < minCount) return NOT_ENOUGH_DATA_POLYGON_STYLE;
+
+    let numCases = getCount(regionalData);
+
+    if (!numCases || numCases <= 0) return BLANK_POLYGON_STYLE;
+
+    if (isPercent) numCases /= totalCount;
 
     return {
       // define the outlines of the map
       weight: 0.9,
       color: "white",
       // define the color and opacity of each polygon
-      fillColor: colour || NOT_ENOUGH_GRAY,
-      fillOpacity: opacity,
+      fillColor: getColour(tab.ui.colourScheme, numCases),
+      fillOpacity: POLYGON_OPACITY,
     };
   };
 
-  const getGeoJson = () => {
-    if (tab.data.isGeoJson) return data;
+  const getGeoJson = () =>
+    dataInfo.type === DATA_TYPE.OVERLAY ? dataInfo.baseLayer.geoJson : data;
 
-    return country.geoJson;
+  const getStyleFunction = () =>
+    dataInfo.shapeType === SHAPE_TYPE.CIRCLES
+      ? (_) => CONFIRMED_CIRCLE_STYLE
+      : createPolygonStyle();
+
+  // this function is called with each polygon when the GeoJSON polygons are rendered
+  // just creates the popup content and binds a popup to each polygon
+  // `feature` is the GeoJSON feature (the FSA polygon)
+  // use the FSA polygon FSA ID to get the FSA data from `formData`
+  const getPopupBinder = () => {
+    return (feature, layer) => {
+      let regionName = getRegionName(feature);
+      const regionData = getRegionalData(feature, regionName);
+
+      if (!regionData) {
+        layer.bindPopup(t("msg_noentries"), POPUP_OPTIONS);
+        return;
+      }
+
+      const count = getCount(regionData);
+      let total;
+      if ("getRegionalTotal" in dataInfo.fields)
+        total = dataInfo.fields.getRegionalTotal(regionData);
+      const minThreshold = tab.data.notEnoughDataThreshold;
+
+      if (minThreshold && total < minThreshold) {
+        layer.bindPopup(t("msg_noentries"), POPUP_OPTIONS);
+        return;
+      }
+
+      if (country.suffix) regionName += " " + country.suffix;
+
+      let content = `<h3>${regionName}</h3>`;
+
+      content += tab.ui.getPopupContent(t, count, total);
+
+      if (!content) {
+        layer.bindPopup(t("msg_noentries"), POPUP_OPTIONS);
+        return;
+      }
+
+      const lastUpdated = dataInfo.fields.getLastUpdated(regionData);
+      if (lastUpdated) content += `${t("last_updated")}: ${lastUpdated}`;
+
+      layer.bindPopup(content, POPUP_OPTIONS);
+    };
   };
 
-  const getStyleFunction = () => {
-    if (tab.data.isGeoJson) {
-      if (tabSpecifics.points) return (_) => CONFIRMED_CIRCLE_STYLE;
-      else return createConfirmedStyle(tab.ui.colourScheme);
-    }
+  const getPointToLayer = () => {
+    if (dataInfo.shapeType !== SHAPE_TYPE.CIRCLES) return undefined;
 
-    return createFormStyle();
+    return (feature, latLng) => {
+      const regionalData = getRegionalData(feature);
+
+      if (!regionalData) return null;
+
+      const count = getCount(regionalData);
+
+      if (!count) return null;
+      return L.circleMarker(latLng, {
+        radius: getCircleSize(
+          dataInfo.ui.circleSizes,
+          dataInfo.ui.thresholds,
+          count
+        ),
+      });
+    };
   };
 
   // we wait until the formData is not null before rendering the GeoJSON.
   // otherwise it will try to create a popup for every FSA but the data won't
   // be there yet.
   if (!data) return <h3>{t("loading")}</h3>;
-
-  // this function is called with each polygon when the GeoJSON polygons are rendered
-  // just creates the popup content and binds a popup to each polygon
-  // `feature` is the GeoJSON feature (the FSA polygon)
-  // use the FSA polygon FSA ID to get the FSA data from `formData`
-  const bindPopupOnEachFeature = (feature, layer) => {
-    const popupStyle = {
-      className: "popupCustom",
-    };
-    let content;
-
-    if (tab.dataTag === "conf") {
-      content =
-        `<h3>${feature.properties[country.confirmedName]}</h3>` +
-        `${feature.properties[country.confirmedTag]} ${t(
-          "confirmedCases"
-        )} <br />`;
-
-      if ("Last_Updated" in feature.properties) {
-        content += `${t("last_updated")}: ${feature.properties.Last_Updated}`;
-      }
-    } else {
-      const regionID = feature.properties[country.geoJsonRegionName];
-      let regionData = data[country.regionName][regionID];
-      if (!regionData) {
-        console.log("no data for region ID", regionID);
-        regionData = {}; // instead of an error, it will say 'undefined' in the popup
-      }
-
-      let XXX;
-      const YYY = regionData.number_reports;
-
-      // eslint-disable-next-line no-use-before-define
-      const one = YYY === one;
-
-      if (YYY === undefined || YYY < 25) {
-        content = t("msg_noentries");
-      } else {
-        if (tab.dataTag === "risk") {
-          XXX = regionData.risk;
-          if (one) content = t("vul_case_popup_1");
-          else content = t("vul_case_popup");
-        } else if (tab.dataTag === "both") {
-          XXX = regionData.both;
-          if (one) content = t("pot_vul_popup_1");
-          else content = t("pot_vul_popup");
-        } else if (tab.dataTag === "pot") {
-          XXX = regionData.pot;
-          if (one) content = t("pot_case_popup_1");
-          else content = t("pot_case_popup");
-        }
-      }
-      content = content
-        .replace("FSA", regionID + " " + country.suffix)
-        .replace("XXX", XXX)
-        .replace("YYY", YYY);
-    }
-
-    layer.bindPopup(content, popupStyle);
-  };
-
-  const getPointToLayer = () => {
-    if (!tabSpecifics.points) return undefined;
-
-    return (feature, latLng) => {
-      let cases;
-      if (tab.data.isGeoJson) cases = feature.properties[country.confirmedTag];
-      else
-        cases =
-          data[feature.properties[country.geoJsonRegionName]][
-            tab.data.fieldName
-          ];
-
-      return L.circleMarker(latLng, {
-        radius: getCircleSize(
-          tabSpecifics.circleSizes,
-          tabSpecifics.thresholds,
-          cases
-        ),
-      });
-    };
-  };
 
   return (
     <Map
@@ -186,7 +172,7 @@ const LeafletMap = ({ t, data, country, tab, tabSpecifics }) => {
         // unbinding all popups and recreating them with the correct data.
         data={getGeoJson()}
         style={getStyleFunction()}
-        onEachFeature={bindPopupOnEachFeature}
+        onEachFeature={getPopupBinder()}
         pointToLayer={getPointToLayer()}
         key={tab.ui.uniqueKey}
       />
@@ -201,7 +187,7 @@ LeafletMap.propTypes = {
   country: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   tab: PropTypes.object.isRequired,
-  tabSpecifics: PropTypes.object.isRequired,
+  dataInfo: PropTypes.object.isRequired,
 };
 
 export default withTranslation("Leafletmap")(LeafletMap);
