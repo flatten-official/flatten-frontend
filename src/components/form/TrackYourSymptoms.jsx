@@ -9,7 +9,7 @@ import { setDailyCookie } from "../../actions/index";
 import SyringeIcon from "../../assets/syringe.svg";
 
 const TrackYourSymptoms = ({ t, dispatch, daily }) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
 
   const lang = i18next.language;
   let formID;

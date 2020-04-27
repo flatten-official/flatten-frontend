@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import i18next from "i18next";
-const TOS = () => {
+import { withTranslation } from "react-i18next";
+
+const TOS = ({ t }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -13,12 +15,12 @@ const TOS = () => {
 
   return (
     <div className="legal__body">
-      <div className="title legal__title">Terms Of Service</div>
+      <div className="title legal__title">{t("TOS")}</div>
       <iframe src={src} className="pdf">
-        <p>Your browser does not support iframes.</p>
+        <p>{t("error")}</p>
       </iframe>
     </div>
   );
 };
 
-export default TOS;
+export default withTranslation("Legal")(TOS);
