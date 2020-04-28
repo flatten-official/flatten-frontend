@@ -18,21 +18,21 @@ let drawCasesChart = (t, name, container_selector, config) => {
     "https://storage.googleapis.com/flatten-271620.appspot.com/confirmed_time_series.json";
 
   d3.json(url).then((raw) => {
-    let x = d3
+    const x = d3
       .scaleTime()
       .range([config.margin.left, width - config.margin.right]);
 
-    let x_band = d3
+    const x_band = d3
       .scaleBand()
       .paddingInner(0.1)
       .range([config.margin.left, width - config.margin.right]);
 
-    let y = d3
+    const y = d3
       .scaleLinear()
       .range([config.height - config.margin.bottom, config.margin.top]);
 
-    let xAxis = d3.axisBottom().scale(x).ticks(3);
-    let yAxis = d3.axisRight().scale(y).ticks(4);
+    const xAxis = d3.axisBottom().scale(x).ticks(3);
+    const yAxis = d3.axisRight().scale(y).ticks(4);
     svg
       .append("g")
       .attr("id", `${name}-xaxis`)
@@ -60,7 +60,7 @@ let drawCasesChart = (t, name, container_selector, config) => {
     let data = utils.genConfirmedData(raw, "ONTARIO");
 
     function genBars() {
-      let bar = svg
+      const bar = svg
         .append("g")
         .selectAll("rect")
         .data(data, (d) => d.date.toDateString())
@@ -89,16 +89,16 @@ let drawCasesChart = (t, name, container_selector, config) => {
       .attr("y", config.height * 0.25)
       .attr("fill", palette.recovered);
 
-    let barsConfirmed = genBars().attr("fill", palette.confirmed_cases);
+    const barsConfirmed = genBars().attr("fill", palette.confirmed_cases);
 
-    let barsDeaths = genBars().attr("fill", palette.deaths);
+    const barsDeaths = genBars().attr("fill", palette.deaths);
 
-    let barsRecovered = genBars().attr("fill", palette.recovered);
+    const barsRecovered = genBars().attr("fill", palette.recovered);
 
     function update(selectedGroup) {
       let data = utils.genConfirmedData(raw, selectedGroup);
 
-      let t = d3.transition().duration(300).ease(d3.easeLinear);
+      const t = d3.transition().duration(300).ease(d3.easeLinear);
 
       let dates = data.map((d) => d.date);
       let latestDate = d3.max(dates);
@@ -152,9 +152,9 @@ let drawCasesChart = (t, name, container_selector, config) => {
             )
         );
     }
-    let defaultProvince = "ONTARIO";
+    const defaultProvince = "ONTARIO";
 
-    let select = svg.append("select").attr("id", "viz-select");
+    const select = svg.append("select").attr("id", "viz-select");
     // add the options to the button
     d3.select("#viz-select")
       .selectAll("myOptions")
@@ -194,7 +194,7 @@ function Visualization({ t }) {
         </div>
       </div>
       <div id="cases-chart" className="chart" />
-      {/*<div id="cases-chart2" className="chart" />*/}
+      {/* <div id="cases-chart2" className="chart" /> */}
     </div>
   );
 }

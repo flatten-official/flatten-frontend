@@ -11,5 +11,9 @@
   "p9": "Total Responses",
   "p10": "Last Update",
   "maplink": "https://flatten-271620.web.app/?lang=en",
-  "error": "Sorry, the heat-map did not load."
+  "error": "Sorry, the heat-map did not load.",
+  "pot_button": "Potential Cases",
+  "vul_button": "Vulnerable Individuals",
+  "cul_button": "Confirmed Cases",
+  "pot_vul_button": "High-Risk Potential Cases"
 }

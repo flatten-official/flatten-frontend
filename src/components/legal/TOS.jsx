@@ -8,7 +8,7 @@ const TOS = ({ t }) => {
   }, []);
 
   const lang = i18next.language;
-  let src =
+  const src =
     lang === "fr"
       ? "https://drive.google.com/file/d/1p8L0_pj0jAuuDKBvmx13r6p3SZZfBxgp/preview"
       : "https://drive.google.com/file/d/1diVRWxk7E1JzsXhPyzaN4IjcwHzEwx08/preview";

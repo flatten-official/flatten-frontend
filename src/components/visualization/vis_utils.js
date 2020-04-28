@@ -2,10 +2,10 @@ import * as d3 from "d3";
 
 const responsivefy = (svg) => {
   // get container + svg aspect ratio
-  var container = d3.select(svg.node().parentNode),
-    width = parseInt(svg.style("width")),
-    height = parseInt(svg.style("height")),
-    aspect = width / height;
+  var container = d3.select(svg.node().parentNode);
+  var width = parseInt(svg.style("width"));
+  var height = parseInt(svg.style("height"));
+  var aspect = width / height;
 
   // add viewBox and preserveAspectRatio properties,
   // and call resize so that svg resizes on inital page load

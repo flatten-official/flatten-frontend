@@ -1,140 +1,149 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
-import i18next from "i18next";
 import Leafletmap from "./Leafletmap";
+import PropTypes from "prop-types";
+import { getMapConfirmedData, getMapFormData } from "../../actions";
+import { connect } from "react-redux";
+import { getCountry } from "./mapConstants";
+import PrimaryButton from "../common/buttons/PrimaryButton";
+import { formatTimestamp, getData, getDataInfo } from "./helper";
 
-const i18nlang = i18next.language;
-const URLS = {
-  cadForm:
-    "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
-  usaForm:
-    "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json",
-  cadConf:
-    "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson",
-  usaConf:
-    "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
+const MapDataFooter = ({ t, data, fields }) => {
+  let numResponses;
+  let date;
+
+  if (data) {
+    const total = fields.getTotal(data);
+    if (total) {
+      numResponses = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Adds commas to number
+    }
+
+    const timestamp = fields.getTimestamp(data);
+    if (timestamp) {
+      date = formatTimestamp(timestamp);
+    }
+  }
+
+  return (
+    <div className="heatmap__minidescription body">
+      <b>{t("p9")}</b>
+      <p>{numResponses || "Loading..."}</p>
+      <b>{t("p10")}</b>
+      <p>{date || "Loading..."}</p>
+    </div>
+  );
 };
 
-class HeatMap extends React.Component {
-  constructor(props) {
-    super(props);
+MapDataFooter.propTypes = {
+  t: PropTypes.func.isRequired,
+  data: PropTypes.object,
+  fields: PropTypes.object.isRequired,
+};
 
-    let formUrl;
-    let confUrl;
+const HeatMap = ({ t, data, country, loadData }) => {
+  useEffect(() => loadData(), []); // [] to only run once
 
-    if (i18nlang === "enUS") {
-      formUrl = URLS.usaForm;
-      confUrl = URLS.usaConf;
-    } else {
-      formUrl = URLS.cadForm;
-      confUrl = URLS.cadConf;
-    }
+  const [activeTab, setTab] = useState(country.activeTabs[0]);
 
-    this.state = {
-      formURL: formUrl,
-      confURL: confUrl,
-      confirmedCases: null,
-      formData: null,
-      width: 0,
-      height: 0,
-      ratio: 190,
-    };
-    this.getFormData = this.getFormData.bind(this);
-    this.getConfirmedCasesData = this.getConfirmedCasesData.bind(this);
-  }
+  const renderTabs = () => {
+    const buttonList = country.activeTabs.map((tab, index) => (
+      <PrimaryButton
+        key={tab.ui.uniqueKey}
+        className={tab === activeTab ? "active" : undefined}
+        onClick={(e) => setTab(tab)}
+      >
+        {t(tab.ui.btnContent)}
+      </PrimaryButton>
+    ));
 
-  componentDidMount() {
-    this.getFormData();
-    this.getConfirmedCasesData();
-  }
+    return (
+      <div id="tabs" className="TabSelectors btn_group">
+        {buttonList}
+      </div>
+    );
+  };
 
-  getFormData() {
-    fetch(this.state.formURL)
-      .then((r) => r.json())
-      .then((d) => {
-        return d;
-      })
-      .then((formData) => this.setState({ formData }));
-  }
-
-  getConfirmedCasesData() {
-    fetch(this.state.confURL)
-      .then((r) => r.json())
-      .then((d) => {
-        return d;
-      })
-      .then((confirmedCases) => this.setState({ confirmedCases }));
-  }
-
-  render() {
-    const { t } = this.props;
-
-    let date = "Loading";
-    let totalResponses = "Loading";
-
-    if (this.state.formData !== null) {
-      date = "" + new Date(1000 * this.state.formData.time);
-      totalResponses = "" + this.state.formData.total_responses;
-      // Adds commas to number
-      totalResponses = totalResponses.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    return location ? (
-      <div className="heatmap" id="heatmap">
-        <div className="heatmap__header">
-          &nbsp; &nbsp;
-          <div className="heatmap__headercontainer">
-            <div className="heatmap__title">
-              <div className="title">{t("header")}</div>
-            </div>
-            <div className="heatmap__description body">
-              <p>
-                <b>{t("p1")}</b>
-                <br></br>
-                <br></br>
-              </p>
-            </div>
+  return (
+    <div className="heatmap" id="heatmap">
+      <div className="heatmap__header">
+        &nbsp; &nbsp;
+        <div className="heatmap__headercontainer">
+          <div className="heatmap__title">
+            <div className="title">{t("header")}</div>
           </div>
-        </div>
-        <div className="heatmap__container">
-          {this.state.formData && this.state.confirmedCases && (
-            <Leafletmap
-              formData={this.state.formData}
-              confirmedCases={this.state.confirmedCases}
-            ></Leafletmap>
-          )}
-        </div>
-
-        <div className="heatmap__header">
-          <div className="heatmap__headercontainer">
-            <div className="heatmap__description body">
-              <p>
-                <b>{t("p6")}</b>
-                <br></br>
-                <b>{t("p7")}</b>
-              </p>
-            </div>
-
-            <div className="heatmap__minidescription body">
-              <b>{t("p9")}</b>
-              <p>{totalResponses}</p>
-              <b>{t("p10")}</b>
-              <p>{date}</p>
-            </div>
-
-            <div className="heatmap__minidescription body">
-              <p>
-                {t("p8")}
-                <br></br>
-                <br></br>
-                {t("p5")}
-              </p>
-            </div>
+          <div className="heatmap__description body">
+            <p>
+              <b>{t("p1")}</b>
+              <br />
+            </p>
           </div>
         </div>
       </div>
-    ) : null;
-  }
-}
+      <div className="heatmap__container">
+        {renderTabs()}
+        <Leafletmap
+          data={getData(activeTab, data)}
+          dataInfo={getDataInfo(activeTab, country)}
+          country={country}
+          tab={activeTab}
+        />
+      </div>
 
-export default withTranslation("Heatmap")(HeatMap);
+      <div className="heatmap__header">
+        <div className="heatmap__headercontainer">
+          <div className="heatmap__description body">
+            <p>
+              <b>{t("p6")}</b>
+              <br />
+              <b>{t("p7")}</b>
+            </p>
+          </div>
+
+          {country.ui.showDataFooter && (
+            <MapDataFooter
+              t={t}
+              data={data.form}
+              fields={country.data.form.fields}
+            />
+          )}
+
+          <div className="heatmap__minidescription body">
+            <p>
+              {t("p8")}
+              <br />
+              <br />
+              {t("p5")}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+HeatMap.propTypes = {
+  t: PropTypes.func.isRequired,
+  country: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+  loadData: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({ data: state.mapData });
+
+// Passes loadData as a prop to HeatMap where load data calls both data loading functions
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  loadData: () => {
+    dispatch(getMapFormData(ownProps.country.data));
+    dispatch(getMapConfirmedData(ownProps.country.data));
+  },
+});
+
+// Add translation and Redux state
+const HeatMapConnected = withTranslation("Heatmap")(
+  connect(mapStateToProps, mapDispatchToProps)(HeatMap)
+);
+
+// Add country
+const HeatMapWithCountry = () => <HeatMapConnected country={getCountry()} />;
+
+export default HeatMapWithCountry;

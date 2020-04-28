@@ -7,7 +7,7 @@ const PrivacyPolicy = ({ t }) => {
   }, []);
 
   const lang = i18next.language;
-  let src =
+  const src =
     lang === "fr"
       ? "https://drive.google.com/file/d/1MxJo7fDJbp22mBulqyBt_G367RnL-Xzs/preview"
       : "https://drive.google.com/file/d/1ueuRMZ1BlKFvmMmJxNr6_ieHj543P4W6/preview";
