@@ -231,7 +231,7 @@ const COUNTRIES = {
     },
   },
   usa: {
-    activeTabs: [TABS.both, TABS.vulnerable, TABS.potential, TABS.confirmed],
+    activeTabs: [TABS.confirmed, TABS.both, TABS.vulnerable, TABS.potential],
     view: {
       bounds: [
         [15, -180],
@@ -282,7 +282,7 @@ export function getCountry() {
       return COUNTRIES.usa;
     case "fr":
     case "en":
-    case "en-US": // TODO Defaults to enUS when language is unknown. Should fix this in i18n
+    case "en-US": // TODO Defaults to en-US when language is unknown. Should fix this in i18n
       return COUNTRIES.canada;
     default:
       console.log("Unknown country: " + i18next.language);
