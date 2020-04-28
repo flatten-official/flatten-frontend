@@ -8,6 +8,7 @@ import Legend from "./Legend";
 import L from "leaflet";
 
 import {
+  BASE_POLYGON_STYLE,
   BLANK_POLYGON_STYLE,
   CONFIRMED_CIRCLE_STYLE,
   DATA_TYPE,
@@ -75,9 +76,7 @@ const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
     if (!numCases || numCases <= 0) return BLANK_POLYGON_STYLE;
 
     return {
-      // define the outlines of the map
-      weight: 0.9,
-      color: "white",
+      ...BASE_POLYGON_STYLE,
       // define the color and opacity of each polygon
       fillColor: getColour(tab.ui.colourScheme, numCases),
       fillOpacity: POLYGON_OPACITY,

@@ -297,15 +297,17 @@ export const CONFIRMED_CIRCLE_STYLE = {
   fillOpacity: 0.5,
 };
 
-export const BLANK_POLYGON_STYLE = {
+export const BASE_POLYGON_STYLE = {
   weight: 0.9,
   color: "white",
-  opacity: 0,
 };
 
+export const BLANK_POLYGON_STYLE = {
+  ...BASE_POLYGON_STYLE,
+  opacity: 0,
+};
 export const NOT_ENOUGH_DATA_POLYGON_STYLE = {
-  weight: 0.9,
-  color: "white",
+  ...BASE_POLYGON_STYLE,
   fillOpacity: POLYGON_OPACITY,
   fillColor: NOT_ENOUGH_GRAY,
 };
