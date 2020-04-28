@@ -283,9 +283,9 @@ export function getCountry() {
     case "fr":
     case "en":
     case "en-US": // TODO Defaults to en-US when language is unknown. Should fix this in i18n
-      return COUNTRIES.canada;
     default:
-      console.log("Unknown country: " + i18next.language);
+      return COUNTRIES.canada;
+    // console.log("Unknown country: " + i18next.language);
   }
 }
 
