@@ -1,29 +1,24 @@
 import React from "react";
-
-const Para1 = () => (
+import { withTranslation } from "react-i18next";
+const Para1 = ({ t }) => (
   <React.Fragment>
     <div>
-      COVID-19 is believed to be spread most commonly from an infected person
-      through:
+      {t("para1")}
       <ul>
-        <li>Respiratory droplets generated when they cough or sneeze</li>
-        <li>
-          Close, prolonged personal contact such as touching or shaking hands
-        </li>
-        <li>
-          Touching something with the virus on it, then touching your mouth,
-          nose, or eyes before washing your hands
-        </li>
+        <li>{t("para1l1")}</li>
+        <li>{t("para1l2")}</li>
+        <li>{t("para1l3")}</li>
       </ul>
     </div>
-    <span>Source: </span>
+    <span>{t("source")}</span>
     <a
       target="_blank"
+      rel="noreferrer noopener"
       href="https://www.cdc.gov/coronavirus/2019-ncov/prepare/transmission.html"
     >
-      Centers for Disease Control and Prevention
+      {t("CDC")}
     </a>
   </React.Fragment>
 );
 
-export default Para1;
+export default withTranslation("Info")(Para1);
