@@ -8,6 +8,7 @@
   font-family: "DM Sans", sans-serif;
   background: $background-grey;
   color: $black-main;
+  z-index: 1000;
 }
 
 .mapTitle {
@@ -30,4 +31,9 @@
 
 .leaflet-control-locate a {
   background-color: transparent;
+}
+
+#leaflet-map {
+  height: calc(100vh - 200px);
+  z-index: 0;
 }

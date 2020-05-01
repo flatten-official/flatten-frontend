@@ -14,12 +14,10 @@ const Info = ({ t }) => {
 
   let component = <InfoEn />;
   switch (i18nlang) {
-    case "en":
-      component = <InfoEn />;
-      break;
     case "fr":
       component = <InfoFr />;
       break;
+    case "en":
     default:
       component = <InfoEn />;
   }

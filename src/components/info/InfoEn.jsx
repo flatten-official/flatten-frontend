@@ -1,4 +1,5 @@
 import React from "react";
+import i18next from "i18next";
 import { withTranslation } from "react-i18next";
 
 import Para0 from "./paragraphs/Para0";
@@ -60,6 +61,10 @@ const InfoEn = ({ t }) => {
       body: <Para10 />,
     },
   ];
+
+  if (i18next.language === "so") {
+    Paragraphs.splice(7, 4);
+  }
 
   return (
     <React.Fragment>

@@ -21,6 +21,8 @@ const Navbar = ({ t, getGeolocation }) => {
     history.push(linkLang);
   };
 
+  const domain = i18next.language === "so" ? ".SO" : ".CA";
+
   let navbar;
   let symptomsLink;
   let heatmapLink;
@@ -73,10 +75,6 @@ const Navbar = ({ t, getGeolocation }) => {
       </Link>
     );
 
-    if (value === "so") {
-      heatmapLink = null;
-    }
-
     navbar = (
       <Link
         activeClass="active"
@@ -92,7 +90,7 @@ const Navbar = ({ t, getGeolocation }) => {
             {symptomsLink}
             {heatmapLink}
             {infoLink}
-            .CA
+            {domain}
           </div>
           <hr />
         </div>
@@ -129,7 +127,7 @@ const Navbar = ({ t, getGeolocation }) => {
             {symptomsLink}
             {heatmapLink}
             {infoLink}
-            .CA
+            {domain}
           </div>
           <hr />
         </div>

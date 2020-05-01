@@ -1,10 +1,11 @@
 import React from "react";
 import { TwitterShareButton, TwitterIcon } from "react-share";
+import { withTranslation } from "react-i18next";
 
-const TwitterButton = () => {
+const TwitterButton = ({ t }) => {
   return (
     <div className="share-button">
-      <div className="body">Tweet</div>
+      <div className="body">{t("twitter-caption")}</div>
       <TwitterShareButton url="https://flatten.ca">
         <TwitterIcon size="8vh" borderRadius="8px" />
       </TwitterShareButton>
@@ -12,4 +13,4 @@ const TwitterButton = () => {
   );
 };
 
-export default TwitterButton;
+export default withTranslation("FormModal")(TwitterButton);
