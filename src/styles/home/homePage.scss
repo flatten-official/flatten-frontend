@@ -15,6 +15,15 @@
   text-align: center;
 }
 
+.home-so {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../assets/background-so.png");
+  // PATH NEEDS TO BE RELATIVE TO import.scss (weird, but easiest workaround for now)
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+}
+
 .home__content {
   height: auto;
   padding: 0% 20%;

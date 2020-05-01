@@ -18,8 +18,8 @@ const Para7 = () => (
             <li>
               In the 14 days before onset of illness, a person who has:
               travelled to an affected area <strong>OR</strong> has had close
-              contact with a confirmed or probable case of COVID-19{" "}
-              <strong>OR</strong> had close contact with a person with acute
+              contact with a confirmed or probable case of COVID-19
+              <strong> OR</strong> had close contact with a person with acute
               respiratory illness who has been to an affected area within 14
               days prior to their illness onset <strong>OR</strong> had
               laboratory exposure to biological material (e.g. primary clinical
@@ -56,6 +56,7 @@ const Para7 = () => (
     <span>Source: </span>
     <a
       target="_blank"
+      rel="noreferrer noopener"
       href="https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection/health-professionals/national-case-definition.html"
     >
       Public Health Agency of Canada
