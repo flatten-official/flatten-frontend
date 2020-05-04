@@ -1,6 +1,6 @@
 import React from "react";
 import { Trans, withTranslation } from "react-i18next";
-
+import i18next from "i18next";
 import PrimaryButton from "../common/buttons/PrimaryButton";
 import logo from "../../assets/logo-black.png";
 
@@ -16,8 +16,9 @@ const scrollToForm = () => {
 };
 
 const HomePage = ({ t }) => {
+  const soMap = i18next.language === "so" ? "home home-so" : "home";
   return (
-    <div className="home">
+    <div className={soMap}>
       <div className="home__content">
         <img className="home__logo" src={logo} alt="logo" />
         <div className="body home__description">

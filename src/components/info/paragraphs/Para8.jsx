@@ -25,6 +25,7 @@ const Para8 = () => (
     <span>Source: </span>
     <a
       target="_blank"
+      rel="noreferrer noopener"
       href="https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection/health-professionals/national-case-definition.html#exposure"
     >
       Public Health Agency of Canada
