@@ -1,7 +1,7 @@
 {
   "loading": "Loading...",
   "insufficient_responses_message": "<p>We haven't had enough form responses in this region yet.</p>",
-  "last_updated": "Last updated",
+  "last_updated": "Last updated : {{time}}",
   "not_enough_data": "Not Enough Data",
   "number_of_cases": "Number of cases",
   "percent_responses": "% of Responses",
@@ -13,7 +13,7 @@
     "": "We received a report from {{count}} vulnerable individual.",
     "_plural": "We received {{count}} reports from vulnerable individuals."
   },
-  "high_risk_case_count_summary": {
+  "vuln_and_pot_case_count_summary": {
     "": "We received a report from {{count}} vulnerable individual who is also a potential case.",
     "_plural": "We received {{count}} reports from vulnerable individuals who are also potential cases."
   },

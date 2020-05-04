@@ -31,31 +31,3 @@ export const getData = (tab, data) => data[tab.data.source];
 
 export const getNameGetter = () =>
   i18next.language === "fr" ? "getFrenchName" : "getEnglishName";
-
-// build the regional info string
-export const getPopupContent = (tab, t, count, total) => {
-  count = { count: count };
-  let content = "<p>";
-
-  switch (tab) {
-    case "confirmed_cases":
-      content += t("confirmed_case_count_summary.", count);
-      break;
-    case "potential_cases":
-      content += t("potential_case_count_summary.", count);
-      break;
-    case "vulnerable_cases":
-      content += t("vulnerable_case_count_summary.", count);
-      break;
-    case "high_risk_cases":
-      content += t("high_risk_case_count_summary.", count);
-      break;
-  }
-
-  if (!isNaN(total)) {
-    content += `<br/><br/> ${t("report_count_summary.", { count: total })}`;
-  }
-  content += "</p>";
-
-  return content;
-};

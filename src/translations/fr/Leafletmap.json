@@ -1,7 +1,7 @@
 {
   "loading": "Chargement...",
   "insufficient_responses_message": "<p>Nous n’avons pas encore reçu suffisamment de rapports dans cette région.</p>",
-  "last_updated": "Dernière mise à jour",
+  "last_updated": "Dernière mise à jour : {{time}}",
   "not_enough_data": "Données insuffisantes",
   "number_of_cases": "Nombre de cas",
   "percent_responses": "% de réponses",
@@ -13,7 +13,7 @@
     "": "Nous avons reçu {{count}} rapport d'un individu vulnérable.",
     "_plural": "Nous avons reçu {{count}} rapports d'individus vulnérables."
   },
-  "high_risk_case_count_summary": {
+  "vuln_and_pot_case_count_summary": {
     "": "Nous avons reçu {{count}} rapport d'un individu vulnérable étant également un cas potentiel.",
     "_plural": "Nous avons reçu {{count}} rapports d'individus vulnérables étant également des cas potentiels."
   },

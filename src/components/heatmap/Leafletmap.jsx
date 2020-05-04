@@ -125,11 +125,17 @@ const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
       return;
     }
 
-    content += tab.ui.getPopupContent(t, count, total);
+    content += `<p>` + t(tab.ui.popupMessage, { count: count });
+
+    if (!isNaN(total)) {
+      content += `<br/><br/> ` + t("report_count_summary.", { count: total });
+    }
+
+    content += `</p>`;
 
     if (dataInfo.fields.getLastUpdated) {
       const lastUpdated = dataInfo.fields.getLastUpdated(regionData);
-      if (lastUpdated) content += `${t("last_updated")}: ${lastUpdated}`;
+      if (lastUpdated) content += t("last_updated", { time: lastUpdated });
     }
 
     layer.bindPopup(content, POPUP_OPTIONS);
