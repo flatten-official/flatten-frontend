@@ -2,7 +2,12 @@ import canadaGeoJsonBase from "../../assets/map/converted_boundaries.js";
 import somaliaGeoJsonBase from "../../assets/map/mongadishu_coords.js";
 import usaGeoJsonBase from "../../assets/map/county_boundaries";
 import i18next from "i18next";
-import { getConfirmedPopupContent, getFormPopupContent } from "./helper";
+import {
+  getConfirmedPopupContent,
+  getFormPopupContent,
+  getPopupContent,
+  getTestPopupContent,
+} from "./helper";
 
 const MAP_COLOURS = ["#FAE0A6", "#FABD05", "#FF7800", "#EB4236", "#C70505"];
 
@@ -25,14 +30,14 @@ export const TABS = {
   both: {
     ui: {
       uniqueKey: 0,
-      legendTitle: "pct_responses",
+      legendTitle: "percent_responses",
       btnContent: "pot_vul_button",
       colourScheme: {
         colours: MAP_COLOURS,
         thresholds: [0.01, 0.02, 0.05, 0.1],
       },
       getPopupContent: (t, count, total) =>
-        getFormPopupContent(t, count, total, "pot_vul_popup"),
+        getPopupContent("high_risk_cases", t, count, total),
     },
     data: {
       source: "form",
@@ -43,10 +48,10 @@ export const TABS = {
   vulnerable: {
     ui: {
       uniqueKey: 1,
-      legendTitle: "pct_responses",
+      legendTitle: "percent_responses",
       btnContent: "vul_button",
       getPopupContent: (t, count, total) =>
-        getFormPopupContent(t, count, total, "vul_case_popup"),
+        getPopupContent("vulnerable_cases", t, count, total),
       colourScheme: {
         colours: MAP_COLOURS,
         thresholds: [0.15, 0.25, 0.35, 0.5],
@@ -61,10 +66,10 @@ export const TABS = {
   potential: {
     ui: {
       uniqueKey: 2,
-      legendTitle: "pct_responses",
+      legendTitle: "percent_responses",
       btnContent: "pot_button",
       getPopupContent: (t, count, total) =>
-        getFormPopupContent(t, count, total, "pot_case_popup"),
+        getPopupContent("potential_cases", t, count, total),
       colourScheme: {
         colours: MAP_COLOURS,
         thresholds: [0.02, 0.05, 0.1, 0.25],
@@ -81,7 +86,8 @@ export const TABS = {
       uniqueKey: 3,
       legendTitle: "number_of_cases",
       btnContent: "cul_button",
-      getPopupContent: getConfirmedPopupContent,
+      getPopupContent: (t, count, total) =>
+        getPopupContent("confirmed_cases", t, count, total),
       colourScheme: {
         colours: MAP_COLOURS,
         thresholds: [5, 25, 100, 250],

@@ -3,13 +3,26 @@
   "msg_noentries": "<p>We haven't had enough form responses in this region yet.</p>",
   "last_updated": "Last updated",
   "not_enough_data_legend": "Not Enough Data",
-  "confirmedCases": "confirmed cases",
-  "pot_case_popup": "<p>We received XXX reports from potential cases.<br/><br/>We received YYY reports in total.</p>",
-  "pot_case_popup_1": "<p>We received 1 report from a potential case.<br/><br/>We received YYY reports in total.</p>",
-  "vul_case_popup": "<p>We received XXX reports from vulnerable individuals.<br/><br/>We received YYY reports in total.</p>",
-  "vul_case_popup_1": "<p>We received 1 report from a vulnerable individual.<br/><br/>We received YYY reports in total.</p>",
-  "pot_vul_popup": "<p>We received XXX reports from vulnerable individuals who are also potential cases.<br/><br/>We received YYY reports in total.</p>",
-  "pot_vul_popup_1": "<p>We received 1 report from a vulnerable individual who is also a potential case.<br/><br/>We received YYY reports in total.</p>",
   "number_of_cases": "Number of cases",
-  "pct_responses": "% of Responses"
+  "pct_responses": "% of Responses",
+  "potential_case_count_summary": {
+    "": "We received a reports from {{count}} potential case.",
+    "_plural": "We received {{count}} reports from potential cases."
+  },
+  "vulnerable_case_count_summary": {
+    "": "We received a report from {{count}} vulnerable individual.",
+    "_plural": "We received {{count}} reports from vulnerable individuals."
+  },
+  "high_risk_case_count_summary": {
+    "": "We received a report from {{count}} vulnerable individual who is also a potential case.",
+    "_plural": "We received {{count}} reports from vulnerable individuals who are also potential cases."
+  },
+  "confirmed_case_count_summary": {
+    "": "{{count}} confirmed case.",
+    "_plural": "{{count}} confirmed cases."
+  },
+  "report_count_summary": {
+    "": "We received {{count}} report in total.",
+    "_plural": "We received {{count}} reports in total."
+  }
 }
