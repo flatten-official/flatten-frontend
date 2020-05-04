@@ -32,14 +32,30 @@ export const getData = (tab, data) => data[tab.data.source];
 export const getNameGetter = () =>
   i18next.language === "fr" ? "getFrenchName" : "getEnglishName";
 
-export const getConfirmedPopupContent = (t, count, _) => {
-  return `${count} ${t("confirmedCases")} <br />`;
-};
+// build the regional info string
+export const getPopupContent = (tab, t, count, total) => {
+  count = { count: count };
+  let content = "<p>";
 
-export const getFormPopupContent = (t, count, total, popupTxt) => {
-  if (!total) return null;
+  switch (tab) {
+    case "confirmed_cases":
+      content += t("confirmed_case_count_summary.", count);
+      break;
+    case "potential_cases":
+      content += t("potential_case_count_summary.", count);
+      break;
+    case "vulnerable_cases":
+      content += t("vulnerable_case_count_summary.", count);
+      break;
+    case "high_risk_cases":
+      content += t("high_risk_case_count_summary.", count);
+      break;
+  }
 
-  if (total === 1) popupTxt += "_1"; // TODO Use plurals
+  if (!isNaN(total)) {
+    content += `<br/><br/> ${t("report_count_summary.", { count: total })}`;
+  }
+  content += "</p>";
 
-  return t(popupTxt).replace("XXX", count).replace("YYY", total); // TODO use https://www.i18next.com/translation-function/interpolation
+  return content;
 };

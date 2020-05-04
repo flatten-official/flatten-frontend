@@ -1,15 +1,28 @@
 {
   "loading": "Chargement...",
-  "msg_noentries": "<p>Nous n’avons pas encore reçu suffisamment de rapports dans cette région.</p>",
-  "last_updated": "Dernière mise à jour",
-  "not_enough_data_legend": "Pas assez de données",
-  "confirmedCases": "cas confirmés",
-  "pot_case_popup": "<p>Nous avons reçu XXX rapports de cas potentiels.<br/><br/>Nous avons reçus YYY rapports en tout.</p>",
-  "pot_case_popup_1": "<p>Nous avons reçu 1 rapport de cas potentiel.<br/><br/>Nous avons reçus YYY rapports en tout.</p>",
-  "vul_case_popup": "<p>Nous avons reçu XXX rapports d’individus vulnérables<br/><br/>Nous avons reçus YYY rapports en tout.</p>",
-  "vul_case_popup_1": "<p>Nous avons reçu 1 rapport d'un individu vulnérable<br/><br/>Nous avons reçus YYY rapports en tout.</p>",
-  "pot_vul_popup": "<p>Nous avons reçu XXX rapports de individus vulnérables qui sont également des cas potentiels.<br/><br/>Nous avons reçus YYY rapports en tout.</p>",
-  "pot_vul_popup_1": "<p>Nous avons reçu 1 rapport d'une personne vulnérable qui est également un cas potentiel.<br/><br/>Nous avons reçus YYY rapports en tout.</p>",
+  "insufficient_responses_message": "<p>Nous n’avons pas encore reçu suffisamment de rapports dans cette région.</p>",
+  "last_updated": "Dernière mise à jour :",
+  "not_enough_data": "Données insuffisantes.",
   "number_of_cases": "Nombre de cas",
-  "pct_responses": "% de réponses"
+  "percent_responses": "% de réponses",
+  "potential_case_count_summary": {
+    "": "Nous avons reçu {{count}} rapport d'un cas potentiel.",
+    "_plural": "Nous avons reçu {{count}} rapports de cas potentiels."
+  },
+  "vulnerable_case_count_summary": {
+    "": "Nous avons reçu {{count}} rapport d'un individu vulnérable.",
+    "_plural": "Nous avons reçu {{count}} rapports d'individus vulnérables."
+  },
+  "high_risk_case_count_summary": {
+    "": "Nous avons reçu {{count}} rapport d'un individu vulnérable étant également un cas potentiel.",
+    "_plural": "Nous avons reçu {{count}} rapports d'individus vulnérables étant également des cas potentiels."
+  },
+  "confirmed_case_count_summary": {
+    "": "{{count}} cas confirmé.",
+    "_plural": "{{count}} cas confirmés."
+  },
+  "report_count_summary": {
+    "": "Nous avons reçu {{count}} rapport au total.",
+    "_plural": "Nous avons reçu {{count}} rapports au total."
+  }
 }
