@@ -31,7 +31,7 @@ export const TABS = {
     ui: {
       uniqueKey: 0,
       legendTitle: "percent_responses",
-      btnContent: "pot_vul_button",
+      btnContent: "tabs.high_risk_cases",
       colourScheme: {
         colours: MAP_COLOURS,
         thresholds: [0.01, 0.02, 0.05, 0.1],
@@ -49,7 +49,7 @@ export const TABS = {
     ui: {
       uniqueKey: 1,
       legendTitle: "percent_responses",
-      btnContent: "vul_button",
+      btnContent: "tabs.vulnerable_cases",
       getPopupContent: (t, count, total) =>
         getPopupContent("vulnerable_cases", t, count, total),
       colourScheme: {
@@ -67,7 +67,7 @@ export const TABS = {
     ui: {
       uniqueKey: 2,
       legendTitle: "percent_responses",
-      btnContent: "pot_button",
+      btnContent: "tabs.potential_cases",
       getPopupContent: (t, count, total) =>
         getPopupContent("potential_cases", t, count, total),
       colourScheme: {
@@ -85,7 +85,7 @@ export const TABS = {
     ui: {
       uniqueKey: 3,
       legendTitle: "number_of_cases",
-      btnContent: "cul_button",
+      btnContent: "tabs.confirmed_cases",
       getPopupContent: (t, count, total) =>
         getPopupContent("confirmed_cases", t, count, total),
       colourScheme: {

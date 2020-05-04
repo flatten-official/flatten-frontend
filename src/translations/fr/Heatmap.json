@@ -1,14 +1,18 @@
 {
   "header": "Suivre la propagation",
-  "p1": "Bienvenue sur notre carte interactive de suivi des cas COVID-19 à travers le Canada en temps réel. Pour voir comment va votre région, zoomez ou laissez Flatten accéder à votre position actuelle.",
-  "p5": "Afin de limiter l'abus, nous utilisons des cookies et recaptcha, en plus de tracer toutes adresses IP suspectes.",
-  "p6": "COVID-19 au Canada",
-  "p7": "Mise à jour en temps réel",
-  "p8": "Les résultats sont basés sur des modèles préliminaires et des données évolutives et ne doivent pas être considérés comme définitifs. Alors que les tests et le développement se poursuivent, nos résultats doivent être interprétés avec prudence. Cette carte identifie le statut des individus signalant FLATTEN.ORG dans une région donnée et ne détermine pas les zones sécuritaires ou à risque.",
-  "p9": "Réponses totales",
-  "p10": "Dernière mise à jour",
-  "pot_button": "Cas potentiels",
-  "vul_button": "Individus vulnérables",
-  "cul_button": "Cas confirmés cumulés",
-  "pot_vul_button": "Individus vulnérables symptomatiques"
+  "overview": "Bienvenue sur notre carte interactive de suivi des cas COVID-19 à travers le Canada en temps réel. Pour voir comment va votre région, zoomez ou laissez Flatten accéder à votre position actuelle.",
+  "privacy_disclaimer": "Afin de limiter l'abus, nous utilisons des cookies et recaptcha, en plus de tracer toutes adresses IP suspectes.",
+  "results_disclaimer": "Les résultats sont basés sur des modèles préliminaires et des données évolutives et ne doivent pas être considérés comme définitifs. Alors que les tests et le développement se poursuivent, nos résultats doivent être interprétés avec prudence. Cette carte identifie le statut des individus signalant FLATTEN.ORG dans une région donnée et ne détermine pas les zones sécuritaires ou à risque.",
+  "tabs": {
+    "confirmed_cases": "Cas confirmés cumulés",
+    "potential_cases": "Cas potentiels",
+    "vulnerable_cases": "Individus vulnérables",
+    "high_risk_cases": "Individus vulnérables symptomatiques"
+  },
+  "captions": {
+    "covid19": "COVID-19 au Canada",
+    "real_time": "Mise à jour en temps réel",
+    "total_responses": "Réponses totales",
+    "latest_update": "Dernière mise à jour"
+  }
 }
