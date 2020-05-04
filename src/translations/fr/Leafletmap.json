@@ -1,8 +1,8 @@
 {
   "loading": "Chargement...",
   "insufficient_responses_message": "<p>Nous n’avons pas encore reçu suffisamment de rapports dans cette région.</p>",
-  "last_updated": "Dernière mise à jour :",
-  "not_enough_data": "Données insuffisantes.",
+  "last_updated": "Dernière mise à jour",
+  "not_enough_data": "Données insuffisantes",
   "number_of_cases": "Nombre de cas",
   "percent_responses": "% de réponses",
   "potential_case_count_summary": {

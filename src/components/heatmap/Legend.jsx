@@ -21,7 +21,7 @@ const LegendContent = ({ t, tab, dataInfo }) => {
   const renderNotEnoughData = () => (
     <>
       <i style={{ background: NOT_ENOUGH_GRAY }} />
-      {t("not_enough_data_legend")}
+      {t("not_enough_data")}
       <br />
     </>
   );

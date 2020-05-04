@@ -1,10 +1,10 @@
 {
   "loading": "Loading...",
-  "msg_noentries": "<p>We haven't had enough form responses in this region yet.</p>",
+  "insufficient_responses_message": "<p>We haven't had enough form responses in this region yet.</p>",
   "last_updated": "Last updated",
-  "not_enough_data_legend": "Not Enough Data",
+  "not_enough_data": "Not Enough Data",
   "number_of_cases": "Number of cases",
-  "pct_responses": "% of Responses",
+  "percent_responses": "% of Responses",
   "potential_case_count_summary": {
     "": "We received a reports from {{count}} potential case.",
     "_plural": "We received {{count}} reports from potential cases."

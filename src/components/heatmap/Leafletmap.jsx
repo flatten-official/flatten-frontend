@@ -105,7 +105,7 @@ const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
     let content = `<h3>${regionName}</h3>`; // Use back ticks to escape sequence
 
     if (!regionData) {
-      content += t("msg_noentries");
+      content += t("insufficient_responses_message");
       layer.bindPopup(content, POPUP_OPTIONS);
       return;
     }
@@ -120,7 +120,7 @@ const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
     const minThreshold = dataInfo.notEnoughDataThreshold;
 
     if (minThreshold && total < minThreshold) {
-      content += t("msg_noentries");
+      content += t("insufficient_responses_message");
       layer.bindPopup(content, POPUP_OPTIONS);
       return;
     }
