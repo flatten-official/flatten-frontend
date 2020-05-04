@@ -32,9 +32,8 @@ const AboutUs = ({ t }) => {
             link={dev.link}
             name={dev.name}
             src={dev.src}
-            role={dev.role}
+            role={t("devs." + index + ".role")}
             degrees={dev.degrees}
-            titles={dev.titles}
           />
         ))}
       </div>
@@ -46,9 +45,9 @@ const AboutUs = ({ t }) => {
             link={advisor.link}
             name={advisor.name}
             src={advisor.src}
-            role={advisor.role}
+            role={t("advisors." + index + ".role")}
             degrees={advisor.degrees}
-            titles={advisor.titles}
+            titles={t("advisors." + index + ".titles")}
           />
         ))}
       </div>
@@ -60,9 +59,8 @@ const AboutUs = ({ t }) => {
             link={member.link}
             name={member.name}
             src={member.src}
-            role={member.role}
+            role={t("team." + index + ".role")}
             degrees={member.degrees}
-            titles={member.titles}
           />
         ))}
       </div>
