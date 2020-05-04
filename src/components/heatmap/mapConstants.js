@@ -31,7 +31,7 @@ export const TABS = {
     ui: {
       uniqueKey: 0,
       legendTitle: "percent_responses",
-      btnContent: "tabs.high_risk_cases",
+      btnContent: "tabs.vuln_and_pot_cases",
       popupMessage: "vuln_and_pot_case_count_summary.",
       colourScheme: {
         colours: MAP_COLOURS,

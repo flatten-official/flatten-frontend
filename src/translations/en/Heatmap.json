@@ -7,7 +7,7 @@
     "confirmed_cases": "Confirmed Cases",
     "potential_cases": "Potential Cases",
     "vulnerable_cases": "Vulnerable Individuals",
-    "high_risk_cases": "High-Risk Potential Cases"
+    "vuln_and_pot_cases": "Vulnerable & Potential Cases"
   },
   "captions": {
     "covid19": "COVID-19 in Canada",

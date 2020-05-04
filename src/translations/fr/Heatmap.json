@@ -7,7 +7,7 @@
     "confirmed_cases": "Cas confirmés cumulés",
     "potential_cases": "Cas potentiels",
     "vulnerable_cases": "Individus vulnérables",
-    "high_risk_cases": "Individus vulnérables symptomatiques"
+    "vuln_and_pot_cases": "Individus vulnérables symptomatiques"
   },
   "captions": {
     "covid19": "COVID-19 au Canada",
