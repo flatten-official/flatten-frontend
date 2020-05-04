@@ -9,6 +9,20 @@ export const LANG_CHANGE = "LANG_CHANGE";
 export const SET_COOKIE = "SET_COOKIE";
 export const GET_FORM_DATA = "GET_FORM_DATA";
 export const GET_CONFIRMED_DATA = "GET_CONFIRMED_DATA";
+export const SUBMIT_FORM = "SUBMIT_FORM";
+
+export const submitForm = (formValues) => async (dispatch) => {
+  let submitSuccess;
+  try {
+    const response = await backend.post("/submit-paperform", formValues);
+    submitSuccess = response.data;
+  } catch (e) {
+    console.error(e);
+    submitSuccess = false;
+  }
+
+  dispatch({ type: SUBMIT_FORM, payload: submitSuccess });
+};
 
 export const readCookie = () => async (dispatch) => {
   const { data } = await backend.get("/read-cookie");

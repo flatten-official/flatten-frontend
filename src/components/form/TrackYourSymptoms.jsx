@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import i18next from "i18next";
 import SubmitModal from "./SubmitModal";
 
-import { setDailyCookie } from "../../actions/index";
+import { setDailyCookie, submitForm } from "../../actions/index";
 
 import SyringeIcon from "../../assets/syringe.svg";
 
@@ -33,8 +33,10 @@ const TrackYourSymptoms = ({ t, dispatch, daily }) => {
       document.removeEventListener("PaperformSubmission", submitSuccess);
   }, []);
 
-  const submitSuccess = () => {
+  const submitSuccess = (e) => {
+    console.log(e);
     dispatch(setDailyCookie());
+    dispatch(submitForm(e.detail));
     setShowModal(true);
   };
 
