@@ -1,7 +1,7 @@
 {
   "header": "Suivre la propagation",
   "p1": "Bienvenue sur notre carte interactive de suivi des cas COVID-19 à travers le Canada en temps réel. Pour voir comment va votre région, zoomez ou laissez Flatten accéder à votre position actuelle.",
-  "p5": "Afin d'assurer le non-trollage, nous utilisons des cookies, recaptcha et suivons les adresses IP suspectes.",
+  "p5": "Afin de limiter l'abus, nous utilisons des cookies et recaptcha, en plus de tracer toutes adresses IP suspectes.",
   "p6": "COVID-19 au Canada",
   "p7": "Mise à jour en temps réel",
   "p8": "Les résultats sont basés sur des modèles préliminaires et des données évolutives et ne doivent pas être considérés comme définitifs. Alors que les tests et le développement se poursuivent, nos résultats doivent être interprétés avec prudence. Cette carte identifie le statut des individus signalant FLATTEN.ORG dans une région donnée et ne détermine pas les zones sécuritaires ou à risque.",
