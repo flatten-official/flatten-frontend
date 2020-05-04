@@ -113,10 +113,6 @@ const Navbar = ({ t, getGeolocation }) => {
       </a>
     );
 
-    if (value === "so") {
-      heatmapLink = null;
-    }
-
     navbar = (
       <a href="/">
         <div className="nav__logo">
