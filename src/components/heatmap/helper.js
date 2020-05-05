@@ -31,15 +31,3 @@ export const getData = (tab, data) => data[tab.data.source];
 
 export const getNameGetter = () =>
   i18next.language === "fr" ? "getFrenchName" : "getEnglishName";
-
-export const getConfirmedPopupContent = (t, count, _) => {
-  return `${count} ${t("confirmedCases")} <br />`;
-};
-
-export const getFormPopupContent = (t, count, total, popupTxt) => {
-  if (!total) return null;
-
-  if (total === 1) popupTxt += "_1"; // TODO Use plurals
-
-  return t(popupTxt).replace("XXX", count).replace("YYY", total); // TODO use https://www.i18next.com/translation-function/interpolation
-};
