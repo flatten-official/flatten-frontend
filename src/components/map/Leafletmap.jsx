@@ -3,7 +3,7 @@ import { withTranslation } from "react-i18next";
 import { GeoJSON, Map, TileLayer } from "react-leaflet";
 import PropTypes from "prop-types";
 import LocateControl from "./LocateControl";
-import { getCircleSize, getColour, getNameGetter } from "./helper";
+import { getCircleSize, getColour } from "./helper";
 import Legend from "./Legend";
 import L from "leaflet";
 
@@ -18,14 +18,17 @@ import {
   SHAPE_TYPE,
 } from "./mapConstants";
 
+/**
+ * Leaflet map is the component that contains the map (and only the map from)
+ * @param t         the language function to get text (from the right language) passed from i18n
+ * @param data      the data passed to the map fetched from Flatten's servers
+ * @param country   the country data object from mapConstants.js for the current country
+ * @param tab       the tab data object from mapConstants.js for the current tab
+ * @param dataInfo  the dataInfo object from mapConstants.js for the current data source
+ */
 const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
-  const nameGetter = getNameGetter();
-
-  const getRegionName = (feature) => {
-    if (dataInfo.type === DATA_TYPE.OVERLAY)
-      return dataInfo.baseLayer.fields.getRegionName(feature.properties);
-    else return dataInfo.fields[nameGetter](feature.properties);
-  };
+  const getRegionName = (feature) =>
+    dataInfo.fields.getRegionName(feature.properties);
 
   const getRegionalData = (feature, regionName = null) => {
     if (dataInfo.type === DATA_TYPE.OVERLAY) {
@@ -37,13 +40,16 @@ const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
     }
   };
 
+  /**
+   * Returns the count for the current tab and region. e.g. 10 vulnerable if it's the vulnerable tab.
+   */
   const getCount = (regionalData) =>
     dataInfo.fields[tab.data.field](regionalData);
 
   /**
    Returns a function that given a polygon gives it it's color
    */
-  const createPolygonStyle = () => (feature) => {
+  const polygonStyle = (feature) => {
     const regionalData = getRegionalData(feature);
     let numCases;
 
@@ -83,19 +89,11 @@ const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
     };
   };
 
-  const getGeoJson = () =>
-    dataInfo.type === DATA_TYPE.OVERLAY ? dataInfo.baseLayer.geoJson : data;
-
-  const getStyleFunction = () =>
-    dataInfo.shapeType === SHAPE_TYPE.CIRCLES
-      ? (_) => CONFIRMED_CIRCLE_STYLE
-      : createPolygonStyle();
-
   // this function is called with each polygon when the GeoJSON polygons are rendered
   // just creates the popup content and binds a popup to each polygon
   // `feature` is the GeoJSON feature (the FSA polygon)
   // use the FSA polygon FSA ID to get the FSA data from `formData`
-  const getPopupBinder = () => (feature, layer) => {
+  const popupBinder = (feature, layer) => {
     let regionName = getRegionName(feature);
     const regionData = getRegionalData(feature, regionName);
 
@@ -141,23 +139,22 @@ const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
     layer.bindPopup(content, POPUP_OPTIONS);
   };
 
-  const getPointToLayer = () => {
-    if (dataInfo.shapeType !== SHAPE_TYPE.CIRCLES) return undefined; // Only point to layer for circle type
+  /**
+   * Defines the markers for maps that use circles instead of polygons. See Leaflet documentation.
+   */
+  const pointToLayer = (feature, latLng) => {
+    const regionalData = getRegionalData(feature);
+    if (!regionalData) return null;
+    const count = getCount(regionalData);
 
-    return (feature, latLng) => {
-      const regionalData = getRegionalData(feature);
-      if (!regionalData) return null;
-      const count = getCount(regionalData);
-
-      if (!count) return null;
-      return L.circleMarker(latLng, {
-        radius: getCircleSize(
-          dataInfo.ui.circleSizes,
-          dataInfo.ui.thresholds,
-          count
-        ),
-      });
-    };
+    if (!count) return null;
+    return L.circleMarker(latLng, {
+      radius: getCircleSize(
+        dataInfo.ui.circleSizes,
+        dataInfo.ui.thresholds,
+        count
+      ),
+    });
   };
 
   // we wait until the formData is not null before rendering the GeoJSON.
@@ -178,14 +175,15 @@ const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
       <GeoJSON
-        // the key prop on the GeoJSON component ensures React will re-render
-        // the geojson layer when the activeTab changes. This does the work of
-        // unbinding all popups and recreating them with the correct data.
-        data={getGeoJson()}
-        style={getStyleFunction()}
-        onEachFeature={getPopupBinder()}
-        pointToLayer={getPointToLayer()}
-        key={tab.ui.uniqueKey}
+        data={dataInfo.type === DATA_TYPE.OVERLAY ? dataInfo.baseGeoJson : data}
+        style={
+          dataInfo.shapeType === SHAPE_TYPE.CIRCLES
+            ? CONFIRMED_CIRCLE_STYLE
+            : polygonStyle
+        }
+        onEachFeature={popupBinder}
+        pointToLayer={dataInfo.shapeType === SHAPE_TYPE.CIRCLES && pointToLayer} // Only if it's a circle data source
+        key={tab.ui.uniqueKey} // the key prop ensures React will re-render when the tab changes
       />
       <LocateControl />
       {dataInfo.shapeType === SHAPE_TYPE.POLYGONS && (
