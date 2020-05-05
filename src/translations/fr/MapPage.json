@@ -3,6 +3,7 @@
   "overview": "Bienvenue sur notre carte interactive de suivi des cas COVID-19 à travers le Canada en temps réel. Pour voir comment va votre région, zoomez ou laissez Flatten accéder à votre position actuelle.",
   "privacy_disclaimer": "Afin de limiter l'abus, nous utilisons des cookies et recaptcha, en plus de tracer toutes adresses IP suspectes.",
   "results_disclaimer": "Les résultats sont basés sur des modèles préliminaires et des données évolutives et ne doivent pas être considérés comme définitifs. Alors que les tests et le développement se poursuivent, nos résultats doivent être interprétés avec prudence. Cette carte identifie le statut des individus signalant FLATTEN.ORG dans une région donnée et ne détermine pas les zones sécuritaires ou à risque.",
+  "data_not_available": "Les données ne sont pas disponibles.",
   "tabs": {
     "confirmed_cases": "Cas confirmés cumulés",
     "potential_cases": "Cas potentiels",
