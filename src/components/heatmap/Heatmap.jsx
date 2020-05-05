@@ -26,9 +26,9 @@ const MapDataFooter = ({ t, data, fields }) => {
 
   return (
     <div className="heatmap__minidescription body">
-      <b>{t("p9")}</b>
+      <b>{t("captions.total_responses")}</b>
       <p>{numResponses || "Loading..."}</p>
-      <b>{t("p10")}</b>
+      <b>{t("captions.latest_update")}</b>
       <p>{date || "Loading..."}</p>
     </div>
   );
@@ -73,7 +73,7 @@ const HeatMap = ({ t, data, country, loadData }) => {
           </div>
           <div className="heatmap__description body">
             <p>
-              <b>{t("p1")}</b>
+              <b>{t("overview")}</b>
               <br />
             </p>
           </div>
@@ -93,9 +93,9 @@ const HeatMap = ({ t, data, country, loadData }) => {
         <div className="heatmap__headercontainer">
           <div className="heatmap__description body">
             <p>
-              <b>{t("p6")}</b>
+              <b>{t("captions.covid19")}</b>
               <br />
-              <b>{t("p7")}</b>
+              <b>{t("captions.real_time")}</b>
             </p>
           </div>
 
@@ -109,10 +109,10 @@ const HeatMap = ({ t, data, country, loadData }) => {
 
           <div className="heatmap__minidescription body">
             <p>
-              {t("p8")}
+              {t("results_disclaimer")}
               <br />
               <br />
-              {t("p5")}
+              {t("privacy_disclaimer")}
             </p>
           </div>
         </div>

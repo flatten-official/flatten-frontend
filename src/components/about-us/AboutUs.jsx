@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 
 import Profile from "./Profile";
+
+// TODO : Refactor so data and translations are separate.
 
 const AboutUs = ({ t }) => {
   useEffect(() => {
@@ -32,9 +35,8 @@ const AboutUs = ({ t }) => {
             link={dev.link}
             name={dev.name}
             src={dev.src}
-            role={dev.role}
+            role={t("devs." + index + ".role")} // Not using dev.role because won't work if translation is missing.
             degrees={dev.degrees}
-            titles={dev.titles}
           />
         ))}
       </div>
@@ -46,9 +48,9 @@ const AboutUs = ({ t }) => {
             link={advisor.link}
             name={advisor.name}
             src={advisor.src}
-            role={advisor.role}
+            role={t("advisors." + index + ".role")}
             degrees={advisor.degrees}
-            titles={advisor.titles}
+            titles={t("advisors." + index + ".titles")}
           />
         ))}
       </div>
@@ -60,14 +62,17 @@ const AboutUs = ({ t }) => {
             link={member.link}
             name={member.name}
             src={member.src}
-            role={member.role}
+            role={t("team." + index + ".role")}
             degrees={member.degrees}
-            titles={member.titles}
           />
         ))}
       </div>
     </React.Fragment>
   );
+};
+
+AboutUs.propTypes = {
+  t: PropTypes.func.isRequired,
 };
 
 export default withTranslation("AboutUs")(AboutUs);

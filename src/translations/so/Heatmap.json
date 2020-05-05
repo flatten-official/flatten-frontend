@@ -1,17 +1,15 @@
 {
   "header": "Raad Raaca Faafka",
-  "p1": "Kusoo dhawow khariidadeheena wada-xiriirka ee kiisaska COVID-19 ee daafaha magaalada Muqdisho waqti-buuxa. Si aad u aragto sida gobolka Banaadir wax u wado, ku soo dhowee ama u oggolow Flatten in ay la socoto meesha aad hadda ku sugan tahay.",
-  "p2": "<0>High-risk Potential Cases:</0> This tab displays all individuals that are especially vulnerable to COVID-19 in Canada that are also deemed potential cases, based on data inputted into Flatten's form.",
-  "p3": "<0>Potential Cases:</0> This tab displays all of the potential cases of COVID-19 in Canada, based on data inputted into Flatten's form.",
-  "p4": "<0>Vulnerable Individuals: </0> This tab displays all individuals that are especially vulnerable to COVID-19 in Canada, based on data inputted into Flatten's form.",
-  "p5": "Si aan u hubinno in aysan wax cunin waxaan isticmaalayna cunto nafaqaysan sida (cookies,) waxaa kale oo dib u habeyn ku sameyn karnaa oo aan la soconnaa cinwaannada IP ee laga shakiyo.",
-  "p6": "COVID-19 Mogadishu",
-  "p7": "Xogta Cusub",
-  "p8": "Natiijooyinkaan waxay kuxiran yihiin nuucyada (moodello) hordhac ah iyo xogta soo saaridda mana aha in loo tixgeliyo inay yihiin kuwa ugu dambeeyin ah . Iyada oo tijaabada iyo horumarka ay sii socoto, natiijooyinkayinkaan ayaa si taxaddar leh loogu fasiraayaa. Khariidadan ayaana cadeyneysa xaalada shaqsiyaadka ka soo tebinaya FLATTEN.SO ee gobolka Banaadir iyo goobkasto oo ka mid ah mana go'aaminayaso nabadgelyo ama aagagga halista ku jirto.",
-  "p9": "Total Responses",
-  "p10": "Last Update",
-  "pot_button": "Kiisaska Lamalaynaayo",
-  "vul_button": "Dadka Nugul",
-  "cul_button": "Kiisaska Lahubiyay",
-  "error": "Sorry, the heat-map did not load."
+  "overview": "Kusoo dhawow khariidadeheena wada-xiriirka ee kiisaska COVID-19 ee daafaha magaalada Muqdisho waqti-buuxa. Si aad u aragto sida gobolka Banaadir wax u wado, ku soo dhowee ama u oggolow Flatten in ay la socoto meesha aad hadda ku sugan tahay.",
+  "privacy_disclaimer": "Si aan u hubinno in aysan wax cunin waxaan isticmaalayna cunto nafaqaysan sida (cookies,) waxaa kale oo dib u habeyn ku sameyn karnaa oo aan la soconnaa cinwaannada IP ee laga shakiyo.",
+  "results_disclaimer": "Natiijooyinkaan waxay kuxiran yihiin nuucyada (moodello) hordhac ah iyo xogta soo saaridda mana aha in loo tixgeliyo inay yihiin kuwa ugu dambeeyin ah . Iyada oo tijaabada iyo horumarka ay sii socoto, natiijooyinkayinkaan ayaa si taxaddar leh loogu fasiraayaa. Khariidadan ayaana cadeyneysa xaalada shaqsiyaadka ka soo tebinaya FLATTEN.SO ee gobolka Banaadir iyo goobkasto oo ka mid ah mana go'aaminayaso nabadgelyo ama aagagga halista ku jirto.",
+  "tabs": {
+    "confirmed_cases": "Kiisaska Lahubiyay",
+    "potential_cases": "Kiisaska Lamalaynaayo",
+    "vulnerable_cases": "Dadka Nugul"
+  },
+  "captions": {
+    "covid19": "COVID-19 Mogadishu",
+    "real_time": "Xogta Cusub"
+  }
 }
