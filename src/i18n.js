@@ -2,9 +2,9 @@ import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
-import EnHomePageUS from "./translations/enUS/HomePageUS.json";
-import EnMapPageUS from "./translations/enUS/MapPageUS.json";
-import EnFormUS from "./translations/enUS/FormUS.json";
+import EnHomePageUS from "./translations/enUS/HomePage.json";
+import EnMapPageUS from "./translations/enUS/MapPage.json";
+import EnFormUS from "./translations/enUS/Form.json";
 
 import EnHomePage from "./translations/en/HomePage.json";
 import EnSupporters from "./translations/en/Supporters.json";
