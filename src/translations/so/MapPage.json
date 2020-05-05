@@ -1,0 +1,15 @@
+{
+  "header": "Raad Raaca Faafka",
+  "overview": "Kusoo dhawow khariidadeheena wada-xiriirka ee kiisaska COVID-19 ee daafaha magaalada Muqdisho waqti-buuxa. Si aad u aragto sida gobolka Banaadir wax u wado, ku soo dhowee ama u oggolow Flatten in ay la socoto meesha aad hadda ku sugan tahay.",
+  "privacy_disclaimer": "Si aan u hubinno in aysan wax cunin waxaan isticmaalayna cunto nafaqaysan sida (cookies,) waxaa kale oo dib u habeyn ku sameyn karnaa oo aan la soconnaa cinwaannada IP ee laga shakiyo.",
+  "results_disclaimer": "Natiijooyinkaan waxay kuxiran yihiin nuucyada (moodello) hordhac ah iyo xogta soo saaridda mana aha in loo tixgeliyo inay yihiin kuwa ugu dambeeyin ah . Iyada oo tijaabada iyo horumarka ay sii socoto, natiijooyinkayinkaan ayaa si taxaddar leh loogu fasiraayaa. Khariidadan ayaana cadeyneysa xaalada shaqsiyaadka ka soo tebinaya FLATTEN.SO ee gobolka Banaadir iyo goobkasto oo ka mid ah mana go'aaminayaso nabadgelyo ama aagagga halista ku jirto.",
+  "tabs": {
+    "confirmed_cases": "Kiisaska Lahubiyay",
+    "potential_cases": "Kiisaska Lamalaynaayo",
+    "vulnerable_cases": "Dadka Nugul"
+  },
+  "captions": {
+    "covid19": "COVID-19 Mogadishu",
+    "real_time": "Xogta Cusub"
+  }
+}
