@@ -52,8 +52,10 @@
   margin-left: 30%;
   margin-right: 30%;
 }
+
 .btn_group {
   width: 100%;
+
   button {
     width: 20.5%;
     float: left;
@@ -64,7 +66,8 @@
     background-color: $background-grey;
     color: $darkgrey-text;
   }
-  button:hover {
+
+  button:hover:not(.active) {
     background-color: $background-grey;
     color: $accent;
     transition: 0.3s;
@@ -75,15 +78,19 @@
     outline: none;
     color: $black-main;
   }
+
   button:last-child {
     margin-right: 0%;
   }
-}
 
-.active {
-  background-color: $white-main;
-  color: $black-main;
-  cursor: pointer;
+  .active {
+    background-color: $white-main;
+    color: $black-main;
+    font-weight: bold;
+    text-decoration: underline;
+    text-underline-offset: 2pt;
+    cursor: pointer;
+  }
 }
 
 .heatmap__analytics-button {
