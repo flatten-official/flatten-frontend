@@ -52,8 +52,10 @@
   margin-left: 30%;
   margin-right: 30%;
 }
+
 .btn_group {
   width: 100%;
+
   button {
     width: 20.5%;
     float: left;
@@ -64,6 +66,7 @@
     background-color: $background-grey;
     color: $darkgrey-text;
   }
+
   button:hover {
     background-color: $background-grey;
     color: $accent;
@@ -75,8 +78,18 @@
     outline: none;
     color: $black-main;
   }
+
   button:last-child {
     margin-right: 0%;
+  }
+
+  .active {
+    background-color: $white-main;
+    color: $black-main;
+    font-weight: bold;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
   }
 }
 
