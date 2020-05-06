@@ -67,7 +67,7 @@
     color: $darkgrey-text;
   }
 
-  button:hover {
+  button:hover:not(.active) {
     background-color: $background-grey;
     color: $accent;
     transition: 0.3s;
