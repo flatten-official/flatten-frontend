@@ -2,14 +2,14 @@ import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
-import EnHomePageUS from "./translations/en/HomePageUS.json";
-import EnHeatmapUS from "./translations/en/HeatmapUS.json";
-import EnFormUS from "./translations/en/FormUS.json";
+import EnHomePageUS from "./translations/enUS/HomePage.json";
+import EnMapPageUS from "./translations/enUS/MapPage.json";
+import EnFormUS from "./translations/enUS/Form.json";
 
 import EnHomePage from "./translations/en/HomePage.json";
 import EnSupporters from "./translations/en/Supporters.json";
 import EnNavbar from "./translations/en/Navbar.json";
-import EnHeatmap from "./translations/en/Heatmap.json";
+import EnMapPage from "./translations/en/MapPage.json";
 import EnAboutUs from "./translations/en/AboutUs.json";
 import EnEsriGsiMap from "./translations/en/EsriGsiMap.json";
 import EnFooter from "./translations/en/Footer.json";
@@ -22,7 +22,7 @@ import EnFormModal from "./translations/en/FormModal.json";
 import FrHomePage from "./translations/fr/HomePage.json";
 import FrSuppporters from "./translations/fr/Supporters.json";
 import FrNavbar from "./translations/fr/Navbar.json";
-import FrHeatmap from "./translations/fr/Heatmap.json";
+import FrMapPage from "./translations/fr/MapPage.json";
 import FrAboutUs from "./translations/fr/AboutUs.json";
 import FrEsriGsiMap from "./translations/fr/EsriGsiMap.json";
 import FrFooter from "./translations/fr/Footer.json";
@@ -35,7 +35,7 @@ import FrFormModal from "./translations/fr/FormModal.json";
 import SoHomePage from "./translations/so/HomePage.json";
 import SoSuppporters from "./translations/so/Supporters.json";
 import SoNavbar from "./translations/so/Navbar.json";
-import SoHeatmap from "./translations/so/Heatmap.json";
+import SoMapPage from "./translations/so/MapPage.json";
 import SoAboutUs from "./translations/so/AboutUs.json";
 import SoEsriGsiMap from "./translations/so/EsriGsiMap.json";
 import SoFooter from "./translations/so/Footer.json";
@@ -58,7 +58,7 @@ i18n
         HomePage: EnHomePage,
         Supporters: EnSupporters,
         Navbar: EnNavbar,
-        Heatmap: EnHeatmap,
+        MapPage: EnMapPage,
         AboutUs: EnAboutUs,
         EsriGsiMap: EnEsriGsiMap,
         Footer: EnFooter,
@@ -72,7 +72,7 @@ i18n
         HomePage: EnHomePageUS,
         Supporters: EnSupporters,
         Navbar: EnNavbar,
-        Heatmap: EnHeatmapUS,
+        MapPage: EnMapPageUS,
         AboutUs: EnAboutUs,
         EsriGsiMap: EnEsriGsiMap,
         Footer: EnFooter,
@@ -85,7 +85,7 @@ i18n
         HomePage: FrHomePage,
         Supporters: FrSuppporters,
         Navbar: FrNavbar,
-        Heatmap: FrHeatmap,
+        MapPage: FrMapPage,
         AboutUs: FrAboutUs,
         EsriGsiMap: FrEsriGsiMap,
         Footer: FrFooter,
@@ -99,7 +99,7 @@ i18n
         HomePage: SoHomePage,
         Supporters: SoSuppporters,
         Navbar: SoNavbar,
-        Heatmap: SoHeatmap,
+        MapPage: SoMapPage,
         AboutUs: SoAboutUs,
         EsriGsiMap: SoEsriGsiMap,
         Footer: SoFooter,

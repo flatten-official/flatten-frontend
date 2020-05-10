@@ -1,8 +1,7 @@
-import canadaGeoJsonBase from "../../assets/map/converted_boundaries.js";
-import somaliaGeoJsonBase from "../../assets/map/mongadishu_coords.js";
-import usaGeoJsonBase from "../../assets/map/county_boundaries";
+import canadaGeoJsonBase from "../../assets/map/canada_boundaries.js";
+import somaliaGeoJsonBase from "../../assets/map/somalia_coords.js";
+import usaGeoJsonBase from "../../assets/map/usa_boundaries";
 import i18next from "i18next";
-import { getConfirmedPopupContent, getFormPopupContent } from "./helper";
 
 const MAP_COLOURS = ["#FAE0A6", "#FABD05", "#FF7800", "#EB4236", "#C70505"];
 
@@ -21,18 +20,20 @@ export const DATA_TYPE = {
   STANDALONE: 1,
 };
 
+/**
+ * List of possible tabs and their parameters.
+ */
 export const TABS = {
   both: {
     ui: {
       uniqueKey: 0,
-      legendTitle: "pct_responses",
-      btnContent: "pot_vul_button",
+      legendTitle: "percent_responses",
+      btnContent: "tabs.vuln_and_pot_cases",
+      popupMessage: "vuln_and_pot_case_count_summary.",
       colourScheme: {
         colours: MAP_COLOURS,
         thresholds: [0.01, 0.02, 0.05, 0.1],
       },
-      getPopupContent: (t, count, total) =>
-        getFormPopupContent(t, count, total, "pot_vul_popup"),
     },
     data: {
       source: "form",
@@ -43,10 +44,9 @@ export const TABS = {
   vulnerable: {
     ui: {
       uniqueKey: 1,
-      legendTitle: "pct_responses",
-      btnContent: "vul_button",
-      getPopupContent: (t, count, total) =>
-        getFormPopupContent(t, count, total, "vul_case_popup"),
+      legendTitle: "percent_responses",
+      btnContent: "tabs.vulnerable_cases",
+      popupMessage: "vulnerable_case_count_summary.",
       colourScheme: {
         colours: MAP_COLOURS,
         thresholds: [0.15, 0.25, 0.35, 0.5],
@@ -61,10 +61,9 @@ export const TABS = {
   potential: {
     ui: {
       uniqueKey: 2,
-      legendTitle: "pct_responses",
-      btnContent: "pot_button",
-      getPopupContent: (t, count, total) =>
-        getFormPopupContent(t, count, total, "pot_case_popup"),
+      legendTitle: "percent_responses",
+      btnContent: "tabs.potential_cases",
+      popupMessage: "potential_case_count_summary.",
       colourScheme: {
         colours: MAP_COLOURS,
         thresholds: [0.02, 0.05, 0.1, 0.25],
@@ -80,8 +79,8 @@ export const TABS = {
     ui: {
       uniqueKey: 3,
       legendTitle: "number_of_cases",
-      btnContent: "cul_button",
-      getPopupContent: getConfirmedPopupContent,
+      btnContent: "tabs.confirmed_cases",
+      popupMessage: "confirmed_case_count_summary.",
       colourScheme: {
         colours: MAP_COLOURS,
         thresholds: [5, 25, 100, 250],
@@ -94,31 +93,36 @@ export const TABS = {
     },
   },
 };
+
+/**
+ * List of data sources and each data sources' configurations
+ * The fields object is key as it is used to access the data.
+ * Depending on the field parameter name, different data sources are expected.
+ *    - data: the full data object retrieved from the flatten servers
+ *    - region : just the data for that region
+ *    - prop : feature.properties from the geojson
+ */
 const DATA_INFO = {
   somaliaForm: {
     url:
       "https://storage.googleapis.com/flatten-staging-271921.appspot.com/somalia_data.json",
     shapeType: SHAPE_TYPE.CIRCLES,
     type: DATA_TYPE.OVERLAY,
-    baseLayer: {
-      geoJson: somaliaGeoJsonBase,
-      fields: {
-        getRegionName: (prop) => prop.NAME,
-      },
-    },
+    baseGeoJson: somaliaGeoJsonBase,
     fields: {
-      getRegions: (obj) => obj.region,
+      getRegionName: (prop) => prop.NAME,
+      getRegions: (data) => data.region,
       getPotential: (region) => region.potential,
       getVulnerable: (region) => region.risk,
-      getBoth: (region) => null, // TODO implement
       getRegionalTotal: (region) => region.number_reports,
-      getTotal: (obj) => null, // TODO implement,
+      getBoth: (region) => null, // TODO implement field in data source
+      getTotal: (data) => null, // TODO implement field in data source
+      getTimestamp: (data) => null, // TODO implement ^
     },
     ui: {
       circleSizes: [10, 12, 15, 17, 20, 25],
       thresholds: [3, 12, 25, 125, 250],
     },
-    notEnoughDataThreshold: 1,
   },
   somaliaConfirmed: {
     url:
@@ -127,7 +131,7 @@ const DATA_INFO = {
     type: DATA_TYPE.STANDALONE,
     fields: {
       getConfirmed: (prop) => prop.CONFIRMED,
-      getEnglishName: (prop) => prop.COUNTRY,
+      getRegionName: (prop) => prop.COUNTRY,
     },
     ui: {
       circleSizes: [10, 12, 15, 17, 20, 25],
@@ -140,8 +144,8 @@ const DATA_INFO = {
     url:
       "https://opendata.arcgis.com/datasets/e5403793c5654affac0942432783365a_0.geojson",
     fields: {
-      getEnglishName: (prop) => prop.ENGNAME,
-      getFrenchName: (prop) => prop.FRENAME,
+      getRegionName: (prop) =>
+        i18next.language === "fr" ? prop.FRENAME : prop.ENGNAME,
       getConfirmed: (prop) => prop.CaseCount,
       getLastUpdated: (prop) => prop.Last_Updated,
     },
@@ -151,16 +155,12 @@ const DATA_INFO = {
       "https://storage.googleapis.com/flatten-271620.appspot.com/form_data.json",
     type: DATA_TYPE.OVERLAY,
     shapeType: SHAPE_TYPE.POLYGONS,
-    baseLayer: {
-      geoJson: canadaGeoJsonBase,
-      fields: {
-        getRegionName: (prop) => prop.CFSAUID,
-      },
-    },
+    baseGeoJson: canadaGeoJsonBase,
     fields: {
-      getRegions: (obj) => obj.fsa,
-      getTotal: (obj) => obj.total_responses,
-      getTimestamp: (obj) => obj.time,
+      getRegionName: (prop) => prop.CFSAUID,
+      getRegions: (data) => data.fsa,
+      getTotal: (data) => data.total_responses,
+      getTimestamp: (data) => data.time,
       getPotential: (region) => region.pot,
       getVulnerable: (region) => region.risk,
       getBoth: (region) => region.both,
@@ -174,7 +174,7 @@ const DATA_INFO = {
     url:
       "https://opendata.arcgis.com/datasets/628578697fb24d8ea4c32fa0c5ae1843_0.geojson",
     fields: {
-      getEnglishName: (prop) => prop.Combined_Key,
+      getRegionName: (prop) => prop.Combined_Key,
       getConfirmed: (prop) => prop.Confirmed,
       getLastUpdated: (prop) => prop.Last_Update,
     },
@@ -188,19 +188,15 @@ const DATA_INFO = {
       "https://storage.googleapis.com/flatten-271620.appspot.com/form_data_usa.json",
     type: DATA_TYPE.OVERLAY,
     shapeType: SHAPE_TYPE.POLYGONS,
-    baseLayer: {
-      geoJson: usaGeoJsonBase,
-      fields: {
-        getRegionName: (prop) => prop.NAME,
-      },
-    },
+    baseGeoJson: usaGeoJsonBase,
     ui: {
       nameSuffix: " County",
     },
     fields: {
-      getTimestamp: (obj) => obj.time,
-      getTotal: (obj) => obj.total_responses,
-      getRegions: (obj) => obj.county,
+      getRegionName: (prop) => prop.NAME,
+      getTimestamp: (data) => data.time,
+      getTotal: (data) => data.total_responses,
+      getRegions: (data) => data.county,
       getPotential: (region) => region.pot,
       getVulnerable: (region) => region.risk,
       getBoth: (region) => region.both,
@@ -210,6 +206,9 @@ const DATA_INFO = {
   },
 };
 
+/**
+ * List of countries and their data
+ */
 const COUNTRIES = {
   canada: {
     activeTabs: [TABS.both, TABS.potential, TABS.vulnerable, TABS.confirmed],
@@ -221,9 +220,6 @@ const COUNTRIES = {
       startZoom: 4,
       minZoom: 4,
       start: [56.13, -106.347],
-    },
-    ui: {
-      showDataFooter: true,
     },
     data: {
       confirmed: DATA_INFO.canadaConfirmed,
@@ -238,11 +234,8 @@ const COUNTRIES = {
         [77, -60],
       ],
       start: [37.1, -95.713],
-      startZoom: 3,
-      minZoom: 3,
-    },
-    ui: {
-      showDataFooter: true,
+      startZoom: 4,
+      minZoom: 4,
     },
     data: {
       confirmed: DATA_INFO.usaConfirmed,
@@ -260,9 +253,6 @@ const COUNTRIES = {
       startZoom: 13,
       minZoom: 13,
     },
-    ui: {
-      showDataFooter: false,
-    },
     data: {
       confirmed: DATA_INFO.somaliaConfirmed,
       form: DATA_INFO.somaliaForm,
@@ -273,29 +263,30 @@ const COUNTRIES = {
 // Don't allow these constants to be modified
 Object.freeze(COUNTRIES);
 Object.freeze(TABS);
+Object.freeze(DATA_INFO);
 
+/**
+ * Returns the country based on the i18next language
+ */
 export function getCountry() {
   switch (i18next.language) {
     case "so":
       return COUNTRIES.somalia;
     case "enUS":
       return COUNTRIES.usa;
-    case "fr":
-    case "en":
-    case "en-US": // TODO Defaults to en-US when language is unknown. Should fix this in i18n
     default:
+      // lang is sometimes en-US or en-GB or en or fr depending on what i18n picks.
       return COUNTRIES.canada;
-    // console.log("Unknown country: " + i18next.language);
   }
 }
 
 // for USA circles
-export const CONFIRMED_CIRCLE_STYLE = {
+export const CONFIRMED_CIRCLE_STYLE = (_) => ({
   weight: 0,
   color: "red",
   fillColor: "red",
   fillOpacity: 0.5,
-};
+});
 
 export const BASE_POLYGON_STYLE = {
   weight: 0.9,
@@ -311,6 +302,7 @@ export const NOT_ENOUGH_DATA_POLYGON_STYLE = {
   fillOpacity: POLYGON_OPACITY,
   fillColor: NOT_ENOUGH_GRAY,
 };
+
 export const POPUP_OPTIONS = {
   className: "popupCustom",
 };
