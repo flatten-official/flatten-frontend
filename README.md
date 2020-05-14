@@ -2,6 +2,15 @@
 
 Self-Reporting of COVID-19
 
+## Branches
+
+- `master` and `master-variant` are both production branches hosted on Flatten.ca. `master-variant` is used for AB testing.
+
+- `staging` is where changes go before being released.
+  Only merge changes to staging that are ready to be released and are working since other changes need a working version to work from.
+
+- `map-staging` is where big changes to the maps are made before being merged to `staging`.
+
 ## Setup / Prereqs
 
 Here are some installation/setup steps for you to run the frontend side of the project.
@@ -22,6 +31,8 @@ After making sure you have node and npm on your system, you can run `npm install
 We use [Prettier](https://prettier.io/) for code formatting and [ESLint](https://eslint.org/) for error checking.
 
 Use [this](https://prettier.io/docs/en/editors.html) and [this](https://eslint.org/docs/user-guide/integrations) guide for setting Prettier and ESLint with your editors respectively. (Basically just install both plugins in your IDE.)
+
+Ensure both Prettier and ESLint are setup before getting started.
 
 ## Packages currently in use
 
@@ -45,7 +56,14 @@ Both of these are already setup in the project, so once downloading the extensio
 
 ## How To:
 
-### Redeploy dispatch.yaml
+The following section describes "How Tos" for common tasks.
+
+### Redeploy `dispatch.yaml`
+
+`dispatch.yaml` indicates the mappings of URLs to different Google App Engine services.
+e.g.`map.staging.flatten.ca` should go to the flatten `map-staging` branch.
+When changes are made to this file it needs to be redeployed.
+See Google App Engine documentation for more details on `dispatch.yaml` and the steps below.
 
 1. :warning: Ensure you're default project is the correct one in `gcloud` so you don't deploy to the wrong project.
 

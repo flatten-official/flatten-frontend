@@ -1,7 +1,6 @@
 import backend from "../apis/backend";
 import i18next from "i18next";
 import history from "../history";
-import { COUNTRIES } from "../components/heatmap/mapConstants";
 
 export const COOKIE_EXISTS = "COOKIE_EXISTS";
 export const CURRENT_LANG = "CURRENT_LANG";

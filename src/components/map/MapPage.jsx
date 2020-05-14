@@ -6,30 +6,33 @@ import { getMapConfirmedData, getMapFormData } from "../../actions";
 import { connect } from "react-redux";
 import { getCountry } from "./mapConstants";
 import PrimaryButton from "../common/buttons/PrimaryButton";
-import { formatTimestamp, getData, getDataInfo } from "./helper";
+import { getData, getDataInfo } from "./helper";
 
 const MapDataFooter = ({ t, data, fields }) => {
-  let numResponses;
-  let date;
+  const formatNumResponses = (total) =>
+    total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+  const formatTimestamp = (timestamp) => new Date(1000 * timestamp).toString();
+
+  let numResponses = t("loading");
+  let date = t("loading");
 
   if (data) {
-    const total = fields.getTotal(data);
-    if (total) {
-      numResponses = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Adds commas to number
-    }
+    numResponses = fields.getTotal(data)
+      ? formatNumResponses(fields.getTotal(data))
+      : t("data_not_available");
 
-    const timestamp = fields.getTimestamp(data);
-    if (timestamp) {
-      date = formatTimestamp(timestamp);
-    }
+    date = fields.getTimestamp(data)
+      ? formatTimestamp(fields.getTimestamp(data))
+      : t("data_not_available");
   }
 
   return (
     <div className="heatmap__minidescription body">
       <b>{t("captions.total_responses")}</b>
-      <p>{numResponses || "Loading..."}</p>
+      <p>{numResponses}</p>
       <b>{t("captions.latest_update")}</b>
-      <p>{date || "Loading..."}</p>
+      <p>{date}</p>
     </div>
   );
 };
@@ -40,17 +43,17 @@ MapDataFooter.propTypes = {
   fields: PropTypes.object.isRequired,
 };
 
-const HeatMap = ({ t, data, country, loadData }) => {
+const MapPage = ({ t, data, country, loadData }) => {
   useEffect(() => loadData(), []); // [] to only run once
 
   const [activeTab, setTab] = useState(country.activeTabs[0]);
 
   const renderTabs = () => {
-    const buttonList = country.activeTabs.map((tab, index) => (
+    const buttonList = country.activeTabs.map((tab) => (
       <PrimaryButton
         key={tab.ui.uniqueKey}
-        className={tab === activeTab ? "active" : undefined}
-        onClick={(e) => setTab(tab)}
+        className={tab === activeTab && "active"}
+        onClick={(_) => setTab(tab)}
       >
         {t(tab.ui.btnContent)}
       </PrimaryButton>
@@ -99,13 +102,11 @@ const HeatMap = ({ t, data, country, loadData }) => {
             </p>
           </div>
 
-          {country.ui.showDataFooter && (
-            <MapDataFooter
-              t={t}
-              data={data.form}
-              fields={country.data.form.fields}
-            />
-          )}
+          <MapDataFooter
+            t={t}
+            data={data.form}
+            fields={country.data.form.fields}
+          />
 
           <div className="heatmap__minidescription body">
             <p>
@@ -121,7 +122,7 @@ const HeatMap = ({ t, data, country, loadData }) => {
   );
 };
 
-HeatMap.propTypes = {
+MapPage.propTypes = {
   t: PropTypes.func.isRequired,
   country: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
@@ -138,12 +139,15 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-// Add translation and Redux state
-const HeatMapConnected = withTranslation("Heatmap")(
-  connect(mapStateToProps, mapDispatchToProps)(HeatMap)
+/**
+ * Wraps the country around the function
+ */
+const withCountry = (WrappedComponent) => (props) => (
+  <WrappedComponent {...props} country={getCountry()} />
 );
 
-// Add country
-const HeatMapWithCountry = () => <HeatMapConnected country={getCountry()} />;
-
-export default HeatMapWithCountry;
+export default withCountry(
+  withTranslation("MapPage")(
+    connect(mapStateToProps, mapDispatchToProps)(MapPage)
+  )
+);

@@ -2,8 +2,7 @@ import React from "react";
 import i18next from "i18next";
 import HomePage from "./HomePage";
 import ShareLinks from "../share-links/ShareLinks";
-import Visualization from "../visualization/Visualization";
-import Heatmap from "../heatmap/Heatmap";
+import Map from "../map/MapPage";
 import TrackYourSymptoms from "../form/TrackYourSymptoms";
 import EsriLink from "../esri-gsi-map/EsriLink";
 import Info from "../info/Info";
@@ -16,7 +15,7 @@ const Home = () => {
       <HomePage />
       {/* <Visualization /> */}
       <TrackYourSymptoms />
-      <Heatmap />
+      <Map />
       {cadToggle && <EsriLink />}
       <Info />
       <ShareLinks />
