@@ -32,8 +32,6 @@ const AboutUs = ({ t }) => {
           </p>
         </div>
       </section>
-      
-      this is the first block of people 
 
       <div className="about-us__body">
         {tier1.map((tier1, index) => (
@@ -100,8 +98,6 @@ const AboutUs = ({ t }) => {
           />
         ))}
       </div>
-
-      this is rejects block
 
       <h4 className="about-us__title title">{t("oldTeamHeader")}</h4>
       <div className="about-us__body">

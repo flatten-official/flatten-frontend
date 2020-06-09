@@ -3,7 +3,7 @@
   "p1": "Here are the amazing volunteers who make this project possible!",
   "contact": "Contact us at ",
   "advisorsHeader": "Advisors",
-  "teamHeader": "The Team",
+  "oldTeamHeader": "Past contributers to the project",
   "tier1": [
     {
       "name": "Shrey Jain",
@@ -16,7 +16,7 @@
       "name": "Arthur Allshire",
       "src": "./headshots/arthur.png",
       "link": "https://www.linkedin.com/in/arthur-allshire-56b06a16a/",
-      "role": "Chief Technological Offier"
+      "role": "Chief Technological Officer"
     }
   ],
   "tier2": [

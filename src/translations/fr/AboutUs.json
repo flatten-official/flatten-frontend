@@ -3,112 +3,98 @@
   "p1": "Voici les bénévoles extraordinaires qui ont contribué à monter ce projet!",
   "contact": "Vous pouvez nous joindre à : ",
   "advisorsHeader": "Conseillers",
-  "teamHeader": "L'équipe",
+  "oldTeamHeader": "Anciens contributeurs au projet",
   "tier1": [
     {
       "name": "Shrey Jain",
       "webp": "./headshots/webp/shrey.webp",
       "src": "./headshots/shrey.png",
       "link": "https://www.linkedin.com/in/shrey-j-9869b213a/",
-      "role": "Président et Directeur"
-    },
-    {
-      "name": "Yifei Zhang",
-      "src": "./headshots/yifei.png",
-      "link": "https://www.linkedin.com/in/yifei-zhang1/",
-      "role": "Vice Président"
+      "role": "Fondateur, président et directeur"
     },
     {
       "name": "Arthur Allshire",
       "src": "./headshots/arthur.png",
       "link": "https://www.linkedin.com/in/arthur-allshire-56b06a16a/",
-      "role": "Vice Président"
-    },
-    {
-      "name": "Surya Krishnan",
-      "src": "./headshots/surya.png",
-      "link": "https://www.linkedin.com/in/suryakrsh/",
-      "role": "Chef d'équipe de cartographie"
-    },
+      "role": "Chief Technological Officer"
+    }
+  ],
+  "tier2": [
     {
       "name": "Martin Staadecker",
       "src": "./headshots/martin.png",
       "link": "https://www.linkedin.com/in/staad/",
-      "role": "Chef d'équipe d'intégration de systèmes"
+      "role": "Responsable produit et technique"
     },
     {
-      "name": "Ivan Nesterovic",
-      "src": "./headshots/ivan.png",
-      "link": "https://www.linkedin.com/in/ivan-nesterovic/",
-      "role": "Chef d'équipe du tableau de bord"
+      "name": "Jaydeep Mistry",
+      "src": "./headshots/jaydeep.png",
+      "link": "",
+      "role": "Chef d'équipe Data Analytics"
+    },
+    {
+      "name": "Philip-Nicolas Varga",
+      "src": "./headshots/philip.png",
+      "link": "",
+      "role": "La cyber-sécurité"
+    },
+    {
+      "name": "Marie Charpignon",
+      "src": "./headshots/marie.png",
+      "link": "https://www.linkedin.com/in/mcharpignon/",
+      "role": "Directeure de recherche"
+    }
+  ],
+  "tier3": [
+    {
+      "name": "Miraal Kabir",
+      "src": "./headshots/miraal.png",
+      "link": "https://www.linkedin.com/in/miraalkabir/",
+      "role": "Chef d'équipe d'UI/UX "
+    },
+    {
+      "name": "Rassam Yazdi",
+      "src": "./headshots/rassam.png",
+      "link": "https://www.linkedin.com/in/rassam-yazdi-3a256319a/",
+      "role": "Analyste de données"
+    },
+    {
+      "name": "Ranjani Somayaji",
+      "src": "./headshots/somayaji.png",
+      "role": "Advisor",
+      "degrees": ", MD, MPH, FRCPC",
+      "titles": "Spécialiste des maladies infectieuses et épidémiologiste"
     },
     {
       "name": "Sejal Jain",
       "src": "./headshots/sejal.png",
       "link": "https://www.linkedin.com/in/sejal-jain-25029817b",
-      "role": "Assistant de Recherche et Chef d'équipe diffusion"
-    },
-    {
-      "name": "Emily Tao",
-      "src": "./headshots/emily.png",
-      "link": "https://www.linkedin.com/in/emilytao2000/",
-      "role": "UI/UX et Développeur de logiciels"
-    },
-    {
-      "name": "Anastasia Razdaibiedina",
-      "src": "./headshots/anastasia.png",
-      "link": "https://www.linkedin.com/in/anastasia-razdaibiedina-438929197/",
-      "role": "Assistant de Recherche et Développeur de logiciels"
-    },
-    {
-      "name": "Samuel Hao",
-      "src": "./headshots/samuel.png",
-      "link": "https://www.linkedin.com/in/samuelhao/",
-      "role": "Développeur de logiciels"
-    },
-    {
-      "name": "Eric Zhai",
-      "src": "",
-      "link": "https://www.linkedin.com/in/eric-zhai/",
-      "role": "Développeur de logiciels"
-    },
-    {
-      "name": "William Wen",
-      "src": "./headshots/william.png",
-      "link": "https://www.linkedin.com/in/william-wen360/",
-      "role": "Développeur de logiciels"
+      "role": "Écrivain et communications"
     }
   ],
   "advisors": [
     {
-      "name": "Geoffrey Hinton",
-      "src": "./headshots/geoffrey.png",
-      "role": "Conseiller",
-      "degrees": ", PhD",
-      "titles": "Conseiller scientifique en chef de Vector Institute"
+      "name": "Nick Frosst",
+      "src": "./headshots/nick.png",
+      "link": "https://www.linkedin.com/in/nick-frosst-19b80463/",
+      "role": "Directeur et conseiller",
+      "degrees": "",
+      "titles": "Founder of Cohere"
     },
     {
       "name": "Marzyeh Ghassemi",
       "src": "./headshots/marzyeh.png",
       "link": "https://www.linkedin.com/in/marzyehghassemi",
-      "role": "Conseiller et Directrice",
+      "role": "Directeure et conseillere",
       "degrees": ", PhD",
-      "titles": "Directeur de CIFAR AI et Directeur de Recherche Canada"
+      "titles": "Chaire AI de l'ICRA et Chaire de recherche du Canada"
     },
     {
-      "name": "Nick Frosst",
-      "src": "./headshots/nick.png",
-      "link": "https://www.linkedin.com/in/nick-frosst-19b80463/",
-      "role": "Conseiller et Directeur",
-      "degrees": "",
-      "titles": "Fondateur de Cohere"
-    },
-    {
-      "name": "Shafi  U. Bhuiyan",
-      "src": "./headshots/shafi.png",
-      "role": "Conseiller en santé publique",
-      "degrees": ", MBBS, MPH, MBA, PhD",
-      "titles": "Directeur, Conseil d'administration, Canadian Coalition for Global Health Research"
+      "name": "Geoffrey Hinton",
+      "src": "./headshots/geoffrey.png",
+      "role": "Conseiller",
+      "degrees": ", PhD",
+      "titles": "Conseiller scientifique en chef au Vector Institute"
     },
     {
       "name": "Mint Jain",
@@ -117,77 +103,76 @@
       "role": "Conseiller",
       "degrees": ", MHPE, MD, FRSCS",
       "titles": "Intensiviste"
-    },
-    {
-      "name": "Aby Mathews Maluvelil",
-      "src": "./headshots/aby.png",
-      "link": "https://www.linkedin.com/in/drabymathews",
-      "role": "Conseiller",
-      "degrees": "",
-      "titles": "Spécialiste Informatique de la Santé"
-    },
-    {
-      "name": "Ranjani Somayaji",
-      "src": "./headshots/somayaji.png",
-      "role": "Conseiller",
-      "degrees": ", MD, MPH, FRCPC",
-      "titles": "Spécialiste des maladies infectieuses et épidémiologiste"
     }
   ],
-  "team": [
+  "tier4": [
     {
-      "name": "Rassam Yazdi",
-      "src": "./headshots/rassam.png",
-      "link": "https://www.linkedin.com/in/rassam-yazdi-3a256319a/",
-      "role": "Développeur de logiciels"
+      "name": "Surya Krishnan",
+      "src": "./headshots/surya.png",
+      "link": "https://www.linkedin.com/in/suryakrsh/",
+      "role": "Visualisations"
     },
     {
-      "name": "Miraal Kabir",
-      "src": "./headshots/miraal.png",
-      "link": "https://www.linkedin.com/in/miraalkabir/",
-      "role": "Développeur de logiciels"
+      "name": "Anastasia Razdaibiedina",
+      "src": "./headshots/anastasia.png",
+      "link": "https://www.linkedin.com/in/anastasia-razdaibiedina-438929197/",
+      "role": "Chercheure"
     },
     {
-      "name": "Ethan Chen",
-      "src": "./headshots/ethan.png",
-      "link": "https://www.linkedin.com/in/ethanjc/",
-      "role": "Développeur de logiciels"
+      "name": "Isabella Ieraci",
+      "src": "./headshots/isabella.png",
+      "link": "",
+      "role": "Concepteure UI / UX"
     },
     {
-      "name": "Charlie Chen",
-      "src": "./headshots/charlie.png",
-      "link": "https://www.linkedin.com/in/hyu-chen/",
-      "role": "Développeur de logiciels"
+      "name": "Ivan Nesterovic",
+      "src": "./headshots/ivan.png",
+      "link": "https://www.linkedin.com/in/ivan-nesterovic/",
+      "role": "Analyste de données"
+    }
+  ],
+  "oldTeam": [
+    {
+      "name": "Yifei Zhang"
     },
     {
-      "name": "Siyan Zhao",
-      "src": "./headshots/siyan.png",
-      "link": "https://www.linkedin.com/in/siyanzhao/",
-      "role": "Développeur de logiciels"
+      "name": "Samuel Hao"
     },
     {
-      "name": "George Lifchits",
-      "src": "./headshots/george.png",
-      "link": "https://www.linkedin.com/in/georgelifchits/",
-      "role": "Développeur de logiciels"
+      "name": "Eric Zhai"
     },
     {
-      "name": "Robert Li",
-      "src": "./headshots/robertli.png",
-      "link": "https://www.linkedin.com/in/jianing-robert-li/",
-      "role": "Développeur de logiciels"
+      "name": "William Wen"
     },
     {
-      "name": "Robert Wu",
-      "src": "./headshots/robertwu.png",
-      "link": "https://linkedin.com/in/wu-robert",
-      "role": "Développeur de logiciels"
+      "name": "Emily Tao"
     },
     {
-      "name": "Maanav Dalal",
-      "src": "./headshots/maanav.png",
-      "link": "https://www.linkedin.com/in/maanavdalal/",
-      "role": "Développeur de logiciels"
+      "name": "Shafi  U. Bhuiyan"
+    },
+    {
+      "name": "Aby Mathews Maluvelil"
+    },
+    {
+      "name": "Ethan Chen"
+    },
+    {
+      "name": "Charlie Chen"
+    },
+    {
+      "name": "Siyan Zhao"
+    },
+    {
+      "name": "George Lifchits"
+    },
+    {
+      "name": "Robert Li"
+    },
+    {
+      "name": "Robert Wu"
+    },
+    {
+      "name": "Maanav Dalal"
     }
   ]
 }
