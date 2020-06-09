@@ -19,34 +19,34 @@
       "role": "Chief Technological Offier"
     },
     {
-      "name": "Surya Krishnan",
-      "src": "./headshots/surya.png",
-      "link": "https://www.linkedin.com/in/suryakrsh/",
-      "role": "Vizualizations"
-    },
-    {
       "name": "Martin Staadecker",
       "src": "./headshots/martin.png",
       "link": "https://www.linkedin.com/in/staad/",
       "role": "Product and Technical Lead"
     },
     {
-      "name": "Ivan Nesterovic",
-      "src": "./headshots/ivan.png",
-      "link": "https://www.linkedin.com/in/ivan-nesterovic/",
-      "role": "Data Analyst"
+      "name": "Jaydeep Mistry",
+      "src": "./headshots/jaydeep.png",
+      "link": "",
+      "role": "Data Analytics Team Lead"
     },
     {
-      "name": "Sejal Jain",
-      "src": "./headshots/sejal.png",
-      "link": "https://www.linkedin.com/in/sejal-jain-25029817b",
-      "role": "Writer and Communications"
+      "name": "Philip-Nicolas Varga",
+      "src": "./headshots/philip.png",
+      "link": "",
+      "role": "Cyber Security"
     },
     {
-      "name": "Anastasia Razdaibiedina",
-      "src": "./headshots/anastasia.png",
-      "link": "https://www.linkedin.com/in/anastasia-razdaibiedina-438929197/",
-      "role": "Research Scientist"
+      "name": "Marie Charpignon",
+      "src": "./headshots/marie.png",
+      "link": "https://www.linkedin.com/in/mcharpignon/",
+      "role": "Research Director"
+    },
+    {
+      "name": "Miraal Kabir",
+      "src": "./headshots/miraal.png",
+      "link": "https://www.linkedin.com/in/miraalkabir/",
+      "role": "UI/UX Lead"
     },
     {
       "name": "Rassam Yazdi",
@@ -55,19 +55,51 @@
       "role": "Data Analyst"
     },
     {
-      "name": "Miraal Kabir",
-      "src": "./headshots/miraal.png",
-      "link": "https://www.linkedin.com/in/miraalkabir/",
-      "role": "UI/UX Lead"
+      "name": "Ranjani Somayaji",
+      "src": "./headshots/somayaji.png",
+      "role": "Advisor",
+      "degrees": ", MD, MPH, FRCPC",
+      "titles": "Infectious Disease Specialist and Epidemiologist"
+    },
+    {
+      "name": "Sejal Jain",
+      "src": "./headshots/sejal.png",
+      "link": "https://www.linkedin.com/in/sejal-jain-25029817b",
+      "role": "Writer and Communications"
+    },
+    {
+      "name": "Surya Krishnan",
+      "src": "./headshots/surya.png",
+      "link": "https://www.linkedin.com/in/suryakrsh/",
+      "role": "Vizualizations"
+    },
+    {
+      "name": "Anastasia Razdaibiedina",
+      "src": "./headshots/anastasia.png",
+      "link": "https://www.linkedin.com/in/anastasia-razdaibiedina-438929197/",
+      "role": "Research Scientist"
+    },
+    {
+      "name": "Isabella Ieraci",
+      "src": "./headshots/isabella.png",
+      "link": "",
+      "role": "UI/UX Design"
+    },
+    {
+      "name": "Ivan Nesterovic",
+      "src": "./headshots/ivan.png",
+      "link": "https://www.linkedin.com/in/ivan-nesterovic/",
+      "role": "Data Analyst"
     }
   ],
   "advisors": [
     {
-      "name": "Geoffrey Hinton",
-      "src": "./headshots/geoffrey.png",
-      "role": "Advisor",
-      "degrees": ", PhD",
-      "titles": "Chief Scientific Advisor at Vector Institute"
+      "name": "Nick Frosst",
+      "src": "./headshots/nick.png",
+      "link": "https://www.linkedin.com/in/nick-frosst-19b80463/",
+      "role": "Director and Advisor",
+      "degrees": "",
+      "titles": "Founder of Cohere"
     },
     {
       "name": "Marzyeh Ghassemi",
@@ -78,12 +110,11 @@
       "titles": "CIFAR AI Chair and Canada Research Chair"
     },
     {
-      "name": "Nick Frosst",
-      "src": "./headshots/nick.png",
-      "link": "https://www.linkedin.com/in/nick-frosst-19b80463/",
-      "role": "Director and Advisor",
-      "degrees": "",
-      "titles": "Founder of Cohere"
+      "name": "Geoffrey Hinton",
+      "src": "./headshots/geoffrey.png",
+      "role": "Advisor",
+      "degrees": ", PhD",
+      "titles": "Chief Scientific Advisor at Vector Institute"
     },
     {
       "name": "Mint Jain",
@@ -92,13 +123,6 @@
       "role": "Advisor",
       "degrees": ", MHPE, MD, FRSCS",
       "titles": "Intensivist"
-    },
-    {
-      "name": "Ranjani Somayaji",
-      "src": "./headshots/somayaji.png",
-      "role": "Advisor",
-      "degrees": ", MD, MPH, FRCPC",
-      "titles": "Infectious Disease Specialist and Epidemiologist"
     }
   ],
   "team": [
