@@ -4,7 +4,7 @@
   "contact": "Vous pouvez nous joindre à : ",
   "advisorsHeader": "Conseillers",
   "teamHeader": "L'équipe",
-  "devs": [
+  "tier1": [
     {
       "name": "Shrey Jain",
       "webp": "./headshots/webp/shrey.webp",

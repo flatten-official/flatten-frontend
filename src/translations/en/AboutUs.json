@@ -1,10 +1,10 @@
 {
   "header": "About Us",
-  "p1": "Here are the amazing volunteers who made this project possible!",
+  "p1": "Here are the amazing volunteers who make this project possible!",
   "contact": "Contact us at ",
   "advisorsHeader": "Advisors",
   "teamHeader": "The Team",
-  "devs": [
+  "tier1": [
     {
       "name": "Shrey Jain",
       "webp": "./headshots/webp/shrey.webp",
@@ -17,7 +17,9 @@
       "src": "./headshots/arthur.png",
       "link": "https://www.linkedin.com/in/arthur-allshire-56b06a16a/",
       "role": "Chief Technological Offier"
-    },
+    }
+  ],
+  "tier2": [
     {
       "name": "Martin Staadecker",
       "src": "./headshots/martin.png",
@@ -41,7 +43,9 @@
       "src": "./headshots/marie.png",
       "link": "https://www.linkedin.com/in/mcharpignon/",
       "role": "Research Director"
-    },
+    }
+  ],
+  "tier3": [
     {
       "name": "Miraal Kabir",
       "src": "./headshots/miraal.png",
@@ -66,30 +70,6 @@
       "src": "./headshots/sejal.png",
       "link": "https://www.linkedin.com/in/sejal-jain-25029817b",
       "role": "Writer and Communications"
-    },
-    {
-      "name": "Surya Krishnan",
-      "src": "./headshots/surya.png",
-      "link": "https://www.linkedin.com/in/suryakrsh/",
-      "role": "Vizualizations"
-    },
-    {
-      "name": "Anastasia Razdaibiedina",
-      "src": "./headshots/anastasia.png",
-      "link": "https://www.linkedin.com/in/anastasia-razdaibiedina-438929197/",
-      "role": "Research Scientist"
-    },
-    {
-      "name": "Isabella Ieraci",
-      "src": "./headshots/isabella.png",
-      "link": "",
-      "role": "UI/UX Design"
-    },
-    {
-      "name": "Ivan Nesterovic",
-      "src": "./headshots/ivan.png",
-      "link": "https://www.linkedin.com/in/ivan-nesterovic/",
-      "role": "Data Analyst"
     }
   ],
   "advisors": [
@@ -125,93 +105,74 @@
       "titles": "Intensivist"
     }
   ],
-  "team": [
+  "tier4": [
     {
-      "name": "Yifei Zhang",
-      "src": "./headshots/yifei.png",
-      "link": "https://www.linkedin.com/in/yifei-zhang1/",
-      "role": "Vice President"
+      "name": "Surya Krishnan",
+      "src": "./headshots/surya.png",
+      "link": "https://www.linkedin.com/in/suryakrsh/",
+      "role": "Vizualizations"
     },
     {
-      "name": "Samuel Hao",
-      "src": "./headshots/samuel.png",
-      "link": "https://www.linkedin.com/in/samuelhao/",
-      "role": "Software Developer"
+      "name": "Anastasia Razdaibiedina",
+      "src": "./headshots/anastasia.png",
+      "link": "https://www.linkedin.com/in/anastasia-razdaibiedina-438929197/",
+      "role": "Research Scientist"
     },
     {
-      "name": "Eric Zhai",
-      "src": "",
-      "link": "https://www.linkedin.com/in/eric-zhai/",
-      "role": "Software Developer"
+      "name": "Isabella Ieraci",
+      "src": "./headshots/isabella.png",
+      "link": "",
+      "role": "UI/UX Design"
     },
     {
-      "name": "William Wen",
-      "src": "./headshots/william.png",
-      "link": "https://www.linkedin.com/in/william-wen360/",
-      "role": "Software Developer"
+      "name": "Ivan Nesterovic",
+      "src": "./headshots/ivan.png",
+      "link": "https://www.linkedin.com/in/ivan-nesterovic/",
+      "role": "Data Analyst"
+    }
+  ],
+  "oldTeam": [
+    {
+      "name": "Yifei Zhang"
     },
     {
-      "name": "Emily Tao",
-      "src": "./headshots/emily.png",
-      "link": "https://www.linkedin.com/in/emilytao2000/",
-      "role": "UI/UX and Software Developer"
+      "name": "Samuel Hao"
     },
     {
-      "name": "Shafi  U. Bhuiyan",
-      "src": "./headshots/shafi.png",
-      "role": "Public Health Advisor",
-      "degrees": ", MBBS, MPH, MBA, PhD",
-      "titles": "Chair, Board of Directors, Canadian Coalition for Global Health Research"
+      "name": "Eric Zhai"
     },
     {
-      "name": "Aby Mathews Maluvelil",
-      "src": "./headshots/aby.png",
-      "link": "https://www.linkedin.com/in/drabymathews",
-      "role": "Advisor",
-      "degrees": "",
-      "titles": "Healthcare IT Specialist"
+      "name": "William Wen"
     },
     {
-      "name": "Ethan Chen",
-      "src": "./headshots/ethan.png",
-      "link": "https://www.linkedin.com/in/ethanjc/",
-      "role": "Software Developer"
+      "name": "Emily Tao"
     },
     {
-      "name": "Charlie Chen",
-      "src": "./headshots/charlie.png",
-      "link": "https://www.linkedin.com/in/hyu-chen/",
-      "role": "Software Developer"
+      "name": "Shafi  U. Bhuiyan"
     },
     {
-      "name": "Siyan Zhao",
-      "src": "./headshots/siyan.png",
-      "link": "https://www.linkedin.com/in/siyanzhao/",
-      "role": "Software Developer"
+      "name": "Aby Mathews Maluvelil"
     },
     {
-      "name": "George Lifchits",
-      "src": "./headshots/george.png",
-      "link": "https://www.linkedin.com/in/georgelifchits/",
-      "role": "Software Developer"
+      "name": "Ethan Chen"
     },
     {
-      "name": "Robert Li",
-      "src": "./headshots/robertli.png",
-      "link": "https://www.linkedin.com/in/jianing-robert-li/",
-      "role": "Software Developer"
+      "name": "Charlie Chen"
     },
     {
-      "name": "Robert Wu",
-      "src": "./headshots/robertwu.png",
-      "link": "https://linkedin.com/in/wu-robert",
-      "role": "Software Developer"
+      "name": "Siyan Zhao"
     },
     {
-      "name": "Maanav Dalal",
-      "src": "./headshots/maanav.png",
-      "link": "https://www.linkedin.com/in/maanavdalal/",
-      "role": "Software Developer"
+      "name": "George Lifchits"
+    },
+    {
+      "name": "Robert Li"
+    },
+    {
+      "name": "Robert Wu"
+    },
+    {
+      "name": "Maanav Dalal"
     }
   ]
 }
