@@ -1,0 +1,140 @@
+{
+  "firstTier": [
+    {
+      "name": "Shrey Jain",
+      "src": "shrey.png",
+      "link": "https://www.linkedin.com/in/shrey-j-9869b213a/",
+      "roleKey": "founderPresDir"
+    },
+    {
+      "name": "Arthur Allshire",
+      "src": "arthur.png",
+      "link": "https://www.linkedin.com/in/arthur-allshire-56b06a16a/",
+      "roleKey": "cto"
+    },
+    {
+      "name": "Martin Staadecker",
+      "src": "martin.png",
+      "link": "https://www.linkedin.com/in/staad/",
+      "roleKey": "coo"
+    }
+  ],
+  "secondTier": [
+    {
+      "name": "Jaydeep Mistry",
+      "src": "jaydeep.png",
+      "link": "",
+      "roleKey": "dataAnalyst"
+    },
+    {
+      "name": "Philip-Nicolas Varga",
+      "src": "philip.png",
+      "link": "",
+      "roleKey": "softwareDev"
+    },
+    {
+      "name": "Marie Charpignon",
+      "src": "marie.png",
+      "link": "https://www.linkedin.com/in/mcharpignon/",
+      "roleKey": "softwareDev"
+    },
+    {
+      "name": "Miraal Kabir",
+      "src": "miraal.png",
+      "link": "https://www.linkedin.com/in/miraalkabir/",
+      "roleKey": "uiUXLead"
+    },
+    {
+      "name": "Rassam Yazdi",
+      "src": "rassam.png",
+      "link": "https://www.linkedin.com/in/rassam-yazdi-3a256319a/",
+      "roleKey": "softwareDev"
+    },
+    {
+      "name": "Ranjani Somayaji",
+      "src": "somayaji.png",
+      "roleKey": "advisor",
+      "degrees": ", MD, MPH, FRCPC",
+      "titleKey": "ranjani"
+    },
+    {
+      "name": "Sejal Jain",
+      "src": "sejal.png",
+      "link": "https://www.linkedin.com/in/sejal-jain-25029817b",
+      "roleKey": "writeAndComms"
+    },
+    {
+      "name": "Surya Krishnan",
+      "src": "surya.png",
+      "link": "https://www.linkedin.com/in/suryakrsh/",
+      "roleKey": "softwareDev"
+    },
+    {
+      "name": "Anastasia Razdaibiedina",
+      "src": "anastasia.png",
+      "link": "https://www.linkedin.com/in/anastasia-razdaibiedina-438929197/",
+      "roleKey": "researchScientist"
+    },
+    {
+      "name": "Isabella Ieraci",
+      "src": "isabella.png",
+      "link": "",
+      "roleKey": "uiUXDesign"
+    },
+    {
+      "name": "Ivan Nesterovic",
+      "src": "ivan.png",
+      "link": "https://www.linkedin.com/in/ivan-nesterovic/",
+      "roleKey": "softwareDev"
+    }
+  ],
+  "advisors": [
+    {
+      "name": "Nick Frosst",
+      "src": "nick.png",
+      "link": "https://www.linkedin.com/in/nick-frosst-19b80463/",
+      "roleKey": "directorAdvisor",
+      "degrees": "",
+      "titleKey": "nickFrosst"
+    },
+    {
+      "name": "Marzyeh Ghassemi",
+      "src": "marzyeh.png",
+      "link": "https://www.linkedin.com/in/marzyehghassemi",
+      "roleKey": "directorAdvisor",
+      "degrees": ", PhD",
+      "titleKey": "marzyehGhassemi"
+    },
+    {
+      "name": "Geoffrey Hinton",
+      "src": "geoffrey.png",
+      "roleKey": "advisor",
+      "degrees": ", PhD",
+      "titleKey": "geoffreyHinton"
+    },
+    {
+      "name": "Mint Jain",
+      "src": "minto.png",
+      "link": "https://www.linkedin.com/in/minto-jain-19380333/",
+      "roleKey": "advisor",
+      "degrees": ", MHPE, MD, FRSCS",
+      "titleKey": "intensivist"
+    }
+  ],
+  "contributors": [
+    "Aby Mathews Maluvelil",
+    "Charlie Chen",
+    "Emily Tao",
+    "Eric Zhai",
+    "Ethan Chen",
+    "George Lifchits",
+    "Maanav Dalal",
+    "Robert Li",
+    "Robert Wu",
+    "Samuel Hao",
+    "Shafi  U. Bhuiyan",
+    "Siyan Zhao",
+    "William Wen",
+    "Yifei Zhang"
+  ]
+}
