@@ -102,10 +102,7 @@ const AboutUs = ({ t }) => {
       <h4 className="about-us__title title">{t("oldTeamHeader")}</h4>
       <div className="about-us__body">
         {oldTeam.map((member, index) => (
-          <OldProfile
-            key={index}
-            name={oldTeam.name}
-          />
+          <OldProfile key={index} name={oldTeam.name} />
         ))}
       </div>
     </React.Fragment>
