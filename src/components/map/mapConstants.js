@@ -6,7 +6,7 @@ import i18next from "i18next";
 const MAP_COLOURS = ["#FAE0A6", "#FABD05", "#FF7800", "#EB4236", "#C70505"];
 
 export const NOT_ENOUGH_GRAY = "#909090";
-export const POLYGON_OPACITY = 1;
+export const POLYGON_OPACITY = 0.4;
 
 // Indicates if circles or polygons should be used
 export const SHAPE_TYPE = {
