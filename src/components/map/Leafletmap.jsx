@@ -1,6 +1,6 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
-import { GeoJSON, Map, TileLayer } from "react-leaflet";
+import { GeoJSON, Map, TileLayer, Pane } from "react-leaflet";
 import PropTypes from "prop-types";
 import LocateControl from "./LocateControl";
 import { getCircleSize, getColour } from "./helper";
@@ -170,21 +170,35 @@ const LeafletMap = ({ t, data, country, tab, dataInfo }) => {
       zoom={country.view.startZoom}
       minZoom={country.view.minZoom}
     >
-      <TileLayer
-        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      />
-      <GeoJSON
-        data={dataInfo.type === DATA_TYPE.OVERLAY ? dataInfo.baseGeoJson : data}
-        style={
-          dataInfo.shapeType === SHAPE_TYPE.CIRCLES
-            ? CONFIRMED_CIRCLE_STYLE
-            : polygonStyle
-        }
-        onEachFeature={popupBinder}
-        pointToLayer={dataInfo.shapeType === SHAPE_TYPE.CIRCLES && pointToLayer} // Only if it's a circle data source
-        key={tab.ui.uniqueKey} // the key prop ensures React will re-render when the tab changes
-      />
+      <Pane name="overlayPane" style={{ zIndex: 650 }}>
+        <TileLayer
+          url="https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        />
+      </Pane>
+      <Pane name="polyPane" style={{ zIndex: 50 }}>
+        <GeoJSON
+          data={
+            dataInfo.type === DATA_TYPE.OVERLAY ? dataInfo.baseGeoJson : data
+          }
+          style={
+            dataInfo.shapeType === SHAPE_TYPE.CIRCLES
+              ? CONFIRMED_CIRCLE_STYLE
+              : polygonStyle
+          }
+          onEachFeature={popupBinder}
+          pointToLayer={
+            dataInfo.shapeType === SHAPE_TYPE.CIRCLES && pointToLayer
+          } // Only if it's a circle data source
+          key={tab.ui.uniqueKey} // the key prop ensures React will re-render when the tab changes
+        />
+      </Pane>
+      <Pane name="basePane" style={{ zIndex: 25 }}>
+        <TileLayer
+          url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        />
+      </Pane>
       <LocateControl />
       {dataInfo.shapeType === SHAPE_TYPE.POLYGONS && (
         <Legend tab={tab} dataInfo={dataInfo} />
