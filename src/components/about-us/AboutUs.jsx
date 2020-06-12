@@ -41,6 +41,18 @@ const AboutUs = ({ t }) => {
       </div>
 
       <div className="about-us__body">
+        {people.thirdTier.map((person, index) => (
+          <Profile key={index} t={t} person={person} />
+        ))}
+      </div>
+
+      <div className="about-us__body">
+        {people.fourthTier.map((person, index) => (
+          <Profile key={index} t={t} person={person} />
+        ))}
+      </div>
+
+      <div className="about-us__body">
         {people.advisors.map((person, index) => (
           <Profile key={index} t={t} person={person} />
         ))}

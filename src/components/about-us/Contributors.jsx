@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 
 const Contributors = ({ name }) => (
   <>
-    <p className="OldProfile__name">{name}</p>
+    <div className="oldProfile__card">
+      <div className="description">
+        <p className="profile__name">{name}</p>
+      </div>
+    </div>
   </>
 );
 
