@@ -5,7 +5,7 @@ const Contributors = ({ name }) => (
   <>
     <div className="oldProfile__card">
       <div className="description">
-        <p className="profile__name">{name}</p>
+        <h3 className="profile__name">{name}</h3>
       </div>
     </div>
   </>
