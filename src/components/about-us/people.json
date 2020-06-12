@@ -132,7 +132,7 @@
     },
     {
       "name": "Shafi  U. Bhuiyan",
-      "src": "shafi.png",
+      "src": "shafi.PNG",
       "roleKey": "advisor",
       "degrees": ", MBBS, MPH, MBA, PhD",
       "titleKey": "shafi"
@@ -149,7 +149,6 @@
     "- Robert Li -",
     "- Robert Wu -",
     "- Samuel Hao -",
-    "- Shafi  U. Bhuiyan -",
     "- Siyan Zhao -",
     "- William Wen -",
     "- Yifei Zhang -"
