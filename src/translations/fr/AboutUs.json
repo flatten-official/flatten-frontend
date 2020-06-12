@@ -4,6 +4,26 @@
   "contact": "Vous pouvez nous joindre à : ",
   "advisorsHeader": "Conseillers",
   "contributorsHeader": "Anciens contributeurs au projet",
-  "roles": {},
-  "titles": {}
+  "roles": {
+    "founderPresDir": "Fondateur, président et directeur",
+    "cto": "Chef de la technologie",
+    "coo": "Chef des opérations et de la technologie",
+    "dataAnalyst": "Analyste de données",
+    "softwareDev": "Développeur de logiciels",
+    "uiUXDev": "Développeur de UI/UX",
+    "writeAndComms": "Écrivain et communications",
+    "researchScientist": "Chercheur",
+    "uiUXDesign": "Concepteur d'UI/UX",
+    "directorAdvisor": "Directeur et conseiller",
+    "advisor": "Conseillerr",
+    "epiAdvisor": "Épidémiologiste et conseiller"
+  },
+  "titles": {
+    "ranjani": "Spécialiste des maladies infectieuses et épidémiologiste",
+    "nickFrosst": "Fondateur de Cohere",
+    "geoffreyHinton": "Conseiller scientifique en chef au Vector Institute",
+    "intensivist": "Intensiviste",
+    "marzyehGhassemi": "Chaire AI de l'ICRA et Chaire de recherche du Canada",
+    "shafi": "Président, conseil d'administration, Coalition Canadienne pour la recherche en santé mondiale"
+  }
 }
