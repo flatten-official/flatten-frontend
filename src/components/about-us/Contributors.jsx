@@ -1,14 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
 
+// In future should add webp img's to serve in order to improve img loading times
+// Need to add a webp loader to the webpack config
 const Contributors = ({ name }) => (
   <>
-    <p className="OldProfile__name">{name}</p>
+    <div className="OldProfile__card">
+      <p className="OldProfile__name">{name}</p>
+    </div>
+    <br />
   </>
 );
-
-Contributors.propType = {
-  name: PropTypes.string,
-};
 
 export default Contributors;

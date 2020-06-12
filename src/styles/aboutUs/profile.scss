@@ -1,5 +1,5 @@
 .profile__card {
-  margin: 0 15px 40px 15px;
+  margin: 0px 15px 40px 15px;
   width: 270px;
   text-align: center;
   border-radius: 8px;
@@ -7,9 +7,9 @@
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   &:hover {
     transition: 0.3s;
-    -webkit-box-shadow: 6px 6px 12px 0 rgb(211, 185, 185);
-    -moz-box-shadow: 6px 6px 12px 0 rgb(211, 185, 185);
-    box-shadow: 6px 6px 12px 0 rgb(211, 185, 185);
+    -webkit-box-shadow: 6px 6px 12px 0px rgb(211, 185, 185);
+    -moz-box-shadow: 6px 6px 12px 0px rgb(211, 185, 185);
+    box-shadow: 6px 6px 12px 0px rgb(211, 185, 185);
   }
 }
 
