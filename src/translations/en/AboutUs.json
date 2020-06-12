@@ -10,12 +10,13 @@
     "coo": "Chief Operations Officer",
     "dataAnalyst": "Data Analyst",
     "softwareDev": "Software Developer",
-    "uiUXLead": "UI/UX Lead",
+    "uiUXDev": "UI/UX Developer",
     "writeAndComms": "Writer and Communications",
     "researchScientist": "Research Scientist",
     "uiUXDesign": "UI/UX Design",
     "directorAdvisor": "Director and Advisor",
-    "advisor": "Advisor"
+    "advisor": "Advisor",
+    "epiAdvisor": "Epidemiologist and Advisor"
   },
   "titles": {
     "ranjani": "Infectious Disease Specialist and Epidemiologist",

@@ -56,11 +56,11 @@
       "name": "Miraal Kabir",
       "src": "miraal.png",
       "link": "https://www.linkedin.com/in/miraalkabir/",
-      "roleKey": "uiUXLead"
+      "roleKey": "uiUXDev"
     },
     {
       "name": "Marie Charpignon",
-      "src": "marie.png",
+      "src": "marie.jpg",
       "link": "https://www.linkedin.com/in/mcharpignon/",
       "roleKey": "softwareDev"
     },
@@ -72,12 +72,12 @@
     },
     {
       "name": "Isabella Ieraci",
-      "src": "isabella.png",
+      "src": "isabella.jpg",
       "link": "",
       "roleKey": "uiUXDesign"
     }
   ],
-  "fourthTier":[
+  "fourthTier": [
     {
       "name": "Anastasia Razdaibiedina",
       "src": "anastasia.png",
@@ -126,7 +126,7 @@
     {
       "name": "Ranjani Somayaji",
       "src": "somayaji.png",
-      "roleKey": "advisor",
+      "roleKey": "epiAdvisor",
       "degrees": ", MD, MPH, FRCPC",
       "titleKey": "ranjani"
     },
