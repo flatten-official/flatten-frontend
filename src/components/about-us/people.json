@@ -17,15 +17,15 @@
       "src": "martin.png",
       "link": "https://www.linkedin.com/in/staad/",
       "roleKey": "coo"
-    }
-  ],
-  "secondTier": [
+    },
     {
       "name": "Jaydeep Mistry",
       "src": "jaydeep.png",
       "link": "",
       "roleKey": "dataAnalyst"
-    },
+    }
+  ],
+  "secondTier": [
     {
       "name": "Philip-Nicolas Varga",
       "src": "philip.png",
