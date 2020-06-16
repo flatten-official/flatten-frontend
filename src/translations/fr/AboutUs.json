@@ -7,15 +7,16 @@
   "roles": {
     "founderPresDir": "Fondateur, président et directeur",
     "cto": "Chef de la technologie",
-    "coo": "Chef des opérations et de la technologie",
+    "coo": "Chef des opérations",
     "dataAnalyst": "Analyste de données",
     "softwareDev": "Développeur de logiciels",
     "uiUXDev": "Développeur de UI/UX",
     "writeAndComms": "Écrivain et communications",
-    "researchScientist": "Chercheur",
+    "researchScientistFemale": "Chercheuse",
+    "researchScientistMale": "Chercheur",
     "uiUXDesign": "Concepteur d'UI/UX",
     "directorAdvisor": "Directeur et conseiller",
-    "advisor": "Conseillerr",
+    "advisor": "Conseiller",
     "epiAdvisor": "Épidémiologiste et conseiller"
   },
   "titles": {

@@ -1,5 +1,5 @@
 {
-  "firstTier": [
+  "team": [
     {
       "name": "Shrey Jain",
       "src": "shrey.png",
@@ -23,9 +23,7 @@
       "src": "jaydeep.png",
       "link": "",
       "roleKey": "dataAnalyst"
-    }
-  ],
-  "secondTier": [
+    },
     {
       "name": "Surya Krishnan",
       "src": "surya.png",
@@ -49,9 +47,7 @@
       "src": "sejal.png",
       "link": "https://www.linkedin.com/in/sejal-jain-25029817b",
       "roleKey": "writeAndComms"
-    }
-  ],
-  "thirdTier": [
+    },
     {
       "name": "Miraal Kabir",
       "src": "miraal.png",
@@ -62,7 +58,7 @@
       "name": "Marie Charpignon",
       "src": "marie.jpg",
       "link": "https://www.linkedin.com/in/mcharpignon/",
-      "roleKey": "softwareDev"
+      "roleKey": "researchScientistFemale"
     },
     {
       "name": "Ivan Nesterovic",
@@ -75,20 +71,18 @@
       "src": "isabella.jpg",
       "link": "",
       "roleKey": "uiUXDesign"
-    }
-  ],
-  "fourthTier": [
+    },
     {
       "name": "Anastasia Razdaibiedina",
       "src": "anastasia.png",
       "link": "https://www.linkedin.com/in/anastasia-razdaibiedina-438929197/",
-      "roleKey": "researchScientist"
+      "roleKey": "researchScientistFemale"
     },
     {
       "name": "Matthew Samuel",
       "src": "matthew.png",
       "link": "https://www.linkedin.com/in/mathewcsamuel",
-      "roleKey": "researchScientist"
+      "roleKey": "researchScientistMale"
     },
     {
       "name": "Geoffrey Hinton",
@@ -104,9 +98,7 @@
       "roleKey": "advisor",
       "degrees": ", MHPE, MD, FRSCS",
       "titleKey": "intensivist"
-    }
-  ],
-  "advisors": [
+    },
     {
       "name": "Nick Frosst",
       "src": "nick.png",

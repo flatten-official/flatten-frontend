@@ -14,7 +14,7 @@ const AboutUs = ({ t }) => {
   }, []);
 
   return (
-    <React.Fragment>
+    <div className="about-us__container">
       <section className="about-us__header">
         <h4 className="about-us__title title">{t("header")}</h4>
         <div className="about-us__description">
@@ -29,31 +29,7 @@ const AboutUs = ({ t }) => {
       </section>
 
       <div className="about-us__body">
-        {people.firstTier.map((person, index) => (
-          <Profile key={index} t={t} person={person} />
-        ))}
-      </div>
-
-      <div className="about-us__body">
-        {people.secondTier.map((person, index) => (
-          <Profile key={index} t={t} person={person} />
-        ))}
-      </div>
-
-      <div className="about-us__body">
-        {people.thirdTier.map((person, index) => (
-          <Profile key={index} t={t} person={person} />
-        ))}
-      </div>
-
-      <div className="about-us__body">
-        {people.fourthTier.map((person, index) => (
-          <Profile key={index} t={t} person={person} />
-        ))}
-      </div>
-
-      <div className="about-us__body">
-        {people.advisors.map((person, index) => (
+        {people.team.map((person, index) => (
           <Profile key={index} t={t} person={person} />
         ))}
       </div>
@@ -64,7 +40,7 @@ const AboutUs = ({ t }) => {
           <Contributors key={index} name={name} />
         ))}
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 
