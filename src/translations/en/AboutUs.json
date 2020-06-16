@@ -1,193 +1,29 @@
 {
   "header": "About Us",
-  "p1": "Here are the amazing volunteers who made this project possible!",
+  "p1": "Here are the amazing volunteers who make this project possible!",
   "contact": "Contact us at ",
   "advisorsHeader": "Advisors",
-  "teamHeader": "The Team",
-  "devs": [
-    {
-      "name": "Shrey Jain",
-      "webp": "./headshots/webp/shrey.webp",
-      "src": "./headshots/shrey.png",
-      "link": "https://www.linkedin.com/in/shrey-j-9869b213a/",
-      "role": "President and Director"
-    },
-    {
-      "name": "Yifei Zhang",
-      "src": "./headshots/yifei.png",
-      "link": "https://www.linkedin.com/in/yifei-zhang1/",
-      "role": "Vice President"
-    },
-    {
-      "name": "Arthur Allshire",
-      "src": "./headshots/arthur.png",
-      "link": "https://www.linkedin.com/in/arthur-allshire-56b06a16a/",
-      "role": "Vice President"
-    },
-    {
-      "name": "Surya Krishnan",
-      "src": "./headshots/surya.png",
-      "link": "https://www.linkedin.com/in/suryakrsh/",
-      "role": "Mapping Team Lead"
-    },
-    {
-      "name": "Martin Staadecker",
-      "src": "./headshots/martin.png",
-      "link": "https://www.linkedin.com/in/staad/",
-      "role": "Systems Integration Team Lead"
-    },
-    {
-      "name": "Ivan Nesterovic",
-      "src": "./headshots/ivan.png",
-      "link": "https://www.linkedin.com/in/ivan-nesterovic/",
-      "role": "Dashboard Team Lead"
-    },
-    {
-      "name": "Sejal Jain",
-      "src": "./headshots/sejal.png",
-      "link": "https://www.linkedin.com/in/sejal-jain-25029817b",
-      "role": "Research Assistant and Outreach Lead"
-    },
-    {
-      "name": "Emily Tao",
-      "src": "./headshots/emily.png",
-      "link": "https://www.linkedin.com/in/emilytao2000/",
-      "role": "UI/UX and Software Developer"
-    },
-    {
-      "name": "Anastasia Razdaibiedina",
-      "src": "./headshots/anastasia.png",
-      "link": "https://www.linkedin.com/in/anastasia-razdaibiedina-438929197/",
-      "role": "Research Assistant and Developer"
-    },
-    {
-      "name": "Samuel Hao",
-      "src": "./headshots/samuel.png",
-      "link": "https://www.linkedin.com/in/samuelhao/",
-      "role": "Software Developer"
-    },
-    {
-      "name": "Eric Zhai",
-      "src": "",
-      "link": "https://www.linkedin.com/in/eric-zhai/",
-      "role": "Software Developer"
-    },
-    {
-      "name": "William Wen",
-      "src": "./headshots/william.png",
-      "link": "https://www.linkedin.com/in/william-wen360/",
-      "role": "Software Developer"
-    }
-  ],
-  "advisors": [
-    {
-      "name": "Geoffrey Hinton",
-      "src": "./headshots/geoffrey.png",
-      "role": "Advisor",
-      "degrees": ", PhD",
-      "titles": "Chief Scientific Advisor at Vector Institute"
-    },
-    {
-      "name": "Marzyeh Ghassemi",
-      "src": "./headshots/marzyeh.png",
-      "link": "https://www.linkedin.com/in/marzyehghassemi",
-      "role": "Advisor and Director",
-      "degrees": ", PhD",
-      "titles": "CIFAR AI Chair and Canada Research Chair"
-    },
-    {
-      "name": "Nick Frosst",
-      "src": "./headshots/nick.png",
-      "link": "https://www.linkedin.com/in/nick-frosst-19b80463/",
-      "role": "Advisor and Director",
-      "degrees": "",
-      "titles": "Founder of Cohere"
-    },
-    {
-      "name": "Shafi  U. Bhuiyan",
-      "src": "./headshots/shafi.png",
-      "role": "Public Health Advisor",
-      "degrees": ", MBBS, MPH, MBA, PhD",
-      "titles": "Chair, Board of Directors, Canadian Coalition for Global Health Research"
-    },
-    {
-      "name": "Mint Jain",
-      "src": "./headshots/minto.png",
-      "link": "https://www.linkedin.com/in/minto-jain-19380333/",
-      "role": "Advisor",
-      "degrees": ", MHPE, MD, FRSCS",
-      "titles": "Intensivist"
-    },
-    {
-      "name": "Aby Mathews Maluvelil",
-      "src": "./headshots/aby.png",
-      "link": "https://www.linkedin.com/in/drabymathews",
-      "role": "Advisor",
-      "degrees": "",
-      "titles": "Healthcare IT Specialist"
-    },
-    {
-      "name": "Ranjani Somayaji",
-      "src": "./headshots/somayaji.png",
-      "role": "Advisor",
-      "degrees": ", MD, MPH, FRCPC",
-      "titles": "Infectious Disease Specialist and Epidemiologist"
-    }
-  ],
-  "team": [
-    {
-      "name": "Rassam Yazdi",
-      "src": "./headshots/rassam.png",
-      "link": "https://www.linkedin.com/in/rassam-yazdi-3a256319a/",
-      "role": "Software Developer"
-    },
-    {
-      "name": "Miraal Kabir",
-      "src": "./headshots/miraal.png",
-      "link": "https://www.linkedin.com/in/miraalkabir/",
-      "role": "Software Developer"
-    },
-    {
-      "name": "Ethan Chen",
-      "src": "./headshots/ethan.png",
-      "link": "https://www.linkedin.com/in/ethanjc/",
-      "role": "Software Developer"
-    },
-    {
-      "name": "Charlie Chen",
-      "src": "./headshots/charlie.png",
-      "link": "https://www.linkedin.com/in/hyu-chen/",
-      "role": "Software Developer"
-    },
-    {
-      "name": "Siyan Zhao",
-      "src": "./headshots/siyan.png",
-      "link": "https://www.linkedin.com/in/siyanzhao/",
-      "role": "Software Developer"
-    },
-    {
-      "name": "George Lifchits",
-      "src": "./headshots/george.png",
-      "link": "https://www.linkedin.com/in/georgelifchits/",
-      "role": "Software Developer"
-    },
-    {
-      "name": "Robert Li",
-      "src": "./headshots/robertli.png",
-      "link": "https://www.linkedin.com/in/jianing-robert-li/",
-      "role": "Software Developer"
-    },
-    {
-      "name": "Robert Wu",
-      "src": "./headshots/robertwu.png",
-      "link": "https://linkedin.com/in/wu-robert",
-      "role": "Software Developer"
-    },
-    {
-      "name": "Maanav Dalal",
-      "src": "./headshots/maanav.png",
-      "link": "https://www.linkedin.com/in/maanavdalal/",
-      "role": "Software Developer"
-    }
-  ]
+  "contributorsHeader": "Contributors to the project",
+  "roles": {
+    "founderPresDir": "Founder, President and Director",
+    "cto": "Head of Technology",
+    "coo": "Head of Operations and Technology",
+    "dataAnalyst": "Data Analyst",
+    "softwareDev": "Software Developer",
+    "uiUXDev": "UI/UX Developer",
+    "writeAndComms": "Writer and Communications",
+    "researchScientist": "Research Scientist",
+    "uiUXDesign": "UI/UX Design",
+    "directorAdvisor": "Director and Advisor",
+    "advisor": "Advisor",
+    "epiAdvisor": "Epidemiologist and Advisor"
+  },
+  "titles": {
+    "ranjani": "Infectious Disease Specialist and Epidemiologist",
+    "nickFrosst": "Founder of Cohere",
+    "geoffreyHinton": "Chief Scientific Advisor at Vector Institute",
+    "intensivist": "Intensivist",
+    "marzyehGhassemi": "CIFAR AI Chair and Canada Research Chair",
+    "shafi": "Chair, Board of Directors, Canadian Coalition for Global Health Research"
+  }
 }

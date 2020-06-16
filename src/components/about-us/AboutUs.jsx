@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
+import people from "./people.json";
 import Profile from "./Profile";
+import Contributors from "./Contributors";
 
 // TODO : Refactor so data and translations are separate.
 
@@ -11,9 +13,6 @@ const AboutUs = ({ t }) => {
     window.scrollTo(0, 0);
   }, []);
 
-  const devs = t("devs", { returnObjects: true });
-  const advisors = t("advisors", { returnObjects: true });
-  const team = t("team", { returnObjects: true });
   return (
     <React.Fragment>
       <section className="about-us__header">
@@ -28,43 +27,41 @@ const AboutUs = ({ t }) => {
           </p>
         </div>
       </section>
+
       <div className="about-us__body">
-        {devs.map((dev, index) => (
-          <Profile
-            key={index}
-            link={dev.link}
-            name={dev.name}
-            src={dev.src}
-            role={t("devs." + index + ".role")} // Not using dev.role because won't work if translation is missing.
-            degrees={dev.degrees}
-          />
+        {people.firstTier.map((person, index) => (
+          <Profile key={index} t={t} person={person} />
         ))}
       </div>
-      <h4 className="about-us__title title">{t("advisorsHeader")}</h4>
+
       <div className="about-us__body">
-        {advisors.map((advisor, index) => (
-          <Profile
-            key={index}
-            link={advisor.link}
-            name={advisor.name}
-            src={advisor.src}
-            role={t("advisors." + index + ".role")}
-            degrees={advisor.degrees}
-            titles={t("advisors." + index + ".titles")}
-          />
+        {people.secondTier.map((person, index) => (
+          <Profile key={index} t={t} person={person} />
         ))}
       </div>
-      <h4 className="about-us__title title">{t("teamHeader")}</h4>
+
       <div className="about-us__body">
-        {team.map((member, index) => (
-          <Profile
-            key={index}
-            link={member.link}
-            name={member.name}
-            src={member.src}
-            role={t("team." + index + ".role")}
-            degrees={member.degrees}
-          />
+        {people.thirdTier.map((person, index) => (
+          <Profile key={index} t={t} person={person} />
+        ))}
+      </div>
+
+      <div className="about-us__body">
+        {people.fourthTier.map((person, index) => (
+          <Profile key={index} t={t} person={person} />
+        ))}
+      </div>
+
+      <div className="about-us__body">
+        {people.advisors.map((person, index) => (
+          <Profile key={index} t={t} person={person} />
+        ))}
+      </div>
+
+      <h4 className="about-us__title title">{t("contributorsHeader")}</h4>
+      <div className="about-us__body">
+        {people.contributors.map((name, index) => (
+          <Contributors key={index} name={name} />
         ))}
       </div>
     </React.Fragment>
