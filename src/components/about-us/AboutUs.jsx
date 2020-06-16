@@ -28,34 +28,12 @@ const AboutUs = ({ t }) => {
         </div>
       </section>
 
-      <div className="about-us__body">
-        {people.firstTier.map((person, index) => (
-          <Profile key={index} t={t} person={person} />
-        ))}
-      </div>
-
-      <div className="about-us__body">
-        {people.secondTier.map((person, index) => (
-          <Profile key={index} t={t} person={person} />
-        ))}
-      </div>
-
-      <div className="about-us__body">
-        {people.thirdTier.map((person, index) => (
-          <Profile key={index} t={t} person={person} />
-        ))}
-      </div>
-
-      <div className="about-us__body">
-        {people.fourthTier.map((person, index) => (
-          <Profile key={index} t={t} person={person} />
-        ))}
-      </div>
-
-      <div className="about-us__body">
-        {people.advisors.map((person, index) => (
-          <Profile key={index} t={t} person={person} />
-        ))}
+      <div className="about-us__container">
+        <div className="about-us__body">
+          {people.team.map((person, index) => (
+            <Profile key={index} t={t} person={person} />
+          ))}
+        </div>
       </div>
 
       <h4 className="about-us__title title">{t("contributorsHeader")}</h4>

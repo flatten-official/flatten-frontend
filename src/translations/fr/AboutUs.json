@@ -12,10 +12,11 @@
     "softwareDev": "Développeur de logiciels",
     "uiUXDev": "Développeur de UI/UX",
     "writeAndComms": "Écrivain et communications",
-    "researchScientist": "Chercheur",
+    "researchScientistFemale": "Chercheuse",
+    "researchScientistMale": "Chercheur",
     "uiUXDesign": "Concepteur d'UI/UX",
     "directorAdvisor": "Directeur et conseiller",
-    "advisor": "Conseillerr",
+    "advisor": "Conseiller",
     "epiAdvisor": "Épidémiologiste et conseiller"
   },
   "titles": {
