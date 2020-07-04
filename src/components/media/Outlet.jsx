@@ -1,32 +1,22 @@
 import React from "react";
+import { ReactTinyLink } from "react-tiny-link";
 
-// In future should add webp img's to serve in order to improve img loading times
-// Need to add a webp loader to the webpack config
-const Outlet = ({ t, person }) => (
+const Profile = ({ t, outlet }) => (
   <div className="profile__card">
-    <div>
-      <a href={person.link} target="_blank" rel="noopener noreferrer">
-        <img
-          src={require(`${
-            "./headshots/" + person.src || "./headshots/default.png"
-          }`)}
-          alt={name}
-          loading="lazy"
-          className="profile__img"
-        />
-      </a>
-    </div>
     <div className="description">
       <p className="profile__name">
-        {person.name}
-        {person.degrees}
+        {outlet.name}
+        {outlet.date}
       </p>
-      <p className="profile__role">{t("roles." + person.roleKey)}</p>
-      {person.titleKey ? (
-        <p className="profile__title">{t("titles." + person.titleKey)}</p>
-      ) : null}
     </div>
+    <ReactTinyLink
+      cardSize="small"
+      showGraphic={true}
+      maxLine={2}
+      minLine={1}
+      url={outlet.link}
+    />
   </div>
 );
 
-export default Outlet;
+export default Profile;

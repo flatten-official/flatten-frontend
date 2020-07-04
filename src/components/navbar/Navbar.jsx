@@ -27,13 +27,9 @@ const Navbar = ({ t, getGeolocation }) => {
   let symptomsLink;
   let heatmapLink;
   let infoLink;
-  let mediaLink;
 
   // for homepage scrolling links, scrolling animation
-  if (
-    location.pathname ===
-    ("/" || "#symptoms" || "#heatmap" || "#info" || "#media")
-  ) {
+  if (location.pathname === ("/" || "#symptoms" || "#heatmap" || "#info")) {
     symptomsLink = (
       <Link
         activeClass="active"
@@ -79,21 +75,6 @@ const Navbar = ({ t, getGeolocation }) => {
       </Link>
     );
 
-    mediaLink = (
-      <Link
-        activeClass="active"
-        to="media"
-        spy={true}
-        smooth={true}
-        offset={-70}
-        duration={1000}
-        hashSpy={true}
-        className="nav__link nav__text"
-      >
-        {t("media")}
-      </Link>
-    );
-
     navbar = (
       <Link
         activeClass="active"
@@ -109,7 +90,6 @@ const Navbar = ({ t, getGeolocation }) => {
             {symptomsLink}
             {heatmapLink}
             {infoLink}
-            {mediaLink}
             {domain}
           </div>
           <hr />
@@ -132,11 +112,6 @@ const Navbar = ({ t, getGeolocation }) => {
     infoLink = (
       <a className="nav__link nav__text" href="/#info">
         {t("info")}
-      </a>
-    );
-    mediaLink = (
-      <a className="nav__link nav__text" href="/#media">
-        {t("media")}
       </a>
     );
 

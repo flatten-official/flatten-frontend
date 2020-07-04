@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
-import { ReactTinyLink } from "react-tiny-link";
 import { withTranslation } from "react-i18next";
 import PropTypes from "prop-types";
+
+import outlet from "./mediaOutlets.json";
+import Profile from "./Outlet";
 
 const Media = ({ t }) => {
   useEffect(() => {
@@ -9,20 +11,18 @@ const Media = ({ t }) => {
   }, []);
 
   return (
-    <div className="about-us__container">
-      <section className="about-us__header">
-        <h4 className="about-us__title title">{t("mediaPage")}</h4>
-        <div className="about-us__description">
+    <div className="media__container">
+      <section className="media__header">
+        <h4 className="media__title title">{t("mediaTitle")}</h4>
+        <div className="media__description">
           <p className="body">{t("description")}</p>
         </div>
-        <ReactTinyLink
-          cardSize="small"
-          showGraphic={true}
-          maxLine={2}
-          minLine={1}
-          url="https://www.amazon.com/Steve-Madden-Mens-Jagwar-10-5/dp/B016X44MKA/ref=lp_18637582011_1_1?srs=18637582011&ie=UTF8&qid=1550721409&sr=8-1"
-        />
       </section>
+      <div className="media__body">
+        {outlet.team.map((person, index) => (
+          <Profile key={index} t={t} outlet={outlet} />
+        ))}
+      </div>
     </div>
   );
 };
