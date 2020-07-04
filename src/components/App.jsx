@@ -5,6 +5,7 @@ import Navbar from "./navbar/Navbar";
 import Home from "./home/Home";
 import Info from "./info/Info";
 import About from "./about-us/AboutUs";
+import Media from "./media/Media.jsx";
 import Supporters from "./supporters/Supporters";
 import EsriGsiMap from "./esri-gsi-map/EsriGsiMap";
 import history from "../history";
@@ -23,6 +24,7 @@ class App extends React.Component {
             <Route path="/" exact component={Home} />
             <Route path="/info" exact component={Info} />
             <Route path="/about-us" exact component={About} />
+            <Route path="/media" exact component={Media} />
             <Route path="/supporters" exact component={Supporters} />
             <Route path="/terms-of-service" exact component={TOS} />
             <Route path="/privacy-policy" exact component={PrivacyPolicy} />

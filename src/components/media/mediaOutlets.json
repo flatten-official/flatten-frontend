@@ -1,0 +1,85 @@
+{
+    "outlet": [
+      {
+        "name": "OMNI News",
+        "date": "March 19, 2020",
+        "link": "https://www.omnitv.ca/on/it/videos/new-web-app-for-covid-19/"
+      },
+      {
+        "name": "University of Toronto Engineering News",
+        "date": "March 25, 2020",
+        "link": "https://news.engineering.utoronto.ca/flatten-engineering-students-create-free-online-map-to-help-track-the-spread-of-covid-19/"
+      },
+      {
+        "name": "The Logic",
+        "date": "March 26, 2020",
+        "link": "https://thelogic.co/news/covid-19-roundup-canada-opposes-white-house-border-plan/"
+      },
+      {
+        "name": "CTV News",
+        "date": "March 27, 2020",
+        "link": "https://www.ctvnews.ca/sci-tech/canadian-university-students-create-map-of-self-reported-potential-covid-19-cases-1.4872245"
+      },
+      {
+        "name": "BlogTO",
+        "date": "March 27, 2020",
+        "link": "https://www.blogto.com/tech/2020/03/map-location-confirmed-potential-covid-19-cases-ontario/"
+      },
+      {
+        "name": "The Globe and Mail",
+        "date": "March 28, 2020",
+        "link": "https://www.theglobeandmail.com/canada/article-how-big-data-population-health-and-other-scientists-are-trying-to-map/"
+      },
+      {
+        "name": "Now Toronto Magazine",
+        "date": "March 29, 2020",
+        "link": "https://blogs.unb.ca/newsroom/2020/04/unb-student-part-of-national-effort-to-track-covid-19-spread.php"
+      },
+      {
+        "name": "The National Post",
+        "date": "March 31, 2020",
+        "link": "https://nationalpost.com/news/world/how-bad-is-covid-19-in-your-area-university-students-launch-heat-map-to-track-virus-across-canada"
+      },
+      {
+        "name": "The Pointer",
+        "date": "April 2, 2020",
+        "link": "https://thepointer.com/article/2020-04-02/university-students-worried-by-spiralling-covid-19-infection-rates-develop-online-tool-to-track-local-spread-of-virus"
+      },
+      {
+        "name": "Toronto.com",
+        "date": "April 3, 2020",
+        "link": "https://www.toronto.com/news-story/9924095-toronto-groups-develop-online-platforms-to-track-help-respond-to-covid-19-spread/"
+      },
+      {
+        "name": "CBC Ontario Morning Podcast",
+        "date": "April 7, 2020",
+        "link": "https://www.cbc.ca/radio/podcasts/ontario/ontario-morning/"
+      },
+      {
+        "name": "Blog UNB",
+        "date": "April 8, 2020",
+        "link": "https://blogs.unb.ca/newsroom/2020/04/unb-student-part-of-national-effort-to-track-covid-19-spread.php"
+      },
+      {
+        "name": "Global News",
+        "date": "April 14, 2020",
+        "link": "https://globalnews.ca/news/6811448/coronavirus-covid-near-you-canada-tracking-map/"
+      },
+      {
+        "name": "Canadian Underwriter",
+        "date": "April 16, 2020",
+        "link": "https://www.canadianunderwriter.ca/insurance/how-to-track-covid-19-in-your-neighbourhood-1004176998/"
+      },
+      {
+        "name": "The Toronto Star",
+        "date": "June 10, 2020",
+        "link": "https://www.thestar.com/news/gta/2020/06/10/mississauga-student-helping-to-develop-crowdsourcing-covid-19-website-for-somalia.html"
+      },
+      {
+        "name": "CBC News",
+        "date": "June 15, 2020",
+        "link": "https://www.cbc.ca/player/play/1751102019750?fbclid=IwAR0buXKWWqqN2be4HPQS9wl2gJaevAOY5PVtzET1S6arDLUJj1U4fadik5g"
+      }
+    ]
+  }
+  

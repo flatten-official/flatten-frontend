@@ -6,6 +6,7 @@ import Map from "../map/MapPage";
 import TrackYourSymptoms from "../form/TrackYourSymptoms";
 import EsriLink from "../esri-gsi-map/EsriLink";
 import Info from "../info/Info";
+import Media from "../media/Media";
 
 const Home = () => {
   const lang = i18next.language;
@@ -18,6 +19,7 @@ const Home = () => {
       <Map />
       {cadToggle && <EsriLink />}
       <Info />
+      <Media />
       <ShareLinks />
     </React.Fragment>
   );
