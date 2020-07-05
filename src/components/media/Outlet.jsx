@@ -4,16 +4,14 @@ import { ReactTinyLink } from "react-tiny-link";
 const Profile = ({ t, outlet }) => (
   <div className="profile__card">
     <div className="description">
-      <p className="profile__name">
-        {outlet.name}
-        {outlet.date}
-      </p>
+      <p className="profile__name">{outlet.name}</p>
+      <p className="profile__role">{outlet.date}</p>
     </div>
     <ReactTinyLink
-      cardSize="small"
+      cardSize="large"
       showGraphic={true}
-      maxLine={2}
-      minLine={1}
+      maxLine={0}
+      minLine={0}
       url={outlet.link}
     />
   </div>

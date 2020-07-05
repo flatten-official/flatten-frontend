@@ -19,8 +19,8 @@ const Media = ({ t }) => {
         </div>
       </section>
       <div className="media__body">
-        {outlet.team.map((person, index) => (
-          <Profile key={index} t={t} outlet={outlet} />
+        {outlet.outlet.map((story, index) => (
+          <Profile key={index} t={t} outlet={story} />
         ))}
       </div>
     </div>

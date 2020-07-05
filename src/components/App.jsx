@@ -5,7 +5,7 @@ import Navbar from "./navbar/Navbar";
 import Home from "./home/Home";
 import Info from "./info/Info";
 import About from "./about-us/AboutUs";
-import Media from "./media/Media.jsx";
+import Media from "./media/Media";
 import Supporters from "./supporters/Supporters";
 import EsriGsiMap from "./esri-gsi-map/EsriGsiMap";
 import history from "../history";

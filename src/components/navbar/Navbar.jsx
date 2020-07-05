@@ -123,7 +123,6 @@ const Navbar = ({ t, getGeolocation }) => {
             {symptomsLink}
             {heatmapLink}
             {infoLink}
-            {mediaLink}
             {domain}
           </div>
           <hr />

@@ -1,0 +1,25 @@
+.media__header {
+  margin-top: 150px;
+}
+
+.media__description {
+  text-align: center;
+}
+
+.media__body {
+  justify-content: center;
+  display: flex;
+  flex-flow: row wrap;
+  margin: 40px 80px 10px 80px;
+}
+
+.media__container {
+  margin: 0 auto;
+  max-width: 1400px;
+}
+
+.media__title {
+  margin: 0 auto;
+  text-align: center;
+  width: 60%;
+}
