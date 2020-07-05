@@ -23,3 +23,15 @@
   text-align: center;
   width: 60%;
 }
+
+.media__card {
+    margin: 0 15px 40px 15px;
+    border: 1px solid $medium-grey;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    &:hover {
+      transition: 0.3s;
+      -webkit-box-shadow: 6px 6px 12px 0 rgb(211, 185, 185);
+      -moz-box-shadow: 6px 6px 12px 0 rgb(211, 185, 185);
+      box-shadow: 6px 6px 12px 0 rgb(211, 185, 185);
+    }
+  }
