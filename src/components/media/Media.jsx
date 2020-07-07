@@ -13,9 +13,9 @@ const Media = ({ t }) => {
   return (
     <div className="media__container">
       <section className="media__header">
-        <h4 className="media__title title">{t("mediaTitle")}</h4>
+        <h4 className="media__title title">{t("header")}</h4>
         <div className="media__description">
-          <p className="body">{t("description")}</p>
+          <p className="body">{t("p1")}</p>
         </div>
       </section>
       <div className="media__body">
