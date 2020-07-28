@@ -38,6 +38,12 @@ const HomePage = ({ t }) => {
         <PrimaryButton className="home__button body" onClick={scrollToForm}>
           {t("newUserButton")}
         </PrimaryButton>
+        <PrimaryButton className="home__button body" onClick={scrollToForm}>
+          {t("about-us")}
+        </PrimaryButton>
+        <PrimaryButton className="home__button body" onClick={scrollToForm}>
+          {t("Blog")}
+        </PrimaryButton>
       </div>
     </div>
   );
