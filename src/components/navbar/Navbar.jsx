@@ -85,12 +85,11 @@ const Navbar = ({ t, getGeolocation }) => {
         duration={1000}
       >
         <div className="nav__logo">
-          <div className="nav__logo-fixed nav__title">FLATTEN</div>
+          <div className="nav__logo-fixed nav__title">FLATTEN{domain}</div>
           <div className="nav__logo-animation nav__title">
             {symptomsLink}
             {heatmapLink}
             {infoLink}
-            {domain}
           </div>
           <hr />
         </div>
@@ -118,12 +117,11 @@ const Navbar = ({ t, getGeolocation }) => {
     navbar = (
       <a href="/">
         <div className="nav__logo">
-          <div className="nav__logo-fixed nav__title">FLATTEN</div>
+          <div className="nav__logo-fixed nav__title">FLATTEN{domain}</div>
           <div className="nav__logo-animation nav__title">
             {symptomsLink}
             {heatmapLink}
             {infoLink}
-            {domain}
           </div>
           <hr />
         </div>
