@@ -15,6 +15,14 @@ const scrollToForm = () => {
   });
 };
 
+const goToBlog = () => {
+  window.location.href = "https://blog.flatten.ca";
+};
+
+const goToAbout = () => {
+  window.location.href = "/about-us";
+};
+
 const HomePage = ({ t }) => {
   const soMap = i18next.language === "so" ? "home home-so" : "home";
   return (
@@ -37,6 +45,12 @@ const HomePage = ({ t }) => {
         </div>
         <PrimaryButton className="home__button body" onClick={scrollToForm}>
           {t("newUserButton")}
+        </PrimaryButton>
+        <PrimaryButton className="home__button body" onClick={goToAbout}>
+          {t("about-us")}
+        </PrimaryButton>
+        <PrimaryButton className="home__button body" onClick={goToBlog}>
+          {t("Blog")}
         </PrimaryButton>
       </div>
     </div>
