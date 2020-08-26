@@ -57,6 +57,7 @@
     "react-router-dom": "^5.1.2",
     "react-scroll": "^1.7.16",
     "react-share": "^4.1.0",
+    "react-tiny-link": "^3.5.0",
     "recharts": "^1.8.5",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",

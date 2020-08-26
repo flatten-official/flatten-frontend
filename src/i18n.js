@@ -11,6 +11,7 @@ import EnSupporters from "./translations/en/Supporters.json";
 import EnNavbar from "./translations/en/Navbar.json";
 import EnMapPage from "./translations/en/MapPage.json";
 import EnAboutUs from "./translations/en/AboutUs.json";
+import EnMedia from "./translations/en/Media.json";
 import EnEsriGsiMap from "./translations/en/EsriGsiMap.json";
 import EnFooter from "./translations/en/Footer.json";
 import EnLeafletmap from "./translations/en/Leafletmap.json";
@@ -24,6 +25,7 @@ import FrSuppporters from "./translations/fr/Supporters.json";
 import FrNavbar from "./translations/fr/Navbar.json";
 import FrMapPage from "./translations/fr/MapPage.json";
 import FrAboutUs from "./translations/fr/AboutUs.json";
+import FrMedia from "./translations/fr/Media.json";
 import FrEsriGsiMap from "./translations/fr/EsriGsiMap.json";
 import FrFooter from "./translations/fr/Footer.json";
 import FrLeafletmap from "./translations/fr/Leafletmap.json";
@@ -36,6 +38,7 @@ import SoHomePage from "./translations/so/HomePage.json";
 import SoSuppporters from "./translations/so/Supporters.json";
 import SoNavbar from "./translations/so/Navbar.json";
 import SoMapPage from "./translations/so/MapPage.json";
+import SoMedia from "./translations/so/Media.json";
 import SoAboutUs from "./translations/so/AboutUs.json";
 import SoEsriGsiMap from "./translations/so/EsriGsiMap.json";
 import SoFooter from "./translations/so/Footer.json";
@@ -60,6 +63,7 @@ i18n
         Navbar: EnNavbar,
         MapPage: EnMapPage,
         AboutUs: EnAboutUs,
+        Media: EnMedia,
         EsriGsiMap: EnEsriGsiMap,
         Footer: EnFooter,
         Leafletmap: EnLeafletmap,
@@ -74,6 +78,7 @@ i18n
         Navbar: EnNavbar,
         MapPage: EnMapPageUS,
         AboutUs: EnAboutUs,
+        Media: EnMedia,
         EsriGsiMap: EnEsriGsiMap,
         Footer: EnFooter,
         Info: EnInfo,
@@ -87,6 +92,7 @@ i18n
         Navbar: FrNavbar,
         MapPage: FrMapPage,
         AboutUs: FrAboutUs,
+        Media: FrMedia,
         EsriGsiMap: FrEsriGsiMap,
         Footer: FrFooter,
         Leafletmap: FrLeafletmap,
@@ -101,6 +107,7 @@ i18n
         Navbar: SoNavbar,
         MapPage: SoMapPage,
         AboutUs: SoAboutUs,
+        Media: SoMedia,
         EsriGsiMap: SoEsriGsiMap,
         Footer: SoFooter,
         Leafletmap: SoLeafletmap,

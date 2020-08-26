@@ -29,6 +29,9 @@ class Footer extends React.Component {
               <Link className="footer__link" to="/supporters">
                 {t("supporters")}
               </Link>
+              <Link className="footer__link" to="/media">
+                {t("media")}
+              </Link>
             </div>
             <div className="footer__section body">
               <b>{t("legal")}</b>
